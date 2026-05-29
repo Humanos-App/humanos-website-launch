@@ -1,0 +1,156 @@
+/* ---------- NAV ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 243, 239, 0.85);
+  backdrop-filter: saturate(180%) blur(8px);
+  -webkit-backdrop-filter: saturate(180%) blur(8px);
+  border-bottom: 1px solid var(--hm-line);
+}
+.nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  height: 56px;
+  padding: 0 32px;
+  gap: 40px;
+}
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav__brand img {
+  height: 18px;
+}
+.nav__brand-text {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--hm-ink-0);
+}
+.nav__links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.nav__link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--hm-ink-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 0;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-standard);
+  text-decoration: none;
+}
+.nav__link:hover {
+  color: var(--hm-verification);
+}
+.nav__link .chev {
+  width: 10px;
+  height: 10px;
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+.nav__link:hover .chev {
+  transform: translateY(1px);
+}
+.nav__cta-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ---------- Mega menus ---------- */
+.mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--hm-surface-raised);
+  border-bottom: 1px solid var(--hm-line);
+  border-top: 1px solid var(--hm-line);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-base) var(--ease-standard),
+    transform var(--dur-base) var(--ease-standard);
+  z-index: 49;
+}
+.mega.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.mega__grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 32px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+}
+.mega__col-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hm-ink-3);
+  margin-bottom: 16px;
+}
+.mega__item {
+  display: block;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--hm-ink-1);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+.mega__item:hover {
+  color: var(--hm-verification);
+}
+.mega__item-title {
+  font-weight: 500;
+}
+.mega__item-sub {
+  font-size: 13px;
+  color: var(--hm-ink-3);
+  margin-top: 2px;
+}
+
+/* Sub-group within a mega column (e.g. Integrations > SDKs / Orchestration / Skills) */
+.mega__group + .mega__group {
+  margin-top: 18px;
+}
+.mega__group-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hm-ink-4);
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+}
+
+@media (max-width: 880px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    padding: 0 20px;
+  }
+  .mega {
+    display: none;
+  }
+}

@@ -1,0 +1,51 @@
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all var(--dur-fast) var(--ease-standard);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+.btn--primary {
+  background: var(--hm-authority);
+  color: var(--hm-chalk-0);
+}
+.btn--primary:hover {
+  background: #282826;
+}
+.btn--primary:active {
+  background: #000;
+}
+.btn--ghost {
+  color: var(--hm-ink-1);
+  background: transparent;
+}
+.btn--ghost:hover {
+  color: var(--hm-verification);
+}
+.btn--ghost .arrow {
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+.btn--ghost:hover .arrow {
+  transform: translateX(2px);
+}
+.btn--secondary {
+  border: 1px solid var(--hm-line-strong);
+  color: var(--hm-ink-0);
+  background: transparent;
+}
+.btn--secondary:hover {
+  border-color: var(--hm-ink-0);
+}
+.btn--sm {
+  padding: 7px 12px;
+  font-size: 13px;
+}

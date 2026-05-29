@@ -1,0 +1,280 @@
+/* Radix Dialog overlay + content */
+.dlg__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.52);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9500;
+  animation: dlg-fade-in 180ms var(--ease-standard);
+}
+
+.dlg__content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9600;
+  background: var(--hm-surface-raised);
+  border: 1px solid var(--hm-line);
+  border-radius: 12px;
+  box-shadow:
+    0 12px 32px rgba(17, 17, 17, 0.12),
+    0 24px 80px rgba(17, 17, 17, 0.18);
+  width: min(92vw, 520px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+  animation: dlg-pop-in 200ms var(--ease-standard);
+}
+
+.dlg__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--hm-ink-3);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 120ms var(--ease-standard), color 120ms var(--ease-standard);
+}
+.dlg__close:hover {
+  background: rgba(17, 17, 17, 0.04);
+  color: var(--hm-ink-0);
+}
+
+.dlg__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hm-verification);
+  margin-bottom: 12px;
+}
+.dlg__title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--hm-ink-0);
+  margin: 0 0 8px;
+}
+.dlg__sub {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--hm-ink-2);
+  margin: 0 0 24px;
+}
+
+/* Step 1: choice cards */
+.dlg__choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.dlg__choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--hm-line);
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition: border-color 160ms var(--ease-standard), background 160ms var(--ease-standard);
+}
+.dlg__choice:hover {
+  border-color: rgba(75, 73, 202, 0.4);
+  background: rgba(75, 73, 202, 0.025);
+}
+.dlg__choice-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--hm-ink-0);
+}
+.dlg__choice-sub {
+  font-size: 13px;
+  color: var(--hm-ink-2);
+  line-height: 1.45;
+}
+.dlg__choice-arrow {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--hm-verification);
+}
+
+/* Step 2: form — minimal underline-only inputs (light adaptation of
+   .arch__form from Pricing.html). Mono uppercase labels above each field,
+   no borders except a 1px bottom rule, indigo focus glow. */
+.dlg__form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.dlg__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.dlg__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dlg__label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--hm-ink-3);
+}
+.dlg__input,
+.dlg__select,
+.dlg__textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid var(--hm-line-strong);
+  background: transparent;
+  border-radius: 0;
+  font: inherit;
+  font-size: 15px;
+  color: var(--hm-ink-0);
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard);
+}
+.dlg__input::placeholder,
+.dlg__textarea::placeholder {
+  color: var(--hm-ink-4);
+}
+.dlg__input:focus,
+.dlg__select:focus,
+.dlg__textarea:focus {
+  outline: none;
+  border-bottom-color: var(--hm-verification);
+  box-shadow: 0 1px 0 0 var(--hm-verification);
+}
+.dlg__textarea {
+  resize: vertical;
+  min-height: 64px;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+/* Select — strip native chrome, paint our own chevron */
+.dlg__select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 28px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M3 4.5L6 7.5L9 4.5' stroke='%2376746D' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 12px;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dlg__select:hover {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M3 4.5L6 7.5L9 4.5' stroke='%23111111' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+.dlg__select:focus {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M3 4.5L6 7.5L9 4.5' stroke='%234B49CA' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+.dlg__select:invalid,
+.dlg__select option[value=""] {
+  color: var(--hm-ink-4);
+}
+.dlg__select option {
+  color: var(--hm-ink-0);
+  background: var(--hm-surface-raised);
+}
+
+.dlg__actions {
+  margin-top: 8px;
+}
+.dlg__actions .btn {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 22px;
+  font-size: 14.5px;
+  font-weight: 500;
+}
+.dlg__actions .btn .arrow {
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+.dlg__actions .btn:hover .arrow {
+  transform: translateX(2px);
+}
+.dlg__error {
+  font-size: 13px;
+  color: var(--hm-rejection);
+  margin: 4px 0 0;
+}
+.dlg__back {
+  background: transparent;
+  border: none;
+  color: var(--hm-ink-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 0;
+  margin-bottom: 12px;
+}
+.dlg__back:hover {
+  color: var(--hm-ink-0);
+}
+
+.dlg__success {
+  text-align: center;
+  padding: 16px 0;
+}
+.dlg__success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: rgba(75, 73, 202, 0.08);
+  color: var(--hm-verification);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+@keyframes dlg-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes dlg-pop-in {
+  from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@media (max-width: 560px) {
+  .dlg__content {
+    padding: 24px;
+  }
+  .dlg__row {
+    grid-template-columns: 1fr;
+  }
+  .dlg__choices {
+    grid-template-columns: 1fr;
+  }
+}

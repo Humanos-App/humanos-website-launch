@@ -1,0 +1,804 @@
+      .oc {
+        position: relative;
+        background: #111111;
+        color: var(--hm-chalk-0);
+        border-top: 1px solid var(--hm-line);
+        /* No bottom border — the Case Studies block continues directly below
+       on the same dark surface, so they read as one section. */
+        overflow: hidden;
+      }
+      .oc__grid-bg {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle,
+          rgba(244, 243, 239, 0.045) 1px,
+          transparent 1px
+        );
+        background-size: 20px 20px;
+        background-position: 0 0;
+        mask-image: radial-gradient(
+          ellipse 80% 60% at 70% 40%,
+          black 30%,
+          transparent 100%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 60% at 70% 40%,
+          black 30%,
+          transparent 100%
+        );
+        pointer-events: none;
+      }
+      .oc__wrap {
+        position: relative;
+        padding: 96px 32px 80px;
+      }
+
+      .oc__head {
+        margin-bottom: 56px;
+        max-width: 880px;
+      }
+      .oc__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: var(--hm-chalk-2);
+        border: 1px solid rgba(244, 243, 239, 0.12);
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(244, 243, 239, 0.03);
+        margin-bottom: 24px;
+      }
+      .oc__eyebrow-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--hm-verification);
+        box-shadow: 0 0 0 4px rgba(75, 73, 202, 0.18);
+      }
+      .oc__eyebrow-label {
+        color: var(--hm-chalk-1);
+        font-weight: 500;
+      }
+      .oc__eyebrow-sep {
+        color: var(--hm-chalk-2);
+      }
+      .oc__eyebrow-mono {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--hm-chalk-2);
+      }
+      .oc__heading {
+        font-size: 40px;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        font-weight: 600;
+        color: var(--hm-chalk-0);
+        margin: 0;
+        text-wrap: balance;
+      }
+      .oc__subhead {
+        margin: 12px 0 0;
+        font-size: 18px;
+        line-height: 1.45;
+        letter-spacing: -0.005em;
+        color: var(--hm-chalk-1);
+        font-weight: 400;
+        max-width: 760px;
+      }
+
+      /* --- panels (cross-fade) --- */
+      .oc__panels {
+        position: relative;
+      }
+      .oc__panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        gap: 80px;
+        align-items: start;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition:
+          opacity var(--dur-slow) var(--ease-standard),
+          transform var(--dur-slow) var(--ease-standard);
+        position: absolute;
+        inset: 0;
+        height: max-content;
+      }
+      .oc__panel.is-active {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+        transform: translateY(0);
+        position: relative;
+        inset: auto;
+      }
+
+      /* LEFT — outcome */
+      .oc__left {
+        min-width: 0;
+        max-width: 620px;
+      }
+      .oc__customer {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(244, 243, 239, 0.1);
+      }
+      .oc__customer-mark {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--hm-chalk-0);
+      }
+      .oc__customer-meta {
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--hm-chalk-2);
+        font-weight: 500;
+      }
+      .oc__outcome {
+        font-size: 40px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 500;
+        color: var(--hm-chalk-0);
+        margin: 0;
+        text-wrap: pretty;
+      }
+      .oc__outcome .oc__brand {
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        color: var(--hm-chalk-0);
+        margin-right: 4px;
+      }
+      .oc__outcome .oc__muted {
+        color: var(--hm-chalk-2);
+        font-weight: 400;
+      }
+      .oc__hl {
+        background: linear-gradient(
+          180deg,
+          transparent 60%,
+          rgba(75, 73, 202, 0.45) 60%
+        );
+        padding: 0 2px;
+      }
+      .oc__protocols {
+        margin-top: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(244, 243, 239, 0.1);
+      }
+      .oc__protocols-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--hm-chalk-2);
+      }
+      .oc__protocols-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 14px;
+      }
+      .oc__proto {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13.5px;
+        color: var(--hm-chalk-1);
+      }
+      .oc__proto-logo {
+        width: 22px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+      .oc__proto-logo[viewBox="0 0 20 20"] {
+        width: 16px;
+        height: 16px;
+      }
+      .oc__proto-sep {
+        color: var(--hm-chalk-3);
+        font-size: 11px;
+      }
+      .oc__metric {
+        color: var(--hm-verification);
+        font-feature-settings: "tnum" 1;
+      }
+      .oc__shift {
+        margin-top: 32px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        padding: 10px 14px;
+        border: 1px solid rgba(244, 243, 239, 0.1);
+        border-radius: 4px;
+        background: rgba(244, 243, 239, 0.02);
+        font-size: 13px;
+      }
+      .oc__shift-from {
+        color: var(--hm-chalk-2);
+        text-decoration: line-through;
+        text-decoration-color: rgba(243, 121, 126, 0.55);
+        text-decoration-thickness: 1px;
+      }
+      .oc__shift-arrow {
+        color: var(--hm-chalk-2);
+      }
+      .oc__shift-to {
+        color: var(--hm-chalk-0);
+        font-weight: 500;
+      }
+
+      /* customer name above outcome */
+      .oc__cust {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--hm-chalk-2);
+        font-weight: 600;
+        margin-bottom: 22px;
+      }
+      .oc__cust::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: rgba(244, 243, 239, 0.3);
+      }
+
+      /* outcome banner: customer story → principle */
+      .oc__banner {
+        margin-top: 32px;
+        padding: 16px 18px 18px;
+        border: 1px solid rgba(244, 243, 239, 0.1);
+        border-left: 2px solid var(--hm-verification, #4b49ca);
+        border-radius: 3px;
+        background: rgba(75, 73, 202, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        max-width: 560px;
+      }
+      .oc__banner-line {
+        font-size: 15px;
+        line-height: 1.4;
+        color: var(--hm-chalk-0);
+        font-weight: 600;
+        letter-spacing: -0.005em;
+      }
+      .oc__banner-line--sub {
+        font-weight: 400;
+        color: var(--hm-chalk-1);
+        font-size: 14px;
+      }
+
+      /* RIGHT — animation visual only (steps + code now live in oc__left) */
+      .oc__right {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+      }
+      .oc__how {
+        margin-top: 32px;
+        padding-left: 28px;
+        border-left: 1px solid rgba(244, 243, 239, 0.1);
+      }
+      .oc__how-label {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--hm-chalk-2);
+        font-weight: 500;
+        margin-bottom: 18px;
+      }
+      .oc__steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .oc__step {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        align-items: baseline;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--hm-chalk-1);
+      }
+      .oc__step-num {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--hm-chalk-2);
+        letter-spacing: 0.04em;
+      }
+      .oc__step-text {
+        color: var(--hm-chalk-1);
+      }
+      .oc__inline {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        background: rgba(244, 243, 239, 0.06);
+        padding: 1px 6px;
+        border-radius: 3px;
+        color: var(--hm-chalk-0);
+      }
+      .oc__pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        margin-right: 6px;
+        vertical-align: 1px;
+      }
+      .oc__pill--ok {
+        color: var(--hm-verification);
+        background: rgba(75, 73, 202, 0.16);
+        border: 1px solid rgba(75, 73, 202, 0.4);
+      }
+      .oc__pill--no {
+        color: var(--hm-rejection);
+        background: rgba(243, 121, 126, 0.12);
+        border: 1px solid rgba(243, 121, 126, 0.4);
+      }
+      .oc__chips {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-left: 4px;
+        vertical-align: 1px;
+      }
+      .oc__chip {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--hm-chalk-1);
+        border: 1px solid rgba(244, 243, 239, 0.14);
+        padding: 2px 8px;
+        border-radius: 3px;
+        background: rgba(244, 243, 239, 0.03);
+      }
+      .oc__code {
+        margin-top: 18px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--hm-chalk-1);
+        background: rgba(244, 243, 239, 0.04);
+        border: 1px solid rgba(244, 243, 239, 0.1);
+        border-radius: 4px;
+        padding: 12px 14px;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .oc__code-kw {
+        color: var(--hm-pending);
+      }
+      .oc__code-fn {
+        color: var(--hm-execution);
+      }
+      .oc__code-arg {
+        color: var(--hm-chalk-2);
+      }
+      .oc__code-comment {
+        color: var(--hm-chalk-2);
+        font-style: italic;
+      }
+
+      .oc__ctas {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 32px;
+      }
+      .oc__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 4px;
+        transition: all var(--dur-fast) var(--ease-standard);
+        white-space: nowrap;
+      }
+      .oc__cta--primary {
+        background: var(--hm-chalk-0);
+        color: var(--hm-authority);
+      }
+      .oc__cta--primary:hover {
+        background: #fff;
+      }
+      .oc__cta--ghost {
+        color: var(--hm-chalk-1);
+        border: 1px solid rgba(244, 243, 239, 0.16);
+      }
+      .oc__cta--ghost:hover {
+        color: var(--hm-chalk-0);
+        border-color: rgba(244, 243, 239, 0.32);
+      }
+      .oc__arr {
+        transition: transform var(--dur-fast) var(--ease-standard);
+      }
+      .oc__cta:hover .oc__arr {
+        transform: translateX(2px);
+      }
+
+      /* --- TABS --- */
+      /* The tabs row sits ON the dark Outcomes section. Same dark surface
+     vocabulary as the rest of the section (chalk hairlines, subtle wash);
+     the active tab uses the indigo accent to mark selection. */
+      .oc__tabs {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        margin-top: 32px;
+        margin-bottom: 48px;
+        background: rgba(244, 243, 239, 0.03);
+        border: 1px solid rgba(244, 243, 239, 0.1);
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .oc__tab {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 24px 20px 20px;
+        text-align: left;
+        color: var(--hm-chalk-2);
+        border-top: 2px solid transparent;
+        margin-top: -1px;
+        transition:
+          color var(--dur-fast) var(--ease-standard),
+          border-color var(--dur-fast) var(--ease-standard),
+          background var(--dur-fast) var(--ease-standard);
+        cursor: pointer;
+      }
+      .oc__tab + .oc__tab {
+        border-left: 1px solid rgba(244, 243, 239, 0.1);
+      }
+      .oc__tab:hover {
+        color: var(--hm-chalk-0);
+        background: rgba(244, 243, 239, 0.04);
+      }
+      .oc__tab.is-active {
+        color: var(--hm-chalk-0);
+        border-top-color: var(--hm-verification);
+        background: rgba(75, 73, 202, 0.12);
+      }
+      .oc__tab-num {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        color: inherit;
+        opacity: 0.7;
+      }
+      .oc__tab-label {
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: -0.005em;
+        color: inherit;
+        line-height: 1.3;
+      }
+
+      @media (max-width: 1080px) {
+        .oc__panel {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .oc__outcome {
+          font-size: 32px;
+        }
+      }
+      @media (max-width: 760px) {
+        .oc__wrap {
+          padding: 64px 20px 80px;
+        }
+        .oc__heading {
+          font-size: 32px;
+        }
+        .oc__subhead {
+          font-size: 15px;
+        }
+        .oc__outcome {
+          font-size: 32px;
+        }
+        .oc__how {
+          padding-left: 18px;
+        }
+        .oc__tabs {
+          grid-template-columns: 1fr;
+        }
+        .oc__tab + .oc__tab {
+          border-left: 0;
+          border-top: 1px solid rgba(244, 243, 239, 0.1);
+        }
+        .oc__tab.is-active {
+          border-top-color: var(--hm-verification);
+          border-bottom-color: transparent;
+        }
+      }
+
+/* ===== OC overrides (second style block) ===== */
+
+      /* OUTCOMES — light variant override */
+      .oc.oc--light {
+        background: #fbfaf7;
+        color: #111111;
+      }
+      .oc.oc--light .oc__grid-bg {
+        background-image: radial-gradient(
+          circle,
+          rgba(17, 17, 17, 0.06) 1px,
+          transparent 1px
+        );
+      }
+      .oc.oc--light .oc__eyebrow,
+      .oc.oc--light .oc__eyebrow-label,
+      .oc.oc--light .oc__eyebrow-mono,
+      .oc.oc--light .oc__eyebrow-sep {
+        color: #5a5957;
+      }
+      .oc.oc--light .oc__heading {
+        color: #111111;
+      }
+      .oc.oc--light .oc__subhead {
+        color: #5a5957;
+      }
+      .oc.oc--light .oc__customer {
+        border-bottom-color: rgba(17, 17, 17, 0.1);
+      }
+      .oc.oc--light .oc__customer-mark {
+        color: #111111;
+      }
+      .oc.oc--light .oc__customer-meta {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__cust {
+        color: #111111;
+        font-weight: 700;
+      }
+      .oc.oc--light .oc__cust::before {
+        background: rgba(17, 17, 17, 0.2);
+      }
+      .oc.oc--light .oc__outcome {
+        color: #111111;
+      }
+      .oc.oc--light .oc__outcome .oc__muted {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__hl {
+        background: linear-gradient(
+          180deg,
+          transparent 60%,
+          rgba(75, 73, 202, 0.22) 60%
+        );
+      }
+      .oc.oc--light .oc__protocols {
+        border-top-color: rgba(17, 17, 17, 0.1);
+      }
+      .oc.oc--light .oc__protocols-label {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__proto {
+        color: #3a3938;
+      }
+      .oc.oc--light .oc__proto-sep {
+        color: #c7c5c0;
+      }
+      .oc.oc--light .oc__metric {
+        color: #4b49ca;
+      }
+      .oc.oc--light .oc__shift-from {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__shift-arrow {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__shift-to {
+        color: #111111;
+      }
+      .oc.oc--light .oc__banner {
+        background: rgba(17, 17, 17, 0.03);
+        border-color: rgba(17, 17, 17, 0.1);
+      }
+      .oc.oc--light .oc__banner-line {
+        color: #111111;
+      }
+      .oc.oc--light .oc__banner-line--sub {
+        color: #5a5957;
+      }
+      .oc.oc--light .oc__how {
+        border-left-color: rgba(17, 17, 17, 0.12);
+      }
+      .oc.oc--light .oc__how-label {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__step {
+        color: #3a3938;
+      }
+      .oc.oc--light .oc__step-num {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__step-text {
+        color: #3a3938;
+      }
+      .oc.oc--light .oc__inline {
+        color: #111111;
+        background: rgba(17, 17, 17, 0.05);
+      }
+      .oc.oc--light .oc__pill--ok {
+        color: #4b49ca;
+        background: rgba(75, 73, 202, 0.1);
+        border-color: rgba(75, 73, 202, 0.3);
+      }
+      .oc.oc--light .oc__pill--no {
+        color: #be3d36;
+        background: rgba(243, 121, 126, 0.1);
+        border-color: rgba(243, 121, 126, 0.3);
+      }
+      .oc.oc--light .oc__chip {
+        color: #3a3938;
+        background: rgba(17, 17, 17, 0.03);
+        border-color: rgba(17, 17, 17, 0.1);
+      }
+      .oc.oc--light .oc__code {
+        color: #111111;
+        background: rgba(17, 17, 17, 0.03);
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        padding: 12px 14px;
+        border-radius: 4px;
+      }
+      .oc.oc--light .oc__code-kw {
+        color: #be3d36;
+      }
+      .oc.oc--light .oc__code-fn {
+        color: #2f7a5a;
+      }
+      .oc.oc--light .oc__code-arg {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__code-comment {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__cta--primary {
+        background: #111111;
+        color: #fbfaf7;
+      }
+      .oc.oc--light .oc__cta--primary:hover {
+        background: #000;
+      }
+      .oc.oc--light .oc__cta--ghost {
+        color: #3a3938;
+        border-color: rgba(17, 17, 17, 0.18);
+      }
+      .oc.oc--light .oc__cta--ghost:hover {
+        color: #111111;
+        border-color: rgba(17, 17, 17, 0.32);
+      }
+      .oc.oc--light .oc__tabs {
+        border-top-color: rgba(17, 17, 17, 0.1);
+      }
+      .oc.oc--light .oc__tab {
+        color: #8c8b89;
+      }
+      .oc.oc--light .oc__tab + .oc__tab {
+        border-left-color: rgba(17, 17, 17, 0.1);
+      }
+      .oc.oc--light .oc__tab:hover {
+        color: #111111;
+        background: rgba(17, 17, 17, 0.02);
+      }
+      .oc.oc--light .oc__tab.is-active {
+        color: #111111;
+        border-top-color: #4b49ca;
+        background: rgba(75, 73, 202, 0.06);
+      }
+
+      /* ===== oc__visual — borrows the cs-flow animation primitives.
+     Expose the --cs-* tokens on .oc so the shared .cs-flow CSS just works
+     without a second copy. The visual sits where the "How it works" steps
+     used to, framed by a soft rounded container with a faint inner grid. */
+      .oc {
+        --cs-line: rgba(244, 243, 239, 0.08);
+        --cs-line-2: rgba(244, 243, 239, 0.14);
+        --cs-ink-0: var(--hm-chalk-0);
+        --cs-ink-1: var(--hm-chalk-1);
+        --cs-ink-2: var(--hm-chalk-2);
+        --cs-accent: var(--hm-verification);
+        --cs-green: #6fccaa;
+      }
+      .oc__visual {
+        position: relative;
+        width: 100%;
+        flex: 1 1 auto;
+        min-height: 360px;
+        border-radius: 12px;
+        background: linear-gradient(160deg, #16161a 0%, #0e0e0d 100%);
+        border: 1px solid var(--cs-line);
+        overflow: hidden;
+      }
+      .oc__visual::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(
+            to right,
+            rgba(244, 243, 239, 0.022) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(244, 243, 239, 0.022) 1px,
+            transparent 1px
+          );
+        background-size: 32px 32px;
+        -webkit-mask-image: radial-gradient(
+          ellipse 65% 65% at 50% 50%,
+          #000 0%,
+          transparent 100%
+        );
+        mask-image: radial-gradient(
+          ellipse 65% 65% at 50% 50%,
+          #000 0%,
+          transparent 100%
+        );
+        pointer-events: none;
+      }
+      /* Light theme variant — keep contrast if the section ever flips light */
+      .oc.oc--light {
+        --cs-line: rgba(17, 17, 17, 0.08);
+        --cs-line-2: rgba(17, 17, 17, 0.16);
+        --cs-ink-0: #111111;
+        --cs-ink-1: #3a3938;
+        --cs-ink-2: #8c8b89;
+      }
+      .oc.oc--light .oc__visual {
+        background: linear-gradient(160deg, #f4f2ec 0%, #ece9e0 100%);
+        border-color: rgba(17, 17, 17, 0.1);
+      }
+      /* Honor reduced-motion preference for the embedded flow too */
+      @media (prefers-reduced-motion: reduce) {
+        .oc .cs-flow * {
+          animation: none !important;
+        }
+        .oc .cs-flow__particle {
+          opacity: 0;
+        }
+      }
+      @media (max-width: 760px) {
+        .oc__visual {
+          min-height: 280px;
+        }
+        .oc {
+          display: none;
+        }
+      }
+
+/* Hide on mobile per design decision */
+@media (max-width: 760px) {
+  .oc {
+    display: none;
+  }
+}

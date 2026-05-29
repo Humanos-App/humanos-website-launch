@@ -1,0 +1,251 @@
+/* ============================================================
+   Humanos — Colors & Type
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ========== COLOR — CORE ================================= */
+  --hm-authority:      #111111;
+  --hm-clarity:        #F4F3EF;
+  --hm-humanity:       #E4D8C8;
+
+  /* ========== COLOR — SIGNALS (state only) ================= */
+  --hm-verification:   #4B49CA;
+  --hm-execution:      #7978E9;
+  --hm-pending:        #7DA0FA;
+  --hm-rejection:      #F3797E;
+
+  --hm-verification-wash: rgba(75,73,202,0.08);
+  --hm-execution-wash:    rgba(121,120,233,0.10);
+  --hm-pending-wash:      rgba(125,160,250,0.10);
+  --hm-rejection-wash:    rgba(243,121,126,0.10);
+
+  /* ========== NEUTRAL SCALE ================================ */
+  --hm-ink-0:   #111111;
+  --hm-ink-1:   #2A2A28;
+  --hm-ink-2:   #4A4A46;
+  --hm-ink-3:   #76746D;
+  --hm-ink-4:   #A6A29A;
+  --hm-line:    #DDD9D0;
+  --hm-line-strong: #C9C4B7;
+  --hm-surface-raised: #FFFFFF;
+
+  --hm-chalk-0: #F4F3EF;
+  --hm-chalk-1: #CFCDC6;
+  --hm-chalk-2: #8F8D85;
+  --hm-line-dark: #2A2A28;
+
+  /* ========== SEMANTIC ROLES =============================== */
+  --fg-1: var(--hm-ink-0);
+  --fg-2: var(--hm-ink-2);
+  --fg-3: var(--hm-ink-3);
+  --fg-inverse: var(--hm-chalk-0);
+
+  --bg-page:    var(--hm-clarity);
+  --bg-human:   var(--hm-humanity);
+  --bg-machine: var(--hm-surface-raised);
+  --bg-authority: var(--hm-authority);
+
+  --border-1: var(--hm-line);
+  --border-2: var(--hm-line-strong);
+
+  --state-authorized: var(--hm-verification);
+  --state-executing:  var(--hm-execution);
+  --state-pending:    var(--hm-pending);
+  --state-rejected:   var(--hm-rejection);
+
+  /* ========== TYPOGRAPHY =================================== */
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --font-features-sans: "ss01" 1, "cv11" 1, "tnum" 1;
+  --font-features-mono: "zero" 1, "ss01" 1;
+
+  --type-hero-size:    48px;
+  --type-hero-weight:  600;
+  --type-hero-leading: 1.08;
+  --type-hero-track:   -0.02em;
+
+  --type-section-size:    32px;
+  --type-section-size-lg: 40px;
+  --type-section-weight:  600;
+  --type-section-leading: 1.15;
+  --type-section-track:   -0.015em;
+
+  --type-title-size:    22px;
+  --type-title-size-lg: 24px;
+  --type-title-size-sm: 20px;
+  --type-title-weight:  600;
+  --type-title-leading: 1.25;
+  --type-title-track:   -0.005em;
+
+  --type-body-size:    16px;
+  --type-body-size-lg: 18px;
+  --type-body-weight:  400;
+  --type-body-leading: 1.5;
+
+  --type-label-size:    12px;
+  --type-label-size-lg: 14px;
+  --type-label-weight:  500;
+  --type-label-leading: 1.3;
+  --type-label-track:   0.04em;
+
+  --type-mono-size:    13px;
+  --type-mono-leading: 1.5;
+
+  /* ========== SPACING ====================================== */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  80px;
+  --sp-10: 120px;
+  --sp-11: 160px;
+
+  /* ========== RADII ======================================== */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-3: 8px;
+  --r-full: 999px;
+
+  /* ========== ELEVATION ==================================== */
+  --elev-base:   none;
+  --elev-record: 0 1px 0 var(--hm-line), 0 0 0 1px rgba(17,17,17,0.02);
+  --elev-active: 0 1px 2px rgba(17,17,17,0.06), 0 8px 24px -8px rgba(17,17,17,0.12);
+  --elev-focus:  0 0 0 3px rgba(75,73,202,0.18), 0 1px 2px rgba(17,17,17,0.08);
+
+  /* ========== MOTION ======================================= */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit:     cubic-bezier(0.4, 0, 1, 1);
+  --dur-fast:   120ms;
+  --dur-base:   180ms;
+  --dur-slow:   260ms;
+}
+
+/* ============================================================
+   Base element styles
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+  font-feature-settings: var(--font-features-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1, .hm-hero {
+  font-family: var(--font-sans);
+  font-size: var(--type-hero-size);
+  font-weight: var(--type-hero-weight);
+  line-height: var(--type-hero-leading);
+  letter-spacing: var(--type-hero-track);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+h2, .hm-section {
+  font-family: var(--font-sans);
+  font-size: var(--type-section-size);
+  font-weight: var(--type-section-weight);
+  line-height: var(--type-section-leading);
+  letter-spacing: var(--type-section-track);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+h3, .hm-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-title-size);
+  font-weight: var(--type-title-weight);
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-track);
+  margin: 0;
+}
+
+p, .hm-body {
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+  margin: 0;
+  color: var(--fg-2);
+}
+
+.hm-label {
+  font-family: var(--font-sans);
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-track);
+  line-height: var(--type-label-leading);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+code, kbd, samp, pre, .hm-mono {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono-size);
+  line-height: var(--type-mono-leading);
+  font-feature-settings: var(--font-features-mono);
+}
+
+.hm-state-authorized { color: var(--state-authorized); }
+.hm-state-executing  { color: var(--state-executing); }
+.hm-state-pending    { color: var(--state-pending); }
+.hm-state-rejected   { color: var(--state-rejected); }
+
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--elev-focus);
+  border-color: var(--state-authorized);
+}
+
+/* ============================================================
+   Shared utilities
+   ============================================================ */
+
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.wrap--narrow {
+  max-width: 1120px;
+}
+
+@media (max-width: 720px) {
+  .wrap {
+    padding: 0 20px;
+  }
+}

@@ -1,0 +1,141 @@
+.logos {
+  padding: 56px 0 64px;
+  border-bottom: 1px solid var(--hm-line);
+}
+.logos__caption {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hm-ink-3);
+  margin-bottom: 36px;
+}
+.logos__marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+.logos__track {
+  display: flex;
+  width: max-content;
+  align-items: stretch;
+  animation: logos-scroll 140s linear infinite;
+  will-change: transform;
+}
+.logos__marquee:hover .logos__track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logos__track {
+    animation: none;
+  }
+}
+@keyframes logos-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.logos__track-inner {
+  display: flex;
+  flex: 0 0 auto;
+}
+.logos__cell {
+  flex: 0 0 auto;
+  width: 260px;
+  padding: 8px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  border-right: 1px solid var(--hm-line);
+  text-decoration: none;
+  color: inherit;
+}
+.logos__tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hm-ink-4);
+  font-weight: 500;
+}
+.logos__name {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--hm-ink-0);
+  text-decoration: none;
+  line-height: 1.05;
+  font-family: var(--font-sans);
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+a.logos__cell:hover .logos__name {
+  color: var(--hm-verification);
+}
+.logos__desc {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.4;
+  letter-spacing: 0.005em;
+  color: var(--hm-ink-2);
+  max-width: 100%;
+}
+
+/* Per-cell name style overrides (inline styles in the original HTML) */
+.logos__name--pwc {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.logos__name--kharafi,
+.logos__name--lusiadas,
+.logos__name--critical,
+.logos__name--glintt,
+.logos__name--ciberbit,
+.logos__name--extraflow,
+.logos__name--ralio,
+.logos__name--bloodflow {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.logos__name--lusiadas {
+  font-style: italic;
+  letter-spacing: -0.015em;
+}
+.logos__name--bloodflow {
+  letter-spacing: -0.025em;
+}
+.logos__name--fidelidade,
+.logos__name--numo,
+.logos__name--medify {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.logos__name--numo {
+  letter-spacing: -0.035em;
+}
+.logos__name--jcs {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-size: 22px;
+}
+.logos__name-accent {
+  color: var(--hm-verification);
+}

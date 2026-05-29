@@ -1,0 +1,964 @@
+      .anet {
+        position: relative;
+        background: #fbfaf7;
+        color: var(--hm-ink-0);
+        padding: 96px 0 100px;
+        border-top: 1px solid var(--hm-line);
+        overflow: hidden;
+      }
+      .anet__wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 48px;
+      }
+
+      /* head */
+      .anet__head {
+        max-width: 760px;
+        margin: 0 0 48px;
+      }
+      .anet__eyebrow {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--hm-ink-3);
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+      .anet__eyebrow::before {
+        content: "";
+        width: 24px;
+        height: 1px;
+        background: var(--hm-verification, #4b49ca);
+        display: inline-block;
+      }
+      .anet__title {
+        font-size: 44px;
+        line-height: 1.08;
+        letter-spacing: -0.022em;
+        font-weight: 600;
+        color: var(--hm-ink-0);
+        margin: 0 0 16px;
+        text-wrap: balance;
+      }
+      .anet__title em {
+        font-style: normal;
+        color: var(--hm-ink-0);
+        position: relative;
+        white-space: nowrap;
+      }
+      .anet__title em::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.06em;
+        height: 2px;
+        background: var(--hm-verification, #4b49ca);
+      }
+      .anet__sub {
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--hm-ink-2);
+        max-width: 600px;
+        margin: 0;
+        text-wrap: pretty;
+      }
+
+      /* diagram */
+      .anet__diagram {
+        position: relative;
+        margin: 0 auto;
+        max-width: 1040px;
+        padding: 24px 0 24px;
+      }
+      .anet__svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: visible;
+        z-index: 0;
+      }
+      .anet__grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: auto;
+        gap: 56px 16px;
+        align-items: center;
+        z-index: 1;
+      }
+      .anet__row--top,
+      .anet__row--bot {
+        display: contents;
+      }
+
+      /* Bottom row holds 3 nodes — distribute evenly across the 4-col grid */
+      .anet__row--bot {
+        /* override display:contents so we can lay 3 nodes out flexibly */
+        display: flex;
+        grid-row: 3;
+        grid-column: 1 / -1;
+        gap: 16px;
+        justify-content: space-between;
+      }
+      .anet__row--bot .anet__node {
+        grid-row: auto;
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 220px;
+      }
+
+      /* node card */
+      .anet__node {
+        grid-row: 1;
+        background: #ffffff;
+        border: 1px solid var(--hm-line);
+        border-radius: 3px;
+        padding: 11px 14px 10px;
+        min-height: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 3px;
+        position: relative;
+        transition: border-color 240ms var(--ease-standard);
+      }
+      .anet__node:hover {
+        border-color: var(--hm-line-strong);
+      }
+      .anet__row--bot .anet__node {
+        grid-row: 3;
+      }
+      .anet__node-name {
+        font-size: 13.5px;
+        font-weight: 500;
+        letter-spacing: -0.005em;
+        color: var(--hm-ink-0);
+        line-height: 1.2;
+      }
+      .anet__node-meta {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--hm-ink-3);
+        font-weight: 500;
+      }
+      /* verifying flash on node */
+      .anet__node-ring {
+        position: absolute;
+        inset: -1px;
+        border: 1px solid var(--hm-verification, #4b49ca);
+        border-radius: 3px;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .anet__node.is-verifying .anet__node-ring {
+        animation: anetNodePulse 1000ms var(--ease-standard) forwards;
+      }
+      @keyframes anetNodePulse {
+        0% {
+          opacity: 0;
+        }
+        35% {
+          opacity: 0.55;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      .anet__node-tick {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--hm-verification, #4b49ca);
+        opacity: 0;
+        transition: opacity 200ms var(--ease-standard);
+      }
+      .anet__node.is-verifying .anet__node-tick {
+        opacity: 1;
+      }
+
+      /* mandate card */
+      .anet__mandate {
+        grid-row: 2;
+        grid-column: 2 / span 2;
+        background: var(--hm-authority);
+        color: var(--hm-chalk-0);
+        border-radius: 6px;
+        padding: 20px 22px 18px;
+        position: relative;
+        box-shadow:
+          0 1px 0 rgba(17, 17, 17, 0.04),
+          0 12px 40px -14px rgba(17, 17, 17, 0.2),
+          0 0 0 1px rgba(17, 17, 17, 0.04);
+      }
+      .anet__mandate::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 7px;
+        box-shadow: 0 0 0 1px rgba(75, 73, 202, 0.18);
+        pointer-events: none;
+        animation: anetMandatePulse 3.6s var(--ease-standard) infinite;
+      }
+      @keyframes anetMandatePulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 1px rgba(75, 73, 202, 0.18);
+        }
+        50% {
+          box-shadow: 0 0 0 4px rgba(75, 73, 202, 0.1);
+        }
+      }
+      .anet__mandate-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(244, 243, 239, 0.1);
+        margin-bottom: 14px;
+      }
+      .anet__mandate-kind {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--hm-chalk-1);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .anet__mandate-kind .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--hm-verification, #4b49ca);
+        box-shadow: 0 0 0 4px rgba(75, 73, 202, 0.22);
+      }
+      .anet__mandate-id {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--hm-chalk-2);
+        letter-spacing: 0.02em;
+        font-feature-settings:
+          "tnum" 1,
+          "zero" 1;
+      }
+      .anet__mandate-rows {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 6px 16px;
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+        line-height: 1.4;
+      }
+      .anet__mandate-k {
+        color: var(--hm-chalk-2);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 10.5px;
+        padding-top: 2px;
+      }
+      .anet__mandate-v {
+        color: var(--hm-chalk-0);
+        font-feature-settings:
+          "tnum" 1,
+          "zero" 1;
+      }
+      .anet__mandate-foot {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(244, 243, 239, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--hm-chalk-2);
+      }
+      .anet__mandate-foot .ok {
+        color: var(--hm-verification, #4b49ca);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .anet__mandate-foot .ok::before {
+        content: "✔";
+        font-size: 11px;
+      }
+
+      /* svg lines */
+      .anet__line {
+        fill: none;
+        stroke: rgba(75, 73, 202, 0.26);
+        stroke-width: 1;
+        stroke-dasharray: 2 4;
+      }
+      .anet__signal {
+        fill: var(--hm-verification, #4b49ca);
+        opacity: 0;
+      }
+
+      /* principles — removed */
+      .anet__principles {
+        display: none;
+      }
+
+      /* === CAPABILITY GRID — 6 cards, each with an animated visual ===
+     Each card: small eyebrow → contained animated visual → title → one-line
+     body. Light surfaces, hairline borders, indigo as the only accent. */
+      .anet__caps {
+        position: relative;
+        max-width: 1200px;
+        margin: 80px auto 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: 1fr;
+        gap: 14px;
+        isolation: isolate;
+      }
+      .anet__cap {
+        position: relative;
+        z-index: 1;
+        border: 1px solid var(--hm-line);
+        border-radius: 12px;
+        padding: 22px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: border-color 240ms
+          var(--ease-standard, cubic-bezier(0.2, 0, 0, 1));
+      }
+      .anet__cap:hover {
+        border-color: rgba(75, 73, 202, 0.4);
+      }
+      .anet__cap.is-pulsing {
+        background: rgba(75, 73, 202, 0.025);
+      }
+
+      .anet__cap-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--hm-ink-3, #8c8b89);
+        margin-bottom: 18px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .anet__cap-eyebrow .num {
+        color: var(--hm-ink-1, #2a2a28);
+        font-weight: 600;
+      }
+      .anet__cap-eyebrow::before {
+        content: "";
+        width: 14px;
+        height: 1px;
+        background: var(--hm-verification, #4b49ca);
+      }
+
+      .anet__cap-vis {
+        flex: none;
+        height: 220px;
+        width: 100%;
+        margin-bottom: 22px;
+        border-radius: 8px;
+        background: #fbfaf7;
+        border: 1px solid rgba(17, 17, 17, 0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .anet__cap-title {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.012em;
+        color: var(--hm-ink-0, #111);
+        line-height: 1.25;
+        margin: 0 0 8px;
+        text-wrap: balance;
+      }
+      .anet__cap-body {
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--hm-ink-2, #5a5957);
+        margin: 0;
+        letter-spacing: -0.005em;
+        text-wrap: pretty;
+      }
+
+      /* ===== Visual a — Reuse (radial fan) =====
+     Central indigo node with 5 satellite dots; a pulse expands outward. */
+      .anet__vis-fan {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .anet__vis-fan svg {
+        width: 75%;
+        max-width: 200px;
+        height: auto;
+        overflow: visible;
+      }
+      .anet__vis-fan-line {
+        stroke: rgba(75, 73, 202, 0.18);
+        stroke-width: 1;
+        fill: none;
+        stroke-dasharray: 2 4;
+      }
+      .anet__vis-fan-core {
+        fill: #4b49ca;
+      }
+      .anet__vis-fan-sat {
+        fill: #4b49ca;
+        opacity: 0.85;
+      }
+      .anet__vis-fan-ring {
+        fill: none;
+        stroke: #4b49ca;
+        stroke-width: 1.4;
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: anetFanRing 3.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      }
+      @keyframes anetFanRing {
+        0% {
+          opacity: 0;
+          transform: scale(0.35);
+        }
+        20% {
+          opacity: 0.8;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(2.6);
+        }
+      }
+
+      /* ===== Visual b — Identity (rows with progressive checks) ===== */
+      .anet__vis-id {
+        width: 100%;
+        padding: 22px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .anet__vis-id-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 9px 12px;
+        background: #ffffff;
+        border: 1px solid var(--hm-line);
+        border-radius: 6px;
+      }
+      .anet__vis-id-pip {
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        border: 1.2px solid rgba(75, 73, 202, 0.4);
+        flex-shrink: 0;
+        position: relative;
+      }
+      .anet__vis-id-line {
+        flex: 1;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(17, 17, 17, 0.1);
+      }
+      .anet__vis-id-mark {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+        background: rgba(75, 73, 202, 0.1);
+        color: var(--hm-verification);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 700;
+        opacity: 0;
+        transition: opacity 360ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .anet__vis-id-row.is-on .anet__vis-id-mark {
+        opacity: 1;
+      }
+      .anet__vis-id-row.is-on .anet__vis-id-pip {
+        background: var(--hm-verification);
+        border-color: var(--hm-verification);
+        box-shadow: 0 0 0 3px rgba(75, 73, 202, 0.1);
+      }
+      .anet__vis-id-row.is-on .anet__vis-id-line {
+        background: rgba(75, 73, 202, 0.2);
+      }
+      .anet__vis-id-row:nth-child(1) {
+        animation: anetIdRow 5.4s ease-in-out infinite;
+        animation-delay: 0s;
+      }
+      .anet__vis-id-row:nth-child(2) {
+        animation: anetIdRow 5.4s ease-in-out infinite;
+        animation-delay: 0.6s;
+      }
+      .anet__vis-id-row:nth-child(3) {
+        animation: anetIdRow 5.4s ease-in-out infinite;
+        animation-delay: 1.2s;
+      }
+      @keyframes anetIdRow {
+        0%,
+        16%,
+        100% {
+          background: #ffffff;
+          border-color: var(--hm-line);
+        }
+        18%,
+        90% {
+          background: rgba(75, 73, 202, 0.04);
+          border-color: rgba(75, 73, 202, 0.3);
+        }
+      }
+      /* CSS-only "check appears" — fade in the mark inside animated row at 18-90% */
+      .anet__vis-id-row:nth-child(1) .anet__vis-id-mark {
+        animation: anetIdMark 5.4s ease-in-out infinite;
+        animation-delay: 0s;
+      }
+      .anet__vis-id-row:nth-child(2) .anet__vis-id-mark {
+        animation: anetIdMark 5.4s ease-in-out infinite;
+        animation-delay: 0.6s;
+      }
+      .anet__vis-id-row:nth-child(3) .anet__vis-id-mark {
+        animation: anetIdMark 5.4s ease-in-out infinite;
+        animation-delay: 1.2s;
+      }
+      @keyframes anetIdMark {
+        0%,
+        18%,
+        100% {
+          opacity: 0;
+          transform: scale(0.6);
+        }
+        24%,
+        90% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* ===== Visual c — Policy (synced bars) ===== */
+      .anet__vis-policy {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 22px 24px;
+        width: 100%;
+      }
+      .anet__vis-policy-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .anet__vis-policy-tag {
+        width: 6px;
+        height: 14px;
+        border-radius: 2px;
+        background: rgba(17, 17, 17, 0.1);
+        flex-shrink: 0;
+      }
+      .anet__vis-policy-track {
+        flex: 1;
+        height: 8px;
+        background: rgba(17, 17, 17, 0.06);
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+      }
+      .anet__vis-policy-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        background: linear-gradient(90deg, rgba(75, 73, 202, 0.7), #7978e9);
+        border-radius: 2px;
+        animation: anetPolicyFill 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      }
+      .anet__vis-policy-row:nth-child(1) .anet__vis-policy-fill {
+        --w: 86%;
+      }
+      .anet__vis-policy-row:nth-child(2) .anet__vis-policy-fill {
+        --w: 72%;
+      }
+      .anet__vis-policy-row:nth-child(3) .anet__vis-policy-fill {
+        --w: 90%;
+      }
+      .anet__vis-policy-row:nth-child(4) .anet__vis-policy-fill {
+        --w: 58%;
+      }
+      @keyframes anetPolicyFill {
+        0% {
+          width: 0;
+        }
+        35% {
+          width: var(--w, 70%);
+        }
+        72% {
+          width: var(--w, 70%);
+        }
+        100% {
+          width: 0;
+        }
+      }
+
+      /* ===== Visual d — Audit (chain of anchored blocks) ===== */
+      .anet__vis-audit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 24px 20px;
+        width: 100%;
+      }
+      .anet__vis-audit-block {
+        width: 28px;
+        height: 36px;
+        background: #ffffff;
+        border: 1px solid var(--hm-line);
+        border-radius: 4px;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .anet__vis-audit-block::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 6px;
+        right: 6px;
+        height: 2px;
+        background: rgba(17, 17, 17, 0.1);
+        border-radius: 999px;
+      }
+      .anet__vis-audit-block::after {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 6px;
+        width: 60%;
+        height: 2px;
+        background: rgba(17, 17, 17, 0.06);
+        border-radius: 999px;
+      }
+      .anet__vis-audit-block.is-anchored {
+        border-color: var(--hm-verification);
+        box-shadow: 0 0 0 3px rgba(75, 73, 202, 0.1);
+      }
+      .anet__vis-audit-block.is-anchored::before {
+        background: var(--hm-verification);
+      }
+      .anet__vis-audit-link {
+        flex: 0 0 12px;
+        height: 1px;
+        background: rgba(75, 73, 202, 0.3);
+      }
+      /* Anchored state cycles through blocks left-to-right */
+      .anet__vis-audit-block {
+        animation: anetAuditAnchor 4.8s ease-in-out infinite;
+      }
+      .anet__vis-audit-block:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .anet__vis-audit-block:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      .anet__vis-audit-block:nth-child(5) {
+        animation-delay: 1.2s;
+      }
+      .anet__vis-audit-block:nth-child(7) {
+        animation-delay: 1.8s;
+      }
+      .anet__vis-audit-block:nth-child(9) {
+        animation-delay: 2.4s;
+      }
+      @keyframes anetAuditAnchor {
+        0%,
+        12%,
+        100% {
+          border-color: var(--hm-line);
+          box-shadow: none;
+        }
+        16%,
+        88% {
+          border-color: var(--hm-verification);
+          box-shadow: 0 0 0 3px rgba(75, 73, 202, 0.1);
+        }
+      }
+
+      /* ===== Visual e — Portable (orbital) ===== */
+      .anet__vis-orbit {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .anet__vis-orbit svg {
+        width: 80%;
+        max-width: 220px;
+        height: auto;
+        overflow: visible;
+      }
+      .anet__vis-orbit-ring {
+        stroke: rgba(17, 17, 17, 0.16);
+        fill: none;
+        stroke-width: 1;
+      }
+      .anet__vis-orbit-core {
+        fill: #4b49ca;
+      }
+      .anet__vis-orbit-inner {
+        fill: #7978e9;
+      }
+      .anet__vis-orbit-outer {
+        fill: #b9b7ff;
+        stroke: #4b49ca;
+        stroke-width: 0.8;
+      }
+
+      /* ===== Visual f — Runtime (agent → mandate connector) ===== */
+      .anet__vis-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 24px;
+        width: 100%;
+      }
+      .anet__vis-link-box {
+        border: 1px solid rgba(17, 17, 17, 0.2);
+        border-radius: 6px;
+        padding: 14px 18px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        letter-spacing: -0.005em;
+        color: var(--hm-ink-0, #111);
+        background: #ffffff;
+      }
+      .anet__vis-link-box--accent {
+        border-color: rgba(75, 73, 202, 0.5);
+        color: var(--hm-verification);
+        background: rgba(75, 73, 202, 0.06);
+      }
+      .anet__vis-link-conn {
+        flex: 1;
+        max-width: 56px;
+        height: 1px;
+        background: rgba(75, 73, 202, 0.3);
+        position: relative;
+      }
+      .anet__vis-link-conn::after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--hm-verification);
+        box-shadow: 0 0 8px rgba(75, 73, 202, 0.45);
+        animation: anetLinkDot 3.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      }
+      @keyframes anetLinkDot {
+        0% {
+          left: 0;
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        85% {
+          opacity: 1;
+          left: calc(100% - 7px);
+        }
+        100% {
+          left: calc(100% - 7px);
+          opacity: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .anet__vis-fan-ring,
+        .anet__vis-id-row,
+        .anet__vis-id-mark,
+        .anet__vis-policy-fill,
+        .anet__vis-audit-block,
+        .anet__vis-link-conn::after {
+          animation: none;
+        }
+        .anet__vis-policy-fill {
+          width: var(--w);
+        }
+      }
+
+      /* Ambient backdrop — distant infrastructure signal */
+      .anet__ambient {
+        position: absolute;
+        inset: -1px;
+        width: calc(100% + 2px);
+        height: calc(100% + 2px);
+        pointer-events: none;
+        z-index: 0;
+        overflow: visible;
+      }
+      .anet__ambient-line {
+        fill: none;
+        stroke: rgba(75, 73, 202, 0.08);
+        stroke-width: 1;
+        stroke-dasharray: 1 5;
+      }
+      .anet__ambient-dot {
+        fill: var(--hm-verification, #4b49ca);
+        opacity: 0;
+      }
+
+      @media (max-width: 980px) {
+        .anet__caps {
+          grid-template-columns: repeat(2, 1fr);
+          margin-top: 56px;
+        }
+        .anet__cap {
+          padding: 20px;
+        }
+        .anet__cap-vis {
+          height: 200px;
+          margin-bottom: 18px;
+        }
+      }
+      @media (max-width: 640px) {
+        .anet__caps {
+          grid-template-columns: 1fr;
+          gap: 12px;
+          margin-top: 40px;
+        }
+        .anet__cap {
+          padding: 18px;
+        }
+        .anet__cap-vis {
+          height: 180px;
+          margin-bottom: 16px;
+        }
+        .anet__cap-title {
+          font-size: 15px;
+        }
+        .anet__cap-body {
+          font-size: 13px;
+        }
+      }
+
+      /* closer */
+      .anet__closer {
+        margin: 80px auto 0;
+        max-width: 1040px;
+        text-align: center;
+        padding-top: 40px;
+        position: relative;
+      }
+      .anet__closer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 1px;
+        background: var(--hm-verification, #4b49ca);
+      }
+      .anet__closer-line {
+        font-size: 32px;
+        line-height: 1.15;
+        letter-spacing: -0.022em;
+        font-weight: 500;
+        color: var(--hm-ink-0);
+        margin: 0;
+        text-wrap: balance;
+      }
+      .anet__closer-line em {
+        font-style: normal;
+        color: var(--hm-ink-0);
+        position: relative;
+        white-space: nowrap;
+      }
+      .anet__closer-line em::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.06em;
+        height: 2px;
+        background: var(--hm-verification, #4b49ca);
+      }
+
+      @media (max-width: 980px) {
+        .anet {
+          padding: 72px 0 72px;
+        }
+        .anet__wrap {
+          padding: 0 24px;
+        }
+        .anet__title {
+          font-size: 30px;
+        }
+        .anet__sub {
+          font-size: 15px;
+        }
+        .anet__grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        .anet__row--bot {
+          display: contents;
+          grid-row: auto;
+          grid-column: auto;
+        }
+        .anet__row--bot .anet__node {
+          grid-row: auto;
+          max-width: none;
+          flex: none;
+        }
+        .anet__node {
+          grid-row: auto;
+        }
+        .anet__mandate {
+          grid-row: auto;
+          grid-column: 1 / span 2;
+          order: 0;
+          margin: 8px 0;
+        }
+        .anet__svg {
+          display: none;
+        }
+        .anet__closer {
+          margin-top: 48px;
+          padding-top: 28px;
+        }
+        .anet__closer-line {
+          font-size: 22px;
+        }
+      }
