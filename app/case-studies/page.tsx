@@ -36,6 +36,13 @@ const CASE_STUDIES = [
       "Verifying every high-risk AI action inside regulated workflows.",
     industry: "Multi-agent AI · Regulated industries",
   },
+  {
+    slug: "lusiadas",
+    customer: "Lusíadas",
+    tagline:
+      "One approval API across every clinical and admin system in the stack.",
+    industry: "Healthcare · National hospital network",
+  },
 ];
 
 export default function CaseStudiesIndexPage() {

@@ -243,7 +243,7 @@ const PANELS: Panel[] = [
         )
       </>
     ),
-    caseStudyHref: "/case-studies",
+    caseStudyHref: "/case-studies/lusiadas",
     visual: {
       status: "Cross-system consent",
       sourceLabel: "Consent",
