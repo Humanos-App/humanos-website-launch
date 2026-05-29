@@ -52,7 +52,7 @@ export function PortableAuthSection() {
             'Keep policy and enforcement in lockstep — no drift between what was approved and what runs.',
             'Revoke or amend in one place; every downstream system sees it on the next verify.',
           ]}
-          docs={{ label: 'Mandates & Requests', href: 'https://humanos.mintlify.app/mandates' }}
+          docs={{ label: 'Mandates & Requests', href: 'https://docs.humanos.id/essentials/quick-start' }}
         />
 
         <Reveal delay={120}><MandatePortability /></Reveal>
@@ -621,7 +621,7 @@ export function RecoverySection() {
             'Eliminate manual “re-issue approval” cycles when scope, signers, or constraints shift.',
             'Turn auth failures into recoverable states instead of dead ends.',
           ]}
-          docs={{ label: 'Mandate lifecycle', href: 'https://humanos.mintlify.app/mandates#lifecycle' }}
+          docs={{ label: 'Mandate lifecycle', href: 'https://docs.humanos.id/essentials/quick-start' }}
         />
         <Reveal delay={120}><RecoveryFlow /></Reveal>
       </div>
