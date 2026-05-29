@@ -1,5 +1,5 @@
 export const EXTERNAL_LINKS = {
-  calendly: "http://calendly.com/pedrohumanos",
+  calendly: "https://calendly.com/pedrohumanos",
   docs: "https://docs.humanos.id",
   app: "https://app.humanos.id",
   github: "#",
