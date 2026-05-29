@@ -32,7 +32,7 @@ const PANELS: Panel[] = [
     tabLabel: "Treasury & settlement",
     outcome: (
       <>
-        <span className="oc__brand">Numo</span>
+        <span className="oc__brand">Numo</span>{" "}
         <span className="oc__muted">
           agents settled treasury payments in real time,
         </span>{" "}
@@ -94,7 +94,7 @@ const PANELS: Panel[] = [
     tabLabel: "B2B agentic payments",
     outcome: (
       <>
-        <span className="oc__brand">Ralio</span>
+        <span className="oc__brand">Ralio</span>{" "}
         <span className="oc__muted">
           agents bought from external merchants,
         </span>{" "}
@@ -149,7 +149,7 @@ const PANELS: Panel[] = [
     tabLabel: "B2C agentic payments",
     outcome: (
       <>
-        <span className="oc__brand">Paymove</span>
+        <span className="oc__brand">Paymove</span>{" "}
         <span className="oc__muted">
           agents transacted on behalf of consumers,
         </span>{" "}
@@ -204,7 +204,7 @@ const PANELS: Panel[] = [
     tabLabel: "Multi-system approvals",
     outcome: (
       <>
-        <span className="oc__brand">Lusíadas</span>
+        <span className="oc__brand">Lusíadas</span>{" "}
         <span className="oc__muted">
           acted on patient consent across systems,
         </span>{" "}
@@ -258,22 +258,21 @@ const PANELS: Panel[] = [
     tabLabel: "Multi-agent platforms",
     outcome: (
       <>
-        <span className="oc__brand">DataWhisper</span>
+        <span className="oc__brand">DataWhisper</span>{" "}
         <span className="oc__muted">
-          Cortex orchestrated multi-agent AI workflows,
+          uses Humanos to govern agent actions,
         </span>{" "}
-        every action verified at the GUARDIANSHIELD boundary
+        every step authorized and written to a clean audit trail
         <span className="oc__muted">.</span>
       </>
     ),
     steps: [
-      { text: "Operations lead signs a scoped mandate per case class." },
+      { text: "A human principal signs a scoped mandate." },
       {
         text: (
           <>
-            GUARDIANSHIELD calls{" "}
-            <code className="oc__inline">verify()</code> before any high-risk
-            action.
+            Agents call <code className="oc__inline">verify()</code> before any
+            high-risk action.
           </>
         ),
       },
@@ -281,7 +280,7 @@ const PANELS: Panel[] = [
         text: (
           <>
             <span className="oc__pill oc__pill--ok">Authorized</span>{" "}
-            resolution commits to the case-of-record.
+            action proceeds and a signed receipt is recorded.
           </>
         ),
         modifier: "auth",
@@ -308,11 +307,11 @@ const PANELS: Panel[] = [
     ),
     caseStudyHref: "/case-studies/datawhisper",
     visual: {
-      status: "Multi-agent orchestration",
-      sourceLabel: "Cortex agent",
-      sourceValue: "dispute.resolve",
-      destCaption: "Action commits only after deterministic verify()",
-      dests: ["Case ledger", "Auditor", "Regulator"],
+      status: "Multi-agent governance",
+      sourceLabel: "AI agent",
+      sourceValue: "action()",
+      destCaption: "Every action authorized · clean audit trail",
+      dests: ["Audit log", "Auditor", "Regulator"],
     },
   },
   {
@@ -321,7 +320,7 @@ const PANELS: Panel[] = [
     tabLabel: "ERP agent automations",
     outcome: (
       <>
-        <span className="oc__brand">Extraflow</span>
+        <span className="oc__brand">Extraflow</span>{" "}
         <span className="oc__muted">
           agents executed operations across ERP systems,
         </span>{" "}
