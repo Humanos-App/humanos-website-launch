@@ -90,6 +90,28 @@
 a.logos__cell:hover .logos__name {
   color: var(--hm-verification);
 }
+
+/* Customer logo image treatment.
+   grayscale + brightness(0) collapses every logo to pure black; the
+   multiply blend mode then lets white backgrounds (e.g. JPGs) dissolve
+   into the cream page background. Opacity gives the muted look used
+   across the marquee. */
+.logos__img {
+  display: block;
+  max-height: 32px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+  filter: grayscale(1) brightness(0);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+  transition: opacity var(--dur-fast) var(--ease-standard);
+}
+a.logos__cell:hover .logos__img {
+  opacity: 1;
+}
 .logos__desc {
   font-family: var(--font-mono);
   font-size: 11.5px;

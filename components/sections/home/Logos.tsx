@@ -1,6 +1,9 @@
 type LogoCell = {
   tag: string;
+  /** Customer display name (used as alt text + fallback when no src). */
   name: React.ReactNode;
+  /** Optional path to the customer logo image. When present, replaces the text. */
+  src?: string;
   nameClass: string;
   desc: string;
   href?: string;
@@ -10,12 +13,14 @@ const CELLS: LogoCell[] = [
   {
     tag: "Professional services",
     name: "PwC",
+    src: "/assets/logos/pwc.png",
     nameClass: "logos__name--pwc",
     desc: "Big Four · audit & assurance",
   },
   {
     tag: "Insurance · global",
     name: "Fidelidade",
+    src: "/assets/logos/fidelidade.png",
     nameClass: "logos__name--fidelidade",
     desc: "7M customers · 14 countries",
     href: "https://www.fidelidade.pt/en",
@@ -23,6 +28,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Healthcare",
     name: "Lusíadas",
+    src: "/assets/logos/lusiadas.svg",
     nameClass: "logos__name--lusiadas",
     desc: "National private hospital network",
     href: "https://www.lusiadas.pt/en",
@@ -30,17 +36,15 @@ const CELLS: LogoCell[] = [
   {
     tag: "Diagnostics",
     name: "Joaquim Chaves",
+    src: "/assets/logos/joaquim_chaves.svg",
     nameClass: "logos__name--jcs",
     desc: "Millions of exams / year",
     href: "https://jcs.pt/en",
   },
   {
     tag: "Banking",
-    name: (
-      <>
-        numo<span className="logos__name-accent">.</span>
-      </>
-    ),
+    name: "numo",
+    src: "/assets/logos/numo.png",
     nameClass: "logos__name--numo",
     desc: "Regulated payment rails",
     href: "https://usenumo.com/",
@@ -48,6 +52,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Healthtech",
     name: "Bloodflow",
+    src: "/assets/logos/bloodflow.png",
     nameClass: "logos__name--bloodflow",
     desc: "Vascular care decisions",
     href: "https://www.bloodflow.eu/",
@@ -55,6 +60,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Clinical software",
     name: "medify",
+    src: "/assets/logos/medify.png",
     nameClass: "logos__name--medify",
     desc: "Prescriptions & referrals",
     href: "https://medify.eu/",
@@ -62,18 +68,21 @@ const CELLS: LogoCell[] = [
   {
     tag: "Safety-critical",
     name: "Critical Software",
+    src: "/assets/logos/critical_software.jpg",
     nameClass: "logos__name--critical",
     desc: "Aerospace · defense · rail",
   },
   {
     tag: "Healthcare tech",
     name: "Glintt",
+    src: "/assets/logos/glintt.svg",
     nameClass: "logos__name--glintt",
     desc: "Hospitals & pharmacies, EU-wide",
   },
   {
     tag: "Cybersecurity",
     name: "Ciberbit",
+    src: "/assets/logos/ciberbit.png",
     nameClass: "logos__name--ciberbit",
     desc: "Privileged access · incident response",
   },
@@ -86,12 +95,14 @@ const CELLS: LogoCell[] = [
   {
     tag: "Operations",
     name: "Ralio",
+    src: "/assets/logos/ralio.png",
     nameClass: "logos__name--ralio",
     desc: "Audit-grade approval workflows",
   },
   {
     tag: "Regulated AI · UK",
     name: "DataWhisper",
+    src: "/assets/logos/data_whisper.webp",
     nameClass: "logos__name--ralio",
     desc: "Multi-Agent AI Operating System",
     href: "https://www.datawhisper.co.uk",
@@ -102,7 +113,16 @@ function Cell({ cell }: { cell: LogoCell }) {
   const inner = (
     <>
       <span className="logos__tag">{cell.tag}</span>
-      <span className={`logos__name ${cell.nameClass}`}>{cell.name}</span>
+      {cell.src ? (
+        <img
+          className="logos__img"
+          src={cell.src}
+          alt={typeof cell.name === "string" ? cell.name : ""}
+          loading="lazy"
+        />
+      ) : (
+        <span className={`logos__name ${cell.nameClass}`}>{cell.name}</span>
+      )}
       <span className="logos__desc">{cell.desc}</span>
     </>
   );
