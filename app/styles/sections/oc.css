@@ -450,7 +450,7 @@
      the active tab uses the indigo accent to mark selection. */
       .oc__tabs {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
         margin-top: 32px;
         margin-bottom: 48px;
         background: rgba(244, 243, 239, 0.03);

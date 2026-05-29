@@ -27,61 +27,8 @@ type Panel = {
 
 const PANELS: Panel[] = [
   {
-    key: "agents",
+    key: "treasury",
     num: "01",
-    tabLabel: "Agents executing actions",
-    outcome: (
-      <>
-        <span className="oc__brand">Bloodflow</span>
-        <span className="oc__muted">
-          agents accessed patient data and took action
-        </span>{" "}
-        only when backed by verified consent
-        <span className="oc__muted">.</span>
-      </>
-    ),
-    steps: [
-      { text: "AI prepares the action." },
-      { text: "Humanos verifies if it's within approved scope." },
-      {
-        text: (
-          <>
-            <span className="oc__pill oc__pill--ok">Authorized</span> action
-            executes.
-          </>
-        ),
-        modifier: "auth",
-      },
-      {
-        text: (
-          <>
-            <span className="oc__pill oc__pill--no">Out of scope</span> approval
-            is requested, then resumes.
-          </>
-        ),
-        modifier: "rej",
-      },
-    ],
-    code: (
-      <>
-        <span className="oc__code-kw">const</span> result ={" "}
-        <span className="oc__code-kw">await</span> humanos.
-        <span className="oc__code-fn">verify</span>(
-        <span className="oc__code-arg">{"{ subject, action, scope }"}</span>)
-      </>
-    ),
-    caseStudyHref: "/case-studies",
-    visual: {
-      status: "Healthcare agent",
-      sourceLabel: "AI agent",
-      sourceValue: "fetch_record",
-      destCaption: "Action runs only when consent is verified",
-      dests: ["Read EHR", "Write order", "Notify clinician"],
-    },
-  },
-  {
-    key: "capital",
-    num: "02",
     tabLabel: "Treasury & settlement",
     outcome: (
       <>
@@ -142,26 +89,27 @@ const PANELS: Panel[] = [
     },
   },
   {
-    key: "agentic",
-    num: "03",
-    tabLabel: "Agentic payments",
+    key: "b2b",
+    num: "02",
+    tabLabel: "B2B agentic payments",
     outcome: (
       <>
+        <span className="oc__brand">Ralio</span>
         <span className="oc__muted">
-          Autonomous agents transacted on behalf of users,
+          agents bought from external merchants,
         </span>{" "}
-        every payment backed by an explicit, verifiable mandate
+        every transaction backed by a verifiable mandate
         <span className="oc__muted">.</span>
       </>
     ),
     steps: [
-      { text: "User issues a mandate (scope, limits, expiry)." },
-      { text: "Agent prepares a payment via the protocol." },
+      { text: "Finance lead issues a mandate (scope, vendors, ceiling)." },
+      { text: "Agent prepares the purchase across B2B marketplaces." },
       {
         text: (
           <>
             <span className="oc__pill oc__pill--ok">Within mandate</span>{" "}
-            payment executes.
+            merchant settles instantly.
           </>
         ),
         modifier: "auth",
@@ -169,8 +117,8 @@ const PANELS: Panel[] = [
       {
         text: (
           <>
-            <span className="oc__pill oc__pill--no">Out of mandate</span> user
-            is asked to extend it.
+            <span className="oc__pill oc__pill--no">Out of mandate</span>{" "}
+            step-up approval is collected at the boundary.
           </>
         ),
         modifier: "rej",
@@ -180,20 +128,78 @@ const PANELS: Panel[] = [
       <>
         <span className="oc__code-kw">await</span> humanos.
         <span className="oc__code-fn">verify</span>(
-        <span className="oc__code-arg">{"{ agent, mandate, payment }"}</span>)
+        <span className="oc__code-arg">
+          {"{ vendor, amount, mandate }"}
+        </span>
+        )
       </>
     ),
     caseStudyHref: "/case-studies/ralio",
     visual: {
-      status: "Agentic payment",
+      status: "B2B procurement",
       sourceLabel: "Agent",
+      sourceValue: "purchase()",
+      destCaption: "Merchant verifies the mandate directly",
+      dests: ["Marketplace", "Vendor", "Procurement ledger"],
+    },
+  },
+  {
+    key: "b2c",
+    num: "03",
+    tabLabel: "B2C agentic payments",
+    outcome: (
+      <>
+        <span className="oc__brand">Paymove</span>
+        <span className="oc__muted">
+          agents transacted on behalf of consumers,
+        </span>{" "}
+        every payment within user-signed limits
+        <span className="oc__muted">.</span>
+      </>
+    ),
+    steps: [
+      { text: "User signs a spending mandate (scope, limits, expiry)." },
+      { text: "Agent buys, subscribes, or pays on the user's behalf." },
+      {
+        text: (
+          <>
+            <span className="oc__pill oc__pill--ok">Within mandate</span>{" "}
+            payment executes silently.
+          </>
+        ),
+        modifier: "auth",
+      },
+      {
+        text: (
+          <>
+            <span className="oc__pill oc__pill--no">Out of mandate</span>{" "}
+            user is asked to extend it in-app.
+          </>
+        ),
+        modifier: "rej",
+      },
+    ],
+    code: (
+      <>
+        <span className="oc__code-kw">await</span> humanos.
+        <span className="oc__code-fn">verify</span>(
+        <span className="oc__code-arg">
+          {"{ user, agent, payment, mandate }"}
+        </span>
+        )
+      </>
+    ),
+    caseStudyHref: "/case-studies",
+    visual: {
+      status: "Consumer agentic payment",
+      sourceLabel: "User-agent",
       sourceValue: "charge()",
-      destCaption: "Payment executes within user mandate",
+      destCaption: "Every charge sits inside a user-signed mandate",
       dests: ["Merchant", "Subscription", "Marketplace"],
     },
   },
   {
-    key: "cross",
+    key: "multi",
     num: "04",
     tabLabel: "Multi-system approvals",
     outcome: (
@@ -247,50 +253,121 @@ const PANELS: Panel[] = [
     },
   },
   {
-    key: "audit",
+    key: "platforms",
     num: "05",
-    tabLabel: "Receipts on demand",
+    tabLabel: "Multi-agent platforms",
     outcome: (
       <>
-        <span className="oc__brand">Joaquim Chaves</span>
+        <span className="oc__brand">DataWhisper</span>
         <span className="oc__muted">
-          made decisions with full traceability,
+          Cortex orchestrated multi-agent AI workflows,
         </span>{" "}
-        every action provable on demand<span className="oc__muted">.</span>
+        every action verified at the GUARDIANSHIELD boundary
+        <span className="oc__muted">.</span>
       </>
     ),
     steps: [
-      { text: "Each decision produces a signed record." },
+      { text: "Operations lead signs a scoped mandate per case class." },
       {
         text: (
           <>
-            Includes:{" "}
-            <span className="oc__chips">
-              <span className="oc__chip">who approved</span>
-              <span className="oc__chip">what action</span>
-              <span className="oc__chip">full payload</span>
-              <span className="oc__chip">timestamp</span>
-            </span>
+            GUARDIANSHIELD calls{" "}
+            <code className="oc__inline">verify()</code> before any high-risk
+            action.
           </>
         ),
-        modifier: "meta",
       },
-      { text: "Execution receipts can be verified independently." },
+      {
+        text: (
+          <>
+            <span className="oc__pill oc__pill--ok">Authorized</span>{" "}
+            resolution commits to the case-of-record.
+          </>
+        ),
+        modifier: "auth",
+      },
+      {
+        text: (
+          <>
+            <span className="oc__pill oc__pill--no">Out of scope</span>{" "}
+            step-up is collected from the human principal.
+          </>
+        ),
+        modifier: "rej",
+      },
     ],
     code: (
       <>
-        proof.<span className="oc__code-fn">verify</span>(
-        <span className="oc__code-arg">publicKey</span>){" "}
-        <span className="oc__code-comment">{"// returns true"}</span>
+        <span className="oc__code-kw">await</span> humanos.
+        <span className="oc__code-fn">verify</span>(
+        <span className="oc__code-arg">
+          {"{ subject, action, scope, mandate }"}
+        </span>
+        )
+      </>
+    ),
+    caseStudyHref: "/case-studies/datawhisper",
+    visual: {
+      status: "Multi-agent orchestration",
+      sourceLabel: "Cortex agent",
+      sourceValue: "dispute.resolve",
+      destCaption: "Action commits only after deterministic verify()",
+      dests: ["Case ledger", "Auditor", "Regulator"],
+    },
+  },
+  {
+    key: "erp",
+    num: "06",
+    tabLabel: "ERP agent automations",
+    outcome: (
+      <>
+        <span className="oc__brand">Extraflow</span>
+        <span className="oc__muted">
+          agents executed operations across ERP systems,
+        </span>{" "}
+        every entry authorized before commit
+        <span className="oc__muted">.</span>
+      </>
+    ),
+    steps: [
+      {
+        text: "System prepares the entry (invoice, PO, journal, payment).",
+      },
+      { text: "Humanos verifies authority before the ERP commits." },
+      {
+        text: (
+          <>
+            <span className="oc__pill oc__pill--ok">Authorized</span> entry
+            posts to the ledger.
+          </>
+        ),
+        modifier: "auth",
+      },
+      {
+        text: (
+          <>
+            <span className="oc__pill oc__pill--no">Missing</span> approval is
+            requested, then the entry resumes.
+          </>
+        ),
+        modifier: "rej",
+      },
+    ],
+    code: (
+      <>
+        <span className="oc__code-kw">if</span> (
+        <span className="oc__code-fn">verify</span>(entry).
+        <span className="oc__code-arg">authorized</span>) erp.
+        <span className="oc__code-fn">commit</span>(entry)
       </>
     ),
     caseStudyHref: "/case-studies",
     visual: {
-      status: "Receipts on demand",
-      sourceLabel: "Action",
-      sourceValue: "execution receipt",
-      destCaption: "Independently verifiable, no callback to Humanos",
-      dests: ["Auditor", "Regulator", "Counterparty"],
+      status: "ERP execution",
+      sourceLabel: "AI agent",
+      sourceValue: "Invoice #2841",
+      destCaption: "Cross-system entries authorized before commit",
+      dests: ["Procurement", "Accounting", "Payments"],
     },
   },
 ];
