@@ -14,12 +14,6 @@ const CELLS: LogoCell[] = [
     desc: "Big Four · audit & assurance",
   },
   {
-    tag: "Industrial · Gulf",
-    name: "Al-Kharafi Group",
-    nameClass: "logos__name--kharafi",
-    desc: "Multi-billion-dollar capital projects",
-  },
-  {
     tag: "Insurance · global",
     name: "Fidelidade",
     nameClass: "logos__name--fidelidade",

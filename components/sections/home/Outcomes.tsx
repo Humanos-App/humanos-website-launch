@@ -14,6 +14,8 @@ type Panel = {
   outcome: ReactNode;
   steps: Step[];
   code: ReactNode;
+  /** Destination for the "Read case study" CTA. */
+  caseStudyHref: string;
   visual: {
     status: string;
     sourceLabel: string;
@@ -68,6 +70,7 @@ const PANELS: Panel[] = [
         <span className="oc__code-arg">{"{ subject, action, scope }"}</span>)
       </>
     ),
+    caseStudyHref: "/case-studies",
     visual: {
       status: "Healthcare agent",
       sourceLabel: "AI agent",
@@ -129,6 +132,7 @@ const PANELS: Panel[] = [
         )
       </>
     ),
+    caseStudyHref: "/case-studies/numo",
     visual: {
       status: "Treasury settlement",
       sourceLabel: "Wire",
@@ -179,6 +183,7 @@ const PANELS: Panel[] = [
         <span className="oc__code-arg">{"{ agent, mandate, payment }"}</span>)
       </>
     ),
+    caseStudyHref: "/case-studies/ralio",
     visual: {
       status: "Agentic payment",
       sourceLabel: "Agent",
@@ -188,61 +193,8 @@ const PANELS: Panel[] = [
     },
   },
   {
-    key: "workflows",
-    num: "04",
-    tabLabel: "Actions across systems",
-    outcome: (
-      <>
-        <span className="oc__brand">Al Kharafi</span>
-        <span className="oc__muted">
-          ERP agents executed operations across systems,
-        </span>{" "}
-        every action verified before it runs<span className="oc__muted">.</span>
-      </>
-    ),
-    steps: [
-      {
-        text: "System prepares the action (invoice, record, update).",
-      },
-      { text: "Humanos verifies authorization before execution." },
-      {
-        text: (
-          <>
-            <span className="oc__pill oc__pill--ok">Authorized</span> system
-            executes.
-          </>
-        ),
-        modifier: "auth",
-      },
-      {
-        text: (
-          <>
-            <span className="oc__pill oc__pill--no">Missing</span> approval is
-            requested, then resumes.
-          </>
-        ),
-        modifier: "rej",
-      },
-    ],
-    code: (
-      <>
-        <span className="oc__code-kw">if</span> (
-        <span className="oc__code-fn">verify</span>(entry).
-        <span className="oc__code-arg">authorized</span>) system.
-        <span className="oc__code-fn">execute</span>(entry)
-      </>
-    ),
-    visual: {
-      status: "ERP execution",
-      sourceLabel: "AI agent",
-      sourceValue: "Invoice #2841",
-      destCaption: "Cross-system actions authorized before run",
-      dests: ["Procurement", "Accounting", "Payments"],
-    },
-  },
-  {
     key: "cross",
-    num: "05",
+    num: "04",
     tabLabel: "Approval reused everywhere",
     outcome: (
       <>
@@ -285,6 +237,7 @@ const PANELS: Panel[] = [
         )
       </>
     ),
+    caseStudyHref: "/case-studies",
     visual: {
       status: "Cross-system consent",
       sourceLabel: "Consent",
@@ -295,7 +248,7 @@ const PANELS: Panel[] = [
   },
   {
     key: "audit",
-    num: "06",
+    num: "05",
     tabLabel: "Receipts on demand",
     outcome: (
       <>
@@ -331,6 +284,7 @@ const PANELS: Panel[] = [
         <span className="oc__code-comment">{"// returns true"}</span>
       </>
     ),
+    caseStudyHref: "/case-studies",
     visual: {
       status: "Receipts on demand",
       sourceLabel: "Action",
@@ -423,7 +377,7 @@ export function Outcomes() {
                 <div className="oc__ctas">
                   <a
                     className="oc__cta oc__cta--primary"
-                    href="How it works.html"
+                    href={p.caseStudyHref}
                   >
                     Read case study <span className="oc__arr">→</span>
                   </a>
