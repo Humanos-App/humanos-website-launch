@@ -11,6 +11,7 @@ import "./styles/rtbar.css";
 import "./styles/dialog.css";
 import "./styles/pricing.css";
 import "./styles/case-study.css";
+import "./styles/platform.css";
 import "./styles/sections/hero.css";
 import "./styles/sections/logos.css";
 import "./styles/sections/risk.css";

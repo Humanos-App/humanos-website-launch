@@ -97,8 +97,8 @@ const PANELS: Panel[] = [
       {
         text: (
           <>
-            Every transaction calls{" "}
-            <code className="oc__inline">verify()</code> before execution.
+            Every transaction calls <code className="oc__inline">verify()</code>{" "}
+            before execution.
           </>
         ),
       },
@@ -195,7 +195,7 @@ const PANELS: Panel[] = [
   {
     key: "cross",
     num: "04",
-    tabLabel: "Approval reused everywhere",
+    tabLabel: "Multi-system approvals",
     outcome: (
       <>
         <span className="oc__brand">Lusíadas</span>
@@ -364,9 +364,7 @@ export function Outcomes() {
                         key={i}
                         className={`oc__step${s.modifier ? ` oc__step--${s.modifier}` : ""}`}
                       >
-                        <span className="oc__step-num">
-                          0{i + 1}
-                        </span>
+                        <span className="oc__step-num">0{i + 1}</span>
                         <span className="oc__step-text">{s.text}</span>
                       </li>
                     ))}

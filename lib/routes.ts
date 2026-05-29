@@ -2,6 +2,7 @@ export const ROUTES = {
   home: "/",
   howItWorks: "/how-it-works",
   developers: "/developers",
+  platform: "/platform",
   pricing: "/pricing",
   trust: "/trust",
   caseStudies: {
