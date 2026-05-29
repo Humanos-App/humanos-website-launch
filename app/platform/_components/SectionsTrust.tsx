@@ -67,27 +67,29 @@ function CrossSystemDiagram() {
   const flowsRef = useRef([]);
   const idRef = useRef(0);
 
-  // viewBox 1280 x 460
-  const W = 1280, H = 460;
+  // viewBox 1280 x 540 — extra vertical space to separate the title /
+  // identity-chip strip / org cards, plus room inside each org card
+  // between its title and the first system row.
+  const W = 1280, H = 540;
 
   const orgA = {
-    x: 60, y: 60, w: 440, h: H - 120,
+    x: 60, y: 130, w: 440, h: 360,
     label: 'Organization A',
     sub: 'issues mandate',
     systems: [
-      { y: 130, label: 'Treasury' },
-      { y: 200, label: 'AI agent' },
-      { y: 270, label: 'ERP' },
+      { y: 270, label: 'Treasury' },
+      { y: 340, label: 'AI agent' },
+      { y: 410, label: 'ERP' },
     ],
   };
   const orgB = {
-    x: W - 60 - 440, y: 60, w: 440, h: H - 120,
+    x: W - 60 - 440, y: 130, w: 440, h: 360,
     label: 'Organization B',
     sub: 'verifies mandate',
     systems: [
-      { y: 130, label: 'Bank' },
-      { y: 200, label: 'Partner system' },
-      { y: 270, label: 'Counterparty' },
+      { y: 270, label: 'Bank' },
+      { y: 340, label: 'Partner system' },
+      { y: 410, label: 'Counterparty' },
     ],
   };
 
@@ -183,7 +185,7 @@ function CrossSystemDiagram() {
             { label: 'did:web',   x: W/2 + 132 },
             { label: 'did:hum',   x: W/2 + 212 },
           ].map((c) => (
-            <g key={c.label} transform={`translate(${c.x}, 56)`}>
+            <g key={c.label} transform={`translate(${c.x}, 80)`}>
               <rect width="68" height="18" fill="rgba(121,120,233,0.06)"
                 stroke="rgba(121,120,233,0.30)" strokeWidth="1" rx="2"
               />
@@ -192,7 +194,7 @@ function CrossSystemDiagram() {
               >{c.label}</text>
             </g>
           ))}
-          <rect x={W/2 - 280} y={84} width={560} height={1} fill="rgba(121,120,233,0.20)" />
+          <rect x={W/2 - 280} y={108} width={560} height={1} fill="rgba(121,120,233,0.20)" />
         </g>
 
         {/* Connection paths */}
@@ -284,7 +286,7 @@ export function PolicySection() {
             'Roll back or amend a policy in one place and have it propagate atomically.',
             'Make policy changes auditable as first-class events, not config diffs.',
           ]}
-          docs={{ label: 'Policy Requests', href: 'https://humanos.mintlify.app/requests/policy' }}
+          docs={{ label: 'Policy Requests', href: 'https://docs.humanos.id/api-reference/2026-05-17/requests/create-request' }}
         />
         <Reveal delay={120}><PolicyTransform /></Reveal>
       </div>
@@ -645,9 +647,7 @@ export function RuntimeEnforcementSection() {
             { l: 'External execution legitimacy before settlement', sub: 'verify what was allowed, before money moves' },
             { l: 'Runtime enforcement for autonomous systems', sub: 'agents that cannot act outside their mandate' },
           ].map((c, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <EnforcementCard idx={i} label={c.l} sub={c.sub} />
-            </Reveal>
+            <EnforcementCard key={i} idx={i} label={c.l} sub={c.sub} />
           ))}
         </div>
       </div>
@@ -664,6 +664,7 @@ function EnforcementCard({ idx, label, sub }) {
       borderRadius: 8,
       padding: 28,
       minHeight: 340,
+      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       gap: 16,

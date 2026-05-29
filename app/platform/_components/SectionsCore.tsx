@@ -232,7 +232,7 @@ function MandatePortability() {
               const angle = -Math.PI / 2 + (i / (total - 1)) * Math.PI; // arc from top to bottom on right
               const cx = 80 + Math.cos(angle - Math.PI / 2 + Math.PI) * 0; // ignore
               // We'll just lay them in a column on the right
-              const x = 360;
+              const x = 300;
               const y = 40 + i * 70;
               const active = portableMode && targetIdx === i;
               return (
@@ -252,7 +252,7 @@ function MandatePortability() {
                   )}
                   <rect
                     x={x} y={y - 18}
-                    width="100" height="36"
+                    width="160" height="36"
                     fill={active ? 'rgba(75,73,202,0.10)' : '#16161A'}
                     stroke={active ? 'rgba(75,73,202,0.55)' : 'rgba(244,243,239,0.10)'}
                     strokeWidth="1"
@@ -314,7 +314,7 @@ export function RuntimeVerificationSection() {
             'Get a signed, sub-second answer in the execution path instead of after-the-fact reconciliation.',
             'Make every “was this allowed?” question answerable from a single source.',
           ]}
-          docs={{ label: 'humanos.verify()', href: 'https://humanos.mintlify.app/verify' }}
+          docs={{ label: 'humanos.verify()', href: 'https://docs.humanos.id/api-reference/2026-05-17/credentials/verify-vp' }}
         />
 
         <Reveal delay={120}><VerificationEngine /></Reveal>

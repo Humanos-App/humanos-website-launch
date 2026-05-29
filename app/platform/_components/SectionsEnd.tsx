@@ -21,6 +21,7 @@ import {
   SectionOutcome,
   CornerBrackets,
 } from "./_primitives";
+import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 
 // ============================================================
 // End sections — Integrations · Execution environments · Final
@@ -155,11 +156,9 @@ export function UseCasesSection() {
             </p>
           </div>
         </Reveal>
-        <div className="uc-grid stage-light">
+        <div className="uc-grid stage-light" style={{ marginTop: 24, padding: 24 }}>
           {cases.map((c, i) => (
-            <Reveal key={c.k} delay={i * 80}>
-              <UseCaseCard title={c.title} outcome={c.outcome} mini={c.mini} index={i+1} />
-            </Reveal>
+            <UseCaseCard key={c.k} title={c.title} outcome={c.outcome} mini={c.mini} index={i+1} />
           ))}
         </div>
       </div>
@@ -366,12 +365,19 @@ export function FinalSection() {
         </Reveal>
         <Reveal delay={250}>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button className="btn btn-primary">
-              Talk to us <span className="arrow"><ArrowRight /></span>
-            </button>
-            <button className="btn btn-secondary">
+            <TalkWithUs>
+              <button className="btn btn-primary" type="button">
+                Talk to us <span className="arrow"><ArrowRight /></span>
+              </button>
+            </TalkWithUs>
+            <a
+              className="btn btn-secondary"
+              href="https://docs.humanos.id"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Read the docs <span className="arrow"><ArrowRight /></span>
-            </button>
+            </a>
           </div>
         </Reveal>
       </div>
