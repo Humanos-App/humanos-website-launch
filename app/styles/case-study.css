@@ -1302,3 +1302,71 @@ img { display: block; max-width: 100%; }
 .cs-index__card:hover .cs-index__card-cta .arrow {
   transform: translateX(2px);
 }
+
+/* ============================================================
+   Case study — mobile fixes (apply to every .cs-page).
+   Placed outside the @scope block on purpose: fully-qualified
+   selectors (0,2,0) beat the shared rules (0,1,0).
+   Fixes: (1) Implementation walkthrough animating off-screen,
+   (2) Network nodes colliding with the hub, (3) cramped flow SVG.
+   ============================================================ */
+
+/* (1) Implementation — pin the animation panel above the stage
+   cards so the walkthrough is actually visible while it plays.
+   On desktop the panel is sticky on the right; on mobile the grid
+   stacks, so we reorder the panel above the cards and pin it. */
+@media (max-width: 1080px) {
+  .cs-page .impl__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .cs-page .impl__viz {
+    order: -1;
+    position: sticky;
+    top: 64px;
+    height: 54vh;
+    min-height: 340px;
+    max-height: 500px;
+    z-index: 4;
+  }
+  .cs-page .impl__viz-frame {
+    height: 100%;
+  }
+}
+
+/* (2) Network effect — on phones the radial nodes overlapped the
+   center hub. Drop the absolute layout for a clean vertical
+   hub → connected-parties list. */
+@media (max-width: 600px) {
+  .cs-page .net__diagram {
+    aspect-ratio: auto;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .cs-page .net__lines { display: none; }
+  .cs-page .net__center {
+    width: 128px;
+    height: 128px;
+    flex-shrink: 0;
+  }
+  .cs-page .net__node {
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+}
+
+/* (3) System flow — keep the wide diagram legible by letting it
+   scroll horizontally instead of shrinking to an unreadable size. */
+@media (max-width: 760px) {
+  .cs-page .flow__diagram {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cs-page .flow__svg {
+    min-width: 720px;
+  }
+}

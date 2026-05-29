@@ -175,7 +175,11 @@ export function Implementation() {
     });
 
     const pickStage = (): string | null => {
-      const anchor = window.innerHeight * 0.45;
+      // On mobile the viz panel is pinned to the top (see case-study.css
+      // .impl mobile rules), so the active stage must track the
+      // card in the strip *below* the panel — anchor lower than on desktop.
+      const mobile = window.matchMedia("(max-width: 1080px)").matches;
+      const anchor = window.innerHeight * (mobile ? 0.8 : 0.45);
       let best: HTMLElement | null = null;
       let bestDist = Infinity;
       stages.forEach((el) => {
