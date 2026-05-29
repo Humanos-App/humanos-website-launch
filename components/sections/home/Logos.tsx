@@ -89,6 +89,13 @@ const CELLS: LogoCell[] = [
     nameClass: "logos__name--ralio",
     desc: "Audit-grade approval workflows",
   },
+  {
+    tag: "Regulated AI · UK",
+    name: "DataWhisper",
+    nameClass: "logos__name--ralio",
+    desc: "Multi-Agent AI Operating System",
+    href: "https://www.datawhisper.co.uk",
+  },
 ];
 
 function Cell({ cell }: { cell: LogoCell }) {

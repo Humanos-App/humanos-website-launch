@@ -209,7 +209,8 @@ export const USE_CASES_MENU: MegaMenu = {
       items: [
         { title: "Numo — banking", href: "/case-studies/numo" },
         { title: "Ralio — operations", href: "/case-studies/ralio" },
-        { title: "All case studies", href: "#" },
+        { title: "DataWhisper — regulated AI", href: "/case-studies/datawhisper" },
+        { title: "All case studies", href: "/case-studies" },
       ],
     },
   ],

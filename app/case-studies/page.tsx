@@ -29,6 +29,13 @@ const CASE_STUDIES = [
       "Making autonomous agent transactions independently verifiable.",
     industry: "B2B commerce · Autonomous payments",
   },
+  {
+    slug: "datawhisper",
+    customer: "DataWhisper",
+    tagline:
+      "Verifying every high-risk AI action inside regulated workflows.",
+    industry: "Multi-agent AI · Regulated industries",
+  },
 ];
 
 export default function CaseStudiesIndexPage() {
