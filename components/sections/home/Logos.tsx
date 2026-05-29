@@ -11,11 +11,10 @@ type LogoCell = {
 
 const CELLS: LogoCell[] = [
   {
-    tag: "Professional services",
-    name: "PwC",
-    src: "/assets/logos/pwc.png",
+    tag: "Agentic governance",
+    name: "Coalex",
     nameClass: "logos__name--pwc",
-    desc: "Big Four · audit & assurance",
+    desc: "AI governance & oversight",
   },
   {
     tag: "Insurance · global",
@@ -28,7 +27,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Healthcare",
     name: "Lusíadas",
-    src: "/assets/logos/lusiadas.svg",
+    src: "/assets/logos/lusiadas.png.webp",
     nameClass: "logos__name--lusiadas",
     desc: "National private hospital network",
     href: "https://www.lusiadas.pt/en",
@@ -68,7 +67,6 @@ const CELLS: LogoCell[] = [
   {
     tag: "Safety-critical",
     name: "Critical Software",
-    src: "/assets/logos/critical_software.jpg",
     nameClass: "logos__name--critical",
     desc: "Aerospace · defense · rail",
   },
@@ -98,6 +96,12 @@ const CELLS: LogoCell[] = [
     src: "/assets/logos/ralio.png",
     nameClass: "logos__name--ralio",
     desc: "Audit-grade approval workflows",
+  },
+  {
+    tag: "B2C agentic payments",
+    name: "Paymove",
+    nameClass: "logos__name--ralio",
+    desc: "Consumer agent transactions",
   },
   {
     tag: "Regulated AI · UK",

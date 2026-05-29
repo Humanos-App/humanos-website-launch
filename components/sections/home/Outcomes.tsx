@@ -11,6 +11,8 @@ type Panel = {
   key: string;
   num: string;
   tabLabel: string;
+  /** Customer logo shown above the outcome headline. Falls back to none when missing. */
+  brandLogo?: { src: string; alt: string };
   outcome: ReactNode;
   steps: Step[];
   code: ReactNode;
@@ -30,6 +32,7 @@ const PANELS: Panel[] = [
     key: "treasury",
     num: "01",
     tabLabel: "Treasury & settlement",
+    brandLogo: { src: "/assets/logos/numo.png", alt: "Numo" },
     outcome: (
       <>
         <span className="oc__brand">Numo</span>{" "}
@@ -92,6 +95,7 @@ const PANELS: Panel[] = [
     key: "b2b",
     num: "02",
     tabLabel: "B2B agentic payments",
+    brandLogo: { src: "/assets/logos/ralio.png", alt: "Ralio" },
     outcome: (
       <>
         <span className="oc__brand">Ralio</span>{" "}
@@ -202,6 +206,7 @@ const PANELS: Panel[] = [
     key: "multi",
     num: "04",
     tabLabel: "Multi-system approvals",
+    brandLogo: { src: "/assets/logos/lusiadas.png.webp", alt: "Lusíadas" },
     outcome: (
       <>
         <span className="oc__brand">Lusíadas</span>{" "}
@@ -256,6 +261,7 @@ const PANELS: Panel[] = [
     key: "platforms",
     num: "05",
     tabLabel: "Multi-agent platforms",
+    brandLogo: { src: "/assets/logos/data_whisper.webp", alt: "DataWhisper" },
     outcome: (
       <>
         <span className="oc__brand">DataWhisper</span>{" "}
@@ -430,6 +436,16 @@ export function Outcomes() {
               aria-hidden={active !== p.key}
             >
               <div className="oc__left">
+                {p.brandLogo && (
+                  <div className="oc__brand-mark">
+                    <img
+                      className="oc__brand-logo"
+                      src={p.brandLogo.src}
+                      alt={p.brandLogo.alt}
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <h3 className="oc__outcome">{p.outcome}</h3>
 
                 <div className="oc__how">

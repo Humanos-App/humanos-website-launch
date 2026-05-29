@@ -32,7 +32,7 @@
   display: flex;
   width: max-content;
   align-items: stretch;
-  animation: logos-scroll 140s linear infinite;
+  animation: logos-scroll 35s linear infinite;
   will-change: transform;
 }
 .logos__marquee:hover .logos__track {
@@ -58,12 +58,17 @@
 .logos__cell {
   flex: 0 0 auto;
   width: 260px;
-  padding: 8px 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
+  padding: 24px 28px;
+  /* Fixed 3-row grid keeps the tag, brand, and description slots aligned
+     to the same baselines across every cell — so the marquee reads as a
+     homogeneous strip regardless of which cell uses text vs. an image
+     or which description wraps to two lines. */
+  display: grid;
+  grid-template-rows: 16px 40px 32px;
+  row-gap: 12px;
+  justify-items: start;
+  align-content: center;
+  align-items: center;
   border-right: 1px solid var(--hm-line);
   text-decoration: none;
   color: inherit;
@@ -71,19 +76,28 @@
 .logos__tag {
   font-family: var(--font-mono);
   font-size: 10px;
+  line-height: 1.2;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--hm-ink-4);
   font-weight: 500;
+  align-self: center;
+  /* Keep the tag to a single line so the grid row never overflows. */
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .logos__name {
-  display: block;
+  display: flex;
+  align-items: center;
+  height: 100%;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.025em;
   color: var(--hm-ink-0);
   text-decoration: none;
-  line-height: 1.05;
+  line-height: 1;
   font-family: var(--font-sans);
   transition: color var(--dur-fast) var(--ease-standard);
 }
@@ -98,10 +112,11 @@ a.logos__cell:hover .logos__name {
    across the marquee. */
 .logos__img {
   display: block;
-  max-height: 32px;
+  max-height: 40px;
   max-width: 100%;
   width: auto;
   height: auto;
+  align-self: center;
   object-fit: contain;
   object-position: left center;
   filter: grayscale(1) brightness(0);
@@ -119,6 +134,13 @@ a.logos__cell:hover .logos__img {
   letter-spacing: 0.005em;
   color: var(--hm-ink-2);
   max-width: 100%;
+  align-self: start;
+  /* Clamp to two lines so the description always sits inside its grid
+     row regardless of copy length. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Per-cell name style overrides (inline styles in the original HTML) */

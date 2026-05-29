@@ -153,6 +153,27 @@
         margin: 0;
         text-wrap: pretty;
       }
+      /* Customer logo above the outcome headline.
+         Inverts pixel luminance so dark logo content renders white on
+         the dark Outcomes surface; grayscale strips brand color so every
+         logo reads with the same monochrome treatment. Backgrounds that
+         were originally white invert to black and disappear into #111. */
+      .oc__brand-mark {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+      .oc__brand-logo {
+        display: block;
+        max-height: 40px;
+        max-width: 220px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        object-position: left center;
+        filter: grayscale(1) brightness(0) invert(1);
+        opacity: 0.92;
+      }
       .oc__outcome .oc__brand {
         font-weight: 700;
         letter-spacing: -0.035em;
