@@ -43,6 +43,13 @@ const CASE_STUDIES = [
       "One approval API across every clinical and admin system in the stack.",
     industry: "Healthcare · National hospital network",
   },
+  {
+    slug: "paymove",
+    customer: "Paymove",
+    tagline:
+      "Proving a human authorized the spend before agent payments settle on the Visa rail.",
+    industry: "Agentic commerce · Settlement on the Visa rail",
+  },
 ];
 
 export default function CaseStudiesIndexPage() {

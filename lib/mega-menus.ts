@@ -211,6 +211,7 @@ export const USE_CASES_MENU: MegaMenu = {
         { title: "Ralio — operations", href: "/case-studies/ralio" },
         { title: "DataWhisper — regulated AI", href: "/case-studies/datawhisper" },
         { title: "Lusíadas — healthcare", href: "/case-studies/lusiadas" },
+        { title: "Paymove — agentic payments", href: "/case-studies/paymove" },
         { title: "All case studies", href: "/case-studies" },
       ],
     },

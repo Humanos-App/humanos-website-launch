@@ -148,27 +148,36 @@ const PANELS: Panel[] = [
     },
   },
   {
-    key: "b2c",
+    key: "settlement",
     num: "03",
-    tabLabel: "B2C agentic payments",
+    tabLabel: "Agentic commerce settlement",
+    brandLogo: { src: "/assets/logos/paymove.png", alt: "Paymove" },
     outcome: (
       <>
         <span className="oc__brand">Paymove</span>{" "}
         <span className="oc__muted">
-          agents transacted on behalf of consumers,
+          settled agent payments on the Visa rail,
         </span>{" "}
-        every payment within user-signed limits
+        every spend verifiably authorized before it moved
         <span className="oc__muted">.</span>
       </>
     ),
     steps: [
-      { text: "User signs a spending mandate (scope, limits, expiry)." },
-      { text: "Agent buys, subscribes, or pays on the user's behalf." },
+      { text: "User signs a mandate (max amount, allowed IBANs, expiry)." },
+      {
+        text: (
+          <>
+            Agent prepares a spend; Paymove calls{" "}
+            <code className="oc__inline">verify()</code> in the settlement
+            path.
+          </>
+        ),
+      },
       {
         text: (
           <>
             <span className="oc__pill oc__pill--ok">Within mandate</span>{" "}
-            payment executes silently.
+            settles on the Visa rail instantly.
           </>
         ),
         modifier: "auth",
@@ -176,8 +185,8 @@ const PANELS: Panel[] = [
       {
         text: (
           <>
-            <span className="oc__pill oc__pill--no">Out of mandate</span>{" "}
-            user is asked to extend it in-app.
+            <span className="oc__pill oc__pill--no">Out of scope</span>{" "}
+            fresh approval is collected, then it settles.
           </>
         ),
         modifier: "rej",
@@ -188,18 +197,18 @@ const PANELS: Panel[] = [
         <span className="oc__code-kw">await</span> humanos.
         <span className="oc__code-fn">verify</span>(
         <span className="oc__code-arg">
-          {"{ user, agent, payment, mandate }"}
+          {"{ amount, counterparty, mandate }"}
         </span>
         )
       </>
     ),
-    caseStudyHref: "/case-studies",
+    caseStudyHref: "/case-studies/paymove",
     visual: {
-      status: "Consumer agentic payment",
-      sourceLabel: "User-agent",
-      sourceValue: "charge()",
-      destCaption: "Every charge sits inside a user-signed mandate",
-      dests: ["Merchant", "Subscription", "Marketplace"],
+      status: "Agentic settlement · Visa rail",
+      sourceLabel: "Agent wallet",
+      sourceValue: "pay()",
+      destCaption: "Every spend authorized before it settles",
+      dests: ["Visa rail", "Counterparty", "On-chain receipt"],
     },
   },
   {
