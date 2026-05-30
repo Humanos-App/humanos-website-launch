@@ -1,7 +1,7 @@
 export function SystemFlow() {
   return (
     <section
-      className="section section--dark"
+      className="section section--dark mobile-hide"
       data-screen-label="08 System flow"
     >
       <div className="wrap">

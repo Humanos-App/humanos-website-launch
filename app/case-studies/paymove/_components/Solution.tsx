@@ -19,7 +19,7 @@ export function Solution() {
           </p>
         </div>
 
-        <div className="capture">
+        <div className="capture mobile-hide">
           <div className="capture__head">
             <div className="capture__head-l">
               verification.capture · before payment settles

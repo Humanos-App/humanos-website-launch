@@ -427,7 +427,7 @@ export function Implementation() {
             </article>
           </div>
 
-          <div className="impl__viz">
+          <div className="impl__viz mobile-hide">
             <div
               className="impl__viz-frame"
               data-iv-mandate="off"

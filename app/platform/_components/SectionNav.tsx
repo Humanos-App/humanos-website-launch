@@ -109,7 +109,7 @@ export function SectionNav() {
   return (
     <div
       ref={navRef}
-      className={`section-nav ${overflow.left ? "has-overflow-left" : ""} ${
+      className={`section-nav mobile-hide ${overflow.left ? "has-overflow-left" : ""} ${
         overflow.right ? "has-overflow-right" : ""
       }`}
     >

@@ -55,7 +55,7 @@ export function CrossSystemSection() {
           ]}
           docs={{ label: 'VIA Protocol', href: 'https://humanos.mintlify.app/via' }}
         />
-        <Reveal delay={120}><CrossSystemDiagram /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><CrossSystemDiagram /></Reveal>
       </div>
     </section>
   );
@@ -288,7 +288,7 @@ export function PolicySection() {
           ]}
           docs={{ label: 'Policy Requests', href: 'https://docs.humanos.id/api-reference/2026-05-17/requests/create-request' }}
         />
-        <Reveal delay={120}><PolicyTransform /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><PolicyTransform /></Reveal>
       </div>
     </section>
   );
@@ -469,7 +469,7 @@ export function IdentitySection() {
           ]}
           docs={{ label: 'DIDs & VCs', href: 'https://humanos.mintlify.app/identity' }}
         />
-        <Reveal delay={120}><IdentityDiagram /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><IdentityDiagram /></Reveal>
       </div>
     </section>
   );
@@ -674,16 +674,19 @@ function EnforcementCard({ idx, label, sub }) {
       <span className="mono" style={{ fontSize: 10.5, color: 'var(--fg-on-dark-3)', letterSpacing: '0.12em' }}>
         EMERGING · 0{idx+1}
       </span>
-      <div style={{
-        flex: 1,
-        position: 'relative',
-        borderRadius: 4,
-        background:
-          'radial-gradient(ellipse at 50% 50%, rgba(75,73,202,0.10), transparent 60%), var(--surface-3)',
-        border: '1px solid var(--line-dim)',
-        minHeight: 140,
-        overflow: 'hidden',
-      }}>
+      <div
+        className="mobile-hide"
+        style={{
+          flex: 1,
+          position: 'relative',
+          borderRadius: 4,
+          background:
+            'radial-gradient(ellipse at 50% 50%, rgba(75,73,202,0.10), transparent 60%), var(--surface-3)',
+          border: '1px solid var(--line-dim)',
+          minHeight: 140,
+          overflow: 'hidden',
+        }}
+      >
         <EnforcementMini idx={idx} active={inView} />
       </div>
 

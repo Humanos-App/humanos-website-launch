@@ -55,7 +55,7 @@ export function PortableAuthSection() {
           docs={{ label: 'Mandates & Requests', href: 'https://docs.humanos.id/essentials/quick-start' }}
         />
 
-        <Reveal delay={120}><MandatePortability /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><MandatePortability /></Reveal>
       </div>
     </section>
   );
@@ -317,7 +317,7 @@ export function RuntimeVerificationSection() {
           docs={{ label: 'humanos.verify()', href: 'https://docs.humanos.id/api-reference/2026-05-17/credentials/verify-vp' }}
         />
 
-        <Reveal delay={120}><VerificationEngine /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><VerificationEngine /></Reveal>
       </div>
     </section>
   );
@@ -623,7 +623,7 @@ export function RecoverySection() {
           ]}
           docs={{ label: 'Mandate lifecycle', href: 'https://docs.humanos.id/essentials/quick-start' }}
         />
-        <Reveal delay={120}><RecoveryFlow /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><RecoveryFlow /></Reveal>
       </div>
     </section>
   );
@@ -830,7 +830,7 @@ export function ReceiptsSection() {
           ]}
           docs={{ label: 'Proofs (PoAI)', href: 'https://humanos.mintlify.app/proofs' }}
         />
-        <Reveal delay={120}><ReceiptStage /></Reveal>
+        <Reveal delay={120} className="mobile-hide"><ReceiptStage /></Reveal>
       </div>
     </section>
   );

@@ -15,6 +15,7 @@ import "./styles/platform.css";
 import "./styles/trust.css";
 import "./styles/company.css";
 import "./styles/customers.css";
+import "./styles/mobile-simplify.css";
 import "./styles/sections/hero.css";
 import "./styles/sections/logos.css";
 import "./styles/sections/risk.css";

@@ -11,7 +11,7 @@ export function NetworkEffect() {
         </div>
 
         <div className="net__grid">
-          <div className="net__diagram">
+          <div className="net__diagram mobile-hide">
             <svg
               className="net__lines"
               viewBox="0 0 400 400"

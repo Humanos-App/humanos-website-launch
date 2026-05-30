@@ -1,0 +1,39 @@
+/* Mobile simplification helpers.
+   Single shared escape hatch for hiding desktop-only ornamentation
+   (large SVG diagrams, sticky scroll-driven panels, dense
+   comparison tables, dark live-capture cards) on phones — without
+   touching the desktop layout.
+
+   The !important on .mobile-hide is intentional: targets often live
+   inside high-specificity grid/flex selectors and we want one rule
+   to win everywhere. IntersectionObserver loops bound to elements
+   inside a display:none subtree never fire, so animation loops
+   pause automatically when their containers are hidden. */
+
+@media (max-width: 720px) {
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  display: none;
+}
+@media (max-width: 720px) {
+  .mobile-only {
+    display: revert;
+  }
+}
+
+/* When the case-study Implementation viz panel is hidden on mobile,
+   the .impl__stages cards are no longer driven by the scroll loop.
+   Strip the past/active/future dimming so every stage reads at full
+   strength as a plain static list. */
+@media (max-width: 720px) {
+  .impl__stages .istage,
+  .impl__stages .istage.is-past,
+  .impl__stages .istage.is-active,
+  .impl__stages .istage.is-future {
+    opacity: 1 !important;
+  }
+}

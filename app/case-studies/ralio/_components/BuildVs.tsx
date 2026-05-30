@@ -1,6 +1,6 @@
 export function BuildVs() {
   return (
-    <section className="section" data-screen-label="09 Build vs Humanos">
+    <section className="section mobile-hide" data-screen-label="09 Build vs Humanos">
       <div className="wrap">
         <div className="bvh__head">
           <div className="eyebrow">§ 07 · Build vs Humanos</div>

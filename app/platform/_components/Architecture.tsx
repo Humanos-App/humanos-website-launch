@@ -97,7 +97,7 @@ export function Architecture() {
         </Reveal>
 
         <Reveal>
-          <div className="arch-stack-note">
+          <div className="arch-stack-note mobile-hide">
             <span className="arch-stack-note-mark" aria-hidden="true">
               <span></span>
               <span></span>
@@ -110,7 +110,7 @@ export function Architecture() {
           </div>
         </Reveal>
 
-        <Reveal>
+        <Reveal className="mobile-hide">
           <ArchitectureRunway />
         </Reveal>
       </div>
