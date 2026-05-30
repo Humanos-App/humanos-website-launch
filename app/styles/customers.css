@@ -184,4 +184,9 @@
   .customers-page .hero__stats { grid-template-columns: 1fr; gap: 28px; }
   .customers-page .proof__grid { grid-template-columns: 1fr; }
   .customers-page .proof__item { padding-left: 0; border-left: 0; }
+  /* Drop the dark verify-code panel on each story card on mobile —
+     it's a desktop-density visual that crowds the customer copy on a
+     narrow screen. The body card still carries the headline, stats,
+     and CTA. */
+  .customers-page .fcard__visual { display: none; }
 }
