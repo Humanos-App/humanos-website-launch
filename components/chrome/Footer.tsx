@@ -50,11 +50,11 @@ const COLUMNS: FooterColumn[] = [
     title: "Customers",
     links: [
       { label: "All stories", href: "/case-studies" },
-      { label: "Numo — treasury", href: "/case-studies/numo" },
-      { label: "Ralio — procurement", href: "/case-studies/ralio" },
-      { label: "Paymove — agentic payments", href: "/case-studies/paymove" },
-      { label: "Lusíadas — healthcare", href: "/case-studies/lusiadas" },
-      { label: "DataWhisper — multi-agent AI", href: "/case-studies/datawhisper" },
+      { label: "Numo", href: "/case-studies/numo" },
+      { label: "Ralio", href: "/case-studies/ralio" },
+      { label: "Paymove", href: "/case-studies/paymove" },
+      { label: "Lusíadas", href: "/case-studies/lusiadas" },
+      { label: "DataWhisper", href: "/case-studies/datawhisper" },
     ],
   },
   {
