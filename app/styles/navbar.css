@@ -206,12 +206,25 @@
 }
 
 @media (max-width: 880px) {
-  /* Hide desktop nav, swap the CTA buttons for the burger. */
+  /* Hide desktop nav. Keep "Talk with us" visible to the left of the
+     burger and restyle it to primary (black); hide "Login". */
   .nav__links {
     display: none;
   }
-  .nav__cta-group .btn {
+  .nav__cta--login {
     display: none;
+  }
+  .nav__cta--talk {
+    background: var(--hm-authority);
+    color: var(--hm-chalk-0);
+    border: 0;
+  }
+  .nav__cta--talk:hover {
+    background: #282826;
+    color: var(--hm-chalk-0);
+  }
+  .nav__cta-group {
+    gap: 10px;
   }
   .nav__burger {
     display: inline-flex;

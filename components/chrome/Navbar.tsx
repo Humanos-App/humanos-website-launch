@@ -99,7 +99,7 @@ export function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
-  /* Close mega on outside click / Escape. */
+  /* Close desktop mega on outside click / Escape. */
   useEffect(() => {
     function onClick(e: MouseEvent) {
       if (!headerRef.current) return;
@@ -141,112 +141,121 @@ export function Navbar() {
   };
 
   return (
-    <header
-      ref={headerRef}
-      className="nav"
-      onMouseLeave={() => setOpenKey(null)}
-    >
-      <div className="nav__inner">
-        <Link className="nav__brand" href={ROUTES.home}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/logo-mark-black.svg" alt="Humanos" />
-          <span className="nav__brand-text">Humanos</span>
-        </Link>
+    <>
+      <header
+        ref={headerRef}
+        className="nav"
+        onMouseLeave={() => setOpenKey(null)}
+      >
+        <div className="nav__inner">
+          <Link className="nav__brand" href={ROUTES.home}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/logo-mark-black.svg" alt="Humanos" />
+            <span className="nav__brand-text">Humanos</span>
+          </Link>
 
-        <nav className="nav__links">
-          {NAV_LINKS.map((link) => {
-            if (link.kind === "mega") {
+          <nav className="nav__links">
+            {NAV_LINKS.map((link) => {
+              if (link.kind === "mega") {
+                return (
+                  <span
+                    key={link.label}
+                    className="nav__link"
+                    onMouseEnter={() => setOpenKey(link.menu.key)}
+                    onFocus={() => setOpenKey(link.menu.key)}
+                    onClick={() =>
+                      setOpenKey((prev) =>
+                        prev === link.menu.key ? null : link.menu.key,
+                      )
+                    }
+                    tabIndex={0}
+                    role="button"
+                    aria-expanded={openKey === link.menu.key}
+                  >
+                    {link.label}
+                    <Chevron />
+                  </span>
+                );
+              }
+              if (link.external) {
+                return (
+                  <a
+                    key={link.label}
+                    className="nav__link"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={() => setOpenKey(null)}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
               return (
-                <span
+                <Link
                   key={link.label}
-                  className="nav__link"
-                  onMouseEnter={() => setOpenKey(link.menu.key)}
-                  onFocus={() => setOpenKey(link.menu.key)}
-                  onClick={() =>
-                    setOpenKey((prev) =>
-                      prev === link.menu.key ? null : link.menu.key,
-                    )
-                  }
-                  tabIndex={0}
-                  role="button"
-                  aria-expanded={openKey === link.menu.key}
-                >
-                  {link.label}
-                  <Chevron />
-                </span>
-              );
-            }
-            if (link.external) {
-              return (
-                <a
-                  key={link.label}
-                  className="nav__link"
                   href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  className="nav__link"
                   onMouseEnter={() => setOpenKey(null)}
                 >
                   {link.label}
-                </a>
+                </Link>
               );
-            }
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="nav__link"
-                onMouseEnter={() => setOpenKey(null)}
+            })}
+          </nav>
+
+          <div className="nav__cta-group">
+            <TalkWithUs>
+              <button
+                type="button"
+                className="btn btn--ghost btn--sm nav__cta nav__cta--talk"
               >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="nav__cta-group">
-          <TalkWithUs>
-            <button type="button" className="btn btn--ghost btn--sm">
-              Talk with us
+                Talk with us
+              </button>
+            </TalkWithUs>
+            <a
+              className="btn btn--primary btn--sm nav__cta nav__cta--login"
+              href={EXTERNAL_LINKS.app}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Login
+            </a>
+            {/* Burger — hidden on desktop, visible on mobile via navbar.css */}
+            <button
+              type="button"
+              className="nav__burger"
+              aria-expanded={mobileOpen}
+              aria-controls="nav-mobile"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMobileOpen((o) => !o)}
+            >
+              <span className="nav__burger-bars" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
             </button>
-          </TalkWithUs>
-          <a
-            className="btn btn--primary btn--sm"
-            href={EXTERNAL_LINKS.app}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Login
-          </a>
-          {/* Burger — hidden on desktop, visible on mobile via .navbar.css */}
-          <button
-            type="button"
-            className="nav__burger"
-            aria-expanded={mobileOpen}
-            aria-controls="nav-mobile"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMobileOpen((o) => !o)}
-          >
-            <span className="nav__burger-bars" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-            </span>
-          </button>
+          </div>
         </div>
-      </div>
 
-      {/* Desktop mega menus */}
-      {NAV_LINKS.filter((l) => l.kind === "mega").map((link) =>
-        link.kind === "mega" ? (
-          <MegaPanel
-            key={link.menu.key}
-            menu={link.menu}
-            open={openKey === link.menu.key}
-          />
-        ) : null,
-      )}
+        {/* Desktop mega menus */}
+        {NAV_LINKS.filter((l) => l.kind === "mega").map((link) =>
+          link.kind === "mega" ? (
+            <MegaPanel
+              key={link.menu.key}
+              menu={link.menu}
+              open={openKey === link.menu.key}
+            />
+          ) : null,
+        )}
+      </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — rendered OUTSIDE the <header>. The header has
+          backdrop-filter set on it, which would make it the containing
+          block for any position:fixed descendant (collapsing the drawer
+          to 0 height). Keeping the drawer as a header sibling lets
+          `position: fixed` resolve against the viewport. */}
       <div
         id="nav-mobile"
         className={`nav__mobile${mobileOpen ? " is-open" : ""}`}
@@ -357,6 +366,6 @@ export function Navbar() {
           </a>
         </div>
       </div>
-    </header>
+    </>
   );
 }
