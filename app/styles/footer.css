@@ -39,10 +39,16 @@
   line-height: 1.6;
 }
 .footer__api {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--hm-chalk-2);
   margin-top: 8px;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+.footer__api:hover {
+  color: var(--hm-chalk-0);
 }
 .footer__col-title {
   font-size: 11px;

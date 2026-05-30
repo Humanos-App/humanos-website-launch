@@ -1,64 +1,87 @@
+import { EXTERNAL_LINKS } from "@/lib/external-links";
+
+type FooterLink = { label: string; href: string };
 type FooterColumn = {
   title: string;
-  links: { label: string; href: string }[];
+  links: FooterLink[];
+};
+
+/* Deep links into docs.humanos.id used in multiple footer columns. Kept
+   in one place so we can flip the API version when it bumps. */
+const DOCS = {
+  root: EXTERNAL_LINKS.docs,
+  quickstart: `${EXTERNAL_LINKS.docs}/essentials/quick-start`,
+  webhooks: `${EXTERNAL_LINKS.docs}/essentials/webhooks-intro`,
+  verifyVp: `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/credentials/verify-vp`,
+  createRequest: `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/requests/create-request`,
+  revokeCredential: `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/credentials/revoke-credential`,
+};
+
+const SDKS = {
+  ts: "https://www.npmjs.com/package/humanos",
+  py: "https://pypi.org/project/humanos/",
+  cs: "https://www.nuget.org/packages/Humanos",
 };
 
 const COLUMNS: FooterColumn[] = [
   {
     title: "Product",
     links: [
-      { label: "Mandates", href: "#" },
-      { label: "Requests", href: "#" },
-      { label: "Execution Receipts", href: "#" },
-      { label: "Verification", href: "#" },
-      { label: "Intelligence", href: "#" },
-      { label: "Mandate Console", href: "#" },
+      { label: "Platform", href: "/platform" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "humanos.verify()", href: DOCS.verifyVp },
+      { label: "Request approvals", href: DOCS.createRequest },
+      { label: "Revocation", href: DOCS.revokeCredential },
+      { label: "Webhooks", href: DOCS.webhooks },
     ],
   },
   {
     title: "Developers",
     links: [
-      { label: "Quickstart", href: "#" },
-      { label: "Reference", href: "#" },
-      { label: "SDKs", href: "#" },
-      { label: "VIA Protocol", href: "#" },
-      { label: "GitHub", href: "#" },
-      { label: "Changelog", href: "#" },
+      { label: "Quickstart", href: DOCS.quickstart },
+      { label: "API reference", href: DOCS.root },
+      { label: "TypeScript SDK", href: SDKS.ts },
+      { label: "Python SDK", href: SDKS.py },
+      { label: "C# SDK", href: SDKS.cs },
+      { label: "Get API keys", href: EXTERNAL_LINKS.app },
     ],
   },
   {
-    title: "Use cases",
+    title: "Customers",
     links: [
-      { label: "Agentic finance", href: "#" },
-      { label: "Treasury", href: "#" },
-      { label: "Trading", href: "#" },
-      { label: "Healthcare", href: "#" },
-      { label: "Agent delegation", href: "#" },
-      { label: "Multi-party approval", href: "#" },
+      { label: "All stories", href: "/case-studies" },
+      { label: "Numo — treasury", href: "/case-studies/numo" },
+      { label: "Ralio — procurement", href: "/case-studies/ralio" },
+      { label: "Paymove — agentic payments", href: "/case-studies/paymove" },
+      { label: "Lusíadas — healthcare", href: "/case-studies/lusiadas" },
+      { label: "DataWhisper — multi-agent AI", href: "/case-studies/datawhisper" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About", href: "#" },
-      { label: "Customers", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "About", href: "/company" },
+      { label: "Customers", href: "/case-studies" },
+      { label: "Trust", href: "/trust" },
+      { label: "Talk with us", href: EXTERNAL_LINKS.calendly },
     ],
   },
   {
     title: "Trust",
     links: [
-      { label: "Security", href: "#" },
-      { label: "Compliance", href: "#" },
-      { label: "Status", href: "#" },
-      { label: "Privacy", href: "#" },
-      { label: "Terms", href: "#" },
-      { label: "DPA", href: "#" },
+      { label: "Trust overview", href: "/trust" },
+      { label: "Why verify", href: "/trust#before" },
+      { label: "Independent verification", href: "/trust#verify" },
+      { label: "VIA Protocol", href: "/trust#via" },
+      { label: "Open standards", href: "/trust#standards" },
+      { label: "Regulated systems", href: "/trust#regulated" },
     ],
   },
 ];
+
+function isExternal(href: string) {
+  return /^https?:\/\//.test(href);
+}
 
 export function Footer() {
   return (
@@ -75,17 +98,38 @@ export function Footer() {
               Human intent, programmable and portable. The authorization layer
               for the agentic economy.
             </div>
-            <div className="footer__api">api.humanos.tech</div>
+            <a
+              className="footer__api"
+              href={EXTERNAL_LINKS.docs}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              api.humanos.tech
+            </a>
           </div>
 
           {COLUMNS.map((col) => (
             <div key={col.title} className="footer__col">
               <div className="footer__col-title">{col.title}</div>
-              {col.links.map((l) => (
-                <a key={l.label} href={l.href}>
-                  {l.label}
-                </a>
-              ))}
+              {col.links.map((l) => {
+                if (isExternal(l.href)) {
+                  return (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {l.label}
+                    </a>
+                  );
+                }
+                return (
+                  <a key={l.label} href={l.href}>
+                    {l.label}
+                  </a>
+                );
+              })}
             </div>
           ))}
         </div>

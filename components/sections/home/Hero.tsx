@@ -178,7 +178,8 @@ export function Hero() {
           <div className="hero__eyebrow">
             <span className="dot" />
             <span>
-              Portable Authorization &amp; Runtime Verification for AI Systems
+              Portable Authorization &amp; Runtime Verification{" "}
+              <span className="hero__eyebrow-suffix">for AI Systems</span>
             </span>
             <span className="sep">·</span>
             <span className="mono">api.humanos.tech</span>
