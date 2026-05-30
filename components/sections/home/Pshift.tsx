@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { MobileVisualDrawer } from "@/components/MobileVisualDrawer";
 
 const SYSTEMS = [
   { name: "AI Agent", meta: "Executor" },
@@ -192,6 +193,7 @@ export function Pshift() {
           </p>
         </div>
 
+        <MobileVisualDrawer label="Expand the authorization layer">
         <div className="pshift__viz" ref={vizRef}>
           <svg
             className="pshift__svg"
@@ -285,6 +287,7 @@ export function Pshift() {
             ))}
           </ul>
         </div>
+        </MobileVisualDrawer>
       </div>
     </section>
   );

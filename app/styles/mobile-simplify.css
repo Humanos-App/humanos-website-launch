@@ -37,3 +37,151 @@
     opacity: 1 !important;
   }
 }
+
+/* =========================================================
+   MobileVisualDrawer — desktop renders inline, mobile shows
+   an "Expand" pill that opens a bottom-sheet drawer.
+   ========================================================= */
+
+/* Default (desktop): hide the expand button, show inline children. */
+.mvd__expand {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  /* Hide the inline copy on mobile — the user opens the drawer to see it. */
+  .mvd__inline {
+    display: none !important;
+  }
+
+  /* "Expand" pill button. No top/bottom margin — surrounding section
+     CSS controls spacing. */
+  .mvd__expand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 18px;
+    background: var(--hm-surface-raised, #f6f5f1);
+    border: 1px solid var(--hm-line-strong, rgba(17, 17, 17, 0.18));
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--hm-ink-0);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      border-color var(--dur-fast) var(--ease-standard),
+      transform var(--dur-fast) var(--ease-standard);
+  }
+  .mvd__expand:hover,
+  .mvd__expand:focus-visible {
+    border-color: var(--hm-ink-0);
+  }
+  .mvd__expand:active {
+    transform: scale(0.98);
+  }
+  .mvd__expand-icon {
+    color: var(--hm-verification);
+    font-weight: 600;
+  }
+
+  /* The drawer is conditionally mounted by React. It pins to the
+     viewport, dims everything below it, and slides up from the bottom. */
+  .mvd__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(17, 17, 17, 0.55);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: stretch;
+    animation: mvd-overlay-in 0.22s var(--ease-standard);
+  }
+  .mvd__drawer {
+    width: 100%;
+    max-height: 92vh;
+    background: var(--bg-page);
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -24px 80px -16px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: mvd-drawer-in 0.32s cubic-bezier(0.2, 0.6, 0.2, 1);
+    transition: transform 0.18s var(--ease-standard);
+    transform: translateY(0);
+    touch-action: pan-y;
+  }
+  @keyframes mvd-overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes mvd-drawer-in {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .mvd__handle-row {
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 14px 16px 10px;
+    /* The grabber sits visually in the middle, the X stays on the right. */
+  }
+  .mvd__handle {
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    width: 44px;
+    height: 4px;
+    background: var(--hm-line-strong, rgba(17, 17, 17, 0.18));
+    border-radius: 2px;
+    transform: translateX(-50%);
+  }
+  .mvd__close {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--hm-line);
+    font-size: 22px;
+    line-height: 1;
+    color: var(--hm-ink-0);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    transition: background var(--dur-fast) var(--ease-standard);
+  }
+  .mvd__close:hover {
+    background: var(--hm-surface-raised, rgba(17, 17, 17, 0.04));
+  }
+  .mvd__content {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    padding: 4px 20px 32px;
+  }
+  /* Mobile-hide subtrees nested INSIDE the drawer need to come back —
+     once the drawer is opened, the user has explicitly asked to see the
+     visualization, so re-enable any subtrees we'd otherwise hide. */
+  .mvd__content .mobile-hide {
+    display: revert !important;
+  }
+}
+

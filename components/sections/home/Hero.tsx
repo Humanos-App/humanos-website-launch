@@ -3,6 +3,8 @@ import { RuntimeFlow } from "./RuntimeFlow";
 
 type CompatItem = {
   label: string;
+  /** Shorter label rendered on mobile in place of `label`. */
+  mobileLabel?: string;
   href: string;
   logo: React.ReactNode;
 };
@@ -10,6 +12,7 @@ type CompatItem = {
 const COMPAT_ITEMS: CompatItem[] = [
   {
     label: "Visa Intelligent Commerce Connect",
+    mobileLabel: "Visa ICC",
     href: "https://corporate.visa.com/en/sites/visa-perspectives/newsroom/visa-intelligent-commerce-connect-ai-shopping-for-businesses.html",
     logo: (
       <svg className="hero__compat-logo" viewBox="0 0 32 20" aria-hidden="true">
@@ -48,6 +51,7 @@ const COMPAT_ITEMS: CompatItem[] = [
   },
   {
     label: "EU Digital Identity Wallet",
+    mobileLabel: "EU Wallet",
     href: "https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/694487738/EU+Digital+Identity+Wallet+Home",
     logo: (
       <svg className="hero__compat-logo" viewBox="0 0 20 20" aria-hidden="true">
@@ -71,6 +75,7 @@ const COMPAT_ITEMS: CompatItem[] = [
   },
   {
     label: "Mastercard Verifiable Intent",
+    mobileLabel: "Mastercard VI",
     href: "https://verifiableintent.dev/",
     logo: (
       <svg className="hero__compat-logo" viewBox="0 0 32 20" aria-hidden="true">
@@ -109,6 +114,7 @@ const COMPAT_ITEMS: CompatItem[] = [
   },
   {
     label: "Stripe Agentic Commerce",
+    mobileLabel: "Stripe ACP",
     href: "https://www.agenticcommerce.dev/",
     logo: (
       <svg className="hero__compat-logo" viewBox="0 0 20 20" aria-hidden="true">
@@ -222,7 +228,14 @@ export function Hero() {
                   rel="noopener noreferrer"
                 >
                   {item.logo}
-                  <span>{item.label}</span>
+                  <span className="hero__compat-name">
+                    {item.mobileLabel && (
+                      <span className="hero__compat-name-short">
+                        {item.mobileLabel}
+                      </span>
+                    )}
+                    <span className="hero__compat-name-full">{item.label}</span>
+                  </span>
                 </a>
                 {i < COMPAT_ITEMS.length && (
                   <span className="hero__compat-sep">·</span>

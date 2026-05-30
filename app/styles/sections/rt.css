@@ -1533,6 +1533,55 @@
           min-height: 0;
         }
       }
+      /* The mobile drawer renders the chart with an inner wrapper
+         carrying `rt__stage is-active` (passed via
+         drawerInnerClassName on MobileVisualDrawer). That wrapper
+         re-creates the parent context the chart's CSS expects —
+         every .rt__stage.is-active descendant rule now matches, so
+         reveal opacities, stagger delays, pulse animations, and the
+         dozen-plus nth-child offsets all resolve naturally without
+         case-by-case shims.
+         The .rt__stage selector also brings desktop article styling
+         (top border, 72/40 px padding, 0.36 opacity dim). Reset all
+         of that inside the drawer where the chart isn't an article
+         in a sticky-scroll column.
+         CRITICAL: replant the --rt-* design tokens here too. They're
+         defined only on .rt (line 1-20), and createPortal moves the
+         chart out into document.body, breaking the custom-property
+         inheritance chain. Without these the chart's borders,
+         backgrounds, accents, and ink colours all resolve to invalid
+         / initial values — the visible "corruption" the chart shows
+         inside the drawer. */
+      .mvd__content > .rt__stage {
+        --rt-bg: #fbfaf7;
+        --rt-paper: #ffffff;
+        --rt-ink: #111111;
+        --rt-ink-2: #5a5957;
+        --rt-ink-3: #8c8b89;
+        --rt-line: rgba(17, 17, 17, 0.08);
+        --rt-line-2: rgba(17, 17, 17, 0.16);
+        --rt-accent: #4b49ca;
+        --rt-accent-soft: rgba(75, 73, 202, 0.1);
+        --rt-ok: #1f8a5b;
+        --rt-warn: #b97b2b;
+        --rt-err: #be3d36;
+        --rt-dark: #0e0f13;
+        --rt-on-dark: #f4f2ec;
+        --rt-on-dark-2: rgba(244, 242, 236, 0.7);
+        --rt-on-dark-3: rgba(244, 242, 236, 0.46);
+        --rt-on-dark-line: rgba(244, 242, 236, 0.14);
+        --rt-accent-on-dark: #b9b7ff;
+
+        border: 0;
+        padding: 0;
+        opacity: 1;
+        font-family: var(--font-sans);
+        color: var(--rt-ink);
+      }
+      .mvd__content > .rt__stage > .rt__stage-visual {
+        transform: none;
+      }
+
       @media (max-width: 720px) {
         .rt {
           padding: 96px 0 0;
@@ -1545,6 +1594,55 @@
         }
         .rt__stage-h {
           font-size: 24px;
+        }
+        /* On mobile keep only: title, lede description, humanos.verify()
+           snippet, and the stage articles. Hide the eyebrow ("The
+           runtime authorization lifecycle") and the runtime-stack
+           micro box ("Use the full runtime stack — or integrate only
+           the layers you need.") together with its ::before hairline.
+           !important defeats the .rt__left .rt__copy-micro selector in
+           the dark-variant override above. */
+        .rt__eyebrow,
+        .rt__copy-micro,
+        .rt__left .rt__copy-micro {
+          display: none !important;
+        }
+        /* Drop the hairline under the lede on mobile — with the runtime
+           stack list and micro box hidden, the trailing separator reads
+           as a stray rule with nothing beneath it. */
+        .rt__copy-lead,
+        .rt__left .rt__copy-lead {
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+        /* The stage-3 meta chip now lives inside the Expand drawer; its
+           desktop negative top margin would clip against the drawer padding. */
+        .mvd__content .rt__stage-meta {
+          margin-top: 0;
+        }
+        /* On mobile the visualizations are hidden behind an Expand
+           pill. The desktop sticky-scroll spacing (88px gap, 72/40px
+           padding, dimmed inactive stages) becomes huge empty gutter
+           when the visuals are gone — tighten it to a normal column
+           rhythm and force every stage to full opacity. */
+        .rt__right {
+          gap: 16px;
+        }
+        .rt__stage {
+          padding: 28px 0 24px;
+          opacity: 1;
+        }
+        .rt__stage:first-child {
+          padding-top: 8px;
+        }
+        .rt__stage-num {
+          margin: 0 0 12px;
+        }
+        .rt__stage-h {
+          margin: 0 0 12px;
+        }
+        .rt__stage-sub {
+          margin: 0 0 16px;
         }
         .rt__closer {
           padding: 72px 24px 88px;

@@ -19,6 +19,7 @@ export function RuntimeFlow() {
     }
 
     let timeouts: ReturnType<typeof setTimeout>[] = [];
+    let running = false;
 
     function clearTimers() {
       for (const t of timeouts) clearTimeout(t);
@@ -29,21 +30,45 @@ export function RuntimeFlow() {
       for (const el of steps) el.classList.remove("is-on");
     }
 
+    /* Step / line delays. Halved from the original 650 / 350 so the
+       reveal feels snappier; the 12-second post-loop pause keeps the
+       sequence visible long enough to be readable before it restarts. */
     function play() {
+      if (!running) return;
       reset();
       let t = 0;
       for (const el of steps) {
         const isLine = el.classList.contains("rtdown");
-        const delay = isLine ? 350 : 650;
+        const delay = isLine ? 180 : 320;
         timeouts.push(setTimeout(() => el.classList.add("is-on"), t));
         t += delay;
       }
-      timeouts.push(setTimeout(play, t + 20000));
+      timeouts.push(setTimeout(play, t + 12000));
     }
 
-    play();
+    /* Start the loop only when the panel is in view, stop when it
+       isn't. On desktop the hero panel is in the fold so it runs
+       immediately; on mobile the right pane sits below the left
+       text content, so the user sees the sequence animate as they
+       scroll down to it. */
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries[0]?.isIntersecting ?? false;
+        if (visible && !running) {
+          running = true;
+          play();
+        } else if (!visible && running) {
+          running = false;
+          clearTimers();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(root);
 
     return () => {
+      io.disconnect();
+      running = false;
       clearTimers();
     };
   }, []);

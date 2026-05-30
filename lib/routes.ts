@@ -3,6 +3,7 @@ export const ROUTES = {
   howItWorks: "/how-it-works",
   developers: "/developers",
   platform: "/platform",
+  useCases: "/use-cases",
   pricing: "/pricing",
   trust: "/trust",
   company: "/company",

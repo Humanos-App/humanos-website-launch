@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { MobileVisualDrawer } from "@/components/MobileVisualDrawer";
 
 const COLLECT_PILLS = [
   "Signature",
@@ -269,7 +270,7 @@ export function Rt() {
               </span>
             </p>
 
-            <div className="rt__group">
+            <div className="rt__group mobile-hide">
               <div className="rt__group-label">The runtime stack</div>
               <ol className="rt__copy-list">
                 {STACK_ITEMS.map((item) => (
@@ -302,6 +303,7 @@ export function Rt() {
                 verify before acting.
               </p>
 
+              <MobileVisualDrawer label="Expand portable authorization" drawerInnerClassName="rt__stage is-active">
               <div className="rt__stage-visual rt-collect">
                 <div className="rt-collect__pills">
                   {COLLECT_PILLS.map((p) => (
@@ -335,6 +337,7 @@ export function Rt() {
                   <div className="rt-obj__foot">Verified before execution</div>
                 </div>
               </div>
+              </MobileVisualDrawer>
             </article>
 
             <article className="rt__stage" data-stage="2">
@@ -346,6 +349,7 @@ export function Rt() {
                 actions are actually allowed before execution.
               </p>
 
+              <MobileVisualDrawer label="Expand cross-system propagation" drawerInnerClassName="rt__stage is-active">
               <div className="rt__stage-visual rt-prop">
                 <div className="rt-prop__col rt-prop__col--mandate">
                   <div className="rt-prop__mandate">
@@ -395,6 +399,7 @@ export function Rt() {
                   </ul>
                 </div>
               </div>
+              </MobileVisualDrawer>
             </article>
 
             <article className="rt__stage" data-stage="3">
@@ -405,10 +410,11 @@ export function Rt() {
                 freshness, identity, revocation — before it touches a system of
                 record. No verification, no execution.
               </p>
+
+              <MobileVisualDrawer label="Expand verify before execution" drawerInnerClassName="rt__stage is-active">
               <div className="rt__stage-meta" aria-hidden="true">
                 Portable authorization · Verified at runtime · Cross-system
               </div>
-
               <div className="rt__stage-visual rt-verify">
                 <div className="rt-timeline" aria-label="Runtime verification flow">
                   <div className="rt-timeline__step">
@@ -484,6 +490,7 @@ export function Rt() {
                   </div>
                 </div>
               </div>
+              </MobileVisualDrawer>
             </article>
 
             <article className="rt__stage" data-stage="4">
@@ -495,6 +502,7 @@ export function Rt() {
                 automatically once authorization is verified.
               </p>
 
+              <MobileVisualDrawer label="Expand dynamic recovery" drawerInnerClassName="rt__stage is-active">
               <div className="rt__stage-visual rt-recover-wrap" data-rt-recover>
                 <div className="rt-recover__scenario" aria-hidden="true">
                   <span className="rt-recover__scenario-eyebrow">Scenario</span>
@@ -551,6 +559,7 @@ export function Rt() {
                   })}
                 </div>
               </div>
+              </MobileVisualDrawer>
             </article>
 
             <article className="rt__stage" data-stage="5">
@@ -562,6 +571,7 @@ export function Rt() {
                 what happened.
               </p>
 
+              <MobileVisualDrawer label="Expand execution receipts" drawerInnerClassName="rt__stage is-active">
               <div className="rt__stage-visual rt-proof">
                 <div className="rt-proof__receipt">
                   <div className="rt-proof__head">
@@ -605,6 +615,7 @@ export function Rt() {
                   No callback to Humanos required.
                 </p>
               </div>
+              </MobileVisualDrawer>
             </article>
           </div>
         </div>

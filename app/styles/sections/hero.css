@@ -159,6 +159,11 @@
   font-style: italic;
 }
 
+/* Desktop: render the full label, hide the short form. */
+.hero__compat-name-short {
+  display: none;
+}
+
 /* ============== Runtime authorization flow (hero, vertical) ============== */
 .rtflow {
   --rt-line: rgba(17, 17, 17, 0.1);
@@ -373,15 +378,32 @@
     font-size: 40px;
     width: auto !important;
   }
-  /* Drop the "· api.humanos.tech" suffix on mobile to give the eyebrow
-     room to breathe on narrow screens. */
-  .hero__eyebrow .sep,
-  .hero__eyebrow .mono {
+  /* Drop the whole eyebrow tagline on mobile — the headline carries
+     the message and the tagline crowds the small screen. */
+  .hero__eyebrow {
     display: none;
   }
-  /* Push "for AI Systems" onto its own line under the rest of the
-     tagline on mobile. */
-  .hero__eyebrow-suffix {
-    display: block;
+  /* Swap long compat labels for their short form on mobile. The short
+     span sits just before the full span; the adjacent-sibling rule
+     hides the full form only when a short form is actually present
+     (items without `mobileLabel` keep their full label). */
+  .hero__compat-name-short {
+    display: inline;
+  }
+  .hero__compat-name-short + .hero__compat-name-full {
+    display: none;
+  }
+  /* Drop the separator dots and "and more…" on mobile so the row reads
+     as a clean wrapped chip strip. */
+  .hero__compat-sep,
+  .hero__compat-more {
+    display: none;
+  }
+  /* Push the "Compatible with" label onto its own line above the chips:
+     give it the full row width inside the flex-wrap container and the
+     next flex item wraps to the next row. */
+  .hero__compat-label {
+    flex-basis: 100%;
+    margin-right: 0;
   }
 }

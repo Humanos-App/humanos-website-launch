@@ -87,4 +87,27 @@
         font-family: var(--font-mono);
         letter-spacing: 0.005em;
       }
+      @media (max-width: 720px) {
+        .final {
+          /* Desktop runs 200/180 px to give the closing CTA landing-page
+             air. On mobile the section is small and that becomes huge
+             empty gutter — trim to a normal closing-section rhythm. */
+          padding: 72px 0 80px;
+        }
+        .final__title {
+          font-size: 36px;
+          line-height: 1.08;
+          letter-spacing: -0.025em;
+        }
+        .final__sub {
+          margin-top: 24px;
+        }
+        .final__ctas {
+          margin-top: 32px;
+        }
+        .final__fineprint {
+          margin-top: 40px;
+          padding-top: 20px;
+        }
+      }
 

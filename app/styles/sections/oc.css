@@ -542,21 +542,79 @@
           font-size: 15px;
         }
         .oc__outcome {
-          font-size: 32px;
+          font-size: 28px;
         }
-        .oc__how {
-          padding-left: 18px;
-        }
+
+        /* Replace the 6-column grid with a horizontally scrollable chip
+           strip. Each tab becomes a pill; the strip snaps tabs to the
+           start as the user swipes. Bleed off the side gutter so the
+           pills can scroll the full viewport width. */
         .oc__tabs {
-          grid-template-columns: 1fr;
+          display: flex;
+          grid-template-columns: none;
+          gap: 8px;
+          /* Generous inline padding so the first/last chip have visible
+             air at scroll edges. scroll-padding-inline-start makes the
+             snap stop land at the same indent (otherwise snap pulls the
+             chip flush left, defeating the padding). */
+          padding: 0 24px;
+          scroll-padding-inline-start: 24px;
+          scroll-padding-inline-end: 24px;
+          margin: 24px -20px 32px;
+          background: transparent;
+          border: 0;
+          border-radius: 0;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .oc__tabs::-webkit-scrollbar {
+          display: none;
+        }
+        .oc__tab {
+          flex: 0 0 auto;
+          flex-direction: row;
+          align-items: center;
+          gap: 6px;
+          padding: 10px 16px;
+          margin: 0;
+          border: 1px solid rgba(244, 243, 239, 0.18);
+          border-radius: 999px;
+          background: rgba(244, 243, 239, 0.03);
+          scroll-snap-align: start;
+          white-space: nowrap;
         }
         .oc__tab + .oc__tab {
-          border-left: 0;
-          border-top: 1px solid rgba(244, 243, 239, 0.1);
+          border-left: 1px solid rgba(244, 243, 239, 0.18);
+          border-top: 1px solid rgba(244, 243, 239, 0.18);
         }
         .oc__tab.is-active {
+          background: var(--hm-verification);
+          color: var(--hm-chalk-0);
+          border-color: var(--hm-verification);
           border-top-color: var(--hm-verification);
-          border-bottom-color: transparent;
+        }
+        .oc__tab-num {
+          display: none;
+        }
+        .oc__tab-label {
+          font-size: 13px;
+        }
+
+        /* Drop the "How it works" steps + code block and the secondary
+           "Get API key" CTA on mobile. The panel now reads as just the
+           brand logo, the outcome description, and the primary
+           "Read case study" button. */
+        .oc__how {
+          display: none;
+        }
+        .oc__cta--ghost {
+          display: none;
+        }
+        .oc__ctas {
+          margin-top: 24px;
         }
       }
 
@@ -812,14 +870,12 @@
         .oc__visual {
           min-height: 280px;
         }
-        .oc {
+        /* Drop the cs-flow chart animation on the right side of each
+           Outcomes panel on mobile — the left column carries the
+           customer name, outcome, steps, code snippet, and CTAs, which
+           is what mobile needs. */
+        .oc__right,
+        .oc__visual {
           display: none;
         }
       }
-
-/* Hide on mobile per design decision */
-@media (max-width: 760px) {
-  .oc {
-    display: none;
-  }
-}

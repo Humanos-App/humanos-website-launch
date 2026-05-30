@@ -15,6 +15,7 @@ import "./styles/platform.css";
 import "./styles/trust.css";
 import "./styles/company.css";
 import "./styles/customers.css";
+import "./styles/use-cases.css";
 import "./styles/mobile-simplify.css";
 import "./styles/sections/hero.css";
 import "./styles/sections/logos.css";
@@ -40,7 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    /* suppressHydrationWarning silences the benign mismatch caused by
+       browser extensions (e.g. ones that inject `extension-installed`
+       attributes onto <html> before React hydrates). */
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Navbar />
         {children}
