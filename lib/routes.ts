@@ -5,6 +5,8 @@ export const ROUTES = {
   platform: "/platform",
   pricing: "/pricing",
   trust: "/trust",
+  company: "/company",
+  customers: "/case-studies",
   caseStudies: {
     numo: "/case-studies/numo",
     ralio: "/case-studies/ralio",

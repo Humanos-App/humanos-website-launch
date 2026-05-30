@@ -1,0 +1,258 @@
+/* /company route — all selectors scoped under .company-page so the
+   local class vocabulary (.wrap, .intro, .why, .section, etc.) can't
+   collide with global rules or sibling routes. */
+
+.company-page .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.company-page .wrap--narrow { max-width: 960px; }
+
+.company-page .eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--hm-ink-3);
+}
+.company-page .eyebrow .dot {
+  width: 6px; height: 6px; border-radius: 999px;
+  background: var(--hm-verification);
+  box-shadow: 0 0 0 4px rgba(75,73,202,0.16);
+}
+.company-page .eyebrow--dark { color: var(--hm-chalk-2); }
+
+.company-page .h-lead {
+  font-size: 56px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 600;
+  color: var(--hm-ink-0); margin: 0; text-wrap: balance;
+}
+.company-page .h-section {
+  font-size: 44px; line-height: 1.08; letter-spacing: -0.028em; font-weight: 600;
+  color: var(--hm-ink-0); margin: 0; text-wrap: balance;
+}
+.company-page .body-lg {
+  font-size: 18px; line-height: 1.6; color: var(--hm-ink-2);
+  text-wrap: pretty;
+}
+.company-page .body-lg + .body-lg { margin-top: 20px; }
+.company-page .body-lg .hl { color: var(--hm-ink-0); font-weight: 500; }
+
+/* SECTION 01 — INTRO */
+.company-page .intro {
+  position: relative;
+  padding: 130px 0 110px;
+  border-bottom: 1px solid var(--hm-line);
+  overflow: hidden;
+}
+.company-page .intro__grid-bg {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(17,17,17,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, black 20%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, black 20%, transparent 90%);
+  pointer-events: none;
+}
+.company-page .intro__glow {
+  position: absolute; right: -120px; top: -120px;
+  width: 640px; height: 520px;
+  background: radial-gradient(ellipse at center, rgba(75,73,202,0.12), transparent 62%);
+  pointer-events: none;
+}
+.company-page .intro__inner { position: relative; max-width: 1000px; }
+.company-page .intro h1 { margin: 28px 0 0; }
+.company-page .intro__body { margin-top: 36px; max-width: 720px; }
+.company-page .intro__ledger { margin: 48px 0 0; max-width: 760px; }
+
+/* SECTION 02 — TEAM PHOTO */
+.company-page .team {
+  padding: 0;
+  border-bottom: 1px solid var(--hm-line);
+  background: var(--hm-authority);
+}
+.company-page .team__photo {
+  width: 100%;
+  height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(75,73,202,0.16), transparent 70%),
+    var(--hm-authority);
+  color: var(--hm-chalk-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.company-page .team__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.company-page .team__caption {
+  max-width: 1240px; margin: 0 auto;
+  padding: 18px 32px 22px;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+  color: var(--hm-chalk-2);
+}
+.company-page .team__caption .mark {
+  width: 6px; height: 6px; border-radius: 999px; background: var(--hm-verification);
+}
+
+/* SECTION 03 — WHY WE EXIST (dark) */
+.company-page .why {
+  position: relative;
+  background: var(--hm-authority);
+  color: var(--hm-chalk-0);
+  padding: 140px 0;
+  border-bottom: 1px solid var(--hm-line-dark);
+  overflow: hidden;
+}
+.company-page .why__glow {
+  position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse at center, rgba(75,73,202,0.16), transparent 64%);
+  pointer-events: none;
+}
+.company-page .why__inner { position: relative; max-width: 1000px; }
+.company-page .why h2 {
+  margin: 28px 0 0;
+  font-size: 52px; line-height: 1.06; letter-spacing: -0.03em; font-weight: 600;
+  color: var(--hm-chalk-0); text-wrap: balance;
+}
+.company-page .why h2 .q { color: var(--hm-execution); }
+.company-page .why__body { margin-top: 36px; max-width: 720px; }
+.company-page .why__body p { font-size: 18px; line-height: 1.6; color: var(--hm-chalk-1); text-wrap: pretty; }
+.company-page .why__body p + p { margin-top: 20px; }
+.company-page .why__body .hl { color: var(--hm-chalk-0); font-weight: 500; }
+.company-page .why__split {
+  margin-top: 44px; padding-top: 28px;
+  border-top: 1px solid var(--hm-line-dark);
+  display: flex; gap: 40px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 13px; color: var(--hm-chalk-2);
+}
+.company-page .why__split-item { display: flex; align-items: center; gap: 10px; }
+.company-page .why__split-item .from { color: var(--hm-chalk-2); }
+.company-page .why__split-item .to { color: var(--hm-chalk-0); }
+.company-page .why__split-item .arr { color: var(--hm-execution); }
+
+/* SECTION 04 — FOUNDING TEAM */
+.company-page .founders {
+  padding: 130px 0;
+  border-bottom: 1px solid var(--hm-line);
+}
+.company-page .founders__head { max-width: 760px; margin-bottom: 64px; }
+.company-page .founders__head h2 { margin-top: 16px; }
+
+.company-page .metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--hm-line);
+  border-bottom: 1px solid var(--hm-line);
+}
+.company-page .metric {
+  padding: 44px 8px 40px 0;
+  border-left: 1px solid var(--hm-line);
+  padding-left: 32px;
+}
+.company-page .metric:first-child { border-left: 0; padding-left: 0; }
+.company-page .metric__num {
+  font-size: 96px; line-height: 0.92; letter-spacing: -0.04em; font-weight: 600;
+  color: var(--hm-ink-0);
+  font-feature-settings: "tnum" 1;
+}
+.company-page .metric__label {
+  margin-top: 18px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--hm-ink-3);
+}
+.company-page .metric__note {
+  display: block; margin-top: 6px;
+  letter-spacing: 0.06em; text-transform: none;
+  color: var(--hm-ink-4);
+}
+
+.company-page .founders__tags {
+  margin-top: 40px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.company-page .company__tag {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--hm-ink-1);
+  border: 1px solid var(--hm-line);
+  background: var(--hm-surface-raised);
+  border-radius: 4px;
+  padding: 8px 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.company-page .company__tag .pip { width: 5px; height: 5px; border-radius: 999px; background: var(--hm-verification); }
+
+.company-page .founders__support {
+  margin-top: 40px;
+  max-width: 760px;
+  font-size: 18px; line-height: 1.6; color: var(--hm-ink-2);
+  text-wrap: pretty;
+}
+.company-page .founders__support .hl { color: var(--hm-ink-0); font-weight: 500; }
+
+/* SECTION 05 — VISION */
+.company-page .vision {
+  padding: 130px 0;
+  border-bottom: 1px solid var(--hm-line);
+  background: var(--hm-clarity);
+  position: relative;
+  overflow: hidden;
+}
+.company-page .vision__inner { max-width: 1000px; position: relative; }
+.company-page .vision h2 { margin-top: 16px; }
+.company-page .vision__ledger {
+  margin: 56px 0;
+  border-top: 1px solid var(--hm-line);
+}
+.company-page .vision__row {
+  display: grid; grid-template-columns: 240px 1fr;
+  gap: 24px; align-items: baseline;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--hm-line);
+}
+.company-page .vision__co {
+  font-size: 26px; font-weight: 600; letter-spacing: -0.015em; color: var(--hm-ink-3);
+}
+.company-page .vision__did {
+  font-size: 26px; font-weight: 500; letter-spacing: -0.015em; color: var(--hm-ink-2);
+}
+.company-page .vision__row--now .vision__co { color: var(--hm-verification); }
+.company-page .vision__row--now .vision__did { color: var(--hm-ink-0); font-weight: 600; }
+.company-page .vision__row--now { background: linear-gradient(90deg, rgba(75,73,202,0.05), transparent 70%); }
+.company-page .vision__body { max-width: 760px; margin-top: 36px; }
+.company-page .vision__body .body-lg + .body-lg { margin-top: 20px; }
+
+/* CLOSING STRIP */
+.company-page .closing {
+  padding: 110px 0;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 20%, rgba(75,73,202,0.10), transparent 70%),
+    var(--hm-clarity);
+  border-bottom: 1px solid var(--hm-line);
+}
+.company-page .closing__line {
+  font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600;
+  color: var(--hm-ink-0); margin: 18px auto 0; max-width: 760px;
+  text-wrap: balance;
+}
+.company-page .closing__line .accent { color: var(--hm-verification); }
+.company-page .closing__ctas { margin-top: 32px; display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 1080px) {
+  .company-page .h-lead { font-size: 42px; }
+  .company-page .h-section { font-size: 34px; }
+  .company-page .why h2 { font-size: 40px; }
+  .company-page .metrics { grid-template-columns: 1fr; }
+  .company-page .metric { border-left: 0; padding-left: 0; border-top: 1px solid var(--hm-line); }
+  .company-page .metric:first-child { border-top: 0; }
+  .company-page .metric__num { font-size: 72px; }
+  .company-page .team__photo { height: 420px; }
+  .company-page .vision__row { grid-template-columns: 1fr; gap: 4px; }
+  .company-page .vision__co, .company-page .vision__did { font-size: 22px; }
+}
+@media (max-width: 720px) {
+  .company-page .wrap { padding: 0 20px; }
+}

@@ -141,16 +141,187 @@
   display: block;
 }
 
+/* ---------- Burger button ---------- */
+.nav__burger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  color: var(--hm-ink-0);
+  border-radius: 4px;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+.nav__burger:hover {
+  background: rgba(17, 17, 17, 0.04);
+}
+.nav__burger-bars {
+  position: relative;
+  width: 18px;
+  height: 12px;
+  display: block;
+}
+.nav__burger-bars span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transition:
+    transform 0.2s var(--ease-standard),
+    opacity 0.2s var(--ease-standard),
+    top 0.2s var(--ease-standard),
+    bottom 0.2s var(--ease-standard);
+}
+.nav__burger-bars span:nth-child(1) {
+  top: 0;
+}
+.nav__burger-bars span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav__burger-bars span:nth-child(3) {
+  bottom: 0;
+}
+.nav__burger[aria-expanded="true"] .nav__burger-bars span:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.nav__burger[aria-expanded="true"] .nav__burger-bars span:nth-child(2) {
+  opacity: 0;
+}
+.nav__burger[aria-expanded="true"] .nav__burger-bars span:nth-child(3) {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+/* ---------- Mobile drawer ---------- */
+.nav__mobile {
+  display: none;
+}
+
 @media (max-width: 880px) {
+  /* Hide desktop nav, swap the CTA buttons for the burger. */
   .nav__links {
     display: none;
+  }
+  .nav__cta-group .btn {
+    display: none;
+  }
+  .nav__burger {
+    display: inline-flex;
   }
   .nav__inner {
     grid-template-columns: auto 1fr auto;
     gap: 16px;
     padding: 0 20px;
   }
+  /* The desktop mega panels are positioned absolute; they're never opened
+     on mobile (no hover targets) but explicitly hide them just in case. */
   .mega {
     display: none;
+  }
+
+  /* The mobile drawer drops down from below the nav, takes the rest of the
+     viewport, and locks page scroll behind it. */
+  .nav__mobile {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-page, var(--hm-chalk-0));
+    z-index: 48;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.22s var(--ease-standard),
+      opacity 0.22s var(--ease-standard);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .nav__mobile.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav__mobile-links {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 20px 8px;
+  }
+  .nav__mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--hm-ink-0);
+    padding: 18px 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--hm-line);
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  .nav__mobile-link:hover {
+    color: var(--hm-verification);
+  }
+  .nav__mobile-link .chev {
+    width: 14px;
+    height: 14px;
+    opacity: 0.5;
+    transition: transform 0.2s var(--ease-standard);
+  }
+  .nav__mobile-link[aria-expanded="true"] .chev {
+    transform: rotate(180deg);
+  }
+  /* When a mega is expanded inline, the parent link "owns" the bottom border
+     of the drop-down so the row + sub-items read as one block. */
+  .nav__mobile-group:has(.nav__mobile-link[aria-expanded="true"])
+    .nav__mobile-link {
+    border-bottom-color: transparent;
+  }
+  .nav__mobile-mega {
+    padding: 4px 0 18px;
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .nav__mobile-mega-col + .nav__mobile-mega-col {
+    margin-top: 18px;
+  }
+  .nav__mobile-mega-col .mega__col-label {
+    margin-bottom: 6px;
+    font-size: 10px;
+  }
+  .nav__mobile-mega .mega__item {
+    padding: 8px 0;
+  }
+  .nav__mobile-ctas {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 20px 28px;
+    border-top: 1px solid var(--hm-line);
+    background: var(--hm-surface-raised);
+  }
+  .nav__mobile-ctas .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 15px;
   }
 }

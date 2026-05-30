@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Humanos — Company</title>
+<link rel="stylesheet" href="assets/colors_and_type.css" />
+<style>
+  /* ============================================================
+     RESET / BASE
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+  /* ============================================================
+     LAYOUT PRIMITIVES
+     ============================================================ */
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .wrap--narrow { max-width: 960px; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--hm-ink-3);
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 999px;
+    background: var(--hm-verification);
+    box-shadow: 0 0 0 4px rgba(75,73,202,0.16);
+  }
+  .eyebrow--dark { color: var(--hm-chalk-2); }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,243,239,0.85);
+    backdrop-filter: saturate(180%) blur(8px);
+    -webkit-backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .nav__inner {
+    max-width: 1240px; margin: 0 auto;
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+    height: 56px; padding: 0 32px; gap: 40px;
+  }
+  .nav__brand { display: flex; align-items: center; gap: 10px; }
+  .nav__brand img { height: 18px; }
+  .nav__brand-text { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--hm-ink-0); }
+  .nav__links { display: flex; gap: 28px; align-items: center; }
+  .nav__link {
+    font-size: 14px; font-weight: 500; color: var(--hm-ink-1);
+    display: inline-flex; align-items: center; gap: 4px;
+    cursor: pointer; transition: color var(--dur-fast) var(--ease-standard);
+  }
+  .nav__link:hover { color: var(--hm-verification); }
+  .nav__link.is-current { color: var(--hm-verification); }
+  .nav__cta-group { display: flex; gap: 8px; align-items: center; }
+
+  /* ============================================================
+     BUTTONS
+     ============================================================ */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; font-size: 14px; font-weight: 500;
+    border-radius: 4px;
+    transition: all var(--dur-fast) var(--ease-standard);
+    white-space: nowrap;
+  }
+  .btn--primary { background: var(--hm-authority); color: var(--hm-chalk-0); }
+  .btn--primary:hover { background: #282826; }
+  .btn--ghost { color: var(--hm-ink-1); }
+  .btn--ghost:hover { color: var(--hm-verification); }
+  .btn--secondary { border: 1px solid var(--hm-line-strong); color: var(--hm-ink-0); background: transparent; }
+  .btn--secondary:hover { border-color: var(--hm-ink-0); }
+  .btn--sm { padding: 7px 12px; font-size: 13px; }
+  .btn .arrow { transition: transform var(--dur-fast) var(--ease-standard); }
+  .btn:hover .arrow { transform: translateX(2px); }
+
+  /* ============================================================
+     SHARED SECTION TYPE
+     ============================================================ */
+  .h-lead {
+    font-size: 56px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 600;
+    color: var(--hm-ink-0); margin: 0; text-wrap: balance;
+  }
+  .h-section {
+    font-size: 44px; line-height: 1.08; letter-spacing: -0.028em; font-weight: 600;
+    color: var(--hm-ink-0); margin: 0; text-wrap: balance;
+  }
+  .body-lg {
+    font-size: 18px; line-height: 1.6; color: var(--hm-ink-2);
+    text-wrap: pretty;
+  }
+  .body-lg + .body-lg { margin-top: 20px; }
+  .body-lg .hl { color: var(--hm-ink-0); font-weight: 500; }
+
+  /* ============================================================
+     SECTION 01 — INTRO
+     ============================================================ */
+  .intro {
+    position: relative;
+    padding: 130px 0 110px;
+    border-bottom: 1px solid var(--hm-line);
+    overflow: hidden;
+  }
+  .intro__grid-bg {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(17,17,17,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+    mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, black 20%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 30% 0%, black 20%, transparent 90%);
+    pointer-events: none;
+  }
+  .intro__glow {
+    position: absolute; right: -120px; top: -120px;
+    width: 640px; height: 520px;
+    background: radial-gradient(ellipse at center, rgba(75,73,202,0.12), transparent 62%);
+    pointer-events: none;
+  }
+  .intro__inner { position: relative; max-width: 1000px; }
+  .intro h1 { margin: 28px 0 0; }
+  .intro__body { margin-top: 36px; max-width: 720px; }
+  .intro__ledger { margin: 48px 0 0; max-width: 760px; }
+
+  /* ============================================================
+     SECTION 02 — TEAM PHOTO
+     ============================================================ */
+  .team {
+    padding: 0;
+    border-bottom: 1px solid var(--hm-line);
+    background: var(--hm-authority);
+  }
+  .team__photo {
+    width: 100%;
+    height: 640px;
+    display: block;
+  }
+  .team__caption {
+    max-width: 1240px; margin: 0 auto;
+    padding: 18px 32px 22px;
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+    color: var(--hm-chalk-2);
+  }
+  .team__caption .mark {
+    width: 6px; height: 6px; border-radius: 999px; background: var(--hm-verification);
+  }
+
+  /* ============================================================
+     SECTION 03 — WHY WE EXIST (dark)
+     ============================================================ */
+  .why {
+    position: relative;
+    background: var(--hm-authority);
+    color: var(--hm-chalk-0);
+    padding: 140px 0;
+    border-bottom: 1px solid var(--hm-line-dark);
+    overflow: hidden;
+  }
+  .why__glow {
+    position: absolute; left: 50%; bottom: -200px; transform: translateX(-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse at center, rgba(75,73,202,0.16), transparent 64%);
+    pointer-events: none;
+  }
+  .why__inner { position: relative; max-width: 1000px; }
+  .why h2 {
+    margin: 28px 0 0;
+    font-size: 52px; line-height: 1.06; letter-spacing: -0.03em; font-weight: 600;
+    color: var(--hm-chalk-0); text-wrap: balance;
+  }
+  .why h2 .q { color: var(--hm-execution); }
+  .why__body { margin-top: 36px; max-width: 720px; }
+  .why__body p { font-size: 18px; line-height: 1.6; color: var(--hm-chalk-1); text-wrap: pretty; }
+  .why__body p + p { margin-top: 20px; }
+  .why__body .hl { color: var(--hm-chalk-0); font-weight: 500; }
+  .why__split {
+    margin-top: 44px; padding-top: 28px;
+    border-top: 1px solid var(--hm-line-dark);
+    display: flex; gap: 40px; flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: 13px; color: var(--hm-chalk-2);
+  }
+  .why__split-item { display: flex; align-items: center; gap: 10px; }
+  .why__split-item .from { color: var(--hm-chalk-2); }
+  .why__split-item .to { color: var(--hm-chalk-0); }
+  .why__split-item .arr { color: var(--hm-execution); }
+
+  /* Light variant (used in the intro section) */
+  .why__split--light {
+    border-top-color: var(--hm-line);
+    color: var(--hm-ink-3);
+    max-width: 760px;
+  }
+  .why__split--light .from { color: var(--hm-ink-3); }
+  .why__split--light .to { color: var(--hm-ink-0); }
+  .why__split--light .arr { color: var(--hm-verification); }
+
+  /* ============================================================
+     SECTION 04 — FOUNDING TEAM (metrics)
+     ============================================================ */
+  .founders {
+    padding: 130px 0;
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .founders__head { max-width: 760px; margin-bottom: 64px; }
+  .founders__head h2 { margin-top: 16px; }
+
+  .metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--hm-line);
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .metrics--two { grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--hm-line);
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .metric {
+    padding: 44px 8px 40px 0;
+    border-left: 1px solid var(--hm-line);
+    padding-left: 32px;
+  }
+  .metric:first-child { border-left: 0; padding-left: 0; }
+  .metric__num {
+    font-size: 96px; line-height: 0.92; letter-spacing: -0.04em; font-weight: 600;
+    color: var(--hm-ink-0);
+    font-feature-settings: "tnum" 1;
+  }
+  .metric__label {
+    margin-top: 18px;
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--hm-ink-3);
+  }
+  .metric__note {
+    display: block; margin-top: 6px;
+    letter-spacing: 0.06em; text-transform: none;
+    color: var(--hm-ink-4);
+  }
+
+  .founders__tags {
+    margin-top: 40px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tag {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--hm-ink-1);
+    border: 1px solid var(--hm-line);
+    background: var(--hm-surface-raised);
+    border-radius: 4px;
+    padding: 8px 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .tag .pip { width: 5px; height: 5px; border-radius: 999px; background: var(--hm-verification); }
+
+  .founders__support {
+    margin-top: 40px;
+    max-width: 760px;
+    font-size: 18px; line-height: 1.6; color: var(--hm-ink-2);
+    text-wrap: pretty;
+  }
+  .founders__support .hl { color: var(--hm-ink-0); font-weight: 500; }
+
+  /* ============================================================
+     SECTION 05 — VISION
+     ============================================================ */
+  .vision {
+    padding: 130px 0;
+    border-bottom: 1px solid var(--hm-line);
+    background: var(--hm-clarity);
+    position: relative;
+    overflow: hidden;
+  }
+  .vision__inner { max-width: 1000px; position: relative; }
+  .vision h2 { margin-top: 16px; }
+  .vision__ledger {
+    margin: 56px 0;
+    border-top: 1px solid var(--hm-line);
+  }
+  .vision__row {
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: 24px; align-items: baseline;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .vision__co {
+    font-size: 26px; font-weight: 600; letter-spacing: -0.015em; color: var(--hm-ink-3);
+  }
+  .vision__did {
+    font-size: 26px; font-weight: 500; letter-spacing: -0.015em; color: var(--hm-ink-2);
+  }
+  .vision__row--now .vision__co { color: var(--hm-verification); }
+  .vision__row--now .vision__did { color: var(--hm-ink-0); font-weight: 600; }
+  .vision__row--now { background: linear-gradient(90deg, rgba(75,73,202,0.05), transparent 70%); }
+  .vision__body { max-width: 760px; margin-top: 36px; }
+  .vision__body .body-lg + .body-lg { margin-top: 20px; }
+
+  /* ============================================================
+     CLOSING STRIP
+     ============================================================ */
+  .closing {
+    padding: 110px 0;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 20%, rgba(75,73,202,0.10), transparent 70%),
+      var(--hm-clarity);
+    border-bottom: 1px solid var(--hm-line);
+  }
+  .closing__line {
+    font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600;
+    color: var(--hm-ink-0); margin: 18px auto 0; max-width: 760px;
+    text-wrap: balance;
+  }
+  .closing__line .accent { color: var(--hm-verification); }
+  .closing__ctas { margin-top: 32px; display: inline-flex; gap: 10px; }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer { background: var(--hm-authority); color: var(--hm-chalk-1); padding: 80px 0 40px; }
+  .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr; gap: 40px; }
+  .footer__brand { color: var(--hm-chalk-0); }
+  .footer__brand-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .footer__brand-mark img { height: 18px; }
+  .footer__brand-text { font-size: 16px; font-weight: 600; }
+  .footer__tagline { font-size: 13px; color: var(--hm-chalk-2); line-height: 1.5; max-width: 280px; }
+  .footer__col-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hm-chalk-2); margin-bottom: 16px; }
+  .footer__col a { display: block; font-size: 13px; color: var(--hm-chalk-1); padding: 4px 0; transition: color var(--dur-fast); }
+  .footer__col a:hover { color: var(--hm-chalk-0); }
+  .footer__bottom { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--hm-line-dark); display: flex; justify-content: space-between; font-size: 12px; color: var(--hm-chalk-2); flex-wrap: wrap; gap: 12px; }
+  .footer__bottom-right { display: flex; gap: 16px; font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 1080px) {
+    .h-lead { font-size: 42px; }
+    .h-section { font-size: 34px; }
+    .why h2 { font-size: 40px; }
+    .metrics { grid-template-columns: 1fr; }
+    .metric { border-left: 0; padding-left: 0; border-top: 1px solid var(--hm-line); }
+    .metric:first-child { border-top: 0; }
+    .metric__num { font-size: 72px; }
+    .team__photo { height: 420px; }
+    .vision__row { grid-template-columns: 1fr; gap: 4px; }
+    .vision__co, .vision__did { font-size: 22px; }
+    .nav__links { display: none; }
+  }
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    .nav__inner { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     NAV
+========================================================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="Homepage.html">
+      <img src="assets/logo-mark-black.svg" alt="Humanos" />
+      <span class="nav__brand-text">Humanos</span>
+    </a>
+    <nav class="nav__links">
+      <a class="nav__link" href="How it works.html">Product</a>
+      <a class="nav__link" href="Developers.html">Developers</a>
+      <a class="nav__link" href="#">Use cases</a>
+      <a class="nav__link" href="Pricing.html">Pricing</a>
+      <a class="nav__link is-current" href="Company.html">Company</a>
+    </nav>
+    <div class="nav__cta-group">
+      <a class="btn btn--ghost btn--sm" href="#">Sign in</a>
+      <a class="btn btn--primary btn--sm" href="#">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     SECTION 01 — INTRO
+========================================================= -->
+<section class="intro" data-screen-label="01 Company">
+  <div class="intro__grid-bg" aria-hidden="true"></div>
+  <div class="intro__glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="intro__inner">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Company</span>
+      <h1 class="h-lead">Building the authorization layer for autonomous systems.</h1>
+      <div class="vision__ledger intro__ledger">
+        <div class="vision__row">
+          <div class="vision__co">Stripe</div>
+          <div class="vision__did">standardized payments.</div>
+        </div>
+        <div class="vision__row">
+          <div class="vision__co">Auth0</div>
+          <div class="vision__did">standardized identity.</div>
+        </div>
+        <div class="vision__row vision__row--now">
+          <div class="vision__co">Humanos</div>
+          <div class="vision__did">is standardizing authorization.</div>
+        </div>
+      </div>
+
+      <div class="intro__body">
+        <p class="body-lg">As software becomes increasingly autonomous, every action must be <span class="hl">verifiable, authorized, and accountable.</span></p>
+        <p class="body-lg">Humanos is building the infrastructure that allows AI systems, applications, and organizations to verify whether an action is allowed before execution, recover missing authorization when required, and generate independently verifiable proof afterwards.</p>
+        <p class="body-lg">We believe authorization should become a <span class="hl">shared, portable, and machine-verifiable layer of the internet.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION 02 — TEAM PHOTO
+========================================================= -->
+<section class="team" data-screen-label="02 Team">
+  <image-slot
+    id="company-team-photo"
+    class="team__photo"
+    shape="rect"
+    fit="cover"
+    placeholder="Drop the Humanos team photo">
+  </image-slot>
+  <div class="team__caption">
+    <span class="mark" aria-hidden="true"></span>
+    The Humanos founding team is spread across the US and Europe.
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION 03 — WHY WE EXIST
+========================================================= -->
+<section class="why" data-screen-label="03 Why we exist">
+  <div class="why__glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="why__inner">
+      <span class="eyebrow eyebrow--dark"><span class="dot" aria-hidden="true"></span>Why we exist</span>
+      <h2>AI can act. <span class="q">But who decided it was allowed to?</span></h2>
+      <div class="why__body">
+        <p>Today's systems are built around <span class="hl">identity and access</span>. Autonomous systems require <span class="hl">authorization</span>.</p>
+        <p>As AI agents begin executing payments, modifying records, accessing data, signing agreements, interacting with external services, and operating across organizations, the ability to verify whether an action was authorized becomes critical.</p>
+        <p>We started Humanos to build the infrastructure that makes autonomous execution trustworthy.</p>
+      </div>
+      <div class="why__split">
+        <div class="why__split-item"><span class="from">identity</span><span class="arr">→</span><span class="to">who you are</span></div>
+        <div class="why__split-item"><span class="from">access</span><span class="arr">→</span><span class="to">what you can reach</span></div>
+        <div class="why__split-item"><span class="from">authorization</span><span class="arr">→</span><span class="to">whether this action is allowed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION 04 — FOUNDING TEAM
+========================================================= -->
+<section class="founders" data-screen-label="04 Founding team">
+  <div class="wrap">
+    <div class="founders__head">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Founding team</span>
+      <h2 class="h-section">The Humanos team has spent a decade building and automating complex systems.</h2>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric__num">7</div>
+        <div class="metric__label">Team members<span class="metric__note">all repeat founders</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric__num">19</div>
+        <div class="metric__label">Startups built</div>
+      </div>
+      <div class="metric">
+        <div class="metric__num">5</div>
+        <div class="metric__label">Exits</div>
+      </div>
+    </div>
+
+    <div class="founders__tags">
+      <span class="tag"><span class="pip"></span>Payments</span>
+      <span class="tag"><span class="pip"></span>Cybersecurity</span>
+      <span class="tag"><span class="pip"></span>Blockchain</span>
+      <span class="tag"><span class="pip"></span>AI</span>
+      <span class="tag"><span class="pip"></span>Infrastructure</span>
+    </div>
+
+    <p class="founders__support">The Humanos founding team has spent the last decade building companies across <span class="hl">payments, cybersecurity, infrastructure, AI, and identity systems.</span></p>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION 05 — VISION
+========================================================= -->
+<section class="vision" data-screen-label="05 Vision">
+  <div class="wrap">
+    <div class="vision__inner">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Our vision</span>
+      <h2 class="h-section">Authorization should become internet infrastructure.</h2>
+
+      <div class="vision__body">
+        <p class="body-lg">We are building the infrastructure that allows any system to <span class="hl">issue, verify, recover, and prove</span> authorization before execution.</p>
+        <p class="body-lg">Today, approvals, signatures, consents, policies, permissions, and delegated authority are fragmented across applications, organizations, and communication channels. We believe authorization should become a shared, machine-verifiable primitive that any system can trust.</p>
+        <p class="body-lg">As AI systems become increasingly autonomous, authorization becomes as fundamental as <span class="hl">payments and identity.</span> Our goal is to make it a shared, portable, and machine-verifiable layer of the internet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CLOSING
+========================================================= -->
+<section class="closing" data-screen-label="06 Closing">
+  <div class="wrap wrap--narrow">
+    <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Humanos</span>
+    <h2 class="closing__line">A shared layer of authorization for the <span class="accent">autonomous internet.</span></h2>
+    <div class="closing__ctas">
+      <a class="btn btn--primary" href="How it works.html">See how it works <span class="arrow">→</span></a>
+      <a class="btn btn--secondary" href="#">Talk with us <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-mark">
+          <img src="assets/logo-mark-white.svg" alt="Humanos" />
+          <span class="footer__brand-text">Humanos</span>
+        </div>
+        <div class="footer__tagline">Runtime authorization for the execution path. Human intent, programmable and portable.</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--hm-chalk-2);margin-top:10px">api.humanos.tech</div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="How it works.html">How it works</a>
+        <a href="#">Verification</a>
+        <a href="#">Proofs</a>
+        <a href="#">Console</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Developers</div>
+        <a href="Developers.html">Quickstart</a>
+        <a href="Developers.html">Reference</a>
+        <a href="Developers.html">SDKs</a>
+        <a href="#">GitHub</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Use cases</div>
+        <a href="#">Agentic finance</a>
+        <a href="#">Treasury</a>
+        <a href="#">Trading</a>
+        <a href="#">Healthcare</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Company</div>
+        <a href="Company.html">About</a>
+        <a href="#">Customers</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Trust</div>
+        <a href="#">Security</a>
+        <a href="#">Status</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div>© 2026 Humanos · All decisions verifiable</div>
+      <div class="footer__bottom-right">
+        <span>SOC 2 Type II</span>
+        <span>ISO 27001</span>
+        <span>W3C VC 2.0</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/image-slot.js"></script>
+</body>
+</html>

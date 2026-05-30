@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Humanos — Trust</title>
+<link rel="stylesheet" href="assets/colors_and_type.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { margin: 0; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .wrap--narrow { max-width: 960px; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hm-ink-3); }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--hm-verification); box-shadow: 0 0 0 4px rgba(75,73,202,0.16); }
+  .eyebrow--chalk { color: var(--hm-chalk-2); }
+
+  .h-section { font-size: 40px; line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; color: var(--hm-ink-0); margin: 14px 0 0; text-wrap: balance; }
+  .h-section--chalk { color: var(--hm-chalk-0); }
+  .h-section .fn { font-family: var(--font-mono); font-weight: 500; color: var(--hm-verification); }
+  .sub { margin-top: 16px; font-size: 18px; line-height: 1.55; color: var(--hm-ink-2); max-width: 660px; text-wrap: pretty; }
+  .sub--chalk { color: var(--hm-chalk-1); }
+
+  /* NAV */
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(244,243,239,0.85); backdrop-filter: saturate(180%) blur(8px); -webkit-backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--hm-line); }
+  .nav__inner { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; align-items: center; height: 56px; padding: 0 32px; gap: 36px; }
+  .nav__brand { display: flex; align-items: center; gap: 10px; }
+  .nav__brand img { height: 18px; }
+  .nav__brand-text { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--hm-ink-0); }
+  .nav__links { display: flex; gap: 26px; align-items: center; }
+  .nav__link { font-size: 14px; font-weight: 500; color: var(--hm-ink-1); cursor: pointer; transition: color var(--dur-fast) var(--ease-standard); }
+  .nav__link:hover { color: var(--hm-verification); }
+  .nav__link.is-current { color: var(--hm-verification); }
+  .nav__cta-group { display: flex; gap: 8px; align-items: center; }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; font-size: 14px; font-weight: 500; border-radius: 4px; transition: all var(--dur-fast) var(--ease-standard); white-space: nowrap; }
+  .btn--primary { background: var(--hm-authority); color: var(--hm-chalk-0); }
+  .btn--primary:hover { background: #282826; }
+  .btn--ghost { color: var(--hm-ink-1); }
+  .btn--ghost:hover { color: var(--hm-verification); }
+  .btn--secondary { border: 1px solid var(--hm-line-strong); color: var(--hm-ink-0); background: transparent; }
+  .btn--secondary:hover { border-color: var(--hm-ink-0); }
+  .btn--invert { background: var(--hm-chalk-0); color: var(--hm-authority); }
+  .btn--invert:hover { background: #fff; }
+  .btn--invert-ghost { color: var(--hm-chalk-0); border: 1px solid rgba(244,243,239,0.20); }
+  .btn--invert-ghost:hover { border-color: var(--hm-chalk-0); }
+  .btn--sm { padding: 7px 12px; font-size: 13px; }
+  .btn .arrow { transition: transform var(--dur-fast) var(--ease-standard); }
+  .btn:hover .arrow { transform: translateX(2px); }
+
+  .section { padding: 120px 0; border-bottom: 1px solid var(--hm-line); position: relative; }
+  .section--dark { background: var(--hm-authority); color: var(--hm-chalk-0); border-bottom: 1px solid var(--hm-line-dark); }
+  .section__head { max-width: 760px; }
+  .section__head--center { margin: 0 auto; text-align: center; }
+
+  /* WHY-TRUST reasons grid */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 12px; }
+  .why-card {
+    display: flex; flex-direction: column; gap: 12px;
+    border: 1px solid var(--hm-line); background: var(--hm-surface-raised); border-radius: 10px;
+    padding: 26px 24px 22px; min-height: 196px;
+    transition: border-color var(--dur-base), box-shadow var(--dur-base), transform var(--dur-base);
+  }
+  .why-card:hover { border-color: var(--hm-ink-3); box-shadow: var(--elev-active); transform: translateY(-2px); }
+  .why-card__n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--hm-verification); }
+  .why-card__t { font-size: 19px; font-weight: 600; letter-spacing: -0.012em; color: var(--hm-ink-0); margin: 0; line-height: 1.25; }
+  .why-card__d { font-size: 14px; line-height: 1.55; color: var(--hm-ink-2); margin: 0; }
+  .why-card__more { margin-top: auto; font-family: var(--font-mono); font-size: 12px; color: var(--hm-ink-3); display: inline-flex; align-items: center; gap: 6px; transition: color var(--dur-fast); }
+  .why-card__more .arrow { transition: transform var(--dur-fast) var(--ease-standard); }
+  .why-card:hover .why-card__more { color: var(--hm-verification); }
+  .why-card:hover .why-card__more .arrow { transform: translateX(3px); }
+  @media (max-width: 1080px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 720px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* generic flow node (dark surfaces) */
+  .node {
+    background: rgba(244,243,239,0.04); border: 1px solid rgba(244,243,239,0.12); border-radius: 8px;
+    padding: 12px 20px; font-family: var(--font-mono); font-size: 13px; color: var(--hm-chalk-0);
+    display: inline-flex; align-items: center; gap: 9px; letter-spacing: -0.005em;
+  }
+  .node .pip { width: 6px; height: 6px; border-radius: 999px; background: var(--hm-chalk-2); }
+  .node--accent { background: var(--hm-verification); border-color: var(--hm-verification); font-weight: 600; box-shadow: 0 0 0 6px rgba(75,73,202,0.16), 0 12px 40px -12px rgba(75,73,202,0.6); }
+  .node--accent .pip { background: var(--hm-chalk-0); }
+  .node--verify { background: rgba(121,120,233,0.14); border-color: rgba(121,120,233,0.5); color: #c5c4f4; font-weight: 600; }
+  .node--ok { background: rgba(125,196,168,0.10); border-color: rgba(125,196,168,0.4); color: #93dab2; }
+  .node--bad { background: rgba(243,121,126,0.10); border-color: rgba(243,121,126,0.4); color: #f59ba0; }
+  .node--recover { background: rgba(125,160,250,0.10); border-color: rgba(125,160,250,0.4); color: #9eb8f8; }
+  .node--ok .pip { background: #7DC4A8; } .node--bad .pip { background: var(--hm-rejection); } .node--recover .pip { background: var(--hm-pending); }
+
+  /* node on light surfaces */
+  .lnode { background: var(--hm-surface-raised); border: 1px solid var(--hm-line); border-radius: 8px; padding: 12px 20px; font-family: var(--font-mono); font-size: 13px; color: var(--hm-ink-1); display: inline-flex; align-items: center; gap: 9px; }
+  .lnode .pip { width: 6px; height: 6px; border-radius: 999px; background: var(--hm-ink-4); }
+  .lnode--accent { background: var(--hm-verification); border-color: var(--hm-verification); color: var(--hm-chalk-0); font-weight: 600; box-shadow: 0 0 0 5px rgba(75,73,202,0.14); }
+  .lnode--accent .pip { background: var(--hm-chalk-0); }
+
+  /* vertical connector with traveling pulse */
+  .wire { width: 1px; margin: 0 auto; background: rgba(244,243,239,0.18); position: relative; overflow: hidden; }
+  .wire--light { background: var(--hm-line-strong); }
+  .wire .spark { position: absolute; left: 50%; top: 0; width: 1px; height: 40%; transform: translateX(-50%); background: linear-gradient(to bottom, transparent, var(--hm-verification), transparent); animation: travel 2.4s linear infinite; }
+  @keyframes travel { 0% { top: -40%; } 100% { top: 100%; } }
+
+  /* =================== HERO =================== */
+  .hero { position: relative; padding: 92px 0 110px; border-bottom: 1px solid var(--hm-line); overflow: hidden; }
+  .hero__grid-bg { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(17,17,17,0.05) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(ellipse 80% 70% at 30% 0%, black 20%, transparent 90%); -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 0%, black 20%, transparent 90%); pointer-events: none; }
+  .hero__glow { position: absolute; right: -80px; top: -120px; width: 620px; height: 520px; background: radial-gradient(ellipse at center, rgba(121,120,233,0.14), transparent 62%); pointer-events: none; }
+  .hero__inner { position: relative; display: grid; grid-template-columns: minmax(0,1fr) 420px; gap: 64px; align-items: center; }
+  .hero__left { max-width: 580px; }
+  .hero h1 { margin: 24px 0 0; font-size: 58px; line-height: 1.04; letter-spacing: -0.034em; font-weight: 600; color: var(--hm-ink-0); text-wrap: balance; }
+  .hero__sub { margin-top: 24px; font-size: 19px; line-height: 1.55; color: var(--hm-ink-2); max-width: 540px; text-wrap: pretty; }
+  .hero__support { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 18px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--hm-ink-3); }
+  .hero__support span { display: inline-flex; align-items: center; gap: 8px; }
+  .hero__support span::before { content: ""; width: 5px; height: 5px; border-radius: 999px; background: var(--hm-verification); }
+  .hero__ctas { margin-top: 34px; display: flex; gap: 10px; }
+
+  /* hero flow visual */
+  .flowcard { position: relative; background: var(--hm-authority); border: 1px solid var(--hm-line-dark); border-radius: 12px; padding: 30px 28px; overflow: hidden; box-shadow: 0 30px 80px -40px rgba(17,17,17,0.4); }
+  .flowcard::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(121,120,233,0.16), transparent 65%); pointer-events: none; }
+  .flowcard__head { position: relative; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--hm-chalk-2); display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+  .flowcard__head .pip { width: 6px; height: 6px; border-radius: 999px; background: var(--hm-verification); animation: vpulse 1.2s ease-in-out infinite; }
+  @keyframes vpulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .flow { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .flow .node { width: 100%; justify-content: center; opacity: 0.5; transition: opacity .4s, box-shadow .4s, border-color .4s; }
+  .flow .node.is-lit { opacity: 1; }
+  .flow .node.is-lit.node--accent { box-shadow: 0 0 0 6px rgba(75,73,202,0.18), 0 12px 40px -12px rgba(75,73,202,0.6); }
+  .flow .wire { height: 26px; }
+
+  /* =================== DECISION TREE =================== */
+  .tree { margin-top: 56px; display: flex; flex-direction: column; align-items: center; }
+  .tree .lnode { min-width: 200px; justify-content: center; }
+  .tree__branchwire { width: 1px; height: 30px; background: var(--hm-line-strong); }
+  .tree__fan { position: relative; width: 100%; max-width: 760px; height: 36px; }
+  .tree__fan svg { width: 100%; height: 100%; display: block; }
+  .tree__outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; max-width: 760px; margin-top: 6px; }
+  .outcome { border-radius: 8px; border: 1px solid var(--hm-line); background: var(--hm-surface-raised); padding: 20px 18px; text-align: center; transition: border-color .35s, box-shadow .35s, transform .35s, background .35s; }
+  .outcome__tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
+  .outcome__tag .pip { width: 7px; height: 7px; border-radius: 999px; }
+  .outcome__desc { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--hm-ink-3); }
+  .outcome--ok .outcome__tag { color: #2F7A5A; } .outcome--ok .outcome__tag .pip { background: #2F7A5A; }
+  .outcome--bad .outcome__tag { color: var(--hm-rejection); } .outcome--bad .outcome__tag .pip { background: var(--hm-rejection); }
+  .outcome--recover .outcome__tag { color: var(--hm-pending); } .outcome--recover .outcome__tag .pip { background: var(--hm-pending); }
+  .outcome.is-active { transform: translateY(-2px); box-shadow: var(--elev-active); }
+  .outcome--ok.is-active { border-color: #2F7A5A; }
+  .outcome--bad.is-active { border-color: var(--hm-rejection); }
+  .outcome--recover.is-active { border-color: var(--hm-pending); }
+
+  /* =================== HUB & SPOKE =================== */
+  .hub { position: relative; width: 100%; max-width: 600px; margin: 48px auto 0; aspect-ratio: 1 / 1; }
+  .hub__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hub__node { position: absolute; transform: translate(-50%, -50%); }
+  .hub__center {
+    left: 50%; top: 50%;
+    background: var(--hm-verification); color: var(--hm-chalk-0);
+    border-radius: 10px; padding: 16px 22px; text-align: center;
+    box-shadow: 0 0 0 8px rgba(75,73,202,0.14), 0 16px 48px -14px rgba(75,73,202,0.6);
+    z-index: 3;
+  }
+  .hub__center .lab { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; }
+  .hub__center .name { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-top: 2px; }
+  .spoke {
+    background: var(--hm-surface-raised); border: 1px solid var(--hm-line); border-radius: 999px;
+    padding: 9px 15px; font-family: var(--font-mono); font-size: 12px; color: var(--hm-ink-1);
+    display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+    transition: border-color .3s, box-shadow .3s, color .3s;
+  }
+  .spoke .check { width: 14px; height: 14px; border-radius: 999px; border: 1.5px solid var(--hm-line-strong); display: grid; place-items: center; font-size: 8px; color: #2F7A5A; transition: border-color .3s, background .3s; }
+  .spoke.is-verified { border-color: var(--hm-verification); box-shadow: 0 0 0 4px rgba(75,73,202,0.10); }
+  .spoke.is-verified .check { border-color: #2F7A5A; background: rgba(47,122,90,0.12); }
+  .spoke.is-verified .check::after { content: "✓"; }
+
+  /* =================== VIA FLOW =================== */
+  .via { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: center; margin-top: 12px; }
+  .viaflow { display: flex; flex-direction: column; align-items: center; }
+  .viaflow .node { justify-content: center; min-width: 220px; opacity: 0.5; transition: opacity .4s; }
+  .viaflow .node.is-lit { opacity: 1; }
+  .viaflow .wire { height: 24px; }
+  .viaflow__fan { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; max-width: 360px; }
+  .viaflow__fan .node { min-width: 0; padding: 8px 13px; font-size: 11.5px; }
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .feat { border: 1px solid rgba(244,243,239,0.12); border-radius: 8px; padding: 22px 22px 20px; background: rgba(244,243,239,0.02); }
+  .feat__ic { width: 30px; height: 30px; border-radius: 7px; background: rgba(121,120,233,0.16); border: 1px solid rgba(121,120,233,0.4); display: grid; place-items: center; color: #c5c4f4; margin-bottom: 14px; }
+  .feat h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--hm-chalk-0); margin: 0; }
+  .feat p { margin-top: 8px; font-size: 13px; line-height: 1.5; color: var(--hm-chalk-2); }
+
+  /* =================== STANDARDS BADGES =================== */
+  .std-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .std { border: 1px solid var(--hm-line); background: var(--hm-surface-raised); border-radius: 8px; padding: 24px 18px; text-align: center; transition: border-color var(--dur-base), transform var(--dur-base); }
+  .std:hover { border-color: var(--hm-ink-3); transform: translateY(-2px); }
+  .std__name { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; color: var(--hm-ink-0); }
+  .std__sub { margin-top: 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--hm-ink-3); }
+  .std-note { margin-top: 28px; font-family: var(--font-mono); font-size: 13px; color: var(--hm-ink-3); text-align: center; }
+
+  /* =================== REGULATED =================== */
+  .reg { text-align: center; }
+  .reg__lead { font-size: 17px; line-height: 1.6; color: var(--hm-chalk-1); max-width: 720px; margin: 24px auto 0; text-wrap: pretty; }
+  .reg__label { margin-top: 56px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hm-chalk-2); }
+  .reg__badges { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .reg__badge { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; color: var(--hm-chalk-0); padding: 14px 26px; border: 1px solid rgba(244,243,239,0.16); border-radius: 10px; background: rgba(244,243,239,0.03); transition: border-color .3s, background .3s; }
+  .reg__badge:hover { border-color: rgba(121,120,233,0.6); background: rgba(121,120,233,0.08); }
+
+  /* =================== RECEIPT =================== */
+  .receipt-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .receipt { position: relative; background: var(--hm-surface-raised); border: 1px solid var(--hm-line); border-radius: 12px; overflow: hidden; box-shadow: var(--elev-active); }
+  .receipt__bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--hm-line); background: var(--hm-clarity); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-3); }
+  .receipt__bar .stamp { display: inline-flex; align-items: center; gap: 7px; color: #2F7A5A; }
+  .receipt__bar .stamp .pip { width: 7px; height: 7px; border-radius: 999px; background: #2F7A5A; }
+  .receipt__rows { padding: 8px 20px 16px; }
+  .receipt__row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--hm-line); align-items: baseline; }
+  .receipt__row:last-child { border-bottom: 0; }
+  .receipt__k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-3); }
+  .receipt__v { font-family: var(--font-mono); font-size: 13.5px; color: var(--hm-ink-0); word-break: break-word; }
+  .receipt__v .ok { color: #2F7A5A; font-weight: 600; }
+
+  /* =================== GITHUB / VIA OSS =================== */
+  .gh { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .gh-card { background: var(--hm-authority); border: 1px solid var(--hm-line-dark); border-radius: 12px; padding: 30px; color: var(--hm-chalk-0); position: relative; overflow: hidden; }
+  .gh-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 80% 10%, rgba(121,120,233,0.16), transparent 60%); pointer-events: none; }
+  .gh-card__top { position: relative; display: flex; align-items: center; gap: 12px; }
+  .gh-card__mark { width: 38px; height: 38px; border-radius: 8px; background: rgba(244,243,239,0.06); border: 1px solid rgba(244,243,239,0.14); display: grid; place-items: center; }
+  .gh-card__repo { font-family: var(--font-mono); font-size: 14px; color: var(--hm-chalk-0); }
+  .gh-card__org { font-family: var(--font-mono); font-size: 11px; color: var(--hm-chalk-2); }
+  .gh-card__title { position: relative; font-size: 22px; font-weight: 600; letter-spacing: -0.015em; margin: 22px 0 0; }
+  .gh-card__desc { position: relative; margin-top: 10px; font-size: 14px; line-height: 1.55; color: var(--hm-chalk-1); }
+  .gh-card__meta { position: relative; margin-top: 22px; display: flex; gap: 22px; font-family: var(--font-mono); font-size: 12px; color: var(--hm-chalk-2); }
+  .gh-card__meta b { color: var(--hm-chalk-0); font-weight: 600; }
+  .gh-card__btn { position: relative; margin-top: 26px; }
+
+  /* =================== FINAL CTA =================== */
+  .final { padding: 130px 0; text-align: center; background: radial-gradient(ellipse 60% 60% at 50% 25%, rgba(121,120,233,0.12), transparent 70%), var(--hm-clarity); border-bottom: 1px solid var(--hm-line); }
+  .final h2 { font-size: 52px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 600; color: var(--hm-ink-0); margin: 16px auto 0; max-width: 820px; text-wrap: balance; }
+  .final h2 .accent { color: var(--hm-verification); }
+  .final__sub { margin: 18px auto 0; font-size: 18px; color: var(--hm-ink-2); max-width: 560px; }
+  .final__ctas { margin-top: 34px; display: inline-flex; gap: 10px; }
+
+  /* FOOTER */
+  .footer { background: var(--hm-authority); color: var(--hm-chalk-1); padding: 80px 0 40px; }
+  .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr; gap: 40px; }
+  .footer__brand { color: var(--hm-chalk-0); }
+  .footer__brand-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .footer__brand-mark img { height: 18px; }
+  .footer__brand-text { font-size: 16px; font-weight: 600; }
+  .footer__tagline { font-size: 13px; color: var(--hm-chalk-2); line-height: 1.5; max-width: 280px; }
+  .footer__col-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--hm-chalk-2); margin-bottom: 16px; }
+  .footer__col a { display: block; font-size: 13px; color: var(--hm-chalk-1); padding: 4px 0; transition: color var(--dur-fast); }
+  .footer__col a:hover { color: var(--hm-chalk-0); }
+  .footer__bottom { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--hm-line-dark); display: flex; justify-content: space-between; font-size: 12px; color: var(--hm-chalk-2); flex-wrap: wrap; gap: 12px; }
+  .footer__bottom-right { display: flex; gap: 16px; font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+  @media (max-width: 1080px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 44px; }
+    .via { grid-template-columns: 1fr; gap: 40px; }
+    .receipt-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .gh { grid-template-columns: 1fr; gap: 36px; }
+    .std-grid { grid-template-columns: repeat(3, 1fr); }
+    .final h2 { font-size: 38px; }
+    .nav__links { display: none; }
+  }
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    .nav__inner { padding: 0 20px; }
+    .tree__outcomes { grid-template-columns: 1fr; }
+    .feat-grid { grid-template-columns: 1fr; }
+    .std-grid { grid-template-columns: 1fr 1fr; }
+    .reg__badge { font-size: 22px; padding: 10px 18px; }
+    .hub { max-width: 420px; }
+    .spoke { font-size: 10px; padding: 7px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="Homepage.html">
+      <img src="assets/logo-mark-black.svg" alt="Humanos" />
+      <span class="nav__brand-text">Humanos</span>
+    </a>
+    <nav class="nav__links">
+      <a class="nav__link" href="How it works.html">Product</a>
+      <a class="nav__link" href="Developers.html">Developers</a>
+      <a class="nav__link" href="Customer Stories.html">Customers</a>
+      <a class="nav__link" href="Pricing.html">Pricing</a>
+      <a class="nav__link is-current" href="Trust.html">Trust</a>
+      <a class="nav__link" href="Company.html">Company</a>
+    </nav>
+    <div class="nav__cta-group">
+      <a class="btn btn--ghost btn--sm" href="#">Sign in</a>
+      <a class="btn btn--primary btn--sm" href="#">Get started</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__inner">
+      <div class="hero__left">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Why Humanos</span>
+        <h1>You don't have to trust us. You can verify it.</h1>
+        <p class="hero__sub">Humanos doesn't ask companies to take its word. Every action is checked against verifiable authorization before execution — and independently provable afterwards, by anyone.</p>
+        <div class="hero__support">
+          <span>Runtime authorization</span>
+          <span>Independent verification</span>
+          <span>Cryptographic proof</span>
+        </div>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#">Talk with us <span class="arrow">→</span></a>
+          <a class="btn btn--secondary" href="Developers.html">Read the docs <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="flowcard">
+        <div class="flowcard__head"><span class="pip"></span>execution lifecycle</div>
+        <div class="flow" id="heroFlow">
+          <div class="node" data-i><span class="pip"></span>Human</div>
+          <div class="wire" data-i><span class="spark"></span></div>
+          <div class="node" data-i><span class="pip"></span>Authorization</div>
+          <div class="wire" data-i><span class="spark"></span></div>
+          <div class="node node--accent" data-i><span class="pip"></span>Humanos</div>
+          <div class="wire" data-i><span class="spark"></span></div>
+          <div class="node node--verify" data-i>verify()</div>
+          <div class="wire" data-i><span class="spark"></span></div>
+          <div class="node" data-i><span class="pip"></span>Execution</div>
+          <div class="wire" data-i><span class="spark"></span></div>
+          <div class="node node--ok" data-i><span class="pip"></span>Proof</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TRUST — reasons overview -->
+<section class="section" data-screen-label="02 Why trust">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Why companies trust Humanos</span>
+      <h2 class="h-section">Trust earned by verification, not by promise.</h2>
+      <p class="sub">Infrastructure shouldn't be believed — it should be checkable. Here is what a company can verify for itself before relying on Humanos.</p>
+    </div>
+
+    <div class="why-grid">
+      <a class="why-card" href="#before">
+        <div class="why-card__n">01</div>
+        <h3 class="why-card__t">Verified before execution</h3>
+        <p class="why-card__d">Authorization is checked before an action runs — not reconstructed from logs after something already happened.</p>
+        <span class="why-card__more">See enforcement <span class="arrow">→</span></span>
+      </a>
+      <a class="why-card" href="#verify">
+        <div class="why-card__n">02</div>
+        <h3 class="why-card__t">You verify — not just us</h3>
+        <p class="why-card__d">Every decision is independently verifiable by any system, without calling back to Humanos to confirm it.</p>
+        <span class="why-card__more">See verification <span class="arrow">→</span></span>
+      </a>
+      <a class="why-card" href="#via">
+        <div class="why-card__n">03</div>
+        <h3 class="why-card__t">No black box</h3>
+        <p class="why-card__d">VIA is an open protocol. The trust layer is inspectable and not owned or controlled by a single vendor.</p>
+        <span class="why-card__more">See VIA <span class="arrow">→</span></span>
+      </a>
+      <a class="why-card" href="#standards">
+        <div class="why-card__n">04</div>
+        <h3 class="why-card__t">Open standards, no lock-in</h3>
+        <p class="why-card__d">Built on W3C Verifiable Credentials, SD-JWT, and OpenID — not proprietary identity infrastructure.</p>
+        <span class="why-card__more">See standards <span class="arrow">→</span></span>
+      </a>
+      <a class="why-card" href="#proof">
+        <div class="why-card__n">05</div>
+        <h3 class="why-card__t">Portable proof</h3>
+        <p class="why-card__d">Every execution leaves a cryptographic receipt your customers, auditors, partners, and regulators can verify.</p>
+        <span class="why-card__more">See proof <span class="arrow">→</span></span>
+      </a>
+      <a class="why-card" href="#regulated">
+        <div class="why-card__n">06</div>
+        <h3 class="why-card__t">Built for regulated systems</h3>
+        <p class="why-card__d">Runtime authorization, identity attribution, and auditability that map to modern regulatory frameworks.</p>
+        <span class="why-card__more">See frameworks <span class="arrow">→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1 — BEFORE EXECUTION -->
+<section class="section" id="before" data-screen-label="03 Before execution">
+  <div class="wrap">
+    <div class="section__head section__head--center">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Enforcement</span>
+      <h2 class="h-section">Trust is enforced before execution.</h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto;">Most systems rely on permissions, assumptions, or logs generated after an action occurs. Humanos verifies whether an action is authorized <strong style="color:var(--hm-ink-0);font-weight:600">before execution proceeds.</strong></p>
+    </div>
+
+    <div class="tree" id="decisionTree">
+      <div class="lnode"><span class="pip"></span>Action</div>
+      <div class="tree__branchwire"></div>
+      <div class="lnode lnode--accent">verify()</div>
+      <div class="tree__fan" aria-hidden="true">
+        <svg viewBox="0 0 760 36" preserveAspectRatio="none">
+          <path d="M380 0 L150 36" stroke="var(--hm-line-strong)" fill="none" stroke-width="1"/>
+          <path d="M380 0 L380 36" stroke="var(--hm-line-strong)" fill="none" stroke-width="1"/>
+          <path d="M380 0 L610 36" stroke="var(--hm-line-strong)" fill="none" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="tree__outcomes">
+        <div class="outcome outcome--ok" data-outcome>
+          <div class="outcome__tag"><span class="pip"></span>Authorized</div>
+          <div class="outcome__desc">Within approved scope. Execution proceeds.</div>
+        </div>
+        <div class="outcome outcome--recover" data-outcome>
+          <div class="outcome__tag"><span class="pip"></span>Recover authorization</div>
+          <div class="outcome__desc">Missing authority is collected in real time, then resumes.</div>
+        </div>
+        <div class="outcome outcome--bad" data-outcome>
+          <div class="outcome__tag"><span class="pip"></span>Rejected</div>
+          <div class="outcome__desc">Constraints violated. Execution blocked before runtime.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 — INDEPENDENTLY VERIFIABLE -->
+<section class="section section--dark" id="verify" data-screen-label="04 Independently verifiable">
+  <div class="wrap">
+    <div class="section__head section__head--center">
+      <span class="eyebrow eyebrow--chalk"><span class="dot" aria-hidden="true"></span>Independent verification</span>
+      <h2 class="h-section h-section--chalk">Every decision becomes independently verifiable.</h2>
+      <p class="sub sub--chalk" style="margin-left:auto;margin-right:auto;">Authorization exists independently from applications. Any system can verify who approved, what was approved, the constraints, expiration, and revocation status.</p>
+    </div>
+
+    <div class="hub" id="hub">
+      <svg class="hub__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <g stroke="rgba(121,120,233,0.35)" stroke-width="0.4" fill="none">
+          <line class="hub__line" x1="50" y1="50" x2="50"   y2="8"></line>
+          <line class="hub__line" x1="50" y1="50" x2="82.8" y2="23.8"></line>
+          <line class="hub__line" x1="50" y1="50" x2="90.9" y2="59.3"></line>
+          <line class="hub__line" x1="50" y1="50" x2="68.2" y2="87.8"></line>
+          <line class="hub__line" x1="50" y1="50" x2="31.8" y2="87.8"></line>
+          <line class="hub__line" x1="50" y1="50" x2="9.1"  y2="59.3"></line>
+          <line class="hub__line" x1="50" y1="50" x2="17.2" y2="23.8"></line>
+        </g>
+      </svg>
+      <div class="hub__node hub__center">
+        <div class="lab">verifies</div>
+        <div class="name">Authorization</div>
+      </div>
+      <div class="hub__node" style="left:50%;top:8%"><div class="spoke" data-spoke><span class="check"></span>AI Agent</div></div>
+      <div class="hub__node" style="left:82.8%;top:23.8%"><div class="spoke" data-spoke><span class="check"></span>Bank</div></div>
+      <div class="hub__node" style="left:90.9%;top:59.3%"><div class="spoke" data-spoke><span class="check"></span>Hospital</div></div>
+      <div class="hub__node" style="left:68.2%;top:87.8%"><div class="spoke" data-spoke><span class="check"></span>ERP</div></div>
+      <div class="hub__node" style="left:31.8%;top:87.8%"><div class="spoke" data-spoke><span class="check"></span>Auditor</div></div>
+      <div class="hub__node" style="left:9.1%;top:59.3%"><div class="spoke" data-spoke><span class="check"></span>Partner API</div></div>
+      <div class="hub__node" style="left:17.2%;top:23.8%"><div class="spoke" data-spoke><span class="check"></span>Regulator</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — VIA / OPEN INFRA -->
+<section class="section section--dark" id="via" data-screen-label="05 VIA" style="border-top:1px solid var(--hm-line-dark);">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow eyebrow--chalk"><span class="dot" aria-hidden="true"></span>Open infrastructure · VIA</span>
+      <h2 class="h-section h-section--chalk">Authorization infrastructure, without black boxes.</h2>
+      <p class="sub sub--chalk">VIA is the open protocol powering portable runtime authorization. It enables organizations, systems, and AI agents to issue, propagate, verify, and prove authorization across organizational boundaries.</p>
+    </div>
+
+    <div class="via">
+      <div class="viaflow" id="viaFlow">
+        <div class="node" data-i><span class="pip"></span>Approval</div>
+        <div class="wire" data-i><span class="spark"></span></div>
+        <div class="node node--verify" data-i>VIA Protocol</div>
+        <div class="wire" data-i><span class="spark"></span></div>
+        <div class="node node--accent" data-i><span class="pip"></span>Runtime authorization</div>
+        <div class="wire" data-i><span class="spark"></span></div>
+        <div class="viaflow__fan" data-i>
+          <div class="node"><span class="pip"></span>AI Agent</div>
+          <div class="node"><span class="pip"></span>Bank</div>
+          <div class="node"><span class="pip"></span>Hospital</div>
+          <div class="node"><span class="pip"></span>ERP</div>
+          <div class="node"><span class="pip"></span>Auditor</div>
+          <div class="node"><span class="pip"></span>Partner</div>
+        </div>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="feat__ic">◇</div>
+          <h3>Machine-verifiable</h3>
+          <p>Any system can automatically verify authorization before acting.</p>
+        </div>
+        <div class="feat">
+          <div class="feat__ic">≡</div>
+          <h3>Explicit conditions</h3>
+          <p>Authorization contains scope, limits, delegation, expiration, and constraints.</p>
+        </div>
+        <div class="feat">
+          <div class="feat__ic">⊘</div>
+          <h3>Independent verification</h3>
+          <p>Verification does not depend on the issuing application.</p>
+        </div>
+        <div class="feat">
+          <div class="feat__ic">⌾</div>
+          <h3>Open by design</h3>
+          <p>Built on open standards and open-source infrastructure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 — OPEN STANDARDS -->
+<section class="section" id="standards" data-screen-label="06 Open standards">
+  <div class="wrap">
+    <div class="section__head section__head--center">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Open standards</span>
+      <h2 class="h-section">Built on open standards.</h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto;">Humanos does not invent proprietary identity infrastructure. It builds on the standards the ecosystem already trusts.</p>
+    </div>
+
+    <div class="std-grid">
+      <div class="std"><div class="std__name">W3C Verifiable Credentials</div><div class="std__sub">VC 2.0</div></div>
+      <div class="std"><div class="std__name">SD-JWT</div><div class="std__sub">selective disclosure</div></div>
+      <div class="std"><div class="std__name">OpenID ecosystem</div><div class="std__sub">OID4VC · OID4VP</div></div>
+      <div class="std"><div class="std__name">EU Digital Identity Wallet</div><div class="std__sub">EUDI compatible</div></div>
+      <div class="std"><div class="std__name">eIDAS 2.0</div><div class="std__sub">alignment</div></div>
+    </div>
+    <div class="std-note">Authorization should be portable, interoperable, and independently verifiable.</div>
+  </div>
+</section>
+
+<!-- SECTION 5 — REGULATED -->
+<section class="section section--dark reg" id="regulated" data-screen-label="07 Regulated">
+  <div class="wrap wrap--narrow">
+    <span class="eyebrow eyebrow--chalk"><span class="dot" aria-hidden="true"></span>Regulated autonomous systems</span>
+    <h2 class="h-section h-section--chalk" style="margin-left:auto;margin-right:auto;text-align:center;">Built for regulated autonomous systems.</h2>
+    <p class="reg__lead">Humanos provides runtime authorization, identity attribution, auditability, and independently verifiable proof that help organizations implement controls required by modern regulatory frameworks.</p>
+
+    <div class="reg__label">Built to support compliance with</div>
+    <div class="reg__badges">
+      <div class="reg__badge">ISO 27001</div>
+      <div class="reg__badge">DORA</div>
+      <div class="reg__badge">NIS2</div>
+      <div class="reg__badge">EU AI Act</div>
+      <div class="reg__badge">GDPR</div>
+      <div class="reg__badge">HIPAA</div>
+      <div class="reg__badge">eIDAS 2.0</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 — RECEIPT -->
+<section class="section" id="proof" data-screen-label="08 Proof">
+  <div class="wrap">
+    <div class="receipt-wrap">
+      <div>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Proof</span>
+        <h2 class="h-section">Every execution can be proven afterwards.</h2>
+        <p class="sub">Portable proof that can be verified independently by customers, auditors, partners, or regulators — without contacting Humanos.</p>
+      </div>
+
+      <div class="receipt">
+        <div class="receipt__bar">
+          <span>execution receipt</span>
+          <span class="stamp"><span class="pip"></span>verified</span>
+        </div>
+        <div class="receipt__rows">
+          <div class="receipt__row"><div class="receipt__k">Action</div><div class="receipt__v">payments.transfer · €4,800 → AWS</div></div>
+          <div class="receipt__row"><div class="receipt__k">Authorized by</div><div class="receipt__v">did:web:acme.com#cfo</div></div>
+          <div class="receipt__row"><div class="receipt__k">Constraints</div><div class="receipt__v">daily_limit ≤ 10,000 · vendor ∈ allowlist</div></div>
+          <div class="receipt__row"><div class="receipt__k">Time</div><div class="receipt__v">2026-05-29T14:02:11Z</div></div>
+          <div class="receipt__row"><div class="receipt__k">Verification</div><div class="receipt__v"><span class="ok">● authorized</span></div></div>
+          <div class="receipt__row"><div class="receipt__k">Proof ID</div><div class="receipt__v">prf_2FA91 · independently verifiable</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 — VIA OSS / GITHUB -->
+<section class="section" style="background:var(--hm-clarity);" data-screen-label="09 Open source">
+  <div class="wrap">
+    <div class="gh">
+      <div>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>VIA Protocol</span>
+        <h2 class="h-section">Open source foundation.</h2>
+        <p class="sub">The trust layer should belong to the ecosystem, not a single vendor.</p>
+        <p class="sub" style="margin-top:18px;font-size:16px;">VIA Protocol is the open-source protocol powering portable runtime authorization. Humanos provides the infrastructure that issues, propagates, verifies, recovers, and proves authorization throughout the execution lifecycle.</p>
+      </div>
+
+      <a class="gh-card" id="ghCard" href="#" target="_blank" rel="noopener">
+        <div class="gh-card__top">
+          <div class="gh-card__mark">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="var(--hm-chalk-0)" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </div>
+          <div>
+            <div class="gh-card__repo" id="ghRepo">via-protocol</div>
+            <div class="gh-card__org">github.com/humanos</div>
+          </div>
+        </div>
+        <h3 class="gh-card__title">Explore VIA Protocol</h3>
+        <p class="gh-card__desc">Open-source authorization infrastructure for autonomous systems.</p>
+        <div class="gh-card__meta">
+          <span><b id="ghStars">★</b> Stars</span>
+          <span><b>MIT</b> license</span>
+          <span><b>VC 2.0</b> · SD-JWT</span>
+        </div>
+        <div class="gh-card__btn">
+          <span class="btn btn--invert">View on GitHub <span class="arrow">→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" data-screen-label="10 CTA">
+  <div class="wrap wrap--narrow">
+    <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Trust layer</span>
+    <h2>Ensure AI can act only when it <span class="accent">is allowed to.</span></h2>
+    <p class="final__sub">See how runtime authorization fits into your systems.</p>
+    <div class="final__ctas">
+      <a class="btn btn--primary" href="#">Talk with us <span class="arrow">→</span></a>
+      <a class="btn btn--secondary" href="Developers.html">Read the documentation <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-mark">
+          <img src="assets/logo-mark-white.svg" alt="Humanos" />
+          <span class="footer__brand-text">Humanos</span>
+        </div>
+        <div class="footer__tagline">Runtime authorization for the execution path. Human intent, programmable and portable.</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--hm-chalk-2);margin-top:10px">api.humanos.tech</div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="How it works.html">How it works</a>
+        <a href="#">Verification</a>
+        <a href="#">Proofs</a>
+        <a href="#">Console</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Developers</div>
+        <a href="Developers.html">Quickstart</a>
+        <a href="Developers.html">Reference</a>
+        <a href="Developers.html">SDKs</a>
+        <a href="#">GitHub</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Customers</div>
+        <a href="Case Study - Numo.html">Numo</a>
+        <a href="Case Study - Ralio.html">Ralio</a>
+        <a href="Customer Stories.html">All stories</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Company</div>
+        <a href="Company.html">About</a>
+        <a href="Customer Stories.html">Customers</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Trust</div>
+        <a href="Trust.html">Trust</a>
+        <a href="#">Security</a>
+        <a href="#">Status</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div>© 2026 Humanos · All decisions verifiable</div>
+      <div class="footer__bottom-right">
+        <span>SOC 2 Type II</span>
+        <span>ISO 27001</span>
+        <span>W3C VC 2.0</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* helper: run a callback when an element scrolls into view (replayable) */
+  function onView(el, onIn, onOut) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) onIn(); else if (onOut) onOut();
+      });
+    }, { threshold: 0.25 });
+    io.observe(el);
+  }
+
+  /* HERO + VIA vertical flows — cascade lit state down the chain, loop */
+  function cascade(containerId, period) {
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    var items = Array.prototype.slice.call(c.querySelectorAll('[data-i]'));
+    var lit = items.filter(function (n) { return n.classList.contains('node') || n.classList.contains('viaflow__fan'); });
+    var timers = [];
+    function clear() { timers.forEach(clearTimeout); timers = []; }
+    function run() {
+      clear();
+      lit.forEach(function (n) { n.classList.remove('is-lit'); });
+      lit.forEach(function (n, i) { timers.push(setTimeout(function () { n.classList.add('is-lit'); }, 250 + i * 360)); });
+    }
+    var loop = null;
+    onView(c, function () { if (!loop) { run(); loop = setInterval(run, period); } },
+              function () { if (loop) { clearInterval(loop); loop = null; clear(); } });
+  }
+  cascade('heroFlow', 4200);
+  cascade('viaFlow', 3800);
+
+  /* DECISION TREE — cycle the active outcome */
+  (function () {
+    var tree = document.getElementById('decisionTree');
+    if (!tree) return;
+    var outs = Array.prototype.slice.call(tree.querySelectorAll('[data-outcome]'));
+    // weighted order: authorized appears most, then recover, then rejected
+    var order = [0, 0, 1, 0, 2, 0, 1];
+    var idx = 0, loop = null;
+    function step() {
+      outs.forEach(function (o) { o.classList.remove('is-active'); });
+      outs[order[idx % order.length]].classList.add('is-active');
+      idx++;
+    }
+    onView(tree, function () { if (!loop) { step(); loop = setInterval(step, 1600); } },
+                 function () { if (loop) { clearInterval(loop); loop = null; } });
+  })();
+
+  /* HUB — verify spokes sequentially, then reset */
+  (function () {
+    var hub = document.getElementById('hub');
+    if (!hub) return;
+    var spokes = Array.prototype.slice.call(hub.querySelectorAll('[data-spoke]'));
+    var timers = [];
+    function clear() { timers.forEach(clearTimeout); timers = []; }
+    function run() {
+      clear();
+      spokes.forEach(function (s) { s.classList.remove('is-verified'); });
+      spokes.forEach(function (s, i) { timers.push(setTimeout(function () { s.classList.add('is-verified'); }, 300 + i * 280)); });
+    }
+    var loop = null;
+    onView(hub, function () { if (!loop) { run(); loop = setInterval(run, 4200); } },
+                function () { if (loop) { clearInterval(loop); loop = null; clear(); } });
+  })();
+
+  /* GitHub stars — best-effort fetch; silent fallback to ★ */
+  (function () {
+    var REPO = ''; // set to "owner/name" to enable live stars + link
+    var card = document.getElementById('ghCard');
+    if (REPO) {
+      card.href = 'https://github.com/' + REPO;
+      var repoEl = document.getElementById('ghRepo');
+      if (repoEl) repoEl.textContent = REPO.split('/')[1] || REPO;
+      fetch('https://api.github.com/repos/' + REPO)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          if (j && typeof j.stargazers_count === 'number') {
+            var n = j.stargazers_count;
+            document.getElementById('ghStars').textContent = n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+          }
+        })
+        .catch(function () {});
+    }
+  })();
+</script>
+
+</body>
+</html>

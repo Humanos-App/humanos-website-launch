@@ -69,6 +69,7 @@ const STAGE_MS = 5200;
 function easeInOut(t: number) {
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 }
+
 function easeOut(t: number) {
   return 1 - Math.pow(1 - t, 3);
 }
@@ -89,8 +90,8 @@ export function Architecture() {
             <p className="section-sub section-head-aside">
               Humanos issues runtime authorization, propagates it across
               systems, verifies actions before execution, recovers missing
-              approval dynamically, and generates independently verifiable
-              proof afterwards.
+              approval dynamically, and generates independently verifiable proof
+              afterwards.
             </p>
           </div>
         </Reveal>
@@ -166,8 +167,7 @@ function ArchitectureRunway() {
       });
     } else if (stageIdx === 1) {
       stage.systems.forEach((_: any, i: number) => {
-        const angle =
-          -Math.PI + (Math.PI / (stage.systems.length - 1)) * i;
+        const angle = -Math.PI + (Math.PI / (stage.systems.length - 1)) * i;
         const r = 130;
         const ex = target + Math.cos(angle) * r;
         const ey = RW_RAIL_Y + Math.sin(angle) * r - 30;
@@ -190,15 +190,7 @@ function ArchitectureRunway() {
       stage.actions.forEach((_: any, i: number) => {
         const ex = target - 180 + i * 180;
         spawn(target, RW_RAIL_Y, ex, recY, "#7DA0FA", 200 + i * 500, 700);
-        spawn(
-          ex,
-          recY,
-          target,
-          RW_RAIL_Y,
-          "#7978E9",
-          200 + i * 500 + 800,
-          700,
-        );
+        spawn(ex, recY, target, RW_RAIL_Y, "#7978E9", 200 + i * 500 + 800, 700);
       });
     } else if (stageIdx === 4) {
       stage.verifiers.forEach((_: any, i: number) => {
@@ -236,8 +228,7 @@ function ArchitectureRunway() {
         if (curStage === STAGES.length - 1) {
           pulseFrac = curStage / 4 + (1 - curStage / 4) * k;
         } else {
-          pulseFrac =
-            curStage / 4 + (next / 4 - curStage / 4) * easeInOut(k);
+          pulseFrac = curStage / 4 + (next / 4 - curStage / 4) * easeInOut(k);
         }
       }
 
@@ -319,13 +310,7 @@ function ArchitectureRunway() {
         style={{ width: "100%", height: "auto", display: "block" }}
       >
         <defs>
-          <filter
-            id="rwGlow"
-            x="-100%"
-            y="-100%"
-            width="300%"
-            height="300%"
-          >
+          <filter id="rwGlow" x="-100%" y="-100%" width="300%" height="300%">
             <feGaussianBlur stdDeviation="3.5" />
           </filter>
           <linearGradient id="rwLineFade" x1="0" x2="1">
@@ -473,8 +458,7 @@ function StageGlyphs({
     return (
       <g style={styleAttr} opacity={opacity}>
         {stage.systems.map((label: string, i: number) => {
-          const angle =
-            -Math.PI + (Math.PI / (stage.systems.length - 1)) * i;
+          const angle = -Math.PI + (Math.PI / (stage.systems.length - 1)) * i;
           const r = 130;
           const sx = cx + Math.cos(angle) * r;
           const sy = RW_RAIL_Y + Math.sin(angle) * r - 30;
