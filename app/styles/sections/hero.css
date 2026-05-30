@@ -373,4 +373,10 @@
     font-size: 40px;
     width: auto !important;
   }
+  /* Drop the "· api.humanos.tech" suffix on mobile to give the eyebrow
+     room to breathe on narrow screens. */
+  .hero__eyebrow .sep,
+  .hero__eyebrow .mono {
+    display: none;
+  }
 }

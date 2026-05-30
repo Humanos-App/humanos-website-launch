@@ -119,6 +119,28 @@
 }
 .mega__item-title {
   font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+/* Small chip rendered before the title for items that aren't shippable
+   yet (e.g. "Coming soon" on orchestration plugins). */
+.mega__item-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hm-verification);
+  background: var(--hm-verification-wash);
+  border: 1px solid rgba(75, 73, 202, 0.18);
+  padding: 2px 7px;
+  border-radius: 999px;
+  line-height: 1;
+  white-space: nowrap;
 }
 .mega__item-sub {
   font-size: 13px;
@@ -225,6 +247,11 @@
   }
   .nav__cta-group {
     gap: 10px;
+    /* The 3-column grid (auto 1fr auto) is built around the desktop nav
+       links column. On mobile that column is hidden via display:none, so
+       the CTA group lands in the wide 1fr slot — pin it to the right
+       edge of that slot. */
+    justify-self: end;
   }
   .nav__burger {
     display: inline-flex;

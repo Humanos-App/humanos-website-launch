@@ -36,7 +36,12 @@ function MegaItemLink({
 }) {
   const content = (
     <>
-      <div className="mega__item-title">{item.title}</div>
+      <div className="mega__item-title">
+        {item.title}
+        {item.tag && (
+          <span className="mega__item-tag">{item.tag}</span>
+        )}
+      </div>
       {item.sub && <div className="mega__item-sub">{item.sub}</div>}
     </>
   );

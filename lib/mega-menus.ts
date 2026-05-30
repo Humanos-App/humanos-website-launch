@@ -1,6 +1,8 @@
 export type MegaItem = {
   title: string;
   sub?: string;
+  /** Optional small chip rendered before the title (e.g. "Coming soon"). */
+  tag?: string;
   href: string;
 };
 
@@ -122,28 +124,24 @@ export const DEVELOPERS_MENU: MegaMenu = {
     },
     {
       label: "Orchestration",
-      groups: [
+      items: [
         {
-          items: [
-            {
-              title: "n8n",
-              sub: "Drop verify() into workflows",
-              href: "#",
-            },
-            {
-              title: "Zapier",
-              sub: "Trigger-based automation",
-              href: "#",
-            },
-          ],
+          title: "n8n",
+          tag: "Coming soon",
+          sub: "Drop verify() into low-code workflows",
+          href: "#",
         },
         {
-          label: "Skills",
-          items: [
-            { title: "LLM 1", sub: "Coming soon", href: "#" },
-            { title: "LLM 2", sub: "Coming soon", href: "#" },
-            { title: "LLM …", sub: "Coming soon", href: "#" },
-          ],
+          title: "Zapier",
+          tag: "Coming soon",
+          sub: "Trigger-based agent automation",
+          href: "#",
+        },
+        {
+          title: "Skills",
+          tag: "Coming soon",
+          sub: "Reusable verify() modules for LLM agents",
+          href: "#",
         },
       ],
     },

@@ -100,14 +100,10 @@
 }
 
 @media (max-width: 720px) {
+  /* Drop the floating API bar entirely on mobile — it competes with the
+     mobile drawer and bottom CTAs for the limited bottom region. */
   .rtbar {
-    left: 12px;
-    right: 12px;
-    bottom: 14px;
-    transform: translateY(0);
-    max-width: none;
-    padding: 6px;
-    gap: 8px;
+    display: none;
   }
   .rtbar__pitch {
     font-size: 12.5px;
