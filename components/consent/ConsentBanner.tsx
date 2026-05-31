@@ -31,7 +31,7 @@ export function ConsentBanner() {
             We use cookies essential to running this site and, with your
             permission, cookies to help us understand how it&rsquo;s used.{" "}
             <Link href="/legal/cookies" className="consent__link">
-              Learn more
+              Read our cookie policy
             </Link>
             .
           </p>
