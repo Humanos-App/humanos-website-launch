@@ -52,5 +52,40 @@ On-page essentials present everywhere: `title` ✓, meta `description` ✓, exac
 ## Status legend
 `fixable` = code-only, done autonomously · `hand-off` = needs human input/decision
 
+## Fixes applied (code-only) — 2026-05-31, verified locally on a production build
+
+| Area | Fix | Files |
+|------|-----|-------|
+| Shared config | Single source of truth for URL/name/desc/routes/brand | `lib/seo.ts` |
+| metadataBase + canonical | Absolute OG/canonical URLs; self-referential canonical on all 13 routes; `%s · Humanos` title template | `app/layout.tsx` + every `page.tsx` |
+| Open Graph + Twitter | Default OG (`type/siteName/url/title/desc/image`) + `summary_large_image` | `app/layout.tsx` |
+| Missing metadata | Added to `/` (title.absolute) and `/pricing` | `app/page.tsx`, `app/pricing/page.tsx` |
+| Sitemap | `/sitemap.xml` generated from `ROUTES` | `app/sitemap.ts` |
+| Robots | `/robots.txt` (allow all + sitemap + host) | `app/robots.ts` |
+| Favicon / icons | Generated via `ImageResponse` (logo as divs) | `app/icon.tsx`, `app/apple-icon.tsx`, `components/seo/brand-mark.tsx` |
+| OG image | Generated 1200×630 brand card | `app/opengraph-image.tsx` |
+| Manifest | `/manifest.webmanifest` | `app/manifest.ts` |
+| JSON-LD | Organization + WebSite (layout), FAQPage (home, 15 Q&A), BreadcrumbList (5 case studies) | `components/seo/JsonLd.tsx`, `app/layout.tsx`, `app/page.tsx`, case studies |
+| W3C: aria-label on div ×5 | Added `role="group"` / `role="img"` | Logos, Pshift, Rt, Integrate |
+| W3C: role=tab w/o tabpanel | Wired `aria-controls`/`id` + `role="tabpanel"` (article→div) | `components/sections/home/Outcomes.tsx` |
+| a11y: aria-hidden-focus | `inert` on closed mobile nav | `components/chrome/Navbar.tsx` |
+| best-practices: console 404 | Resolved by adding favicon | (icons above) |
+| 404 page | Branded `not-found.tsx` (404 + noindex) | `app/not-found.tsx` |
+| Docs | README filled in | `README.md` |
+
+**Local verification (production build + `next start`):**
+- W3C Nu validator on prod homepage: **0 errors** (was 6), 3 info warnings only.
+- All 13 routes + `/robots.txt` `/sitemap.xml` `/manifest.webmanifest` `/icon` `/opengraph-image` → HTTP 200.
+- 404 page → HTTP 404 + `<meta name="robots" content="noindex">`.
+- JSON-LD parses; Organization/WebSite/FAQPage(15)/BreadcrumbList present.
+- OG image renders the logo mark + headline + domain.
+
+## Hand-off — items needing your input (after re-audit)
+1. **Color contrast (a11y 93→100):** muted text `--hm-ink-3` (#76746d) and `.rt__stage-num` (#8c8b89) fall just under WCAG AA 4.5:1 (3.26–4.48). Darkening is a brand/design decision — not auto-applied.
+2. **Google Search Console** verification token → `verification.google` in root metadata + submit sitemap.
+3. **`sameAs` social URLs** (LinkedIn/X/GitHub) for Organization JSON-LD.
+4. **Twitter handle** (`twitter.site`/`creator`).
+5. Optional: bespoke designed OG image / multi-res favicon (generated versions ship now).
+
 ## Re-audit — (pending, after deploy)
-_To be filled after push + deploy._
+_To be filled after push + Vercel deploy._
