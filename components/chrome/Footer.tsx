@@ -1,4 +1,5 @@
 import { EXTERNAL_LINKS } from "@/lib/external-links";
+import { ConsentSettingsLink } from "@/components/consent/ConsentSettingsLink";
 
 type FooterLink = { label: string; href: string };
 type FooterColumn = {
@@ -71,10 +72,10 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { label: "Trust overview", href: "/trust" },
       { label: "Why verify", href: "/trust#before" },
-      { label: "Independent verification", href: "/trust#verify" },
       { label: "VIA Protocol", href: "/trust#via" },
       { label: "Open standards", href: "/trust#standards" },
       { label: "Regulated systems", href: "/trust#regulated" },
+      { label: "Cookies", href: "/legal/cookies" },
     ],
   },
 ];
@@ -130,6 +131,11 @@ export function Footer() {
                   </a>
                 );
               })}
+              {col.title === "Trust" && (
+                <ConsentSettingsLink className="footer__col-link-button">
+                  Cookie settings
+                </ConsentSettingsLink>
+              )}
             </div>
           ))}
         </div>

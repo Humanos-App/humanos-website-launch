@@ -68,6 +68,23 @@
 .footer__col a:hover {
   color: var(--hm-chalk-0);
 }
+/* Buttons rendered alongside <a> links (e.g. "Cookie settings") need
+   to look identical to the anchors so the column reads as one list. */
+.footer__col-link-button {
+  display: block;
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--hm-chalk-1);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+}
+.footer__col-link-button:hover {
+  color: var(--hm-chalk-0);
+}
 .footer__bottom {
   margin-top: 80px;
   padding-top: 32px;

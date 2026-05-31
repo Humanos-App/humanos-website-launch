@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
+
+export const metadata: Metadata = {
+  title: "Pricing — pay for execution, not seats",
+  description:
+    "Start free with runtime authorization APIs and scale to enterprise execution. Humanos pricing scales with verified execution — not seats, users, agents, or stored data.",
+  alternates: { canonical: "/pricing" },
+};
 
 const FREE_INCLUDES = [
   "Runtime verification API",

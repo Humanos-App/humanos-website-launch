@@ -43,7 +43,8 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
                 How would you like to connect?
               </Dialog.Title>
               <Dialog.Description className="dlg__sub">
-                Book time with our team, or send us a note and we&apos;ll get back to you.
+                Book time with our team, or send us a note and we&apos;ll get
+                back to you.
               </Dialog.Description>
 
               <div className="dlg__choices">
@@ -67,7 +68,7 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
                 >
                   <span className="dlg__choice-title">Send a message</span>
                   <span className="dlg__choice-sub">
-                    Tell us about your use case. We&apos;ll reply by email.
+                    Send us a message. We&apos;ll reply by email.
                   </span>
                   <span className="dlg__choice-arrow">Open form →</span>
                 </button>
@@ -84,7 +85,7 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
               </button>
               <div className="dlg__eyebrow">Send a message</div>
               <Dialog.Title className="dlg__title">
-                Tell us about your use case.
+                Send us a message.
               </Dialog.Title>
               <Dialog.Description className="dlg__sub">
                 Someone from the Humanos team will follow up by email.

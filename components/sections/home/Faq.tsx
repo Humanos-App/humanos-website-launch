@@ -1,4 +1,4 @@
-const FAQ_ITEMS: { q: string; a: string }[] = [
+export const FAQ_ITEMS: { q: string; a: string }[] = [
   {
     q: "Does Humanos replace our IAM or policy engine?",
     a: "No. Existing systems continue deciding who can act internally. Humanos standardizes authorization into portable runtime infrastructure external systems and autonomous workflows can verify before execution.",

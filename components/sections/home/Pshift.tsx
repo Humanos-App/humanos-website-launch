@@ -272,6 +272,7 @@ export function Pshift() {
 
         <div
           className="pshift__regs"
+          role="group"
           aria-label="Built to operate within existing regulatory frameworks"
         >
           <p className="pshift__regs-label">

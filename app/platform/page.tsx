@@ -21,9 +21,10 @@ import {
 } from "./_components/SectionsEnd";
 
 export const metadata: Metadata = {
-  title: "Humanos Platform — Portable authorization infrastructure",
+  title: "Platform — Portable authorization infrastructure",
   description:
     "Humanos turns approvals, permissions, enterprise policies, and delegated authority into machine-verifiable runtime authorization systems can verify before execution.",
+  alternates: { canonical: "/platform" },
 };
 
 export default function PlatformPage() {

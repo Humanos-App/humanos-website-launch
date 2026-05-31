@@ -4,9 +4,10 @@ import { EXTERNAL_LINKS } from "@/lib/external-links";
 import { StoriesGrid, type Story, type Filter } from "./_components/StoriesGrid";
 
 export const metadata: Metadata = {
-  title: "Customer stories · Humanos",
+  title: "Customer stories",
   description:
     "Real stories from systems that verify before they act. Hospitals, insurers, fintechs, payment processors, and AI platforms running Humanos in their execution path.",
+  alternates: { canonical: "/case-studies" },
 };
 
 const FILTERS: Filter[] = [

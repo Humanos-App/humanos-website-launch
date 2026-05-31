@@ -416,7 +416,7 @@ export function Rt() {
                 Portable authorization · Verified at runtime · Cross-system
               </div>
               <div className="rt__stage-visual rt-verify">
-                <div className="rt-timeline" aria-label="Runtime verification flow">
+                <div className="rt-timeline" role="group" aria-label="Runtime verification flow">
                   <div className="rt-timeline__step">
                     <div className="rt-timeline__label">01</div>
                     <div className="rt-timeline__text">Action</div>

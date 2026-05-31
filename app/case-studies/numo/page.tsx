@@ -11,17 +11,22 @@ import { NetworkEffect } from "./_components/NetworkEffect";
 import { UseCases } from "./_components/UseCases";
 import { Model } from "./_components/Model";
 import { Category } from "./_components/Category";
+import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title:
-    "Verifying every agent-driven financial action before execution · Humanos × Numo",
+  title: {
+    absolute:
+      "Verifying every agent-driven financial action before execution · Humanos × Numo",
+  },
   description:
     "Numo runs autonomous strategies that reallocate capital continuously. Humanos verifies every action — identity, scope, amount, validity — before any capital moves.",
+  alternates: { canonical: "/case-studies/numo" },
 };
 
 export default function NumoCaseStudyPage() {
   return (
     <div className="cs-page">
+      <CaseStudyBreadcrumb name="Humanos × Numo" slug="numo" />
       <Hero />
       <About />
       <Problem />

@@ -36,6 +36,7 @@ export function Integrate() {
             <div className="ipath__card-visual">
               <div
                 className="vchain-v"
+                role="img"
                 aria-label="verify() resolves to one of three outcomes: blocked, approval, or authorized"
               >
                 <span className="ipath-pill ipath-pill--active">
@@ -96,6 +97,7 @@ export function Integrate() {
             <div className="ipath__card-visual">
               <div
                 className="vlinear"
+                role="img"
                 aria-label="Trigger then verify() then Action"
               >
                 <span className="ipath-box">Trigger</span>

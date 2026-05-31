@@ -91,12 +91,13 @@
   box-shadow: 0 0 24px -4px rgba(122, 120, 240, 0.55);
 }
 .rtbar__cta--ghost {
-  color: rgba(239, 234, 224, 0.62);
+  color: #ffffff;
   padding: 12px 14px;
   background: transparent;
 }
 .rtbar__cta--ghost:hover {
   color: #ffffff;
+  opacity: 0.85;
 }
 
 @media (max-width: 720px) {

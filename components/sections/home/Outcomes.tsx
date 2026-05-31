@@ -426,9 +426,11 @@ export function Outcomes() {
             <button
               key={p.key}
               type="button"
+              id={`oc-tab-${p.key}`}
               className={`oc__tab${active === p.key ? " is-active" : ""}`}
               role="tab"
               aria-selected={active === p.key}
+              aria-controls={`oc-panel-${p.key}`}
               onClick={() => setActive(p.key)}
             >
               <span className="oc__tab-num">{p.num}</span>
@@ -439,8 +441,11 @@ export function Outcomes() {
 
         <div className="oc__panels">
           {PANELS.map((p) => (
-            <article
+            <div
               key={p.key}
+              id={`oc-panel-${p.key}`}
+              role="tabpanel"
+              aria-labelledby={`oc-tab-${p.key}`}
               className={`oc__panel${active === p.key ? " is-active" : ""}`}
               aria-hidden={active !== p.key}
             >
@@ -526,7 +531,7 @@ export function Outcomes() {
                   </div>
                 </div>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </div>

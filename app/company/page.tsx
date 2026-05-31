@@ -3,9 +3,10 @@ import Link from "next/link";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 
 export const metadata: Metadata = {
-  title: "Company · Humanos",
+  title: "Company",
   description:
     "Humanos is building the authorization layer for autonomous systems — a shared, portable, machine-verifiable primitive of the internet.",
+  alternates: { canonical: "/company" },
 };
 
 export default function CompanyPage() {
@@ -35,14 +36,19 @@ export default function CompanyPage() {
               </div>
               <div className="vision__row vision__row--now">
                 <div className="vision__co">Humanos</div>
-                <div className="vision__did">is standardizing authorization.</div>
+                <div className="vision__did">
+                  is standardizing authorization.
+                </div>
               </div>
             </div>
 
             <div className="intro__body">
               <p className="body-lg">
                 As software becomes increasingly autonomous, every action must
-                be <span className="hl">verifiable, authorized, and accountable.</span>
+                be{" "}
+                <span className="hl">
+                  verifiable, authorized, and accountable.
+                </span>
               </p>
               <p className="body-lg">
                 Humanos is building the infrastructure that allows AI systems,
@@ -54,7 +60,8 @@ export default function CompanyPage() {
               <p className="body-lg">
                 We believe authorization should become a{" "}
                 <span className="hl">
-                  shared, portable, and machine-verifiable layer of the internet.
+                  shared, portable, and machine-verifiable layer of the
+                  internet.
                 </span>
               </p>
             </div>
@@ -67,11 +74,11 @@ export default function CompanyPage() {
         <div className="wrap">
           <div className="team__photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/founders.jpg" alt="The Humanos founding team" />
+            <img src="/assets/founders.jpg" alt="The Humanos team" />
           </div>
           <div className="team__caption">
             <span className="mark" aria-hidden="true" />
-            The Humanos founding team is spread across the US and Europe.
+            The Humanos team is spread across the US and Europe.
           </div>
         </div>
       </section>
@@ -86,7 +93,8 @@ export default function CompanyPage() {
               Why we exist
             </span>
             <h2>
-              AI can act. <span className="q">But who decided it was allowed to?</span>
+              AI can act.{" "}
+              <span className="q">But who decided it was allowed to?</span>
             </h2>
             <div className="why__body">
               <p>
@@ -159,19 +167,22 @@ export default function CompanyPage() {
           </div>
 
           <div className="founders__tags">
-            {["Payments", "Cybersecurity", "Blockchain", "AI", "Infrastructure"].map(
-              (t) => (
-                <span className="company__tag" key={t}>
-                  <span className="pip" />
-                  {t}
-                </span>
-              ),
-            )}
+            {[
+              "Payments",
+              "Cybersecurity",
+              "Blockchain",
+              "AI",
+              "Infrastructure",
+            ].map((t) => (
+              <span className="company__tag" key={t}>
+                <span className="pip" />
+                {t}
+              </span>
+            ))}
           </div>
 
           <p className="founders__support">
-            The Humanos founding team has spent the last decade building
-            companies across{" "}
+            The Humanos team has spent the last decade building companies across{" "}
             <span className="hl">
               payments, cybersecurity, infrastructure, AI, and identity systems.
             </span>
@@ -207,9 +218,9 @@ export default function CompanyPage() {
               <p className="body-lg">
                 As AI systems become increasingly autonomous, authorization
                 becomes as fundamental as{" "}
-                <span className="hl">payments and identity.</span> Our goal is to
-                make it a shared, portable, and machine-verifiable layer of the
-                internet.
+                <span className="hl">payments and identity.</span> Our goal is
+                to make it a shared, portable, and machine-verifiable layer of
+                the internet.
               </p>
             </div>
           </div>

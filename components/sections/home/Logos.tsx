@@ -164,7 +164,7 @@ export function Logos() {
           Loved by startups and companies with billions in revenue
         </div>
       </div>
-      <div className="logos__marquee" aria-label="Customers">
+      <div className="logos__marquee" role="group" aria-label="Customers">
         <div className="logos__track">
           <Track />
           <Track />

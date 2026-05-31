@@ -11,17 +11,22 @@ import { NetworkEffect } from "./_components/NetworkEffect";
 import { UseCases } from "./_components/UseCases";
 import { Model } from "./_components/Model";
 import { Category } from "./_components/Category";
+import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title:
-    "One approval API across every clinical system · Humanos × Lusíadas",
+  title: {
+    absolute:
+      "One approval API across every clinical system · Humanos × Lusíadas",
+  },
   description:
     "Lusíadas runs human approvals through Humanos — consents, KYCs, signatures and prescriptions captured once and verified across Medify, Glintt, NewSoft, Pipedrive, internal systems and the patient mobile app. A global, independent approval OS for a multi-vendor healthcare ecosystem.",
+  alternates: { canonical: "/case-studies/lusiadas" },
 };
 
 export default function LusiadasCaseStudyPage() {
   return (
     <div className="cs-page">
+      <CaseStudyBreadcrumb name="Humanos × Lusíadas" slug="lusiadas" />
       <Hero />
       <About />
       <Problem />

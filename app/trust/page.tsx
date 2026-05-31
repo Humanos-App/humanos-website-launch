@@ -4,9 +4,10 @@ import { EXTERNAL_LINKS } from "@/lib/external-links";
 import { TrustAnimations } from "./_components/Animations";
 
 export const metadata: Metadata = {
-  title: "Trust · Humanos",
+  title: "Trust",
   description:
     "You don't have to trust Humanos. You can verify it. Runtime authorization, independently verifiable proof, open standards.",
+  alternates: { canonical: "/trust" },
 };
 
 export default function TrustPage() {

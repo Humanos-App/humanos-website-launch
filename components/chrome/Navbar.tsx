@@ -265,6 +265,9 @@ export function Navbar() {
         id="nav-mobile"
         className={`nav__mobile${mobileOpen ? " is-open" : ""}`}
         aria-hidden={!mobileOpen}
+        /* inert removes the off-screen menu's links from the tab order and
+           a11y tree while closed — fixes the aria-hidden-focus audit. */
+        inert={!mobileOpen}
       >
         <nav className="nav__mobile-links">
           {NAV_LINKS.map((link) => {

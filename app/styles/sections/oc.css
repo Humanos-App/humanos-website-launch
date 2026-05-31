@@ -35,7 +35,7 @@
       }
 
       .oc__head {
-        margin-bottom: 56px;
+        margin-bottom: 0;
         max-width: 880px;
       }
       .oc__eyebrow {
@@ -472,7 +472,7 @@
       .oc__tabs {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        margin-top: 32px;
+        margin-top: 5px;
         margin-bottom: 48px;
         background: rgba(244, 243, 239, 0.03);
         border: 1px solid rgba(244, 243, 239, 0.1);
