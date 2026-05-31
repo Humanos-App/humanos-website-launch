@@ -115,6 +115,34 @@ On-page essentials present everywhere: `title` ✓, meta `description` ✓, exac
 3. **Twitter handle** for `twitter.site`/`twitter.creator` — awaiting @handle from you.
 4. *(Deferred by you)* Google Search Console verification token.
 
+## Round 3 — external checker triage (Seobility / SiteCheckup / others), 2026-05-31
+
+**Done this round (code-only, no visible-content change):**
+- `sameAs` social URLs (X/LinkedIn/GitHub) in Organization JSON-LD + `twitter:site`/`creator` = `@humanosai`.
+- Meta description expanded 115→160 chars / 14→23 words (was "too short / too few words").
+- Added `/llms.txt`.
+
+**Already done / false positive (no action):**
+- "Not mobile friendly / add viewport" — viewport meta already present (Next default).
+- "Add Google Analytics / analytics tool" — GA4 exists but is consent-gated, so it only loads after opt-in (checkers don't see it).
+- "Use HTTP/2+" — Vercel already serves HTTP/2+.
+- "2 broken links (npm 429 / nuget 404)" — re-verified: nuget → 200, npm → 403-to-bots (page exists). Transient checker failure, links are valid.
+
+**Your action — off-site / infra / brand (can't be fixed in code):**
+- Canonical "points to a different page" — the www↔apex redirect; resolved when you set `humanos.tech` as the Vercel primary domain (your decision to keep non-www).
+- Link building / backlinks / referring domains / IPs — off-site, ongoing.
+- SPF mail record — DNS.
+- "Title too long" (62 vs ≤60 chars) — left as-is: it's your core positioning statement and only 2 chars over a soft guideline. Trim on request.
+
+**Left to honor "minimal content change" (would alter visible copy/structure):**
+- The "113-char too-long tag" is the Hero body paragraph (visible copy), not a meta tag.
+- Few social-share buttons; 28 headings vs text; repeated anchor text; 47 external links; `<img> title` attribute (alt already present everywhere); hreflang (site is English-only).
+
+**Performance follow-ups (code-only but larger; not done to avoid visual regressions):**
+- Render-blocking Google Fonts `@import` → migrate to `next/font`.
+- Modern image formats + properly sized images (esp. `public/assets/founders.jpg`, 6.7 MB) → `next/image`/webp.
+- Reduce DOM size / defer non-critical JS / fewer HTTP requests.
+
 ### Score summary (live, will reflect fully after the pending redeploys)
 | | Baseline | After fixes |
 |---|---|---|
