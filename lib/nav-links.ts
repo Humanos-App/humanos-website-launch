@@ -7,8 +7,8 @@ export type NavLink =
 
 export const NAV_LINKS: NavLink[] = [
   { kind: "link", label: "Platform", href: ROUTES.platform },
-  { kind: "link", label: "Use cases", href: ROUTES.useCases },
   { kind: "mega", label: "Developers", menu: DEVELOPERS_MENU },
+  { kind: "link", label: "Use cases", href: ROUTES.useCases },
   { kind: "link", label: "Customers", href: ROUTES.customers },
   { kind: "link", label: "Pricing", href: ROUTES.pricing },
   { kind: "link", label: "Trust", href: ROUTES.trust },

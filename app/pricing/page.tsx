@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
+import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 export const metadata: Metadata = {
   title: "Pricing — pay for execution, not seats",
@@ -111,7 +112,7 @@ export default function PricingPage() {
                 <div className="quota__head">
                   <div className="quota__head-l">
                     <span className="quota__cap">1,000</span>
-                    <span className="quota__cap-unit">operations</span>
+                    <span className="quota__cap-unit">credits</span>
                   </div>
                   <div className="quota__head-r">any mix</div>
                 </div>
@@ -131,18 +132,6 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              <ul className="price__list" style={{ marginTop: 14 }}>
-                <li>
-                  <Check />
-                  10 KYC verifications
-                </li>
-              </ul>
-
-              <div className="quota__note">
-                Free tier expires once the 1,000 ops are spent. Continue on
-                Pay-as-you-go at $0.02 / $0.10.
-              </div>
-
               <hr className="price__divider" />
               <div className="price__group-label">Includes</div>
               <ul className="price__list">
@@ -155,7 +144,12 @@ export default function PricingPage() {
               </ul>
 
               <div className="price__cta">
-                <a className="btn btn--secondary" href="#">
+                <a
+                  className="btn btn--secondary"
+                  href={EXTERNAL_LINKS.app}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Start building <span className="arrow">→</span>
                 </a>
               </div>
@@ -190,19 +184,13 @@ export default function PricingPage() {
               <div className="price__group-label">Economics</div>
               <div className="price__econ">
                 <div className="price__econ-row">
-                  <span className="price__econ-step">Approval</span>
-                  <span className="price__econ-arr">→</span>
+                  <span className="price__econ-step">One Approval</span>
                   <span className="price__econ-step">
-                    Reusable authorization
+                    One Reusable authorization
                   </span>
-                  <span className="price__econ-arr">→</span>
                   <span className="price__econ-step price__econ-step--many">
-                    Many runtime verifications
+                    Infinite runtime verifications
                   </span>
-                </div>
-                <div className="price__econ-note">
-                  One authorization can power thousands of autonomous decisions
-                  within approved scope.
                 </div>
               </div>
 
@@ -220,7 +208,12 @@ export default function PricingPage() {
               </ul>
 
               <div className="price__cta">
-                <a className="btn btn--primary" href="https://app.humanos.id">
+                <a
+                  className="btn btn--primary"
+                  href={EXTERNAL_LINKS.app}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Get API key <span className="arrow">→</span>
                 </a>
               </div>

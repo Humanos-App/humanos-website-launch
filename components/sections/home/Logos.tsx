@@ -13,6 +13,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Agentic governance",
     name: "Coalex",
+    src: "/assets/logos/coalex.png",
     nameClass: "logos__name--pwc",
     desc: "AI governance & oversight",
   },

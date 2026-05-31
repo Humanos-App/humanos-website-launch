@@ -220,7 +220,10 @@
   font-size: 14px;
   line-height: 1.45;
   color: var(--hm-ink-2);
-  min-height: 40px;
+  /* Big enough to hold the longest 2-line tag in the widest card and
+     still leave the same vertical room in the narrower side cards,
+     so every .price__price-row below it starts at the same Y. */
+  min-height: 64px;
 }
 
 .price__price-row {
@@ -328,7 +331,11 @@
 }
 
 .price__cta {
-  margin-top: 28px;
+  /* Push the CTA to the bottom of the card so the buttons line up
+     across all three cards regardless of how much content sits
+     above them. The 28 px is now the minimum air above the button. */
+  margin-top: auto;
+  padding-top: 28px;
 }
 .price__cta .btn {
   width: 100%;
@@ -433,9 +440,9 @@
 }
 .price__econ-row {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   font-family: var(--font-mono);
   font-size: 12px;
 }
@@ -452,10 +459,6 @@
   border-color: var(--hm-verification);
   color: var(--hm-verification);
   background: rgba(75, 73, 202, 0.06);
-}
-.price__econ-arr {
-  color: var(--hm-ink-3);
-  font-family: var(--font-mono);
 }
 .price__econ-note {
   font-size: 12.5px;
