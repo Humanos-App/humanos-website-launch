@@ -450,16 +450,6 @@ export function Outcomes() {
               aria-hidden={active !== p.key}
             >
               <div className="oc__left">
-                {p.brandLogo && (
-                  <div className="oc__brand-mark">
-                    <img
-                      className="oc__brand-logo"
-                      src={p.brandLogo.src}
-                      alt={p.brandLogo.alt}
-                      loading="lazy"
-                    />
-                  </div>
-                )}
                 <h3 className="oc__outcome">{p.outcome}</h3>
 
                 <div className="oc__how">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import {
   SITE_URL,
   SITE_NAME,
@@ -10,6 +11,15 @@ import {
 } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Navbar } from "@/components/chrome/Navbar";
+
+// Self-hosted, non-render-blocking. Variable fonts → all weights available;
+// OpenType features (ss01/cv11/tnum) still applied via CSS in globals.css.
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
+});
 import { Footer } from "@/components/chrome/Footer";
 import { FloatingApiBar } from "@/components/chrome/FloatingApiBar";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
@@ -101,7 +111,11 @@ export default function RootLayout({
     /* suppressHydrationWarning silences the benign mismatch caused by
        browser extensions (e.g. ones that inject `extension-installed`
        attributes onto <html> before React hydrates). */
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <JsonLd data={ORGANIZATION_LD} />
         <JsonLd data={WEBSITE_LD} />

@@ -2,7 +2,8 @@
    Humanos — Colors & Type
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Inter + JetBrains Mono are loaded (self-hosted, non-render-blocking)
+   via next/font in app/layout.tsx, exposed as the CSS variables below. */
 
 :root {
   /* ========== COLOR — CORE ================================= */
@@ -56,8 +57,8 @@
   --state-rejected:   var(--hm-rejection);
 
   /* ========== TYPOGRAPHY =================================== */
-  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-sans: var(--font-inter), "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --font-features-sans: "ss01" 1, "cv11" 1, "tnum" 1;
   --font-features-mono: "zero" 1, "ss01" 1;
