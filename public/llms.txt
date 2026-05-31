@@ -1,0 +1,23 @@
+# Humanos
+
+> Authorization infrastructure for the agentic economy. Humanos turns approvals, permissions and policies into portable runtime authorization that AI agents and external systems can verify before execution — with independently verifiable execution receipts afterwards.
+
+Humanos works alongside existing IAM, RBAC, OAuth, approval workflows and policy systems, making authorization portable and externally verifiable across organizations and autonomous workflows.
+
+## Core pages
+- [Platform](https://humanos.tech/platform): Portable authorization infrastructure — runtime verification, recovery, receipts, cross-system authorization, policy and identity.
+- [Use cases](https://humanos.tech/use-cases): What becomes possible when human authorization becomes machine-verifiable.
+- [Pricing](https://humanos.tech/pricing): Pay for verified execution — not seats, users, agents, or stored data.
+- [Trust](https://humanos.tech/trust): Independently verifiable proof and open standards.
+- [Customer stories](https://humanos.tech/case-studies): Systems running Humanos in their execution path.
+- [Company](https://humanos.tech/company): Building the authorization layer for autonomous systems.
+
+## Case studies
+- [Humanos × Numo](https://humanos.tech/case-studies/numo): Verifying every agent-driven financial action before execution.
+- [Humanos × Ralio](https://humanos.tech/case-studies/ralio): Verifiable agent payments beyond closed banking APIs.
+- [Humanos × Lusíadas](https://humanos.tech/case-studies/lusiadas): One approval API across every clinical system.
+- [Humanos × Paymove](https://humanos.tech/case-studies/paymove): Settling verifiably authorized agent payments on the Visa rail.
+- [Humanos × DataWhisper](https://humanos.tech/case-studies/datawhisper): Verifying every high-risk AI action inside regulated workflows.
+
+## Legal
+- [Cookie policy](https://humanos.tech/legal/cookies)

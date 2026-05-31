@@ -4,6 +4,8 @@ import {
   SITE_NAME,
   DEFAULT_TITLE,
   DEFAULT_DESCRIPTION,
+  SOCIAL_LINKS,
+  TWITTER_HANDLE,
   absoluteUrl,
 } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -66,6 +68,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: TWITTER_HANDLE,
+    creator: TWITTER_HANDLE,
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
   },
@@ -78,6 +82,7 @@ const ORGANIZATION_LD = {
   url: SITE_URL,
   logo: absoluteUrl("/icon"),
   description: DEFAULT_DESCRIPTION,
+  sameAs: SOCIAL_LINKS,
 };
 
 const WEBSITE_LD = {

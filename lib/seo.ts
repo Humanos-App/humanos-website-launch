@@ -12,7 +12,16 @@ export const DEFAULT_TITLE =
   "Humanos — Authorization infrastructure for the agentic economy";
 
 export const DEFAULT_DESCRIPTION =
-  "Portable Authorization & Runtime Verification for AI. Every authorized action becomes independently verifiable.";
+  "Humanos turns approvals and policies into portable runtime authorization that AI agents and external systems can verify before execution — and prove afterwards.";
+
+/** Social profiles — used for Organization JSON-LD `sameAs` and Twitter card. */
+export const SOCIAL_LINKS = [
+  "https://x.com/humanosai",
+  "https://www.linkedin.com/company/humanosai/",
+  "https://github.com/Humanos-App",
+];
+
+export const TWITTER_HANDLE = "@humanosai";
 
 /** Brand palette (mirrors public/assets/colors_and_type.css). */
 export const BRAND = {
