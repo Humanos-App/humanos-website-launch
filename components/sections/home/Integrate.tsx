@@ -1,3 +1,7 @@
+import { EXTERNAL_LINKS } from "@/lib/external-links";
+
+const VERIFY_VP_DOC = `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/credentials/verify-vp`;
+
 export function Integrate() {
   return (
     <section className="ipath" data-screen-label="11 Integrate">
@@ -86,7 +90,12 @@ export function Integrate() {
                   </span>
                 ))}
               </div>
-              <a className="ipath__card-link" href="#">
+              <a
+                className="ipath__card-link"
+                href={VERIFY_VP_DOC}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Run verify() <span className="arrow">→</span>
               </a>
             </div>
@@ -125,7 +134,12 @@ export function Integrate() {
                   </span>
                 ))}
               </div>
-              <a className="ipath__card-link" href="#">
+              <a
+                className="ipath__card-link"
+                href={VERIFY_VP_DOC}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Open template <span className="arrow">→</span>
               </a>
             </div>
@@ -287,7 +301,12 @@ export function Integrate() {
                   </span>
                 ))}
               </div>
-              <a className="ipath__card-link" href="#">
+              <a
+                className="ipath__card-link"
+                href={EXTERNAL_LINKS.docs}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Test with your stack <span className="arrow">→</span>
               </a>
             </div>
