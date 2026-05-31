@@ -408,7 +408,8 @@
         font-size: 11px;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: var(--rt-ink-3);
+        /* #6B6A63 (not --rt-ink-3 #8c8b89) to clear WCAG AA on the light stage panel */
+        color: #6B6A63;
         margin: 0 0 20px;
       }
       .rt__stage.is-active .rt__stage-num {

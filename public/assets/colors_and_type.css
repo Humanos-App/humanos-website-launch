@@ -34,7 +34,7 @@
   --hm-ink-0:   #111111; /* primary text on light              */
   --hm-ink-1:   #2A2A28; /* body on light                      */
   --hm-ink-2:   #4A4A46; /* secondary                          */
-  --hm-ink-3:   #76746D; /* tertiary / labels                  */
+  --hm-ink-3:   #6B6A63; /* tertiary / labels — darkened for WCAG AA (was #76746D) */
   --hm-ink-4:   #A6A29A; /* disabled                           */
   --hm-line:    #DDD9D0; /* hairlines on clarity               */
   --hm-line-strong: #C9C4B7;
