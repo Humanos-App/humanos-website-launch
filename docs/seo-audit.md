@@ -138,10 +138,10 @@ On-page essentials present everywhere: `title` ✓, meta `description` ✓, exac
 - The "113-char too-long tag" is the Hero body paragraph (visible copy), not a meta tag.
 - Few social-share buttons; 28 headings vs text; repeated anchor text; 47 external links; `<img> title` attribute (alt already present everywhere); hreflang (site is English-only).
 
-**Performance follow-ups (code-only but larger; not done to avoid visual regressions):**
-- Render-blocking Google Fonts `@import` → migrate to `next/font`.
-- Modern image formats + properly sized images (esp. `public/assets/founders.jpg`, 6.7 MB) → `next/image`/webp.
-- Reduce DOM size / defer non-critical JS / fewer HTTP requests.
+**Performance follow-ups:**
+- ✅ **DONE** — render-blocking Google Fonts `@import` replaced with `next/font/google` (Inter + JetBrains Mono, self-hosted, `display:swap`). Same typefaces; verified Inter renders identically with no console errors. (commit 88f069d)
+- ✅ **DONE** — `public/assets/founders.jpg` recompressed 6.4 MB → **568 KB** (4000→2000px, q80); visually identical in its 520px cover container.
+- Still open (smaller wins): reduce DOM size / defer non-critical JS / fewer HTTP requests — not pursued (diminishing returns, would touch interactive components).
 
 ### Score summary (live, will reflect fully after the pending redeploys)
 | | Baseline | After fixes |
