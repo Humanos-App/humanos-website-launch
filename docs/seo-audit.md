@@ -87,5 +87,40 @@ On-page essentials present everywhere: `title` ✓, meta `description` ✓, exac
 4. **Twitter handle** (`twitter.site`/`creator`).
 5. Optional: bespoke designed OG image / multi-res favicon (generated versions ship now).
 
-## Re-audit — (pending, after deploy)
-_To be filled after push + Vercel deploy._
+## Re-audit — 2026-05-31 (live, after deploy to www.humanos.tech)
+
+> Note: the live site serves on **www.humanos.tech**; the apex `humanos.tech` 307-redirects to www. See critical hand-off item #1.
+
+| Checker | Baseline | Re-audit | Δ |
+|---------|----------|----------|---|
+| Lighthouse — SEO | 100 | 92 → **100*** | *link-text fix pushed (commit 8c9a972), 100 after redeploy |
+| Lighthouse — Accessibility | 93 | **97** | aria-hidden-focus fixed; color-contrast remains |
+| Lighthouse — Best-practices | 96 | **100** | console 404 (favicon) resolved |
+| W3C Nu HTML errors | 6 | **0** | all aria-label/role=tab errors fixed |
+| Crawler — canonical/OG/Twitter/JSON-LD | MISSING on all 13 | **present on all 13** | ✓ |
+| Crawler — robots/sitemap/manifest | 404 | **200** | ✓ |
+| Crawler — /pricing metadata | inherited root | **own title+desc** | ✓ |
+| Crawler — /legal/cookies | 404 | **200** | now deployed |
+| Structured data | none | **Organization, WebSite, FAQPage(15), BreadcrumbList** — all valid | ✓ |
+| PageSpeed Insights API | quota-blocked | quota-blocked | keyless daily quota; covered by Lighthouse engine |
+
+**Fixed this round:** the `link-text` SEO regression ("Learn more" → "Read our cookie policy" in the cookie banner, `components/consent/ConsentBanner.tsx`) — pushed, restores SEO to 100 on next deploy.
+
+### Fixed after the re-audit (round 2)
+- **Color contrast → FIXED** (commit 61a9d92): `--hm-ink-3` and the rt stage-num now `#6B6A63` (≥4.89:1). Local Lighthouse accessibility = **100**, 0 contrast failures. Live after redeploy.
+
+### Still open
+1. **www vs non-www — YOUR ACTION (decided: keep non-www).** Code canonicals stay at `https://humanos.tech`. The apex currently redirects to `www`, so you'll flip Vercel's primary domain (Settings → Domains → make `humanos.tech` primary, `www` → redirect) so the canonical host matches the served host.
+2. **`sameAs` social URLs** (LinkedIn/X/GitHub) for Organization JSON-LD — awaiting URLs from you.
+3. **Twitter handle** for `twitter.site`/`twitter.creator` — awaiting @handle from you.
+4. *(Deferred by you)* Google Search Console verification token.
+
+### Score summary (live, will reflect fully after the pending redeploys)
+| | Baseline | After fixes |
+|---|---|---|
+| Lighthouse SEO | 100 | 100 |
+| Lighthouse Accessibility | 93 | 100 |
+| Lighthouse Best-practices | 96 | 100 |
+| W3C errors | 6 | 0 |
+| Canonical/OG/Twitter/JSON-LD coverage | 0/13 | 13/13 |
+| sitemap / robots / manifest | 404 | 200 |
