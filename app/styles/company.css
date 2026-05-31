@@ -37,7 +37,9 @@
 .company-page .intro {
   position: relative;
   padding: 130px 0 110px;
-  border-bottom: 1px solid var(--hm-line);
+  /* No bottom border — the team photo section sits flush against the
+     intro and the hairline between them was reading as an unwanted
+     separator. */
   overflow: hidden;
 }
 .company-page .intro__grid-bg {
@@ -59,26 +61,21 @@
 .company-page .intro__body { margin-top: 36px; max-width: 720px; }
 .company-page .intro__ledger { margin: 48px 0 0; max-width: 760px; }
 
-/* SECTION 02 — TEAM PHOTO */
+/* SECTION 02 — TEAM PHOTO
+   Photo is constrained to the same content width as the rest of the
+   page (it lives inside `.wrap` in the JSX). Plain background, 3 px
+   rounded corners, no dark/purple framing. */
 .company-page .team {
-  padding: 0;
+  padding: 56px 0 48px;
   border-bottom: 1px solid var(--hm-line);
-  background: var(--hm-authority);
+  background: transparent;
 }
 .company-page .team__photo {
   width: 100%;
-  height: 640px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(75,73,202,0.16), transparent 70%),
-    var(--hm-authority);
-  color: var(--hm-chalk-2);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  height: 520px;
+  background: var(--hm-surface-raised, #f6f5f1);
+  border-radius: 5px;
+  overflow: hidden;
 }
 .company-page .team__photo img {
   width: 100%;
@@ -87,11 +84,10 @@
   display: block;
 }
 .company-page .team__caption {
-  max-width: 1240px; margin: 0 auto;
-  padding: 18px 32px 22px;
+  padding: 14px 0 0;
   display: flex; align-items: center; gap: 12px;
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
-  color: var(--hm-chalk-2);
+  color: var(--hm-ink-3);
 }
 .company-page .team__caption .mark {
   width: 6px; height: 6px; border-radius: 999px; background: var(--hm-verification);
@@ -214,6 +210,7 @@
 }
 .company-page .vision__co {
   font-size: 26px; font-weight: 600; letter-spacing: -0.015em; color: var(--hm-ink-3);
+  margin-left: 10px;
 }
 .company-page .vision__did {
   font-size: 26px; font-weight: 500; letter-spacing: -0.015em; color: var(--hm-ink-2);
@@ -255,4 +252,5 @@
 }
 @media (max-width: 720px) {
   .company-page .wrap { padding: 0 20px; }
+  .company-page .vision__co { margin-left: 4px; }
 }

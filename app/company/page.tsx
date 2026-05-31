@@ -62,14 +62,17 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* 02 · TEAM PHOTO (placeholder until a real photo is supplied) */}
+      {/* 02 · TEAM PHOTO */}
       <section className="team" data-screen-label="02 Team">
-        <div className="team__photo" aria-hidden="true">
-          The Humanos founding team
-        </div>
-        <div className="team__caption">
-          <span className="mark" aria-hidden="true" />
-          The Humanos founding team is spread across the US and Europe.
+        <div className="wrap">
+          <div className="team__photo">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/founders.jpg" alt="The Humanos founding team" />
+          </div>
+          <div className="team__caption">
+            <span className="mark" aria-hidden="true" />
+            The Humanos founding team is spread across the US and Europe.
+          </div>
         </div>
       </section>
 
