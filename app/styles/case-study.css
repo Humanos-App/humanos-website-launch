@@ -862,14 +862,18 @@ img { display: block; max-width: 100%; }
 }
 .outc__verdict em { font-style: normal; color: var(--hm-verification); }
 
-/* 2-col outcome grid (BEM modifier; same brand rhythm as base) */
+/* 2-col outcome grid (BEM modifier; same brand rhythm as base).
+   Note: we set only border-right-width/-style here, not -color, so the
+   .section--dark .outc__card { border-color: ... } override stays in
+   charge of the line color on dark backgrounds. */
 .outc__grid.outc__grid--2col { grid-template-columns: repeat(2, 1fr); }
 .outc__grid--2col .outc__card,
 .outc__grid--2col .outc__card:nth-child(3n),
 .outc__grid--2col .outc__card:nth-child(3n+1),
 .outc__grid--2col .outc__card:nth-child(3n+2) {
   padding: 36px 32px 36px 0;
-  border-right: 1px solid var(--hm-line);
+  border-right-width: 1px;
+  border-right-style: solid;
 }
 .outc__grid--2col .outc__card:nth-child(2n) {
   padding-left: 32px; padding-right: 0; border-right: none;
