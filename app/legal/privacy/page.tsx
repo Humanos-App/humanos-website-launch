@@ -240,121 +240,7 @@ export default function PrivacyPage() {
             as necessary.
           </p>
 
-          <h2 className="legal__h2">
-            5. How we share personal data — subprocessors
-          </h2>
-          <p>
-            We do not sell personal data. We share personal data only with
-            vetted third-party subprocessors that help us deliver the Service,
-            under contractual data protection terms (DPAs) and on a scoped,
-            least-privilege basis. Our current subprocessors are:
-          </p>
-          <table className="legal__table">
-            <thead>
-              <tr>
-                <th>Subprocessor</th>
-                <th>Purpose</th>
-                <th>Data involved</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>MongoDB Atlas</strong>
-                </td>
-                <td>Primary application database</td>
-                <td>Name, email, phone, account records</td>
-                <td>AWS eu-west-3 (Paris, EU)</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>AWS S3</strong>
-                </td>
-                <td>Encrypted file / document storage</td>
-                <td>User-uploaded files</td>
-                <td>eu-west-3 (Paris, EU)</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>AWS KMS</strong>
-                </td>
-                <td>Encryption key management</td>
-                <td>Encryption keys (no personal data)</td>
-                <td>EU</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Firebase (Google Cloud)</strong>
-                </td>
-                <td>Authentication and session management</td>
-                <td>Email, authentication tokens, sessions</td>
-                <td>EU / US</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Stripe</strong>
-                </td>
-                <td>Payment processing</td>
-                <td>
-                  Payment method and billing data (card data transmitted
-                  directly to Stripe)
-                </td>
-                <td>US (PCI DSS Level 1)</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Veriff</strong>
-                </td>
-                <td>KYC / identity verification</td>
-                <td>
-                  ID documents, facial image (raw media{" "}
-                  <strong>not retained</strong> by Humanos)
-                </td>
-                <td>EU</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Azure OCR</strong>
-                </td>
-                <td>Text extraction from documents</td>
-                <td>
-                  Uploaded documents (extracted text stored by us; originals
-                  encrypted)
-                </td>
-                <td>EU</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Grafana / Loki</strong>
-                </td>
-                <td>Application logging and monitoring</td>
-                <td>
-                  Operational logs only (<strong>no PII</strong> — scrubbed
-                  before ingestion)
-                </td>
-                <td>EU (eu-west-2)</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Blockchain (Base)</strong>
-                </td>
-                <td>Public credential anchoring</td>
-                <td>
-                  Public credential anchors / DIDs only (
-                  <strong>non-PII data only</strong>)
-                </td>
-                <td>Decentralised public network</td>
-              </tr>
-            </tbody>
-          </table>
-          <p>
-            We may also disclose personal data to authorities or third parties
-            where required by law, to enforce our agreements, or to protect the
-            rights, safety and security of Humanos, our users or the public.
-          </p>
-
-          <h2 className="legal__h2">6. International data transfers</h2>
+          <h2 className="legal__h2">5. International data transfers</h2>
           <p>
             Our primary data storage is located in the{" "}
             <strong>European Union</strong> (AWS eu-west-3, Paris). Some
@@ -378,7 +264,7 @@ export default function PrivacyPage() {
           </p>
 
           <h2 className="legal__h2">
-            7. Blockchain anchoring — important notice
+            6. Blockchain anchoring — important notice
           </h2>
           <p>
             When verifiable credentials are issued, only{" "}
@@ -391,7 +277,7 @@ export default function PrivacyPage() {
             no personal data by design) is permanent and cannot be deleted.
           </p>
 
-          <h2 className="legal__h2">8. How we protect personal data</h2>
+          <h2 className="legal__h2">7. How we protect personal data</h2>
           <p>
             We apply technical and organisational measures appropriate to the
             risk, including:
@@ -429,7 +315,7 @@ export default function PrivacyPage() {
             27001:2022 certified Information Security Management System.
           </p>
 
-          <h2 className="legal__h2">9. How long we keep personal data</h2>
+          <h2 className="legal__h2">8. How long we keep personal data</h2>
           <p>
             We retain personal data only while there is a continued and valid
             reason to do so — for the duration of your relationship with us and
@@ -445,7 +331,7 @@ export default function PrivacyPage() {
             at least six years where required.
           </p>
 
-          <h2 className="legal__h2">10. Your rights</h2>
+          <h2 className="legal__h2">9. Your rights</h2>
           <p>Subject to applicable law, you have the right to:</p>
           <ul className="legal__list">
             <li>
@@ -498,14 +384,14 @@ export default function PrivacyPage() {
             with the supervisory authority of your country of residence.
           </p>
 
-          <h2 className="legal__h2">11. Children</h2>
+          <h2 className="legal__h2">10. Children</h2>
           <p>
             The Service is not directed to children below the age required to
             provide valid consent under applicable law, and we do not knowingly
             collect their personal data without appropriate authorisation.
           </p>
 
-          <h2 className="legal__h2">12. Changes to this Privacy Statement</h2>
+          <h2 className="legal__h2">11. Changes to this Privacy Statement</h2>
           <p>
             We may update this Privacy Statement from time to time. The latest
             version will always be available at this URL, with the effective
@@ -513,7 +399,7 @@ export default function PrivacyPage() {
             Service or by other appropriate means.
           </p>
 
-          <h2 className="legal__h2">13. Contact us</h2>
+          <h2 className="legal__h2">12. Contact us</h2>
           <ul className="legal__list">
             <li>
               <strong>Privacy / data protection:</strong>{" "}
