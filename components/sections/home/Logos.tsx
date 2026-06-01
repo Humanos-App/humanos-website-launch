@@ -16,6 +16,7 @@ const CELLS: LogoCell[] = [
     src: "/assets/logos/coalex.png",
     nameClass: "logos__name--pwc",
     desc: "AI governance & oversight",
+    href: "https://coalex.ai",
   },
   {
     tag: "Insurance · global",
@@ -70,6 +71,7 @@ const CELLS: LogoCell[] = [
     name: "Critical Software",
     nameClass: "logos__name--critical",
     desc: "Aerospace · defense · rail",
+    href: "http://criticalsoftware.com/en",
   },
   {
     tag: "Healthcare tech",
@@ -77,6 +79,7 @@ const CELLS: LogoCell[] = [
     src: "/assets/logos/glintt.svg",
     nameClass: "logos__name--glintt",
     desc: "Hospitals & pharmacies, EU-wide",
+    href: "https://glinttglobal.com/",
   },
   {
     tag: "Cybersecurity",
@@ -84,12 +87,15 @@ const CELLS: LogoCell[] = [
     src: "/assets/logos/ciberbit.png",
     nameClass: "logos__name--ciberbit",
     desc: "Privileged access · incident response",
+    href: "https://ciberbit.pt",
   },
   {
     tag: "Industrial ops",
     name: "Extraflow",
+    src: "/assets/logos/extraflow.svg",
     nameClass: "logos__name--extraflow",
     desc: "Shop-floor sign-offs at scale",
+    href: "https://extraflow.ai/en",
   },
   {
     tag: "Operations",
@@ -97,12 +103,14 @@ const CELLS: LogoCell[] = [
     src: "/assets/logos/ralio.png",
     nameClass: "logos__name--ralio",
     desc: "Audit-grade approval workflows",
+    href: "https://ralio.co",
   },
   {
     tag: "B2C agentic payments",
     name: "Paymove",
     nameClass: "logos__name--ralio",
     desc: "Consumer agent transactions",
+    href: "https://www.paymove.io",
   },
   {
     tag: "Regulated AI · UK",

@@ -286,6 +286,10 @@
   display: flex;
   gap: 12px;
   align-items: flex-start;
+  /* Front face shares grid cell with the taller mandate back face, so
+     there's free vertical space below the header. Auto margins center
+     the approval block inside that space (header stays pinned at top). */
+  margin: auto 0;
 }
 .hf-approval__avatar {
   flex: none;
