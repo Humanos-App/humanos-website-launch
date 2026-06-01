@@ -10,8 +10,8 @@ export function Hero() {
           <span>cs_datawhisper · v2 · anchored 2026-05-29</span>
         </div>
         <h1>
-          DataWhisper&rsquo;s agents act autonomously inside regulated
-          workflows.
+          DataWhisper&rsquo;s <em>agents act autonomously</em> inside
+          regulated workflows.
         </h1>
         <p className="hero__sub">
           <strong>SmartInsights.CortexOS</strong> is integrating with Humanos
