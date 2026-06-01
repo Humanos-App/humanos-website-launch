@@ -117,7 +117,7 @@ export function Solution() {
 
               <div className="cap-verdict">
                 <div className="cap-verdict__l">
-                  Authorised · proof emitted · 82 ms
+                  Authorized · proof emitted · 82 ms
                 </div>
                 <div className="cap-verdict__r">
                   proof:0xC44E…F912 · attached to resolution
@@ -144,7 +144,7 @@ export function Solution() {
             <p>
               Out of scope, expired or revoked. The HITL engine requests
               step-up approval in real time, the mandate is updated, and
-              execution resumes once authorisation is valid. The agent never
+              execution resumes once authorization is valid. The agent never
               silently fails or guesses.
             </p>
           </div>

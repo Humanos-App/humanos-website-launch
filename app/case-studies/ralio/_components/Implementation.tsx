@@ -430,9 +430,9 @@ export function Implementation() {
               <div className="istage__eye">§ 05 · Settle</div>
               <h3 className="istage__title">Agent executes the payment.</h3>
               <p className="istage__lede">
-                Authorised → Ralio&rsquo;s agent executes the payment through
+                Authorized → Ralio&rsquo;s agent executes the payment through
                 the customer&rsquo;s bank API channel and money moves. Not
-                authorised → the merchant declines, and Humanos blocks at the
+                authorized → the merchant declines, and Humanos blocks at the
                 boundary and triggers real-time step-up authorization.
               </p>
               <div className="istage__facts">
@@ -449,13 +449,13 @@ export function Implementation() {
                   </span>
                 </div>
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Authorised</span>
+                  <span className="istage__fact-k">Authorized</span>
                   <span className="istage__fact-v indigo">
                     ✓ € 23,840.00 · settled
                   </span>
                 </div>
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Not authorised</span>
+                  <span className="istage__fact-k">Not authorized</span>
                   <span className="istage__fact-v red">
                     ✗ merchant declines · Humanos blocks · step-up
                   </span>

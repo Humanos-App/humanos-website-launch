@@ -30,7 +30,7 @@ export function Problem() {
               venue the customer doesn&rsquo;t own — a marketplace checkout,
               an acquirer, a third-party processor — the merchant side has no
               credential to verify, no registry to consult, no way to confirm
-              the action is authorised.
+              the action is authorized.
             </p>
             <div className="problem__chain">
               <b>bank API channel</b>

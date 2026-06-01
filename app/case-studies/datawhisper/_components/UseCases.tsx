@@ -23,7 +23,7 @@ export function UseCases() {
             <div className="uc__body">
               <h3>Disputes &amp; chargebacks</h3>
               <p>
-                Refunds, settlements and goodwill credits, each authorised at
+                Refunds, settlements and goodwill credits, each authorized at
                 the gate and carrying a portable proof.
               </p>
             </div>
@@ -45,7 +45,7 @@ export function UseCases() {
               <h3>High-value payment execution</h3>
               <p>
                 Above an operator-defined threshold, cryptographic proof that
-                a human authorised execution at a specific amount.
+                a human authorized execution at a specific amount.
               </p>
             </div>
             <div className="uc__verify">
@@ -65,7 +65,7 @@ export function UseCases() {
             <div className="uc__body">
               <h3>KYB / KYC &amp; sanctions</h3>
               <p>
-                A signed human authorisation record provides audit-ready
+                A signed human authorization record provides audit-ready
                 evidence for FCA or equivalent review.
               </p>
             </div>

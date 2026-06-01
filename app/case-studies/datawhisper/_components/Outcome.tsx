@@ -1,16 +1,19 @@
 export function Outcome() {
   return (
-    <section className="section" data-screen-label="07 Outcome">
+    <section
+      className="section section--dark"
+      data-screen-label="07 Outcome"
+    >
       <div className="wrap">
         <div className="outc__head">
-          <div className="eyebrow">§ 05 · What it delivers</div>
-          <h2 className="h-section">
-            Provable authorisation,{" "}
+          <div className="eyebrow eyebrow--chalk">§ 05 · What it delivers</div>
+          <h2 className="h-section" style={{ color: "var(--hm-chalk-0)" }}>
+            Provable authorization,{" "}
             <em>by default.</em>
           </h2>
         </div>
 
-        <div className="outc__grid">
+        <div className="outc__grid outc__grid--2col">
           <article className="outc__card">
             <div className="outc__num">
               <b>01</b> · Verified
@@ -48,7 +51,7 @@ export function Outcome() {
             <div className="outc__num">
               <b>04</b> · Portable
             </div>
-            <h3>Authorisation travels with the action.</h3>
+            <h3>Authorization travels with the action.</h3>
             <p>
               Issue once, verify anywhere. The proof is recorded in the
               SmartInsights.CortexOS tamper-evident audit trail, lives

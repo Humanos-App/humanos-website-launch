@@ -11,7 +11,7 @@ export function Solution() {
           </h2>
           <p className="solution__intro">
             Humanos issues a certificate scoped to the purchase — counterparty,
-            amount ceiling, expiry — at Ralio&rsquo;s request and authorised by
+            amount ceiling, expiry — at Ralio&rsquo;s request and authorized by
             the customer. The certificate is cryptographically signed and bound
             to the agent&rsquo;s identity, then verified by the merchant in
             real time before settlement.

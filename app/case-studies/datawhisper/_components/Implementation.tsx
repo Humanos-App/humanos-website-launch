@@ -249,9 +249,9 @@ export function Implementation() {
                 <span>01</span>
               </div>
               <div className="istage__eye">§ 01 · Issue</div>
-              <h3 className="istage__title">A human authorises scope.</h3>
+              <h3 className="istage__title">A human authorizes scope.</h3>
               <p className="istage__lede">
-                A DataWhisper Operations Lead authorises scope, ceiling and
+                A DataWhisper Operations Lead authorizes scope, ceiling and
                 validity. Humanos issues a machine-verifiable{" "}
                 <strong>W3C Verifiable Credential</strong>, signed once and
                 reusable across every case.
@@ -377,7 +377,7 @@ export function Implementation() {
               <div className="istage__eye">§ 04 · Settle</div>
               <h3 className="istage__title">Commit, or step up.</h3>
               <p className="istage__lede">
-                Authorised → SmartInsights.CortexOS commits the resolution.
+                Authorized → SmartInsights.CortexOS commits the resolution.
                 Out of scope — a £45,000 settlement against a £25,000 ceiling
                 — the gate blocks and triggers a real-time step-up.
               </p>
@@ -410,7 +410,7 @@ export function Implementation() {
               <div className="istage__eye">§ 05 · Prove</div>
               <h3 className="istage__title">Anchor the proof.</h3>
               <p className="istage__lede">
-                Each authorised action emits a cryptographic proof, recorded
+                Each authorized action emits a cryptographic proof, recorded
                 in both the SmartInsights.CortexOS tamper-evident audit trail
                 and the independent consent record. Auditors, regulators and
                 partners verify it directly, without reconstructing internal

@@ -12,7 +12,7 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Verifying human authorisation inside regulated AI workflows · DataWhisper × Humanos",
+      "Verifying human authorization inside regulated AI workflows · DataWhisper × Humanos",
   },
   description:
     "DataWhisper's SmartInsights.CortexOS is integrating with Humanos so relevant legally consequential actions an AI agent takes are verified, and proved, before execution. Branded GuardianShield Consent inside CortexOS.",

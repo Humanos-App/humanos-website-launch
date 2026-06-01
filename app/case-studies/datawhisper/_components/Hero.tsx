@@ -23,7 +23,7 @@ export function Hero() {
           system for regulated industries. Humanos integrates as its{" "}
           <strong>external mandate verifier</strong>, branded{" "}
           <strong>GuardianShield Consent</strong>: the layer that lets a
-          SmartInsights.CortexOS agent prove a human authorised an action,
+          SmartInsights.CortexOS agent prove a human authorized an action,
           to any party.
         </p>
 

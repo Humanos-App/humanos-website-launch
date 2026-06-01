@@ -861,9 +861,40 @@ img { display: block; max-width: 100%; }
   max-width: 880px; text-wrap: balance;
 }
 .outc__verdict em { font-style: normal; color: var(--hm-verification); }
+
+/* 2-col outcome grid (BEM modifier; same brand rhythm as base) */
+.outc__grid.outc__grid--2col { grid-template-columns: repeat(2, 1fr); }
+.outc__grid--2col .outc__card,
+.outc__grid--2col .outc__card:nth-child(3n),
+.outc__grid--2col .outc__card:nth-child(3n+1),
+.outc__grid--2col .outc__card:nth-child(3n+2) {
+  padding: 36px 32px 36px 0;
+  border-right: 1px solid var(--hm-line);
+}
+.outc__grid--2col .outc__card:nth-child(2n) {
+  padding-left: 32px; padding-right: 0; border-right: none;
+}
+.outc__grid--2col .outc__card:nth-child(2n+1) {
+  padding-left: 0; padding-right: 32px;
+}
+
+/* Dark-section outcome card overrides (mirrors existing
+   .section--dark .outcomes__pair-card pattern) */
+.section--dark .outc__grid { border-top-color: var(--hm-line-dark); }
+.section--dark .outc__card { border-color: var(--hm-line-dark); }
+.section--dark .outc__card h3 { color: var(--hm-chalk-0); }
+.section--dark .outc__card p { color: var(--hm-chalk-1); }
+.section--dark .outc__num b { color: var(--hm-chalk-0); }
+
 @media (max-width: 900px) {
   .outc__grid { grid-template-columns: 1fr; }
   .outc__card, .outc__card:nth-child(3n), .outc__card:nth-child(3n+1), .outc__card:nth-child(3n+2) {
+    padding: 32px 0; border-right: none;
+  }
+  .outc__grid--2col { grid-template-columns: 1fr; }
+  .outc__grid--2col .outc__card,
+  .outc__grid--2col .outc__card:nth-child(2n),
+  .outc__grid--2col .outc__card:nth-child(2n+1) {
     padding: 32px 0; border-right: none;
   }
 }

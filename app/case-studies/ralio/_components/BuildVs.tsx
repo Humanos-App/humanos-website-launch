@@ -24,15 +24,15 @@ export function BuildVs() {
           {[
             {
               bad: "Trust stays inside the customer-owned channel.",
-              good: "Authorisation is independently verifiable beyond the channel.",
+              good: "Authorization is independently verifiable beyond the channel.",
             },
             {
               bad: "External merchants have no shared way to verify the agent.",
               good: "Merchants verify the mandate directly against Humanos.",
             },
             {
-              bad: "Authorisation is tied to the agent's home environment.",
-              good: "Authorisation is a portable, machine-verifiable certificate.",
+              bad: "Authorization is tied to the agent's home environment.",
+              good: "Authorization is a portable, machine-verifiable certificate.",
             },
             {
               bad: "Each party holds its own audit trail in isolation.",
