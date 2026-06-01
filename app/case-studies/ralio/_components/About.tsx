@@ -50,7 +50,13 @@ export function About() {
               <div className="cust__row">
                 <div className="cust__row-k">Site</div>
                 <div className="cust__row-v">
-                  <a href="#">ralio.co&nbsp;↗</a>
+                  <a
+                    href="https://ralio.co"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ralio.co&nbsp;↗
+                  </a>
                 </div>
               </div>
               <div className="cust__row">

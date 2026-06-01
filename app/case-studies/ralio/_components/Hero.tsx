@@ -46,7 +46,13 @@ export function Hero() {
           <div className="hero__qs">
             <div className="hero__qs-k">Site</div>
             <div className="hero__qs-v">
-              <a href="#">ralio.co&nbsp;↗</a>
+              <a
+                href="https://ralio.co"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ralio.co&nbsp;↗
+              </a>
               <small>Agent runtime · 2026</small>
             </div>
           </div>
