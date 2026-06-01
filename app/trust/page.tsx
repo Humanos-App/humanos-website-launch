@@ -148,7 +148,7 @@ export default function TrustPage() {
               {
                 n: "04",
                 t: "Open standards, no lock-in",
-                d: "Built on W3C Verifiable Credentials, SD-JWT, and OpenID — not proprietary identity infrastructure.",
+                d: "Built on W3C Verifiable Credentials and SD-JWT — not proprietary identity infrastructure.",
                 href: "#standards",
                 more: "See standards",
               },
@@ -415,7 +415,6 @@ export default function TrustPage() {
             {[
               { name: "W3C Verifiable Credentials", sub: "VC 2.0" },
               { name: "SD-JWT", sub: "selective disclosure" },
-              { name: "OpenID ecosystem", sub: "OID4VC · OID4VP" },
               { name: "EU Digital Identity Wallet", sub: "EUDI compatible" },
               { name: "eIDAS 2.0", sub: "alignment" },
             ].map((s) => (
