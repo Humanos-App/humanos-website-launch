@@ -224,21 +224,21 @@ export function Implementation() {
     <section className="section" data-screen-label="06 Implementation">
       <div className="wrap">
         <div className="impl__head">
-          <div className="eyebrow">§ 04 · Implementation</div>
-          <h2 className="h-section">How DataWhisper implemented it.</h2>
+          <div className="eyebrow">§ 04 · How the integration works</div>
+          <h2 className="h-section">Five stages, from mandate to proof.</h2>
           <p className="h-lede">
-            Five stages in chronological order. The animation on the right
-            walks through one dispute case end-to-end — issued by DataWhisper
-            Operations, verified by Humanos at the{" "}
+            The animation on the right walks through one dispute case
+            end-to-end — issued by DataWhisper Operations, verified by
+            Humanos at the SmartInsights.CortexOS{" "}
             <span
               style={{
                 fontFamily: "var(--font-mono)",
                 color: "var(--hm-ink-0)",
               }}
             >
-              GUARDIANSHIELD
+              HITL engine
             </span>{" "}
-            boundary, and committed only after a deterministic yes/no.
+            gate, and committed only after a deterministic yes/no.
           </p>
         </div>
 
@@ -249,12 +249,12 @@ export function Implementation() {
                 <span>01</span>
               </div>
               <div className="istage__eye">§ 01 · Issue</div>
-              <h3 className="istage__title">Define mandate.</h3>
+              <h3 className="istage__title">A human authorises scope.</h3>
               <p className="istage__lede">
-                DataWhisper Operations Lead authorizes scope (dispute
-                resolution), ceiling, and validity. Humanos issues a
-                machine-verifiable mandate — signed once, reusable across
-                every case the agent acts in.
+                A DataWhisper Operations Lead authorises scope, ceiling and
+                validity. Humanos issues a machine-verifiable{" "}
+                <strong>W3C Verifiable Credential</strong>, signed once and
+                reusable across every case.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
@@ -285,10 +285,12 @@ export function Implementation() {
                 <span>02</span>
               </div>
               <div className="istage__eye">§ 02 · Prepare</div>
-              <h3 className="istage__title">Cortex agent prepares action.</h3>
+              <h3 className="istage__title">
+                SmartInsights.CortexOS prepares the action.
+              </h3>
               <p className="istage__lede">
-                The Cortex dispute-resolution agent assembles the proposed
-                resolution — refund, fee adjustment, goodwill credit. It
+                The dispute-resolution Peloton assembles the proposed
+                resolution — refund, fee adjustment, goodwill credit — and
                 attaches the mandate to its outbound action as{" "}
                 <span
                   style={{
@@ -302,9 +304,9 @@ export function Implementation() {
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Agent</span>
+                  <span className="istage__fact-k">Peloton</span>
                   <span className="istage__fact-v">
-                    cortex.dispute.agent
+                    cortex.dispute.peloton
                   </span>
                 </div>
                 <div className="istage__fact">
@@ -329,9 +331,9 @@ export function Implementation() {
                 <span>03</span>
               </div>
               <div className="istage__eye">§ 03 · Verify</div>
-              <h3 className="istage__title">GUARDIANSHIELD verifies.</h3>
+              <h3 className="istage__title">The HITL engine verifies.</h3>
               <p className="istage__lede">
-                Before the resolution commits, GUARDIANSHIELD calls{" "}
+                The HITL engine calls{" "}
                 <span
                   style={{
                     fontFamily: "var(--font-mono)",
@@ -340,32 +342,30 @@ export function Implementation() {
                 >
                   humanos.verify()
                 </span>{" "}
-                directly against the mandate. Identity, scope, counterparty,
-                amount, and validity are checked in 184 ms — deterministic, no
-                LLM in the path.
+                against the mandate. Identity, scope, counterparty, amount
+                and validity are checked in 82 ms — deterministic, no LLM in
+                the path.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
                   <span className="istage__fact-k">Caller</span>
-                  <span className="istage__fact-v">
-                    cortex.guardianshield
-                  </span>
+                  <span className="istage__fact-v">HITL engine</span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Identity</span>
                   <span className="istage__fact-v indigo">
-                    claimant verified · 28 ms
+                    claimant verified · 12 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Amount</span>
                   <span className="istage__fact-v indigo">
-                    £ 4,750 ≤ £ 25,000 · 142 ms
+                    £ 4,750 ≤ £ 25,000 · 58 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">184 ms total</span>
+                  <span className="istage__fact-v">82 ms total</span>
                 </div>
               </div>
             </article>
@@ -375,19 +375,17 @@ export function Implementation() {
                 <span>04</span>
               </div>
               <div className="istage__eye">§ 04 · Settle</div>
-              <h3 className="istage__title">Commit resolution.</h3>
+              <h3 className="istage__title">Commit, or step up.</h3>
               <p className="istage__lede">
-                Authorized → Cortex writes the resolution into the
-                case-of-record. Not authorized → the agent doesn&rsquo;t fail
-                silently or guess. For DataWhisper&rsquo;s out-of-scope
-                attempts (a £45,000 high-risk settlement), Humanos blocks at
-                the GUARDIANSHIELD boundary and triggers a real-time step-up.
+                Authorised → SmartInsights.CortexOS commits the resolution.
+                Out of scope — a £45,000 settlement against a £25,000 ceiling
+                — the gate blocks and triggers a real-time step-up.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Authorized</span>
+                  <span className="istage__fact-k">Committed</span>
                   <span className="istage__fact-v indigo">
-                    £ 4,750.00 · committed
+                    £ 4,750.00 · written to case-of-record
                   </span>
                 </div>
                 <div className="istage__fact">
@@ -410,13 +408,13 @@ export function Implementation() {
                 <span>05</span>
               </div>
               <div className="istage__eye">§ 05 · Prove</div>
-              <h3 className="istage__title">Audit proof.</h3>
+              <h3 className="istage__title">Anchor the proof.</h3>
               <p className="istage__lede">
-                Every authorized action emits a cryptographic Proof — anchored
-                in GUARDIANSHIELD, attached to the case-of-record, portable
-                forever. Auditors, regulators, and banking partners verify the
-                Proof directly against Humanos; nothing reconstructs trails
-                from internal Cortex logs.
+                Each authorised action emits a cryptographic proof, recorded
+                in both the SmartInsights.CortexOS tamper-evident audit trail
+                and the independent consent record. Auditors, regulators and
+                partners verify it directly, without reconstructing internal
+                logs.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
@@ -590,7 +588,7 @@ export function Implementation() {
 
                 <div className="iv-verify">
                   <div className="iv-verify__label">
-                    verify() — called by GUARDIANSHIELD, not by the agent
+                    verify() — called by the HITL engine, not by the agent
                   </div>
                   <div className="iv-verify__code">
                     <span className="iv-c-kw">await</span> humanos.
@@ -600,7 +598,7 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 184 ms · deterministic
+                      // 82 ms · deterministic
                     </span>
                   </div>
                 </div>
@@ -613,8 +611,8 @@ export function Implementation() {
                 </div>
 
                 <div className="impl__viz-phase">
-                  <b>05 · Prove</b> · cryptographic receipt, anchored at
-                  GUARDIANSHIELD
+                  <b>05 · Prove</b> · dual record — CortexOS audit trail +
+                  independent consent record
                 </div>
                 <div className="iv-proof">
                   <div className="iv-proof__bar">

@@ -1,44 +1,36 @@
 import type { Metadata } from "next";
 import { Hero } from "./_components/Hero";
 import { About } from "./_components/About";
-import { Problem } from "./_components/Problem";
+import { SelectivityCallout } from "./_components/SelectivityCallout";
 import { Solution } from "./_components/Solution";
 import { Implementation } from "./_components/Implementation";
 import { Outcome } from "./_components/Outcome";
-import { SystemFlow } from "./_components/SystemFlow";
-import { BuildVs } from "./_components/BuildVs";
-import { NetworkEffect } from "./_components/NetworkEffect";
 import { UseCases } from "./_components/UseCases";
-import { Model } from "./_components/Model";
-import { Category } from "./_components/Category";
+import { Closing } from "./_components/Closing";
 import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Verifying every high-risk AI action inside regulated workflows · Humanos × DataWhisper",
+      "Verifying human authorisation inside regulated AI workflows · DataWhisper × Humanos",
   },
   description:
-    "DataWhisper Cortex orchestrates multi-agent AI for regulated industries. Humanos plugs into GUARDIANSHIELD GOVERNANCE as the authorization stack — verifying every high-risk action before execution, with portable independently verifiable proof afterwards.",
+    "DataWhisper's SmartInsights.CortexOS is integrating with Humanos so relevant legally consequential actions an AI agent takes are verified, and proved, before execution. Branded GuardianShield Consent inside CortexOS.",
   alternates: { canonical: "/case-studies/datawhisper" },
 };
 
 export default function DataWhisperCaseStudyPage() {
   return (
     <div className="cs-page">
-      <CaseStudyBreadcrumb name="Humanos × DataWhisper" slug="datawhisper" />
+      <CaseStudyBreadcrumb name="DataWhisper × Humanos" slug="datawhisper" />
       <Hero />
       <About />
-      <Problem />
+      <SelectivityCallout />
       <Solution />
       <Implementation />
       <Outcome />
-      <SystemFlow />
-      <BuildVs />
-      <NetworkEffect />
       <UseCases />
-      <Model />
-      <Category />
+      <Closing />
     </div>
   );
 }

@@ -2,28 +2,43 @@ export function About() {
   return (
     <section className="section" data-screen-label="02 About">
       <div className="wrap">
-        <div className="eyebrow">§ 01 · About the customer</div>
+        <div className="eyebrow">§ 01 · The customer</div>
         <div className="cust__grid">
           <div className="cust__copy">
             <h2>
-              DataWhisper is the Multi-Agent AI Operating System for regulated
-              industries.
+              The governance-first agentic OS for regulated industries.
             </h2>
             <p>
-              Cortex orchestrates AI agents end-to-end inside enterprise
-              workflows — case handling, dispute resolution, claims, KYC,
-              attestations. Every layer of Cortex is purpose-built so agents
-              can act safely on behalf of humans, not around them.
+              <strong>SmartInsights.CortexOS</strong> orchestrates multi-agent
+              teams, called <strong>Pelotons</strong>, inside enterprise
+              workflows: onboarding, dispute resolution, claims, KYC,
+              attestations. Governance is enforced at the infrastructure
+              boundary, not inside a prompt. Every action passes an{" "}
+              <strong>18-stage tool gateway</strong> and is recorded in a
+              hash-chained, tamper-evident audit trail.
             </p>
             <p>
-              Humanos plugs into the <b>GUARDIANSHIELD GOVERNANCE</b> layer as
-              the dedicated authorization stack — a 3rd-party API that makes
-              authorization a runtime primitive instead of internal
-              application state. Every high-risk action is verified against a
-              signed mandate before execution, and every executed action
-              carries an immutable, portable proof.
+              Inside SmartInsights.CortexOS, the human-in-the-loop (HITL)
+              engine holds legally consequential actions at an approval gate.
+              For the defined class where the approving party is external, or
+              the proof must be independently verifiable, it calls Humanos.{" "}
+              <strong>GuardianShield</strong>, the governance and audit plane,
+              records and proves it — branded inside CortexOS as{" "}
+              <strong>GuardianShield Consent</strong>.
+            </p>
+            <p>
+              Explore SmartInsights.CortexOS at{" "}
+              <a
+                href="https://www.datawhisper.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                datawhisper.co.uk
+              </a>
+              .
             </p>
           </div>
+
           <div className="cust__card">
             <div className="cust__card-head">
               <div className="cust__card-name">DataWhisper</div>
@@ -31,25 +46,37 @@ export function About() {
             </div>
             <div className="cust__rows">
               <div className="cust__row">
-                <div className="cust__row-k">Domain</div>
+                <div className="cust__row-k">Channels</div>
+                <div className="cust__row-v">Channel governance</div>
+              </div>
+              <div className="cust__row">
+                <div className="cust__row-k">Agents</div>
                 <div className="cust__row-v">
-                  Multi-agent AI for regulated industries
+                  Agentic AI Governance · HITL engine
                 </div>
               </div>
               <div className="cust__row">
-                <div className="cust__row-k">Surface area</div>
+                <div className="cust__row-k">Core</div>
                 <div className="cust__row-v">
-                  Disputes · Claims · Compliance · Audit
+                  Orchestration · memory · identity
+                </div>
+              </div>
+              <div className="cust__row">
+                <div className="cust__row-k">Roots</div>
+                <div className="cust__row-v">
+                  GuardianShield · GuardianShield Consent
                 </div>
               </div>
               <div className="cust__row">
                 <div className="cust__row-k">Runtime</div>
-                <div className="cust__row-v mono">cortex.agents.v3</div>
+                <div className="cust__row-v mono">
+                  SmartInsights.CortexOS · v5.2
+                </div>
               </div>
               <div className="cust__row">
                 <div className="cust__row-k">Integration</div>
                 <div className="cust__row-v mono">
-                  humanos.verify() · inside GUARDIANSHIELD
+                  humanos.verify() · one call
                 </div>
               </div>
               <div className="cust__row">
@@ -66,7 +93,7 @@ export function About() {
               </div>
               <div className="cust__row">
                 <div className="cust__row-k">Anchored</div>
-                <div className="cust__row-v mono">2026-05-29 · v1</div>
+                <div className="cust__row-v mono">2026-05-29 · v2</div>
               </div>
             </div>
           </div>

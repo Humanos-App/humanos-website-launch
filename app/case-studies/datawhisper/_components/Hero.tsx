@@ -5,59 +5,55 @@ export function Hero() {
         <div className="hero__meta">
           <span className="hero__meta-mark">Case study</span>
           <span className="hero__meta-sep">·</span>
-          <span>Humanos × DataWhisper</span>
+          <span>DataWhisper × Humanos</span>
           <span className="hero__meta-sep">·</span>
-          <span>cs_datawhisper · v1 · 2026-05-29</span>
+          <span>cs_datawhisper · v2 · anchored 2026-05-29</span>
         </div>
         <h1>
-          DataWhisper&rsquo;s AI agents act inside regulated workflows.
-          <br />
-          <em>
-            Humanos verifies every high-risk action before execution.
-          </em>
+          DataWhisper&rsquo;s agents act autonomously inside regulated
+          workflows.
         </h1>
         <p className="hero__sub">
-          DataWhisper Cortex orchestrates multi-agent AI for regulated
-          industries. Humanos slots into the GUARDIANSHIELD GOVERNANCE
-          layer as the dedicated authorization stack — a 3rd-party API
-          that fully abstracts authorization, making every agent action
-          auditable, immutable, and independently verifiable by any party
-          with the right access.
+          <strong>SmartInsights.CortexOS</strong> is integrating with Humanos
+          so relevant legally consequential actions an agent takes are{" "}
+          <em>verified, and proved, before execution.</em>
+        </p>
+        <p className="hero__sub">
+          SmartInsights.CortexOS is the governance-first agentic operating
+          system for regulated industries. Humanos integrates as its{" "}
+          <strong>external mandate verifier</strong>, branded{" "}
+          <strong>GuardianShield Consent</strong>: the layer that lets a
+          SmartInsights.CortexOS agent prove a human authorised an action,
+          to any party.
         </p>
 
         <div className="hero__quickstats">
           <div className="hero__qs">
-            <div className="hero__qs-k">Domain</div>
+            <div className="hero__qs-k">Customer</div>
             <div className="hero__qs-v">
-              Multi-agent AI for regulated industries
-              <small>Workflow orchestration · Cortex</small>
+              DataWhisper
+              <small>Autonomous AI for regulated industries</small>
             </div>
           </div>
           <div className="hero__qs">
             <div className="hero__qs-k">Surface area</div>
             <div className="hero__qs-v">
-              Disputes · Claims · Compliance · Audit
-              <small>High-risk regulated actions</small>
+              Legally consequential actions
+              <small>Disputes · Settlements · KYC · Attestations</small>
             </div>
           </div>
           <div className="hero__qs">
             <div className="hero__qs-k">Integration</div>
             <div className="hero__qs-v">
               humanos.verify()
-              <small>Authorization stack inside GUARDIANSHIELD</small>
+              <small>External mandate verifier at the HITL gate</small>
             </div>
           </div>
           <div className="hero__qs">
-            <div className="hero__qs-k">Site</div>
+            <div className="hero__qs-k">Runtime</div>
             <div className="hero__qs-v">
-              <a
-                href="https://www.datawhisper.co.uk"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                datawhisper.co.uk&nbsp;↗
-              </a>
-              <small>Multi-Agent AI OS · UK</small>
+              SmartInsights.CortexOS
+              <small>GuardianShield Governance · v5.2</small>
             </div>
           </div>
         </div>

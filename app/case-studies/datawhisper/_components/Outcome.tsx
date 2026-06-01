@@ -3,24 +3,23 @@ export function Outcome() {
     <section className="section" data-screen-label="07 Outcome">
       <div className="wrap">
         <div className="outc__head">
-          <div className="eyebrow">§ 05 · Outcome</div>
+          <div className="eyebrow">§ 05 · What it delivers</div>
           <h2 className="h-section">
-            What you get
-            <br />
-            <em>the moment it&rsquo;s wired in.</em>
+            Provable authorisation,{" "}
+            <em>by default.</em>
           </h2>
         </div>
 
         <div className="outc__grid">
           <article className="outc__card">
             <div className="outc__num">
-              <b>01</b> · Verify
+              <b>01</b> · Verified
             </div>
-            <h3>Every high-risk action verified before execution.</h3>
+            <h3>Verified before execution.</h3>
             <p>
-              Nothing commits on assumption. The verify call is non-optional
-              and inline — at the GUARDIANSHIELD boundary, not after the
-              agent has already acted.
+              Relevant legally consequential actions are verified before
+              they commit. The verify call is inline at the HITL gate, not
+              after the agent has acted.
             </p>
           </article>
           <article className="outc__card">
@@ -29,60 +28,34 @@ export function Outcome() {
             </div>
             <h3>Probabilistic AI, deterministic answer.</h3>
             <p>
-              Cortex agents stay probabilistic where it matters (reasoning,
-              context). The act-or-not boundary becomes a yes/no — no LLM in
-              the verification path.
+              Agents stay probabilistic in reasoning. The act-or-not
+              boundary is a yes or no, with no LLM in the verification
+              path.
             </p>
           </article>
           <article className="outc__card">
             <div className="outc__num">
-              <b>03</b> · Auditable
+              <b>03</b> · External reach
             </div>
-            <h3>Auditability without rebuilding logs.</h3>
+            <h3>Human-in-the-loop beyond the operator.</h3>
             <p>
-              Every action emits a portable Proof, anchored at
-              GUARDIANSHIELD. Auditors query directly; they don&rsquo;t
-              reconstruct from internal traces.
+              Approval and consent can come from external counterparties
+              and data subjects, not only internal operators. The loop
+              extends past DataWhisper&rsquo;s boundary.
             </p>
           </article>
           <article className="outc__card">
             <div className="outc__num">
-              <b>04</b> · Recover
+              <b>04</b> · Portable
             </div>
-            <h3>Recover missing authorization in real time.</h3>
+            <h3>Authorisation travels with the action.</h3>
             <p>
-              Out-of-scope action? Humanos collects approval (SMS, API, KYC),
-              updates the mandate, and resumes execution once authorization
-              is valid. No silent failures.
+              Issue once, verify anywhere. The proof is recorded in the
+              SmartInsights.CortexOS tamper-evident audit trail, lives
+              inside GuardianShield Governance, and is verifiable by any
+              permitted party.
             </p>
           </article>
-          <article className="outc__card">
-            <div className="outc__num">
-              <b>05</b> · Portable
-            </div>
-            <h3>Authorization travels with the action.</h3>
-            <p>
-              Issue once; verify anywhere. The same mandate works across
-              customers, partners, regulators, and external counterparties
-              the agent acts in front of.
-            </p>
-          </article>
-          <article className="outc__card">
-            <div className="outc__num">
-              <b>06</b> · Cortex-native
-            </div>
-            <h3>Authorization becomes a runtime primitive.</h3>
-            <p>
-              Inside GUARDIANSHIELD GOVERNANCE, not a sidecar. Every Cortex
-              workflow inherits portable, immutable, independently verifiable
-              authorization by default.
-            </p>
-          </article>
-        </div>
-
-        <div className="outc__verdict">
-          AI agents execute inside regulated environments —{" "}
-          <em>within provable, independently verifiable boundaries.</em>
         </div>
       </div>
     </section>
