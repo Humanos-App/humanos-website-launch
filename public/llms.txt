@@ -136,7 +136,7 @@ See the full pricing page at https://humanos.tech/pricing.
 - Access control: RBAC, MFA, scoped API keys, rate limiting, IP restrictions.
 - Receipts are anchored on a public blockchain (Base) as **cryptographic hashes and DIDs only** — no personal data is ever written on-chain.
 - Customer data is never used for model training.
-- GDPR-compliant; operated by Unicorn Dimension, Lda (Portugal). Full detail at https://humanos.tech/legal/privacy.
+- GDPR-compliant; operated by Humanos Labs Inc. (Portugal). Full detail at https://humanos.tech/legal/privacy.
 
 ---
 
