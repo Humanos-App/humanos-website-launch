@@ -78,7 +78,7 @@ export function Solution() {
                 <div className="cap-verify-title">
                   humanos.verify() · live capture
                 </div>
-                <div className="cap-verify-tot">74 ms</div>
+                <div className="cap-verify-tot">176 ms</div>
               </div>
 
               <div className="cap-check">
@@ -87,7 +87,7 @@ export function Solution() {
                   <b>identity</b>
                   <i>principal verified</i>
                 </div>
-                <div className="cap-check__ms">9 ms</div>
+                <div className="cap-check__ms">22 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -95,7 +95,7 @@ export function Solution() {
                   <b>scope</b>
                   <i>delta_neutral · reallocate</i>
                 </div>
-                <div className="cap-check__ms">18 ms</div>
+                <div className="cap-check__ms">44 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -103,7 +103,7 @@ export function Solution() {
                   <b>counterparty</b>
                   <i>approved venue list</i>
                 </div>
-                <div className="cap-check__ms">31 ms</div>
+                <div className="cap-check__ms">76 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -111,7 +111,7 @@ export function Solution() {
                   <b>amount</b>
                   <i>within € 250,000 daily ceiling</i>
                 </div>
-                <div className="cap-check__ms">52 ms</div>
+                <div className="cap-check__ms">128 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -119,7 +119,7 @@ export function Solution() {
                   <b>validity</b>
                   <i>mandate active until 2026-05-22</i>
                 </div>
-                <div className="cap-check__ms">63 ms</div>
+                <div className="cap-check__ms">160 ms</div>
               </div>
 
               <div className="cap-verdict">

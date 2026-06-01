@@ -341,7 +341,7 @@ export function Implementation() {
                 </span>{" "}
                 directly against the mandate — not against Ralio&rsquo;s
                 runtime. Identity, scope, counterparty, amount, and validity
-                are checked in 82 ms.
+                are checked in 181 ms.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
@@ -351,18 +351,18 @@ export function Implementation() {
                 <div className="istage__fact">
                   <span className="istage__fact-k">Identity</span>
                   <span className="istage__fact-v indigo">
-                    verified · 12 ms
+                    verified · 27 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Amount</span>
                   <span className="istage__fact-v indigo">
-                    € 23,840 ≤ € 24,000 · 58 ms
+                    € 23,840 ≤ € 24,000 · 134 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">82 ms total</span>
+                  <span className="istage__fact-v">181 ms total</span>
                 </div>
               </div>
             </article>
@@ -595,7 +595,7 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 82 ms · deterministic
+                      // 181 ms · deterministic
                     </span>
                   </div>
                 </div>

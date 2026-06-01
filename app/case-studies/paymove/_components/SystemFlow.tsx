@@ -110,7 +110,7 @@ export function SystemFlow() {
                 humanos.verify(...)
               </text>
               <text x="336" y="96" fill="#7978E9">
-                82ms · deterministic
+                184ms · deterministic
               </text>
 
               <line

@@ -341,7 +341,7 @@ export function Implementation() {
                   humanos.verify()
                 </span>{" "}
                 directly against the mandate. Identity, scope, counterparty,
-                amount, and validity are checked in 82 ms — deterministic, no
+                amount, and validity are checked in 184 ms — deterministic, no
                 LLM in the path.
               </p>
               <div className="istage__facts">
@@ -354,18 +354,18 @@ export function Implementation() {
                 <div className="istage__fact">
                   <span className="istage__fact-k">Identity</span>
                   <span className="istage__fact-v indigo">
-                    claimant verified · 12 ms
+                    claimant verified · 28 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Amount</span>
                   <span className="istage__fact-v indigo">
-                    £ 4,750 ≤ £ 25,000 · 58 ms
+                    £ 4,750 ≤ £ 25,000 · 142 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">82 ms total</span>
+                  <span className="istage__fact-v">184 ms total</span>
                 </div>
               </div>
             </article>
@@ -600,7 +600,7 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 82 ms · deterministic
+                      // 184 ms · deterministic
                     </span>
                   </div>
                 </div>

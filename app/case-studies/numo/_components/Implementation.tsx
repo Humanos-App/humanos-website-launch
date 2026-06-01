@@ -345,7 +345,7 @@ export function Implementation() {
                 >
                   humanos.verify()
                 </span>
-                . Constraints, validity, and revocation are checked in 74 ms.
+                . Constraints, validity, and revocation are checked in 176 ms.
                 Deterministic yes / no.
               </p>
               <div className="istage__facts">
@@ -355,17 +355,17 @@ export function Implementation() {
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Identity</span>
-                  <span className="istage__fact-v indigo">verified · 9 ms</span>
+                  <span className="istage__fact-v indigo">verified · 22 ms</span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Amount</span>
                   <span className="istage__fact-v indigo">
-                    € 50,000 ≤ € 250,000 · 52 ms
+                    € 50,000 ≤ € 250,000 · 128 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">74 ms total</span>
+                  <span className="istage__fact-v">176 ms total</span>
                 </div>
               </div>
             </article>
@@ -597,7 +597,7 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 74 ms · deterministic
+                      // 176 ms · deterministic
                     </span>
                   </div>
                 </div>

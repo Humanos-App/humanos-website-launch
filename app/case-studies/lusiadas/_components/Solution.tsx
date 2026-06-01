@@ -72,7 +72,7 @@ export function Solution() {
                 <div className="cap-verify-title">
                   humanos.verify() · live capture
                 </div>
-                <div className="cap-verify-tot">94 ms</div>
+                <div className="cap-verify-tot">188 ms</div>
               </div>
 
               <div className="cap-check">
@@ -81,7 +81,7 @@ export function Solution() {
                   <b>identity</b>
                   <i>patient KYC verified</i>
                 </div>
-                <div className="cap-check__ms">14 ms</div>
+                <div className="cap-check__ms">30 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -89,7 +89,7 @@ export function Solution() {
                   <b>scope</b>
                   <i>consent.informed · cardiology</i>
                 </div>
-                <div className="cap-check__ms">24 ms</div>
+                <div className="cap-check__ms">52 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -97,7 +97,7 @@ export function Solution() {
                   <b>counterparty</b>
                   <i>physician registered · OM 38291</i>
                 </div>
-                <div className="cap-check__ms">42 ms</div>
+                <div className="cap-check__ms">92 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -105,7 +105,7 @@ export function Solution() {
                   <b>signatures</b>
                   <i>patient + cardiologist signed</i>
                 </div>
-                <div className="cap-check__ms">68 ms</div>
+                <div className="cap-check__ms">150 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -113,7 +113,7 @@ export function Solution() {
                   <b>anchor</b>
                   <i>written to Lusíadas approval ledger</i>
                 </div>
-                <div className="cap-check__ms">86 ms</div>
+                <div className="cap-check__ms">182 ms</div>
               </div>
 
               <div className="cap-verdict">

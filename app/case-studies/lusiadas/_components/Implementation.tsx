@@ -325,31 +325,31 @@ export function Implementation() {
               <p className="istage__lede">
                 Both signers (patient + physician) sign through Humanos.
                 Identity, scope, registered counterparty, signatures, and
-                anchor are checked in 94 ms — deterministic, single API
+                anchor are checked in 188 ms — deterministic, single API
                 across every system in the stack.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
                   <span className="istage__fact-k">Identity</span>
                   <span className="istage__fact-v indigo">
-                    patient KYC · 14 ms
+                    patient KYC · 30 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Counterparty</span>
                   <span className="istage__fact-v indigo">
-                    physician OM 38291 · 42 ms
+                    physician OM 38291 · 92 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Signatures</span>
                   <span className="istage__fact-v indigo">
-                    both signers · 68 ms
+                    both signers · 150 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">94 ms total</span>
+                  <span className="istage__fact-v">188 ms total</span>
                 </div>
               </div>
             </article>
@@ -584,7 +584,7 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 94 ms · deterministic
+                      // 188 ms · deterministic
                     </span>
                   </div>
                 </div>

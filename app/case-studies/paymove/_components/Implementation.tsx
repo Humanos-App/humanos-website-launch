@@ -350,7 +350,7 @@ export function Implementation() {
                   humanos.verify()
                 </span>{" "}
                 directly against the mandate. Signature, counterparty (IBAN),
-                amount, validity, and network membership are checked in 82 ms —
+                amount, validity, and network membership are checked in 184 ms —
                 deterministic, no LLM in the path.
               </p>
               <div className="istage__facts">
@@ -361,18 +361,18 @@ export function Implementation() {
                 <div className="istage__fact">
                   <span className="istage__fact-k">Counterparty</span>
                   <span className="istage__fact-v indigo">
-                    IBAN allowed · 22 ms
+                    IBAN allowed · 52 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Amount</span>
                   <span className="istage__fact-v indigo">
-                    € 5,000 ≤ € 10,000 · 36 ms
+                    € 5,000 ≤ € 10,000 · 88 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">82 ms total</span>
+                  <span className="istage__fact-v">184 ms total</span>
                 </div>
               </div>
             </article>
@@ -612,7 +612,7 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 82 ms · deterministic
+                      // 184 ms · deterministic
                     </span>
                   </div>
                 </div>

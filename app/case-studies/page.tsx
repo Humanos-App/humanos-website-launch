@@ -241,7 +241,7 @@ const STORIES: Story[] = [
     ),
     desc: "DataWhisper orchestrates multi-agent AI for regulated industries. Humanos sits as the authorization stack — every high-risk agent action is verified before execution and produces a clean, portable audit trail.",
     stats: [
-      { num: "94ms", lab: "Median verify latency" },
+      { num: "184ms", lab: "Median verify latency" },
       { num: "100%", lab: "Actions on-mandate" },
       { num: "1", lab: "Audit trail format · forever" },
     ],
@@ -369,7 +369,7 @@ export default function CustomerStoriesPage() {
               </div>
               <div className="hero__stat">
                 <div className="hero__stat-num">
-                  42<span className="unit">ms</span>
+                  184<span className="unit">ms</span>
                 </div>
                 <div className="hero__stat-lab">Median verify latency</div>
               </div>
@@ -416,7 +416,7 @@ export default function CustomerStoriesPage() {
             <div className="proof__grid">
               <div className="proof__item">
                 <div className="proof__num">
-                  42<span className="unit">ms</span>
+                  184<span className="unit">ms</span>
                 </div>
                 <div className="proof__lab">
                   Median verify latency
