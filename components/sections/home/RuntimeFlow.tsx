@@ -3,285 +3,243 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Homepage hero visual — three stacked cards telling one narrative:
+ * Homepage hero visual — two stacked elements:
  *
- *   1. APPROVAL ↔ MANDATE  (flip card)
- *      Front: a chat-style human message from "Elena Ruiz".
- *      Back:  the structured, machine-verifiable mandate that approval
- *             gets transformed into. Flips every 4s.
+ *   1. A flip card on top that toggles every 8s between two views of the
+ *      same authorization:
+ *        - "Human approval"   — Maria Costa signs a casual chat-style note.
+ *        - "Mandate"          — the same authorization as a machine-
+ *                               verifiable mandate.json document.
  *
- *   2. AGENT EXECUTION  (live stream)
- *      The treasury agent attempts random payments; the frontend
- *      approves anything ≤ €10,000 / day and rejects the rest, based
- *      on Card 1's mandate. New attempts arrive on a 1.8s tick.
+ *   2. A dark "flowcard" underneath — the exact diagram from the Trust
+ *      page hero (.flowcard / .flow / .node / .wire / .spark), with
+ *      the four nodes sequenced for the homepage narrative:
+ *        Agent wants to act → humanos.verify() (indigo) →
+ *        Execution (green) → Proof.
  *
- *   3. EXECUTION RECEIPTS  (audit trail)
- *      Each approved attempt from Card 2 produces a portable proof
- *      anyone can verify (Auditor / Regulator / Counterparty). Frames
- *      the "trustless" / "no callback to Humanos" property.
- *
- * Animations are gated by an IntersectionObserver so they don't burn
- * CPU when the hero is scrolled off-screen, and respect
- * prefers-reduced-motion.
+ * Animations are gated by an IntersectionObserver so they stop when the
+ * hero scrolls out of view, and respect prefers-reduced-motion.
  */
-
-type Attempt = {
-  id: number;
-  time: string;
-  amount: number;
-  vendor: string;
-  approved: boolean;
-  proofId: string;
-};
-
-/* Allowed vendors come from the mandate on Card 1; the rest of the
-   pool gets pulled in so the random picker generates a healthy mix of
-   approvals and rejections. */
-const ALLOWED_VENDORS = ["AWS", "Stripe", "Vercel", "Anthropic"] as const;
-const BLOCKED_VENDORS = ["GCP", "Cloudflare", "OpenAI", "Azure"] as const;
-const VENDORS = [...ALLOWED_VENDORS, ...BLOCKED_VENDORS] as const;
-
-const ALLOWED_SET = new Set<string>(ALLOWED_VENDORS);
-const DAILY_LIMIT = 10000;
-
-/** Static seed so SSR + CSR initial paint match; live updates take
- *  over once the page hydrates and is in view. */
-const INITIAL_ATTEMPTS: Attempt[] = [
-  {
-    id: 1,
-    time: "14:22:48Z",
-    amount: 4200,
-    vendor: "AWS",
-    approved: true,
-    proofId: "prf_2FA91",
-  },
-  {
-    id: 2,
-    time: "14:22:31Z",
-    amount: 6800,
-    vendor: "Stripe",
-    approved: true,
-    proofId: "prf_4B22A",
-  },
-  {
-    id: 3,
-    time: "14:22:12Z",
-    amount: 2400,
-    vendor: "GCP",
-    approved: false,
-    proofId: "prf_C18FE",
-  },
-];
-
-function nowISO(): string {
-  return new Date().toISOString().slice(11, 19) + "Z";
-}
-
-function pad5(n: number): string {
-  return n.toString(16).toUpperCase().padStart(5, "0").slice(-5);
-}
-
-function makeAttempt(id: number): Attempt {
-  /* Vendors are picked uniformly across the full pool (allowed +
-     blocked), so the verdict mix tracks the size of each pool. Amount
-     is rounded to the nearest €100 to keep the row tidy; the verdict
-     itself is purely vendor-based — anything not in ALLOWED_VENDORS
-     gets blocked. */
-  const vendor = VENDORS[Math.floor(Math.random() * VENDORS.length)];
-  const raw = 800 + Math.random() * (DAILY_LIMIT - 800);
-  const amount = Math.round(raw / 100) * 100;
-  return {
-    id,
-    time: nowISO(),
-    amount,
-    vendor,
-    approved: ALLOWED_SET.has(vendor),
-    proofId: `prf_${pad5(Math.floor(Math.random() * 0xfffff))}`,
-  };
-}
-
-/* ============================================================ Card 1 */
-
-function ApprovalMandateCard({ inView }: { inView: boolean }) {
-  const [flipped, setFlipped] = useState(false);
-
-  useEffect(() => {
-    if (!inView) return;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduced) return;
-    const id = window.setInterval(() => setFlipped((f) => !f), 4000);
-    return () => window.clearInterval(id);
-  }, [inView]);
-
-  return (
-    <div className={`hf-card hf-flip${flipped ? " is-flipped" : ""}`}>
-      <div className="hf-flip__inner">
-        {/* Front: raw human approval */}
-        <div className="hf-flip__face hf-flip__face--front">
-          <div className="hf-card__head">
-            <span>Human approval</span>
-            <span className="hf-card__head-r">SIGNED</span>
-          </div>
-          <div className="hf-approval">
-            <div className="hf-approval__avatar">ER</div>
-            <div className="hf-approval__body">
-              <div className="hf-approval__meta">
-                <span className="hf-approval__name">Elena Ruiz</span>
-                <span className="hf-approval__time">14:22</span>
-              </div>
-              <div className="hf-approval__msg">
-                Authorize treasury transfers up to{" "}
-                <strong>€10,000 / day</strong> to{" "}
-                <strong>AWS, Stripe, Vercel and Anthropic</strong> until June 1.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Back: structured, machine-verifiable mandate.
-            Reuses the .pshift__mandate visual from the "Authorization
-            layer" section so the two surfaces read as the same artefact. */}
-        <div className="hf-flip__face hf-flip__face--back">
-          <article className="pshift__mandate">
-            <header className="pshift__mandate-head">
-              <span className="pshift__mandate-kind">
-                <span className="dot" />
-                Mandate
-              </span>
-              <span className="pshift__mandate-id">0xA13F…E2C9</span>
-            </header>
-            <div className="pshift__mandate-rows">
-              <span className="pshift__mandate-k">Subject</span>
-              <span className="pshift__mandate-v">treasury@acme</span>
-              <span className="pshift__mandate-k">Constraint</span>
-              <span className="pshift__mandate-v">≤ €10,000 / day</span>
-              <span className="pshift__mandate-k">Vendors</span>
-              <span className="pshift__mandate-v">
-                AWS · Stripe · Vercel · Anthropic
-              </span>
-              <span className="pshift__mandate-k">Expires</span>
-              <span className="pshift__mandate-v">2026-06-01T00:00Z</span>
-            </div>
-            <footer className="pshift__mandate-foot">
-              <span className="ok">Verified by Humanos</span>
-              <span>VC · v2.0</span>
-            </footer>
-          </article>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ============================================================ Card 2 */
-
-function ExecutionStreamCard({ attempts }: { attempts: Attempt[] }) {
-  return (
-    <div className="hf-card hf-exec">
-      <div className="hf-card__head">
-        <span>Agent execution · live</span>
-        <span className="hf-card__head-r">verify()</span>
-      </div>
-      <ul className="hf-exec__list">
-        {attempts.map((a, i) => (
-          <li
-            key={a.id}
-            className={`hf-exec__row hf-exec__row--${
-              a.approved ? "ok" : "no"
-            }${i === 0 ? " is-new" : ""}`}
-          >
-            <span className="hf-exec__amount">
-              €{a.amount.toLocaleString()}
-            </span>
-            <span className="hf-exec__vendor">→ {a.vendor}</span>
-            <span className="hf-exec__verdict">
-              {a.approved ? "● authorized" : "● rejected"}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/* ============================================================ Card 3 */
-
-function AuditTrailCard({ receipts }: { receipts: Attempt[] }) {
-  return (
-    <div className="hf-card hf-audit">
-      <div className="hf-card__head">
-        <span>Execution receipts</span>
-        <span className="hf-card__head-r">Auditable</span>
-      </div>
-      <ul className="hf-audit__list">
-        {receipts.map((r) => (
-          <li key={r.id} className="hf-audit__row">
-            <div className="hf-audit__row-meta">
-              <span className="hf-audit__row-time">{r.time}</span>
-              <span className="hf-audit__row-amount">
-                €{r.amount.toLocaleString()} → {r.vendor}
-              </span>
-            </div>
-            <span className="hf-audit__proof">{r.proofId}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="hf-audit__verifiers">
-        <span className="hf-audit__verifier">Auditor</span>
-        <span className="hf-audit__verifier">Regulator</span>
-        <span className="hf-audit__verifier">Counterparty</span>
-        <span className="hf-audit__verifier-note">→ verify(proof)</span>
-      </div>
-    </div>
-  );
-}
-
-/* ============================================================ Root */
 
 export function RuntimeFlow() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [attempts, setAttempts] = useState<Attempt[]>(INITIAL_ATTEMPTS);
-  const counterRef = useRef<number>(INITIAL_ATTEMPTS.length + 1);
+  const flowRef = useRef<HTMLDivElement>(null);
+  const [isMandate, setIsMandate] = useState(false);
 
-  /* Run the live execution stream whenever the panel is in view. */
+  /* Stamps render as a placeholder until after mount so the SSR
+     and first client paint agree (avoids a hydration mismatch on
+     time-of-day). The approval is "now"; the mandate is one minute
+     later — the mandate is issued just after Maria signs. */
+  const [stamps, setStamps] = useState<{
+    approval: string;
+    mandate: string;
+  } | null>(null);
+
   useEffect(() => {
-    if (!inView) return;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduced) return;
-    const id = window.setInterval(() => {
-      const attempt = makeAttempt(counterRef.current++);
-      setAttempts((prev) => [attempt, ...prev].slice(0, 8));
-    }, 1800);
-    return () => window.clearInterval(id);
-  }, [inView]);
+    const fmt = (d: Date) =>
+      `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+    const now = new Date();
+    const later = new Date(now.getTime() + 60_000);
+    setStamps({ approval: fmt(now), mandate: fmt(later) });
+  }, []);
 
-  /* Pause/resume when the hero scrolls in or out of view. */
+  /* ----- flowcard cascade -----
+     The cascade is gated on isMandate, NOT on IO. While the approval
+     card is showing, the four nodes stay dim — the diagram looks
+     "locked," ready to fire. As soon as the mandate flips in, the
+     trust-page cascade plays (and re-loops every 4.2s for as long as
+     the mandate is visible). When the approval flips back in, the
+     effect cleanup resets every node to its un-lit state. */
+  useEffect(() => {
+    const flow = flowRef.current;
+    if (!flow) return;
+    const items = Array.from(flow.querySelectorAll<HTMLElement>("[data-i]"));
+    const lit = items.filter((n) => n.classList.contains("node"));
+
+    /* Reset and bail out while the approval is showing. */
+    if (!isMandate) {
+      lit.forEach((n) => n.classList.remove("is-lit"));
+      return;
+    }
+
+    /* Respect reduced-motion: keep all nodes lit (no animation). */
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      lit.forEach((n) => n.classList.add("is-lit"));
+      return;
+    }
+
+    let timers: number[] = [];
+    const clear = () => {
+      timers.forEach((t) => window.clearTimeout(t));
+      timers = [];
+    };
+
+    /* One-shot cascade, slow. Initial 600ms lead-in so the flip's
+       0.55s transition completes before the first node lights; then
+       one node per second. Nodes stay lit for the rest of the
+       mandate window — no looping. */
+    lit.forEach((n) => n.classList.remove("is-lit"));
+    lit.forEach((n, i) => {
+      timers.push(
+        window.setTimeout(() => n.classList.add("is-lit"), 600 + i * 1000),
+      );
+    });
+
+    return () => {
+      clear();
+      lit.forEach((n) => n.classList.remove("is-lit"));
+    };
+  }, [isMandate]);
+
+  /* ----- flip card toggle (loop: 2s approval / 8s mandate) -----
+     Chained setTimeout so the duration matches the face that just
+     became visible. State is tracked in a plain local variable
+     (`current`) — calling setIsMandate as a simple value setter
+     avoids React 18 strict-mode double-invocation of state updaters,
+     which would otherwise queue duplicate timeouts and stall the loop. */
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let timeoutId: number | null = null;
+    let current = false; // local mirror of isMandate — starts on approval
+
+    const tick = () => {
+      current = !current;
+      setIsMandate(current);
+      timeoutId = window.setTimeout(tick, current ? 8_000 : 2_000);
+    };
+
     const io = new IntersectionObserver(
-      (entries) => setInView(entries[0]?.isIntersecting ?? false),
+      (entries) => {
+        const visible = entries[0]?.isIntersecting ?? false;
+        if (visible && timeoutId === null) {
+          /* Approval is the initial state — first flip to mandate
+             happens after 2 seconds. */
+          timeoutId = window.setTimeout(tick, 2_000);
+        } else if (!visible && timeoutId !== null) {
+          window.clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+      },
       { threshold: 0.2 },
     );
     io.observe(root);
-    return () => io.disconnect();
+
+    return () => {
+      io.disconnect();
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+    };
   }, []);
 
-  /* Card 2 shows the most recent 2 attempts (approved + rejected).
-     Card 3 shows the 2 most recent APPROVED ones as portable proofs. */
-  const recent = attempts.slice(0, 2);
-  const receipts = attempts.filter((a) => a.approved).slice(0, 2);
-
   return (
-    <div ref={rootRef} className="hf" aria-hidden="true">
-      <ApprovalMandateCard inView={inView} />
-      <ExecutionStreamCard attempts={recent} />
-      <AuditTrailCard receipts={receipts} />
+    <div
+      ref={rootRef}
+      className={`rtflow${isMandate ? " is-mandate" : ""}`}
+      aria-hidden="true"
+    >
+      {/* Flip card — Human approval ↔ Mandate */}
+      <div className={`rtflip${isMandate ? " is-mandate" : ""}`}>
+        <div className="rtflip__inner">
+          {/* Face 1 — Human approval (beige chat note) */}
+          <article className="rtflip__face rtflip__face--approval">
+            <header className="rtflip__head">
+              <span className="rtflip__avatar">MC</span>
+              <span className="rtflip__name">Maria Costa</span>
+            </header>
+            <p className="rtflip__msg">
+              Book my Milan trip, spend up to <strong>€1,200</strong>, maximum{" "}
+              <strong>€250 / night</strong> in hotels, valid until Friday.
+            </p>
+            <footer className="rtflip__foot">
+              <span className="rtflip__signed">✓ SIGNED</span>
+              <span className="rtflip__stamp">{stamps?.approval ?? "—"}</span>
+            </footer>
+          </article>
+
+          {/* Face 2 — Mandate (dark JSON document) */}
+          <article className="rtflip__face rtflip__face--mandate">
+            <header className="rtflip__bar">
+              <span className="rtflip__bar-dot rtflip__bar-dot--red" />
+              <span className="rtflip__bar-dot rtflip__bar-dot--amber" />
+              <span className="rtflip__bar-dot rtflip__bar-dot--green" />
+              <span className="rtflip__bar-name">mandate.json</span>
+              <span className="rtflip__bar-stamp">
+                {stamps?.mandate ?? "—"}
+              </span>
+            </header>
+            <pre className="rtflip__code">
+              <span className="rtj__brace">{"{"}</span>
+              {"\n  "}
+              <span className="rtj__k">&quot;action&quot;</span>
+              <span className="rtj__c">: </span>
+              <span className="rtj__s">&quot;book_travel&quot;</span>
+              <span className="rtj__c">,</span>
+              {"\n  "}
+              <span className="rtj__k">&quot;budget&quot;</span>
+              <span className="rtj__c">: </span>
+              <span className="rtj__n">1200</span>
+              <span className="rtj__c">,</span>
+              {"\n  "}
+              <span className="rtj__k">&quot;hotel_max&quot;</span>
+              <span className="rtj__c">: </span>
+              <span className="rtj__n">250</span>
+              <span className="rtj__c">,</span>
+              {"\n  "}
+              <span className="rtj__k">&quot;expires&quot;</span>
+              <span className="rtj__c">: </span>
+              <span className="rtj__s">&quot;Fri&quot;</span>
+              <span className="rtj__c">,</span>
+              {"\n  "}
+              <span className="rtj__k">&quot;approved_by&quot;</span>
+              <span className="rtj__c">: </span>
+              <span className="rtj__s">&quot;Maria Costa&quot;</span>
+              <span className="rtj__c">,</span>
+              {"\n  "}
+              <span className="rtj__k">&quot;verified&quot;</span>
+              <span className="rtj__c">: </span>
+              <span className="rtj__pill">true</span>
+              {"\n"}
+              <span className="rtj__brace">{"}"}</span>
+            </pre>
+          </article>
+        </div>
+      </div>
+
+      {/* Flow diagram — copied design from /trust hero (.flowcard) */}
+      <div className="flowcard">
+        <div className="flowcard__head">
+          <span className="pip" />
+          Runtime authorization lifecycle
+        </div>
+        <div className="flow" ref={flowRef}>
+          <div className="node" data-i>
+            <span className="pip" />
+            Agent wants to act
+          </div>
+          <div className="wire" data-i>
+            <span className="spark" />
+          </div>
+          <div className="node node--accent" data-i>
+            humanos.verify()
+          </div>
+          <div className="wire" data-i>
+            <span className="spark" />
+          </div>
+          <div className="node node--ok" data-i>
+            <span className="pip" />
+            Execution
+          </div>
+          <div className="wire" data-i>
+            <span className="spark" />
+          </div>
+          <div className="node" data-i>
+            <span className="pip" />
+            Proof
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

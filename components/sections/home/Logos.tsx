@@ -35,7 +35,7 @@ const CELLS: LogoCell[] = [
     href: "https://www.lusiadas.pt/en",
   },
   {
-    tag: "Diagnostics",
+    tag: "Healthcare",
     name: "Joaquim Chaves",
     src: "/assets/logos/joaquim_chaves.svg",
     nameClass: "logos__name--jcs",
@@ -55,7 +55,7 @@ const CELLS: LogoCell[] = [
     name: "Bloodflow",
     src: "/assets/logos/bloodflow.png",
     nameClass: "logos__name--bloodflow",
-    desc: "Vascular care decisions",
+    desc: "Clinical Intelligence Layer",
     href: "https://www.bloodflow.eu/",
   },
   {
@@ -63,7 +63,7 @@ const CELLS: LogoCell[] = [
     name: "medify",
     src: "/assets/logos/medify.png",
     nameClass: "logos__name--medify",
-    desc: "Prescriptions & referrals",
+    desc: "+350 hospitals",
     href: "https://medify.eu/",
   },
   {

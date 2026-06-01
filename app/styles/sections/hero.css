@@ -164,325 +164,340 @@
   display: none;
 }
 
-/* ============== Homepage hero — three-card narrative =================
-   Three stacked cards in the hero's right pane, replacing the older
-   vertical scroll-step diagram:
-     1. .hf-flip   — approval ↔ mandate (flips every 4s)
-     2. .hf-exec   — live agent execution stream
-     3. .hf-audit  — portable execution receipts / audit trail
-   See components/sections/home/RuntimeFlow.tsx for the JSX.
-   ======================================================================= */
-.hf {
-  --hf-bg: #ffffff;
-  --hf-bg-2: #fbfaf7;
-  --hf-line: rgba(17, 17, 17, 0.08);
-  --hf-line-2: rgba(17, 17, 17, 0.14);
-  --hf-ink: #111111;
-  --hf-ink-2: #5a5957;
-  --hf-ink-3: #8c8b89;
-  --hf-accent: #4b49ca;
-  --hf-accent-wash: rgba(75, 73, 202, 0.08);
-  --hf-ok: #1f8a5b;
-  --hf-err: #be3d36;
-
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+/* ============== Runtime authorization flow (hero, vertical) ============== */
+.rtflow {
+  --rt-line: rgba(17, 17, 17, 0.1);
+  --rt-line-soft: rgba(17, 17, 17, 0.06);
+  --rt-text: #111111;
+  --rt-text-2: #5a5957;
+  --rt-text-3: #8c8b89;
+  --rt-accent: #4b49ca;
+  --rt-accent-soft: rgba(75, 73, 202, 0.07);
+  --rt-ok: #2f7a5a;
+  --rt-warn: #b58a2d;
+  --rt-block: #be3d36;
+  --rt-bg: #ffffff;
   width: 100%;
-  max-width: 460px;
+  max-width: 420px;
   margin-left: auto;
+  font-family: var(--font-sans);
+  color: var(--rt-text);
 }
-.hf-card {
+/* ---------- Flow diagram (copied from .trust-page .flowcard) ----------
+   Same DOM + visual language as the Trust page hero diagram. Rules are
+   scoped under .rtflow so they don't collide with .trust-page .* (the
+   trust.css copies remain authoritative on /trust). The trust-vpulse
+   and trust-travel keyframes are defined globally in trust.css and
+   referenced here directly. */
+.rtflow .flowcard {
   position: relative;
-  background: var(--hf-bg);
-  border: 1px solid var(--hf-line);
+  background: var(--hm-authority);
+  border: 1px solid var(--hm-line-dark);
   border-radius: 12px;
-  padding: 16px 18px;
-  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.02);
+  padding: 26px 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -40px rgba(17, 17, 17, 0.4);
+  /* Subtly blurred + dimmed while the approval card is showing — the
+     diagram looks like it's waiting for a mandate. Sharpens as soon as
+     the mandate flips in. */
+  filter: blur(1px);
+  opacity: 0.8;
+  transition:
+    filter 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.hf-card__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
+.rtflow.is-mandate .flowcard {
+  filter: blur(0);
+  opacity: 1;
+}
+.rtflow .flowcard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 30%,
+    rgba(121, 120, 233, 0.16),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+.rtflow .flowcard__head {
+  position: relative;
   font-family: var(--font-mono);
   font-size: 10.5px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--hf-ink-3);
+  color: var(--hm-chalk-2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
 }
-.hf-card__head-r {
-  color: var(--hf-accent);
-  font-weight: 500;
+.rtflow .flowcard__head .pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--hm-verification);
+  animation: trust-vpulse 1.2s ease-in-out infinite;
+}
+.rtflow .flow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.rtflow .flow .node {
+  background: rgba(244, 243, 239, 0.04);
+  border: 1px solid rgba(244, 243, 239, 0.12);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--hm-chalk-0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  letter-spacing: -0.005em;
+  opacity: 0.5;
+  transition:
+    opacity 0.4s,
+    box-shadow 0.4s,
+    border-color 0.4s;
+}
+.rtflow .flow .node .pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--hm-chalk-2);
+}
+.rtflow .flow .node.is-lit {
+  opacity: 1;
+  /* Pop briefly when the node lights — scale up ~6% then back to 1
+     so each step of the cascade reads as a beat. The animation only
+     touches transform, so it composes with the existing opacity /
+     box-shadow / border-color transitions. */
+  animation: rtflow-node-pop 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes rtflow-node-pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.rtflow .flow .node--accent {
+  background: var(--hm-verification);
+  border-color: var(--hm-verification);
+  font-weight: 600;
+}
+.rtflow .flow .node.is-lit.node--accent {
+  box-shadow:
+    0 0 0 6px rgba(75, 73, 202, 0.18),
+    0 12px 40px -12px rgba(75, 73, 202, 0.6);
+}
+.rtflow .flow .node--ok {
+  background: rgba(125, 196, 168, 0.1);
+  border-color: rgba(125, 196, 168, 0.4);
+  color: #93dab2;
+}
+.rtflow .flow .node--ok .pip {
+  background: #7dc4a8;
+}
+.rtflow .flow .wire {
+  width: 1px;
+  height: 26px;
+  margin: 0 auto;
+  background: rgba(244, 243, 239, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+.rtflow .flow .wire .spark {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 40%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--hm-verification),
+    transparent
+  );
+  animation: trust-travel 2.4s linear infinite;
 }
 
-/* ---------- Card 1 · approval ↔ mandate crossfade ---------- */
-.hf-flip {
-  /* The two faces sit in the same box and cross-fade with a small
-     horizontal slide. No 3D — just opacity + translateX. The
-     container has no fixed height; it auto-sizes to whichever face
-     is taller. */
+/* ---------- Flip card (Human approval ↔ Mandate) ----------
+   Cross-fade between two faces of the same authorization. Both faces
+   share a single grid cell so the card auto-sizes to the taller face. */
+.rtflip {
+  width: 100%;
+  margin-bottom: 22px;
   position: relative;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  box-shadow: none;
 }
-.hf-flip__inner {
-  /* CSS grid stacking trick: both faces occupy the same single
-     grid cell, so they layer on top of each other and the cell's
-     height = max(front, back). Drop or add mandate rows and the
-     card height follows. */
+.rtflip__inner {
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
 }
-.hf-flip__face {
+.rtflip__face {
   grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  /* Outgoing face slides left + fades; incoming slides in from the
-     right. ease-in-out keeps the swap calm. */
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  opacity: 1;
+  transform: translateX(0);
   transition:
     opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* Front face = approval message. Plain card surface, same as the
-   other two cards in the hero diagram. */
-.hf-flip__face--front {
-  opacity: 1;
-  transform: translateX(0);
-  padding: 16px 18px;
-  background: var(--hf-bg);
-  border: 1px solid var(--hf-line);
-  border-radius: 12px;
-}
-/* Back face = pshift mandate. Stays transparent + borderless so the
-   embedded .pshift__mandate (dark, with its own indigo pulse) is the
-   visible card and the crossfade still reads as a face swap. */
-.hf-flip__face--back {
+.rtflip__face--mandate {
   opacity: 0;
-  transform: translateX(28px);
-  pointer-events: none;
-  background: transparent;
-  border: 0;
-  padding: 0;
-}
-/* (No height pin needed — the grid cell auto-sizes to the mandate.) */
-/* Flipped state — front exits left, back slides in. */
-.hf-flip.is-flipped .hf-flip__face--front {
-  opacity: 0;
-  transform: translateX(-28px);
+  transform: translateX(20px);
   pointer-events: none;
 }
-.hf-flip.is-flipped .hf-flip__face--back {
+.rtflip.is-mandate .rtflip__face--approval {
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
+}
+.rtflip.is-mandate .rtflip__face--mandate {
   opacity: 1;
   transform: translateX(0);
   pointer-events: auto;
 }
 
-/* approval (front) */
-.hf-approval {
+/* --- Approval face (beige chat note) --- */
+.rtflip__face--approval {
+  background: #e8d6b5;
+  padding: 20px 22px 18px;
+  color: #1a1812;
+  /* Flex column so the message can center vertically in the free
+     space and the footer can pin to the bottom. The face stretches
+     to the grid cell height (matched to the taller mandate face). */
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  /* Front face shares grid cell with the taller mandate back face, so
-     there's free vertical space below the header. Auto margins center
-     the approval block inside that space (header stays pinned at top). */
-  margin: auto 0;
+  flex-direction: column;
 }
-.hf-approval__avatar {
-  flex: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  background: var(--hf-accent-wash);
-  color: var(--hf-accent);
+.rtflip__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+.rtflip__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #cdb78b;
+  color: #4a3f25;
   display: grid;
   place-items: center;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-.hf-approval__body {
-  min-width: 0;
-}
-.hf-approval__meta {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-.hf-approval__name {
   font-size: 13px;
   font-weight: 600;
-  color: var(--hf-ink);
+  letter-spacing: 0.04em;
 }
-.hf-approval__time {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--hf-ink-3);
+.rtflip__name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1812;
+  letter-spacing: -0.005em;
 }
-.hf-approval__msg {
-  font-size: 13.5px;
+.rtflip__msg {
+  font-size: 15px;
   line-height: 1.45;
-  color: var(--hf-ink);
+  color: #1a1812;
+  /* Auto top + bottom margins claim the free vertical space, so the
+     message sits vertically centered between the header and the
+     footer; the footer naturally falls to the bottom of the flex
+     column. Horizontal alignment stays left (default). */
+  margin: auto 0;
 }
-.hf-approval__msg strong {
+.rtflip__msg strong {
   font-weight: 600;
 }
-
-/* (Mandate-back styling now provided by .pshift__mandate from
-   sections/pshift.css — same dark card used in the "Authorization
-   layer" section, embedded inside .hf-flip__face--back.) */
-
-/* ---------- Card 2 · live agent execution ---------- */
-.hf-exec__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-.hf-exec__row {
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
-  gap: 10px;
-  align-items: baseline;
-  padding: 8px 0;
-  border-top: 1px solid var(--hf-line);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-.hf-exec__row:first-child {
-  border-top: 0;
-  padding-top: 2px;
-}
-.hf-exec__amount {
-  color: var(--hf-ink);
-  font-weight: 500;
-}
-.hf-exec__vendor {
-  color: var(--hf-ink-2);
-}
-.hf-exec__verdict {
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.hf-exec__row--ok .hf-exec__verdict {
-  color: var(--hf-ok);
-}
-.hf-exec__row--no .hf-exec__verdict {
-  color: var(--hf-err);
-}
-.hf-exec__row--no .hf-exec__amount {
-  text-decoration: line-through;
-  color: var(--hf-ink-3);
-}
-.hf-exec__row.is-new {
-  animation: hf-row-in 320ms ease-out;
-}
-@keyframes hf-row-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.hf-exec__foot {
-  margin-top: 10px;
-  padding-top: 8px;
-  border-top: 1px solid var(--hf-line);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--hf-ink-3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-/* ---------- Card 3 · audit trail ---------- */
-.hf-audit__list {
-  list-style: none;
-  margin: 0 0 12px;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.hf-audit__row {
+.rtflip__foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 8px 12px;
-  border: 1px solid var(--hf-line);
-  border-radius: 6px;
-  background: var(--hf-bg-2);
 }
-.hf-audit__row-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
+.rtflip__signed {
   font-family: var(--font-mono);
-  font-size: 11px;
-  min-width: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--rt-accent);
+  letter-spacing: 0.08em;
 }
-.hf-audit__row-time {
-  color: var(--hf-ink-3);
-}
-.hf-audit__row-amount {
-  color: var(--hf-ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.hf-audit__proof {
-  flex: none;
+.rtflip__stamp {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--hf-accent);
-  background: var(--hf-accent-wash);
-  padding: 3px 9px;
-  border-radius: 999px;
+  font-size: 12px;
+  color: #8a7e62;
 }
-.hf-audit__verifiers {
-  display: flex;
+
+/* --- Mandate face (dark JSON document) --- */
+.rtflip__face--mandate {
+  background: #1c1f2a;
+  color: #d8dae2;
+  padding: 0;
+}
+.rtflip__bar {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto;
   align-items: center;
   gap: 6px;
-  flex-wrap: wrap;
-  padding: 10px 12px;
-  background: var(--hf-accent-wash);
-  border: 1px solid rgba(75, 73, 202, 0.16);
-  border-radius: 6px;
-  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-.hf-audit__verifier {
+.rtflip__bar-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+.rtflip__bar-dot--red { background: #ff5f57; }
+.rtflip__bar-dot--amber { background: #f4be4f; }
+.rtflip__bar-dot--green { background: #28c941; }
+.rtflip__bar-dot--accent { background: var(--rt-accent); }
+.rtflip__bar-name {
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--hf-ink);
-  padding: 3px 8px;
-  border: 1px solid var(--hf-line-2);
-  background: var(--hf-bg);
+  font-size: 12px;
+  color: #b5b8c4;
+  text-align: center;
+  margin: 0 12px;
+}
+.rtflip__bar-stamp {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #6a6e7d;
+  letter-spacing: 0.02em;
+}
+.rtflip__code {
+  margin: 0;
+  padding: 16px 20px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #d8dae2;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* JSON syntax tokens — keys/strings/numbers/punctuation + the
+   indigo `true` pill that ties the mandate visual back to the brand. */
+.rtj__brace { color: #d8dae2; }
+.rtj__k { color: #5dc4cb; }
+.rtj__s { color: #e89b6e; }
+.rtj__n { color: #e8c569; }
+.rtj__c { color: #6a6e7d; }
+.rtj__pill {
+  display: inline-block;
+  padding: 1px 7px;
   border-radius: 4px;
-}
-.hf-audit__verifier-note {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--hf-accent);
-  margin-left: 2px;
-}
-.hf-audit__foot {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--hf-ok);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  background: var(--rt-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 11.5px;
+  line-height: 1.4;
 }
 
 @media (max-width: 1080px) {
@@ -493,7 +508,7 @@
     grid-template-columns: 1fr;
     gap: 48px;
   }
-  .hf {
+  .rtflow {
     margin-left: 0;
     max-width: 100%;
   }
