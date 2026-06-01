@@ -19,11 +19,11 @@ const CELLS: LogoCell[] = [
     href: "https://coalex.ai",
   },
   {
-    tag: "Insurance · global",
+    tag: "Insurance",
     name: "Fidelidade",
     src: "/assets/logos/fidelidade.png",
     nameClass: "logos__name--fidelidade",
-    desc: "7M customers · 14 countries",
+    desc: "7M customers · 14 geos",
     href: "https://www.fidelidade.pt/en",
   },
   {
@@ -31,7 +31,7 @@ const CELLS: LogoCell[] = [
     name: "Lusíadas",
     src: "/assets/logos/lusiadas.png.webp",
     nameClass: "logos__name--lusiadas",
-    desc: "National private hospital network",
+    desc: "Private hospital network",
     href: "https://www.lusiadas.pt/en",
   },
   {
@@ -47,7 +47,7 @@ const CELLS: LogoCell[] = [
     name: "numo",
     src: "/assets/logos/numo.png",
     nameClass: "logos__name--numo",
-    desc: "Regulated payment rails",
+    desc: "Agentic Treasury Management",
     href: "https://usenumo.com/",
   },
   {
@@ -67,57 +67,49 @@ const CELLS: LogoCell[] = [
     href: "https://medify.eu/",
   },
   {
-    tag: "Safety-critical",
+    tag: "Software House",
     name: "Critical Software",
     nameClass: "logos__name--critical",
-    desc: "Aerospace · defense · rail",
+    desc: "Defense · Finance · Insurance",
     href: "http://criticalsoftware.com/en",
   },
   {
-    tag: "Healthcare tech",
-    name: "Glintt",
-    src: "/assets/logos/glintt.svg",
-    nameClass: "logos__name--glintt",
-    desc: "Hospitals & pharmacies, EU-wide",
-    href: "https://glinttglobal.com/",
-  },
-  {
-    tag: "Cybersecurity",
+    tag: "EHR",
     name: "Ciberbit",
     src: "/assets/logos/ciberbit.png",
     nameClass: "logos__name--ciberbit",
-    desc: "Privileged access · incident response",
+    desc: "100+ hospitals and clinics",
     href: "https://ciberbit.pt",
   },
   {
-    tag: "Industrial ops",
+    tag: "ERP Automation",
     name: "Extraflow",
     src: "/assets/logos/extraflow.svg",
     nameClass: "logos__name--extraflow",
-    desc: "Shop-floor sign-offs at scale",
+    desc: "ERP Automation",
     href: "https://extraflow.ai/en",
   },
   {
-    tag: "Operations",
+    tag: "Agentic Payments",
     name: "Ralio",
     src: "/assets/logos/ralio.png",
     nameClass: "logos__name--ralio",
-    desc: "Audit-grade approval workflows",
+    desc: "B2B Agentic Payments",
     href: "https://ralio.co",
   },
   {
-    tag: "B2C agentic payments",
+    tag: "Agentic Payments",
     name: "Paymove",
     nameClass: "logos__name--ralio",
-    desc: "Consumer agent transactions",
+    desc: "500K+ users across Europe",
     href: "https://www.paymove.io",
   },
   {
-    tag: "Regulated AI · UK",
+    tag: "Agent Orchestrator",
     name: "DataWhisper",
     src: "/assets/logos/data_whisper.webp",
     nameClass: "logos__name--ralio",
-    desc: "Multi-Agent AI Operating System",
+    desc: "Multi-Agent AI System",
     href: "https://www.datawhisper.co.uk",
   },
 ];
@@ -170,7 +162,8 @@ export function Logos() {
     <section className="logos">
       <div className="wrap">
         <div className="logos__caption">
-          Providing the trust layer to the most forward-thinking companies
+          Deployed in 350+ hospitals, clinics, insurers, logistics and fintech
+          players
         </div>
       </div>
       <div className="logos__marquee" role="group" aria-label="Customers">

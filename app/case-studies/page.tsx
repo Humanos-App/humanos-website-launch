@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 import { EXTERNAL_LINKS } from "@/lib/external-links";
-import { StoriesGrid, type Story, type Filter } from "./_components/StoriesGrid";
+import {
+  StoriesGrid,
+  type Story,
+  type Filter,
+} from "./_components/StoriesGrid";
 
 export const metadata: Metadata = {
   title: "Customer stories",
@@ -26,7 +30,7 @@ const STORIES: Story[] = [
     domain: "Agentic finance · Treasury",
     title: (
       <>
-        Agents move capital across treasury, exchanges, and rails —{" "}
+        Agents move capital across treasury, exchanges, and rails{" "}
         <em>verified before execution.</em>
       </>
     ),
@@ -66,7 +70,8 @@ const STORIES: Story[] = [
       ],
       verdict: (
         <>
-          <span className="ok">● authorized</span> — within signed treasury scope
+          <span className="ok">● authorized</span> — within signed treasury
+          scope
         </>
       ),
     },
@@ -118,7 +123,8 @@ const STORIES: Story[] = [
       ],
       verdict: (
         <>
-          <span className="ok">● proof_id</span> prf_R19A2 — verifiable by vendor
+          <span className="ok">● proof_id</span> prf_R19A2 — verifiable by
+          vendor
         </>
       ),
     },
@@ -212,8 +218,7 @@ const STORIES: Story[] = [
           {"  "}
           <span className="tk-prop">signers</span>: [
           <span className="tk-str">&quot;patient&quot;</span>,{" "}
-          <span className="tk-str">&quot;physician&quot;</span>]
-          {"\n})"}
+          <span className="tk-str">&quot;physician&quot;</span>]{"\n})"}
         </>
       ),
       checks: [
@@ -275,7 +280,8 @@ const STORIES: Story[] = [
       ],
       verdict: (
         <>
-          <span className="ok">● authorized</span> — within signed scope, proof emitted
+          <span className="ok">● authorized</span> — within signed scope, proof
+          emitted
         </>
       ),
     },
@@ -296,8 +302,7 @@ export default function CustomerStoriesPage() {
               Customer stories
             </span>
             <h1>
-              Real stories from systems that{" "}
-              <em>verify before they act.</em>
+              Real stories from systems that <em>verify before they act.</em>
             </h1>
             <p className="hero__sub">
               See how hospitals, insurers, fintechs, payment processors, and AI
