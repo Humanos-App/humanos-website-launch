@@ -19,6 +19,9 @@ type Panel = {
   code: ReactNode;
   /** Destination for the "Read case study" CTA. */
   caseStudyHref: string;
+  /** When true, the "Read case study" CTA is rendered as a disabled
+   *  "Coming soon" pill — the case study page isn't published yet. */
+  comingSoon?: boolean;
   visual: {
     status: string;
     sourceLabel: string;
@@ -133,10 +136,7 @@ const PANELS: Panel[] = [
       <>
         <span className="oc__code-kw">await</span> humanos.
         <span className="oc__code-fn">verify</span>(
-        <span className="oc__code-arg">
-          {"{ vendor, amount, mandate }"}
-        </span>
-        )
+        <span className="oc__code-arg">{"{ vendor, amount, mandate }"}</span>)
       </>
     ),
     caseStudyHref: "/case-studies/ralio",
@@ -169,8 +169,7 @@ const PANELS: Panel[] = [
         text: (
           <>
             Agent prepares a spend; Paymove calls{" "}
-            <code className="oc__inline">verify()</code> in the settlement
-            path.
+            <code className="oc__inline">verify()</code> in the settlement path.
           </>
         ),
       },
@@ -186,8 +185,8 @@ const PANELS: Panel[] = [
       {
         text: (
           <>
-            <span className="oc__pill oc__pill--no">Out of scope</span>{" "}
-            fresh approval is collected, then it settles.
+            <span className="oc__pill oc__pill--no">Out of scope</span> fresh
+            approval is collected, then it settles.
           </>
         ),
         modifier: "rej",
@@ -215,7 +214,7 @@ const PANELS: Panel[] = [
   {
     key: "multi",
     num: "04",
-    tabLabel: "Multi-system approvals",
+    tabLabel: "Approvals reused everywhere",
     brandLogo: { src: "/assets/logos/lusiadas.png.webp", alt: "Lusíadas" },
     outcome: (
       <>
@@ -275,9 +274,7 @@ const PANELS: Panel[] = [
     outcome: (
       <>
         <span className="oc__brand">DataWhisper</span>{" "}
-        <span className="oc__muted">
-          uses Humanos to govern agent actions,
-        </span>{" "}
+        <span className="oc__muted">uses Humanos to govern agent actions,</span>{" "}
         every step authorized and written to a clean audit trail
         <span className="oc__muted">.</span>
       </>
@@ -295,8 +292,8 @@ const PANELS: Panel[] = [
       {
         text: (
           <>
-            <span className="oc__pill oc__pill--ok">Authorized</span>{" "}
-            action proceeds and a signed receipt is recorded.
+            <span className="oc__pill oc__pill--ok">Authorized</span> action
+            proceeds and a signed receipt is recorded.
           </>
         ),
         modifier: "auth",
@@ -304,8 +301,8 @@ const PANELS: Panel[] = [
       {
         text: (
           <>
-            <span className="oc__pill oc__pill--no">Out of scope</span>{" "}
-            step-up is collected from the human principal.
+            <span className="oc__pill oc__pill--no">Out of scope</span> step-up
+            is collected from the human principal.
           </>
         ),
         modifier: "rej",
@@ -377,6 +374,7 @@ const PANELS: Panel[] = [
       </>
     ),
     caseStudyHref: "/case-studies",
+    comingSoon: true,
     visual: {
       status: "ERP execution",
       sourceLabel: "AI agent",
@@ -470,12 +468,26 @@ export function Outcomes() {
                 </div>
 
                 <div className="oc__ctas">
-                  <a
-                    className="oc__cta oc__cta--primary"
-                    href={p.caseStudyHref}
-                  >
-                    Read case study <span className="oc__arr">→</span>
-                  </a>
+                  {p.comingSoon ? (
+                    <span
+                      className="oc__cta oc__cta--primary"
+                      aria-disabled="true"
+                      style={{
+                        opacity: 0.5,
+                        cursor: "not-allowed",
+                        pointerEvents: "none",
+                      }}
+                    >
+                      Coming soon
+                    </span>
+                  ) : (
+                    <a
+                      className="oc__cta oc__cta--primary"
+                      href={p.caseStudyHref}
+                    >
+                      Read case study <span className="oc__arr">→</span>
+                    </a>
+                  )}
                   <a
                     className="oc__cta oc__cta--ghost"
                     href={EXTERNAL_LINKS.app}
