@@ -1,4 +1,5 @@
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
+import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 export function Final() {
   return (
@@ -15,7 +16,12 @@ export function Final() {
           demand.
         </p>
         <div className="final__ctas">
-          <a className="btn btn--primary" href="#">
+          <a
+            className="btn btn--primary"
+            href={EXTERNAL_LINKS.app}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Get API key <span className="arrow">→</span>
           </a>
           <TalkWithUs>

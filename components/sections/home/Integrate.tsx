@@ -1,6 +1,6 @@
 import { EXTERNAL_LINKS } from "@/lib/external-links";
 
-const VERIFY_VP_DOC = `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/credentials/verify-vp`;
+const VERIFY_VP_DOC = `${EXTERNAL_LINKS.docs}/api-reference/latest/credentials/verify-vp`;
 
 export function Integrate() {
   return (
@@ -71,7 +71,7 @@ export function Integrate() {
               </h3>
               <p className="ipath__card-sub">
                 Verify actions at runtime. Block, request approval, or resume
-                execution — all in one call.
+                execution. All in one call.
               </p>
 
               <div className="ipath__card-divider" />

@@ -1,8 +1,19 @@
 # Humanos
 
-> Authorization infrastructure for the agentic economy. Humanos turns approvals, permissions and policies into portable runtime authorization that AI agents and external systems can verify before execution — with independently verifiable execution receipts afterwards.
+> Humanos is independent authorization infrastructure for machine-executed financial actions. It turns human approvals into machine-verifiable mandates, lets any system verify whether an AI agent was authorized by a human *before* money moves or a record changes, and emits a portable, tamper-proof receipt that proves it afterwards. Probabilistic agents. Deterministic authorization.
 
 Humanos works alongside existing IAM, RBAC, OAuth, approval workflows and policy systems, making authorization portable and externally verifiable across organizations and autonomous workflows.
+
+Last updated: 2026-06-01
+
+## Developer documentation
+- [Quickstart](https://docs.humanos.tech/essentials/quick-start) — fastest path to your first `humanos.verify()` call
+- [API documentation](https://docs.humanos.tech) — full reference for mandates, verification, and receipts
+- [API base URL](https://api.humanos.tech) — the Humanos API endpoint
+- [App / dashboard](https://app.humanos.tech) — create an account, get an API key, manage mandates
+- [TypeScript / JavaScript SDK](https://www.npmjs.com/package/humanos) — `npm install humanos`
+- [Python SDK](https://pypi.org/project/humanos/) — `pip install humanos`
+- [C# / .NET SDK](https://www.nuget.org/packages/Humanos) — `dotnet add package Humanos`
 
 ## Core pages
 - [Platform](https://humanos.tech/platform): Portable authorization infrastructure — runtime verification, recovery, receipts, cross-system authorization, policy and identity.
@@ -13,11 +24,213 @@ Humanos works alongside existing IAM, RBAC, OAuth, approval workflows and policy
 - [Company](https://humanos.tech/company): Building the authorization layer for autonomous systems.
 
 ## Case studies
-- [Humanos × Numo](https://humanos.tech/case-studies/numo): Verifying every agent-driven financial action before execution.
-- [Humanos × Ralio](https://humanos.tech/case-studies/ralio): Verifiable agent payments beyond closed banking APIs.
-- [Humanos × Lusíadas](https://humanos.tech/case-studies/lusiadas): One approval API across every clinical system.
-- [Humanos × Paymove](https://humanos.tech/case-studies/paymove): Settling verifiably authorized agent payments on the Visa rail.
-- [Humanos × DataWhisper](https://humanos.tech/case-studies/datawhisper): Verifying every high-risk AI action inside regulated workflows.
+- [Humanos × Numo](https://humanos.tech/case-studies/numo) [treasury OS]: Numo agents settled treasury payments in real time, with nothing executed outside approved limits.
+- [Humanos × Ralio](https://humanos.tech/case-studies/ralio) [agentic commerce]: Ralio agents bought from external merchants, with every transaction backed by a verifiable mandate.
+- [Humanos × Lusíadas](https://humanos.tech/case-studies/lusiadas) [regulated healthcare]: Lusíadas acted on patient consent across systems: one approval, enforced everywhere.
+- [Humanos × Paymove](https://humanos.tech/case-studies/paymove) [Visa rail / agent payments]: Paymove settled agent payments on the Visa rail, with every spend verifiably authorized before it moved.
+- [Humanos × DataWhisper](https://humanos.tech/case-studies/datawhisper) [agent governance / audit]: DataWhisper uses Humanos to govern agent actions, with every step authorized and written to a clean audit trail.
+- [Humanos × Extraflow](https://humanos.tech/case-studies/extraflow) [ERP back-office]: Extraflow agents executed operations across ERP systems, with every entry authorized before commit.
 
 ## Legal
 - [Cookie policy](https://humanos.tech/legal/cookies)
+- [Privacy policy](https://humanos.tech/legal/privacy)
+- [Terms of service](https://humanos.tech/legal/terms)
+
+## Contact
+- CEO: per@humanos.tech
+- Sales: wgomes@humanos.tech
+- Product: rodrigo@humanos.tech
+- Technical: tech@humanos.tech
+- Privacy / data protection: privacy@humanos.tech
+- Security incidents: security@humanos.tech
+- Legal: legal@humanos.tech
+
+## Book a call
+- [Book a call](https://calendly.com/wgomeshumanos/30min): Schedule a 30-minute call with the Humanos team.
+
+---
+
+## The core question Humanos answers
+
+When an AI agent or autonomous system initiates a financial action and no human is at the keyboard, who can prove that the specific action was within what a human actually authorized? Humanos answers that question deterministically, at execution time, with a yes or no, and records portable proof of the outcome.
+
+---
+
+## The problem
+
+- Every AI action must be verifiable before execution and defensible afterwards.
+- Today, authorization lives in emails, chats, PDFs, and disconnected workflows, and AI still acts even when no one can prove the decision was within policy or mandate.
+- Without machine-verifiable authorization and a real audit trail, automated decisions become black boxes and legal liabilities instead of legally defensible actions.
+- Traditional payments and financial actions assume the human is present at the moment of execution. Agentic systems break that assumption: the agent acts hours or days later, across merchants, rails, wallets, banks, and systems. Implicit consent does not survive autonomy.
+
+---
+
+## The solution
+
+- Human intent becomes runtime authorization.
+- Humanos turns approvals, contracts, policies, signatures, and delegated authority into runtime authorization systems verify before execution.
+- AI agents, banks, ERPs, auditors and partner APIs can all autonomously verify whether actions are allowed before execution.
+- Built to operate within existing regulatory frameworks, enabling defensible, auditable and compliant autonomous execution.
+
+---
+
+## How Humanos works
+
+The flow is always the same. Only one variable changes: who calls `humanos.verify()` and at what moment.
+
+1. **Human.** The user, admin, or CFO defines authorization once: approve this payment, allow this counterparty, spend up to a limit, delegate within constraints.
+2. **Mandate issued.** Humanos issues a **Mandate**: a structured, machine-readable authorization record bound to the human's identity, scope, and validity window. The mandate is portable — it travels across APIs, agents, workflows, and external platforms.
+3. **Runtime verification.** Any agent, wallet, PSP, scheme, bank API, treasury engine, or rail calls `humanos.verify(action)` and independently checks authorization in real time, before execution. The check is deterministic — scope, limits, freshness, identity, revocation. If authorization fails, the action will never be executed.
+4. **Dynamic recovery.** When an action goes beyond what was approved, Humanos pauses it, collects the missing approval or new limits in real time, and resumes once authorization is verified.
+5. **Receipt emitted.** Every outcome — allowed or blocked — emits a portable **Proof / Receipt** that is anchored, signed, and re-verifiable by any party, forever. You can always prove what was authorized, by whom, and under which rules and policies.
+
+If you can answer *who calls `humanos.verify()` and when*, you understand the integration.
+
+---
+
+## Who uses Humanos
+
+Systems where agents or automated logic initiate high-stakes financial actions with no human at the keyboard, and where execution must be verifiable across multiple systems:
+
+- Treasury operating systems
+- Agentic commerce platforms and merchants
+- AI fintechs
+- Hedge funds and asset managers
+- Crypto and wallet infrastructure
+- Agentic ERP and back-office automation
+- Regulated healthcare consent flows
+
+---
+
+## What Humanos is NOT
+
+- Not a payment rail, scheme, or card network.
+- Not a card issuer, PSP, or money transmitter — Humanos does not hold or move funds.
+- Not a KYC vendor — Humanos consumes KYC signals but does not perform identity proofing.
+- Not a replacement for IAM, RBAC, OAuth, or SSO — those control access; Humanos verifies authority over a specific action.
+- Not a chat-based approval workflow tool — approvals captured anywhere become structured, machine-verifiable mandates.
+- Not an LLM provider, agent framework, or orchestrator — Humanos is the authorization layer those systems call.
+
+---
+
+## Pricing
+
+Pricing scales with **verified execution** — not seats, not users, not agents, not stored data.
+
+- **Free** — $0 forever. 1,000 credits, any mix of mandates issued and runtime verifications. For prototyping autonomous authorization.
+- **Pay-as-you-go** — $0.02 per runtime verification, $0.10 per authorization issued. KYC: $0.89. Payments: Stripe fee + $0.10. For systems executing real autonomous actions in production.
+- **Enterprise** — custom pricing based on volume, latency, and deployment. For regulated autonomous execution where unauthorized actions are unacceptable.
+
+Economics: **One Approval → One Reusable authorization → Infinite runtime verifications.** A single human approval can power unlimited downstream verifications across systems and counterparties.
+
+See the full pricing page at https://humanos.tech/pricing.
+
+---
+
+## Security and data handling
+
+- EU-hosted: primary data storage in AWS eu-west-3 (Paris).
+- Certified to ISO/IEC 27001:2022.
+- Encryption in transit: TLS 1.2+ on all connections.
+- Encryption at rest: AES-256 across primary data stores (MongoDB Atlas native, AWS KMS, Stripe-managed).
+- Access control: RBAC, MFA, scoped API keys, rate limiting, IP restrictions.
+- Receipts are anchored on a public blockchain (Base) as **cryptographic hashes and DIDs only** — no personal data is ever written on-chain.
+- Customer data is never used for model training.
+- GDPR-compliant; operated by Unicorn Dimension, Lda (Portugal). Full detail at https://humanos.tech/legal/privacy.
+
+---
+
+## Standards and ecosystem compatibility
+
+Humanos is designed to operate alongside the emerging standards and protocols for agentic commerce, agent identity, and digital identity, providing the authorization layer that verifies human intent within them.
+
+Compatible with:
+- Visa Intelligent Commerce Connect
+- Mastercard Verifiable Intent
+- Google AP2 (Agent Payments Protocol)
+- Stripe Agentic Commerce
+- x402
+- EU Digital Identity Wallet
+- eIDAS 2.0
+- OAuth 2.0
+- W3C Verifiable Credentials 2.0
+- W3C Decentralized Identifiers (DIDs)
+- Skills.md (agent skill format)
+
+In each case, Humanos sits at the authorization step: it verifies that a human authorized the agent's action before the protocol or rail executes it, and emits a portable, independently verifiable receipt afterwards.
+
+---
+
+## Glossary
+
+- **Mandate** — A structured, machine-readable authorization record bound to a human's identity, scope, constraints, and validity window. Issued when a human defines what is allowed.
+- **`humanos.verify()`** — The runtime check a system calls before executing an action. Returns a deterministic authorized / not-authorized decision against the mandate (scope, limits, freshness, identity, revocation).
+- **Proof / Receipt** — An independently verifiable record emitted for every outcome (allowed or blocked). Anchored, signed, and re-verifiable by any party, forever.
+- **Runtime authorization** — Verification performed at the moment of execution, not assumed from an upstream approval.
+- **Portable authorization** — Authorization that travels across systems and counterparties, verifiable without the system that issued it.
+
+---
+
+## Frequently asked questions
+
+### Product basics
+
+**What is Humanos?**
+AI agents now execute consequential actions. Moving money, signing contracts, approving transactions, releasing data, without a human present at the moment of execution. No one can independently prove the action was actually authorized. Humanos is the authorization infrastructure for agent-executed decisions. We turn human approvals into machine-verifiable mandates, so agents act only within granted authority, with portable, cryptographic proof of every execution. Internal policies and audit logs prove nothing to anyone outside the system.  Counterparties, auditors, and regulators need proof they can verify themselves. Humanos gives them that.
+
+**What problem does Humanos solve?**
+In agentic systems the human is not present when money moves or records change, so there is no reliable way to prove an action was within what a human authorized. Authorization is scattered across emails, chats, PDFs, and internal tools, and AI executes anyway. Humanos provides a deterministic, machine-verifiable authorization check at execution time, plus portable proof afterwards.
+
+**What's a mandate?**
+A mandate is a structured, machine-readable authorization record that a human signs. It is bound to that human's identity and defines the scope of what is allowed: which actions, which counterparties, which limits, and for how long it stays valid. Systems verify proposed actions against the mandate before executing. It is the source of truth for what the human approved.
+
+**What's a portable runtime authorization?**
+"Runtime" means the authorization is checked at the exact moment of execution, not assumed from an approval that happened earlier somewhere else. "Portable" means that same authorization is not locked inside the system that issued it, as it travels across APIs, agents, wallets, rails, banks, and external counterparties, and any of them can independently verify it. Together: authorization that any participant can check in real time, at the point of action, without trusting the system that created it.
+
+**Can one authorization be used across multiple systems?**
+Yes. A Humanos mandate is portable. The same human approval and rules travel across APIs, agents, workflows, rails, and external platforms, and each participant can verify it in real time before execution.
+
+**What does "independently verifiable proof of authorization at the point of execution" mean?**
+"Proof of authorization" is cryptographic evidence of who approved an action, what they approved, under which constraints, and for how long. "At the point of execution" means it is checked at the exact moment the action runs, not inferred from an earlier step. "Independently verifiable" means any party, such as a merchant, bank, auditor, or counterparty, can confirm it directly, without trusting the system that issued it or the agent that acted. It is the difference between assuming an action was allowed and being able to prove it.
+
+**Who should use Humanos?**
+Systems where agents or automated logic initiate high-stakes actions with no human at the keyboard and where execution must be verifiable across multiple systems, like treasury operating systems, crypto and wallet infrastructure, agentic commerce rails, AI fintechs, hedge funds and asset managers, and agentic ERP and back-office automation.
+
+### How Humanos differs
+
+**How is Humanos different from Auth0, Okta, IAM, or RBAC?**
+Those systems control access — whether an identity can reach a resource. Humanos verifies authority over a specific action — whether the action falls within what a human approved. It operates at a different layer and is consumed by execution systems, not login flows. They can coexist: identity confirms who the agent is; Humanos confirms the action was authorized.
+
+**How is Humanos different from an internal policy engine, and why integrate Humanos instead of building my own?**
+How it differs: an internal policy engine enforces rules inside its own system and stores the audit trail in its own logs, which counterparties and auditors have to trust. Humanos produces a portable mandate and receipt that any external party can verify independently, without trusting the originating vendor. Why integrate instead of building your own: a homegrown engine can enforce your rules inside your system, but it cannot produce proof a counterparty, auditor, or regulator will trust without trusting you — which does not survive enterprise diligence or SOC-2 review. Humanos issues signed mandates and per-action receipts verifiable independently of you, works across systems rather than only inside yours, and removes the ongoing engineering burden of maintaining authorization logic as you add execution venues. You build differentiating product; authorization becomes verifiable infrastructure you call.
+
+**Does Humanos replace existing payment rails, MB WAY, 3DS, or Visa?**
+No. Humanos complements them. It adds the missing layer that proves an agent was authorized to act, on top of rails that confirm a user approved a request or that settle the payment.
+
+**What's the difference between Humanos and Mastercard Verifiable Intent?**
+Mastercard Verifiable Intent, launched with Google in March 2026, is a card-network standard that records a tamper-resistant proof of user intent for agent-initiated transactions and is being built into Mastercard Agent Pay; scope enforcement happens at the Mastercard network layer. It is a strong solution for card-based agentic commerce inside the Mastercard ecosystem. Humanos is broader and independent in two ways. First, scope: Humanos verifies any machine-executed financial action — wallet and stablecoin signing, treasury bank-API calls, ERP and accounts-payable actions, multi-rail commerce — not only card purchases. Second, independence and portability: Humanos is not a payment network with a stake in the transaction; its mandates and receipts are verifiable across any rail and any counterparty without trusting a single network operator. In card-commerce flows the two are complementary — a scheme or issuer is one of the points where `humanos.verify()` can be called — but where Verifiable Intent is one network's standard for card transactions, Humanos is the cross-rail, cross-system authorization layer for all autonomous financial execution.
+
+### Integration and SDKs
+
+**How do I integrate Humanos, and is there an SDK?**
+Humanos is an API with SDKs for TypeScript/JavaScript (`npm install humanos`), Python (`pip install humanos`), and C#/.NET (`dotnet add package Humanos`). Create an account and get an API key in the app at app.humanos.tech, then place a single `humanos.verify(action)` call before any high-stakes action. Start with the quickstart at docs.humanos.tech/essentials/quick-start; full reference is at docs.humanos.tech.
+
+**How does an AI agent prove it was authorized to move money?**
+The agent calls `humanos.verify()` before execution. Humanos checks the action against a human-signed mandate (scope, limits, freshness, identity, revocation) and returns a deterministic yes or no. If authorized, the action proceeds and a portable receipt is issued; if not, the action is blocked.
+
+**How do I verify an AI agent is acting within its mandate?**
+Your system calls `humanos.verify(action)` before the action touches a system of record. Humanos runs deterministic checks against the agent's mandate — scope, limits, freshness, identity, and revocation — and returns authorized or not authorized. If the checks fail, the action is never executed. If they pass, the action proceeds and a verifiable receipt is issued.
+
+**How does the agent resume execution after human approval?**
+When an action falls outside the existing mandate, Humanos does not silently fail it. It pauses the action, and allows systems to collect the missing approval or updated limits from the human in real time, and once that authorization is signed and verified, the action resumes automatically. This is dynamic recovery: the agent is never stuck and never executes beyond what was approved.
+
+**What happens if an action exceeds what was approved?**
+Humanos pauses the action, collects the missing approval or new limits in real time, and resumes only once authorization is verified.
+
+### Compliance and audit
+
+**Can we prove to auditors and regulators why each agent transaction was allowed with Humanos?**
+Yes. Humanos is built to operate within existing regulatory frameworks. Every executed action carries a receipt linked to the signed mandate it was checked against. Months later, an auditor can retrieve the signed mandate, confirm the action fell within its scope and limits, see that it was valid at execution time, and verify all of this independently without access to your internal systems or the vendor's logs. Each transaction becomes individually defensible with a cryptographic, auditor-readable record rather than a black box.
+
+**How does an AI agent prove to the merchant that a real person authorized the action?**
+When the action executes, Humanos emits an independently verifiable receipt that is anchored and signed. The merchant — or any PSP, scheme, bank, or counterparty — can check that receipt directly and confirm that a specific human signed a mandate covering this action, within these limits, valid at this time. The merchant does not have to trust the agent, the agent's platform, or any single vendor's database; the proof stands on its own.

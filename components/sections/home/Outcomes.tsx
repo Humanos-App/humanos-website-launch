@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 type Step = {
   text: ReactNode;
@@ -475,7 +476,12 @@ export function Outcomes() {
                   >
                     Read case study <span className="oc__arr">→</span>
                   </a>
-                  <a className="oc__cta oc__cta--ghost" href="#">
+                  <a
+                    className="oc__cta oc__cta--ghost"
+                    href={EXTERNAL_LINKS.app}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Get API key <span className="oc__arr">→</span>
                   </a>
                 </div>

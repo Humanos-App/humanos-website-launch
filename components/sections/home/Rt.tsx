@@ -172,8 +172,9 @@ export function Rt() {
     let io: IntersectionObserver | null = null;
 
     if (recoverWrap) {
-      const nameEl =
-        recoverWrap.querySelector<HTMLElement>("[data-rt-recover-name]");
+      const nameEl = recoverWrap.querySelector<HTMLElement>(
+        "[data-rt-recover-name]",
+      );
       const textEls = Array.from(
         recoverWrap.querySelectorAll<HTMLElement>("[data-rt-recover-text]"),
       );
@@ -255,7 +256,9 @@ export function Rt() {
       <div className="rt__wrap">
         <div className="rt__layout">
           <aside className="rt__left">
-            <div className="rt__eyebrow">The runtime authorization lifecycle</div>
+            <div className="rt__eyebrow">
+              The runtime authorization lifecycle
+            </div>
             <h2 className="rt__title">The full authorization lifecycle.</h2>
             <p className="rt__copy">
               <span className="rt__copy-lead">
@@ -265,7 +268,7 @@ export function Rt() {
                 execution receipts afterwards.
               </span>
               <span className="rt__copy-micro">
-                Use the full runtime stack — or integrate only the layers you
+                Use the full runtime stack or integrate only the layers you
                 need.
               </span>
             </p>
@@ -298,45 +301,50 @@ export function Rt() {
               <div className="rt__stage-num">01 / Portable authorization</div>
               <h3 className="rt__stage-h">Portable runtime authorization.</h3>
               <p className="rt__stage-sub">
-                Turn existing approvals and policies — collected through Humanos
-                or external systems — into runtime authorization AI systems
-                verify before acting.
+                Convert existing approvals, contracts, and policies, collected
+                through Humanos or other systems, into runtime authorization AI
+                systems verify before executing.
               </p>
 
-              <MobileVisualDrawer label="Expand portable authorization" drawerInnerClassName="rt__stage is-active">
-              <div className="rt__stage-visual rt-collect">
-                <div className="rt-collect__pills">
-                  {COLLECT_PILLS.map((p) => (
-                    <span key={p} className="rt-collect__pill">
-                      {p}
-                    </span>
-                  ))}
-                </div>
-                <div className="rt-collect__arrow" aria-hidden="true">
-                  →
-                </div>
-                <div className="rt-obj">
-                  <div className="rt-obj__head">
-                    <span className="rt-obj__label">Mandate</span>
-                    <span className="rt-obj__state">signed</span>
-                  </div>
-                  <div className="rt-obj__rows">
-                    {[
-                      ["scope", "treasury.payments"],
-                      ["limit", "€10k / day"],
-                      ["vendor", "AWS"],
-                      ["subject", "acme-treasury"],
-                      ["expires", "2026-12-31"],
-                    ].map(([k, v]) => (
-                      <div key={k} className="rt-obj__row">
-                        <span className="rt-obj__k">{k}</span>
-                        <span className="rt-obj__v">{v}</span>
-                      </div>
+              <MobileVisualDrawer
+                label="Expand portable authorization"
+                drawerInnerClassName="rt__stage is-active"
+              >
+                <div className="rt__stage-visual rt-collect">
+                  <div className="rt-collect__pills">
+                    {COLLECT_PILLS.map((p) => (
+                      <span key={p} className="rt-collect__pill">
+                        {p}
+                      </span>
                     ))}
                   </div>
-                  <div className="rt-obj__foot">Verified before execution</div>
+                  <div className="rt-collect__arrow" aria-hidden="true">
+                    →
+                  </div>
+                  <div className="rt-obj">
+                    <div className="rt-obj__head">
+                      <span className="rt-obj__label">Mandate</span>
+                      <span className="rt-obj__state">signed</span>
+                    </div>
+                    <div className="rt-obj__rows">
+                      {[
+                        ["scope", "treasury.payments"],
+                        ["limit", "€10k / day"],
+                        ["vendor", "AWS"],
+                        ["subject", "acme-treasury"],
+                        ["expires", "2026-12-31"],
+                      ].map(([k, v]) => (
+                        <div key={k} className="rt-obj__row">
+                          <span className="rt-obj__k">{k}</span>
+                          <span className="rt-obj__v">{v}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="rt-obj__foot">
+                      Verified before execution
+                    </div>
+                  </div>
                 </div>
-              </div>
               </MobileVisualDrawer>
             </article>
 
@@ -344,221 +352,245 @@ export function Rt() {
               <div className="rt__stage-num">02 / Cross-system propagation</div>
               <h3 className="rt__stage-h">Reusable across systems.</h3>
               <p className="rt__stage-sub">
-                Runtime authorization propagates across APIs, agents, workflows,
-                and external systems — allowing every participant to verify what
-                actions are actually allowed before execution.
+                The same human approval and rules travel across APIs, agents,
+                workflows, and external platforms, so every participant can
+                check in real time whether an action is actually allowed before
+                execution.
               </p>
 
-              <MobileVisualDrawer label="Expand cross-system propagation" drawerInnerClassName="rt__stage is-active">
-              <div className="rt__stage-visual rt-prop">
-                <div className="rt-prop__col rt-prop__col--mandate">
-                  <div className="rt-prop__mandate">
-                    <div className="rt-prop__mandate-head">
-                      <span className="rt-prop__mandate-label">Mandate</span>
-                      <span className="rt-prop__mandate-id">auth_pK7g3xN9</span>
-                    </div>
-                    <div className="rt-prop__mandate-body">
-                      <div className="rt-prop__mandate-row">
-                        <span className="rt-prop__mandate-k">scope</span>
-                        <span className="rt-prop__mandate-v">
-                          treasury.payments
+              <MobileVisualDrawer
+                label="Expand cross-system propagation"
+                drawerInnerClassName="rt__stage is-active"
+              >
+                <div className="rt__stage-visual rt-prop">
+                  <div className="rt-prop__col rt-prop__col--mandate">
+                    <div className="rt-prop__mandate">
+                      <div className="rt-prop__mandate-head">
+                        <span className="rt-prop__mandate-label">Mandate</span>
+                        <span className="rt-prop__mandate-id">
+                          auth_pK7g3xN9
                         </span>
                       </div>
-                      <div className="rt-prop__mandate-row">
-                        <span className="rt-prop__mandate-k">limit</span>
-                        <span className="rt-prop__mandate-v">€10k / day</span>
+                      <div className="rt-prop__mandate-body">
+                        <div className="rt-prop__mandate-row">
+                          <span className="rt-prop__mandate-k">scope</span>
+                          <span className="rt-prop__mandate-v">
+                            treasury.payments
+                          </span>
+                        </div>
+                        <div className="rt-prop__mandate-row">
+                          <span className="rt-prop__mandate-k">limit</span>
+                          <span className="rt-prop__mandate-v">€10k / day</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="rt-prop__arrows" aria-hidden="true">
-                  {PROP_SYSTEMS.map((_, i) => (
-                    <div key={i} className="rt-prop__arrow-row">
-                      <svg viewBox="0 0 64 12">
-                        <path d="M0 6 L56 6" />
-                        <polygon points="56,2 64,6 56,10" />
-                      </svg>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="rt-prop__col rt-prop__col--systems">
-                  <ul className="rt-prop__systems">
-                    {PROP_SYSTEMS.map((sys) => (
-                      <li key={sys} className="rt-prop__system">
-                        <span className="rt-prop__system-name">{sys}</span>
-                        <span
-                          className="rt-prop__system-mark"
-                          aria-hidden="true"
-                        >
-                          ✓
-                        </span>
-                      </li>
+                  <div className="rt-prop__arrows" aria-hidden="true">
+                    {PROP_SYSTEMS.map((_, i) => (
+                      <div key={i} className="rt-prop__arrow-row">
+                        <svg viewBox="0 0 64 12">
+                          <path d="M0 6 L56 6" />
+                          <polygon points="56,2 64,6 56,10" />
+                        </svg>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
+
+                  <div className="rt-prop__col rt-prop__col--systems">
+                    <ul className="rt-prop__systems">
+                      {PROP_SYSTEMS.map((sys) => (
+                        <li key={sys} className="rt-prop__system">
+                          <span className="rt-prop__system-name">{sys}</span>
+                          <span
+                            className="rt-prop__system-mark"
+                            aria-hidden="true"
+                          >
+                            ✓
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
               </MobileVisualDrawer>
             </article>
 
             <article className="rt__stage" data-stage="3">
               <div className="rt__stage-num">03 / Verify before execution</div>
-              <h3 className="rt__stage-h">Verify before execution.</h3>
+              <h3 className="rt__stage-h">
+                Every action is checked before it runs.
+              </h3>
               <p className="rt__stage-sub">
-                Every action passes through deterministic checks — scope,
-                freshness, identity, revocation — before it touches a system of
-                record. No verification, no execution.
+                Every action passes deterministic checks, scope, limits,
+                freshness, identity, and revocation before it touches a system
+                of record. If authorization fails, the action will never be
+                executed.
               </p>
 
-              <MobileVisualDrawer label="Expand verify before execution" drawerInnerClassName="rt__stage is-active">
-              <div className="rt__stage-meta" aria-hidden="true">
-                Portable authorization · Verified at runtime · Cross-system
-              </div>
-              <div className="rt__stage-visual rt-verify">
-                <div className="rt-timeline" role="group" aria-label="Runtime verification flow">
-                  <div className="rt-timeline__step">
-                    <div className="rt-timeline__label">01</div>
-                    <div className="rt-timeline__text">Action</div>
+              <MobileVisualDrawer
+                label="Expand verify before execution"
+                drawerInnerClassName="rt__stage is-active"
+              >
+                <div className="rt__stage-meta" aria-hidden="true">
+                  Portable authorization · Verified at runtime · Cross-system
+                </div>
+                <div className="rt__stage-visual rt-verify">
+                  <div
+                    className="rt-timeline"
+                    role="group"
+                    aria-label="Runtime verification flow"
+                  >
+                    <div className="rt-timeline__step">
+                      <div className="rt-timeline__label">01</div>
+                      <div className="rt-timeline__text">Action</div>
+                    </div>
+                    <div className="rt-timeline__arrow" aria-hidden="true">
+                      <svg viewBox="0 0 28 10">
+                        <path d="M0 5 L22 5" />
+                        <polygon points="22,1 28,5 22,9" />
+                      </svg>
+                    </div>
+                    <div className="rt-timeline__step rt-timeline__step--accent">
+                      <div className="rt-timeline__label">02</div>
+                      <div className="rt-timeline__text">
+                        <span className="rt-timeline__fn">
+                          humanos.verify(action)
+                        </span>
+                      </div>
+                    </div>
+                    <div className="rt-timeline__arrow" aria-hidden="true">
+                      <svg viewBox="0 0 28 10">
+                        <path d="M0 5 L22 5" />
+                        <polygon points="22,1 28,5 22,9" />
+                      </svg>
+                    </div>
+                    <div className="rt-timeline__step rt-timeline__step--ok">
+                      <div className="rt-timeline__label">03</div>
+                      <div className="rt-timeline__text">Authorized</div>
+                    </div>
+                    <div className="rt-timeline__arrow" aria-hidden="true">
+                      <svg viewBox="0 0 28 10">
+                        <path d="M0 5 L22 5" />
+                        <polygon points="22,1 28,5 22,9" />
+                      </svg>
+                    </div>
+                    <div className="rt-timeline__step">
+                      <div className="rt-timeline__label">04</div>
+                      <div className="rt-timeline__text">Execute</div>
+                    </div>
                   </div>
-                  <div className="rt-timeline__arrow" aria-hidden="true">
-                    <svg viewBox="0 0 28 10">
-                      <path d="M0 5 L22 5" />
-                      <polygon points="22,1 28,5 22,9" />
-                    </svg>
+
+                  <div className="rt-verify__call">
+                    <span className="fn">humanos.verify</span>({" "}
+                    <span className="arg">action</span>:{" "}
+                    <span className="str">&quot;wire.transfer&quot;</span>,{" "}
+                    <span className="arg">amount</span>:{" "}
+                    <span className="num">4200</span>,{" "}
+                    <span className="arg">vendor</span>:{" "}
+                    <span className="str">&quot;AWS&quot;</span> {"}"})
                   </div>
-                  <div className="rt-timeline__step rt-timeline__step--accent">
-                    <div className="rt-timeline__label">02</div>
-                    <div className="rt-timeline__text">
-                      <span className="rt-timeline__fn">
-                        humanos.verify(action)
+
+                  <div className="rt-verify__states">
+                    <div className="rt-verify__state rt-verify__state--ok">
+                      <span className="rt-verify__state-pip">AUTHORIZED</span>
+                      <span className="rt-verify__state-desc">
+                        Within approved runtime scope. Execution proceeds.
+                      </span>
+                    </div>
+                    <div className="rt-verify__state rt-verify__state--warn">
+                      <span className="rt-verify__state-pip">
+                        COLLECT_MISSING
+                      </span>
+                      <span className="rt-verify__state-desc">
+                        Outside approved scope. Authorization recovered live.
+                      </span>
+                    </div>
+                    <div className="rt-verify__state rt-verify__state--err">
+                      <span className="rt-verify__state-pip">REJECTED</span>
+                      <span className="rt-verify__state-desc">
+                        Constraints violated. Execution blocked before runtime.
                       </span>
                     </div>
                   </div>
-                  <div className="rt-timeline__arrow" aria-hidden="true">
-                    <svg viewBox="0 0 28 10">
-                      <path d="M0 5 L22 5" />
-                      <polygon points="22,1 28,5 22,9" />
-                    </svg>
-                  </div>
-                  <div className="rt-timeline__step rt-timeline__step--ok">
-                    <div className="rt-timeline__label">03</div>
-                    <div className="rt-timeline__text">Authorized</div>
-                  </div>
-                  <div className="rt-timeline__arrow" aria-hidden="true">
-                    <svg viewBox="0 0 28 10">
-                      <path d="M0 5 L22 5" />
-                      <polygon points="22,1 28,5 22,9" />
-                    </svg>
-                  </div>
-                  <div className="rt-timeline__step">
-                    <div className="rt-timeline__label">04</div>
-                    <div className="rt-timeline__text">Execute</div>
-                  </div>
                 </div>
-
-                <div className="rt-verify__call">
-                  <span className="fn">humanos.verify</span>({" "}
-                  <span className="arg">action</span>:{" "}
-                  <span className="str">&quot;wire.transfer&quot;</span>,{" "}
-                  <span className="arg">amount</span>:{" "}
-                  <span className="num">4200</span>,{" "}
-                  <span className="arg">vendor</span>:{" "}
-                  <span className="str">&quot;AWS&quot;</span> {"}"})
-                </div>
-
-                <div className="rt-verify__states">
-                  <div className="rt-verify__state rt-verify__state--ok">
-                    <span className="rt-verify__state-pip">AUTHORIZED</span>
-                    <span className="rt-verify__state-desc">
-                      Within approved runtime scope. Execution proceeds.
-                    </span>
-                  </div>
-                  <div className="rt-verify__state rt-verify__state--warn">
-                    <span className="rt-verify__state-pip">
-                      COLLECT_MISSING
-                    </span>
-                    <span className="rt-verify__state-desc">
-                      Outside approved scope. Authorization recovered live.
-                    </span>
-                  </div>
-                  <div className="rt-verify__state rt-verify__state--err">
-                    <span className="rt-verify__state-pip">REJECTED</span>
-                    <span className="rt-verify__state-desc">
-                      Constraints violated. Execution blocked before runtime.
-                    </span>
-                  </div>
-                </div>
-              </div>
               </MobileVisualDrawer>
             </article>
 
             <article className="rt__stage" data-stage="4">
               <div className="rt__stage-num">04 / Dynamic recovery</div>
-              <h3 className="rt__stage-h">Recover authorization dynamically.</h3>
+              <h3 className="rt__stage-h">
+                Recover authorization dynamically.
+              </h3>
               <p className="rt__stage-sub">
-                When execution falls outside approved limits, Humanos pauses the
-                action, collects what&apos;s missing in real time, and resumes
-                automatically once authorization is verified.
+                When an action goes beyond what was approved, Humanos pauses it,
+                collects the missing approval or new limits in real time, and
+                then resumes once authorization is verified.
               </p>
 
-              <MobileVisualDrawer label="Expand dynamic recovery" drawerInnerClassName="rt__stage is-active">
-              <div className="rt__stage-visual rt-recover-wrap" data-rt-recover>
-                <div className="rt-recover__scenario" aria-hidden="true">
-                  <span className="rt-recover__scenario-eyebrow">Scenario</span>
-                  <span
-                    className="rt-recover__scenario-name"
-                    data-rt-recover-name
-                  >
-                    {RECOVER_SCENARIOS[0].name}
-                  </span>
-                  <span className="rt-recover__scenario-dots">
-                    {RECOVER_SCENARIOS.map((_, i) => (
-                      <span
-                        key={i}
-                        className={`rt-recover__scenario-dot${i === 0 ? " is-on" : ""}`}
-                      />
-                    ))}
-                  </span>
-                </div>
-                <div className="rt-recover">
-                  {RECOVER_SCENARIOS[0].rows.map((row, i) => {
-                    const modifiers: Record<number, string> = {
-                      1: " rt-recover__step--warn",
-                      2: " rt-recover__step--accent",
-                      3: " rt-recover__step--ok",
-                      4: " rt-recover__step--ok",
-                    };
-                    const marks = [
-                      "action",
-                      "paused",
-                      "recovering",
-                      "authorized",
-                      "resumed",
-                    ];
-                    return (
-                      <div
-                        key={i}
-                        className={`rt-recover__step${modifiers[i] ?? ""}`}
-                        data-rt-recover-row={i}
-                      >
-                        <span className="rt-recover__step-num">
-                          0{i + 1}
-                        </span>
+              <MobileVisualDrawer
+                label="Expand dynamic recovery"
+                drawerInnerClassName="rt__stage is-active"
+              >
+                <div
+                  className="rt__stage-visual rt-recover-wrap"
+                  data-rt-recover
+                >
+                  <div className="rt-recover__scenario" aria-hidden="true">
+                    <span className="rt-recover__scenario-eyebrow">
+                      Scenario
+                    </span>
+                    <span
+                      className="rt-recover__scenario-name"
+                      data-rt-recover-name
+                    >
+                      {RECOVER_SCENARIOS[0].name}
+                    </span>
+                    <span className="rt-recover__scenario-dots">
+                      {RECOVER_SCENARIOS.map((_, i) => (
                         <span
-                          className="rt-recover__step-text"
-                          data-rt-recover-text
+                          key={i}
+                          className={`rt-recover__scenario-dot${i === 0 ? " is-on" : ""}`}
+                        />
+                      ))}
+                    </span>
+                  </div>
+                  <div className="rt-recover">
+                    {RECOVER_SCENARIOS[0].rows.map((row, i) => {
+                      const modifiers: Record<number, string> = {
+                        1: " rt-recover__step--warn",
+                        2: " rt-recover__step--accent",
+                        3: " rt-recover__step--ok",
+                        4: " rt-recover__step--ok",
+                      };
+                      const marks = [
+                        "action",
+                        "paused",
+                        "recovering",
+                        "authorized",
+                        "resumed",
+                      ];
+                      return (
+                        <div
+                          key={i}
+                          className={`rt-recover__step${modifiers[i] ?? ""}`}
+                          data-rt-recover-row={i}
                         >
-                          {row}
-                        </span>
-                        <span className="rt-recover__step-mark">
-                          {marks[i]}
-                        </span>
-                      </div>
-                    );
-                  })}
+                          <span className="rt-recover__step-num">0{i + 1}</span>
+                          <span
+                            className="rt-recover__step-text"
+                            data-rt-recover-text
+                          >
+                            {row}
+                          </span>
+                          <span className="rt-recover__step-mark">
+                            {marks[i]}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
               </MobileVisualDrawer>
             </article>
 
@@ -566,55 +598,59 @@ export function Rt() {
               <div className="rt__stage-num">05 / Execution receipts</div>
               <h3 className="rt__stage-h">Portable execution receipts.</h3>
               <p className="rt__stage-sub">
-                Every action emits independently verifiable proof — anchored,
-                signed, and re-verifiable by any party that needs to attest to
-                what happened.
+                Each executed action emits an independently verifiable receipt,
+                anchored, signed, and re-verifiable by any party, so you can
+                always prove what was authorized, by whom, and under which rules
+                and policies.
               </p>
 
-              <MobileVisualDrawer label="Expand execution receipts" drawerInnerClassName="rt__stage is-active">
-              <div className="rt__stage-visual rt-proof">
-                <div className="rt-proof__receipt">
-                  <div className="rt-proof__head">
-                    <span className="rt-proof__label">Execution receipt</span>
-                    <span className="rt-proof__seal">Ed25519 · verified</span>
+              <MobileVisualDrawer
+                label="Expand execution receipts"
+                drawerInnerClassName="rt__stage is-active"
+              >
+                <div className="rt__stage-visual rt-proof">
+                  <div className="rt-proof__receipt">
+                    <div className="rt-proof__head">
+                      <span className="rt-proof__label">Execution receipt</span>
+                      <span className="rt-proof__seal">Ed25519 · verified</span>
+                    </div>
+                    <div className="rt-proof__rows">
+                      {[
+                        ["action", "wire.transfer"],
+                        ["amount", "€4,200"],
+                        ["auth_id", "auth_pK7g3xN9"],
+                        ["timestamp", "2026-04-12T14:23:08Z"],
+                        ["signature", "0x4f8a…c2e1"],
+                        ["hash", "sha256:9f3c…8b41"],
+                      ].map(([k, v]) => (
+                        <div key={k} className="rt-proof__row">
+                          <span className="rt-proof__k">{k}</span>
+                          <span className="rt-proof__v">{v}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="rt-proof__rows">
-                    {[
-                      ["action", "wire.transfer"],
-                      ["amount", "€4,200"],
-                      ["auth_id", "auth_pK7g3xN9"],
-                      ["timestamp", "2026-04-12T14:23:08Z"],
-                      ["signature", "0x4f8a…c2e1"],
-                      ["hash", "sha256:9f3c…8b41"],
-                    ].map(([k, v]) => (
-                      <div key={k} className="rt-proof__row">
-                        <span className="rt-proof__k">{k}</span>
-                        <span className="rt-proof__v">{v}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
-                <div className="rt-proof__verifiers">
-                  <div className="rt-proof__verifiers-label">
-                    Independently verifiable by
-                  </div>
-                  <div className="rt-proof__verifiers-row">
-                    {PROOF_VERIFIERS.map((v) => (
-                      <span key={v} className="rt-proof__verifier">
-                        {v}
+                  <div className="rt-proof__verifiers">
+                    <div className="rt-proof__verifiers-label">
+                      Independently verifiable by
+                    </div>
+                    <div className="rt-proof__verifiers-row">
+                      {PROOF_VERIFIERS.map((v) => (
+                        <span key={v} className="rt-proof__verifier">
+                          {v}
+                        </span>
+                      ))}
+                      <span className="rt-proof__verifier rt-proof__verifier--note">
+                        anyone with the public key
                       </span>
-                    ))}
-                    <span className="rt-proof__verifier rt-proof__verifier--note">
-                      anyone with the public key
-                    </span>
+                    </div>
                   </div>
-                </div>
 
-                <p className="rt-proof__caption">
-                  No callback to Humanos required.
-                </p>
-              </div>
+                  <p className="rt-proof__caption">
+                    No callback to Humanos required.
+                  </p>
+                </div>
               </MobileVisualDrawer>
             </article>
           </div>

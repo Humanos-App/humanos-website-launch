@@ -280,58 +280,6 @@ const STORIES: Story[] = [
       ),
     },
   },
-  {
-    cat: "infra",
-    name: "Coalex",
-    status: "In review",
-    domain: "Agentic governance · Oversight",
-    title: (
-      <>
-        Governance agents authorize every privileged operation —{" "}
-        <em>against per-tenant mandates.</em>
-      </>
-    ),
-    desc: "Coalex runs governance automation across enterprise tenants. Humanos verifies every privileged operation against the issuing tenant's mandate, at platform throughput, before it executes.",
-    stats: [
-      { num: "10K+", lab: "Verifications / min" },
-      { num: "100%", lab: "Scoped per tenant" },
-      { num: "0", lab: "Cross-tenant escalations" },
-    ],
-    href: "#",
-    cta: "Story coming soon",
-    verify: {
-      chip: "verify · ops.privileged",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;coalex-platform&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;ops.privileged&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">tenant</span>:{" "}
-          <span className="tk-str">&quot;tnt_8821&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">op</span>:{" "}
-          <span className="tk-str">&quot;rotate-keys&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · coalex-platform",
-        "tenant matched · tnt_8821",
-        "constraints ok · per-tenant mandate",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within tenant mandate
-        </>
-      ),
-    },
-  },
 ];
 
 export default function CustomerStoriesPage() {

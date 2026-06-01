@@ -3,7 +3,6 @@ import { Hero } from "./_components/Hero";
 import { Outcomes } from "./_components/Outcomes";
 import { Industries } from "./_components/Industries";
 import { HowItWorks } from "./_components/HowItWorks";
-import { CaseStudies } from "./_components/CaseStudies";
 import { FinalCta } from "./_components/FinalCta";
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default function UseCasesPage() {
       <Outcomes />
       <Industries />
       <HowItWorks />
-      <CaseStudies />
       <FinalCta />
     </main>
   );

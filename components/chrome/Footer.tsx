@@ -1,5 +1,4 @@
 import { EXTERNAL_LINKS } from "@/lib/external-links";
-import { ConsentSettingsLink } from "@/components/consent/ConsentSettingsLink";
 
 type FooterLink = { label: string; href: string };
 type FooterColumn = {
@@ -7,15 +6,15 @@ type FooterColumn = {
   links: FooterLink[];
 };
 
-/* Deep links into docs.humanos.id used in multiple footer columns. Kept
+/* Deep links into docs.humanos.tech used in multiple footer columns. Kept
    in one place so we can flip the API version when it bumps. */
 const DOCS = {
   root: EXTERNAL_LINKS.docs,
   quickstart: `${EXTERNAL_LINKS.docs}/essentials/quick-start`,
   webhooks: `${EXTERNAL_LINKS.docs}/essentials/webhooks-intro`,
-  verifyVp: `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/credentials/verify-vp`,
-  createRequest: `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/requests/create-request`,
-  revokeCredential: `${EXTERNAL_LINKS.docs}/api-reference/2026-05-17/credentials/revoke-credential`,
+  verifyVp: `${EXTERNAL_LINKS.docs}/api-reference/latest/credentials/verify-vp`,
+  createRequest: `${EXTERNAL_LINKS.docs}/api-reference/latest/requests/create-request`,
+  revokeCredential: `${EXTERNAL_LINKS.docs}/api-reference/latest/credentials/revoke-credential`,
 };
 
 const SDKS = {
@@ -65,17 +64,15 @@ const COLUMNS: FooterColumn[] = [
       { label: "Customers", href: "/case-studies" },
       { label: "Trust", href: "/trust" },
       { label: "Talk with us", href: EXTERNAL_LINKS.calendly },
+      { label: "Privacy", href: "/legal/privacy" },
+      { label: "Terms", href: "/legal/terms" },
     ],
   },
   {
-    title: "Trust",
+    title: "Socials",
     links: [
-      { label: "Trust overview", href: "/trust" },
-      { label: "Why verify", href: "/trust#before" },
-      { label: "VIA Protocol", href: "/trust#via" },
-      { label: "Open standards", href: "/trust#standards" },
-      { label: "Regulated systems", href: "/trust#regulated" },
-      { label: "Cookies", href: "/legal/cookies" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/humanosai/" },
+      { label: "X", href: "https://x.com/humanosai" },
     ],
   },
 ];
@@ -131,11 +128,6 @@ export function Footer() {
                   </a>
                 );
               })}
-              {col.title === "Trust" && (
-                <ConsentSettingsLink className="footer__col-link-button">
-                  Cookie settings
-                </ConsentSettingsLink>
-              )}
             </div>
           ))}
         </div>

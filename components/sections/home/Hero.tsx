@@ -201,7 +201,7 @@ export function Hero() {
             Allow systems to verify portable authorization before execution and
             recover missing approval in real time.{" "}
             <strong>
-              Ensure AI only acts within approved limits — and generate
+              Ensure AI only acts within approved limits and generate
               independently verifiable execution receipts afterwards.
             </strong>
           </p>

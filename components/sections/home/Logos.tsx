@@ -162,7 +162,7 @@ export function Logos() {
     <section className="logos">
       <div className="wrap">
         <div className="logos__caption">
-          Loved by startups and companies with billions in revenue
+          Providing the trust layer to the most forward-thinking companies
         </div>
       </div>
       <div className="logos__marquee" role="group" aria-label="Customers">

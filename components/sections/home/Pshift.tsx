@@ -11,7 +11,15 @@ const SYSTEMS = [
   { name: "Partner API", meta: "Verifier" },
 ];
 
-const REGS = ["ISO 27001", "DORA", "NIS2", "EU AI Act", "GDPR", "HIPAA", "eIDAS 2.0"];
+const REGS = [
+  "ISO 27001",
+  "DORA",
+  "NIS2",
+  "EU AI Act",
+  "GDPR",
+  "HIPAA",
+  "eIDAS 2.0",
+];
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
@@ -38,7 +46,8 @@ export function Pshift() {
 
     let issuePath: SVGPathElement | null = null;
     let issueLen = 0;
-    let outWires: { path: SVGPathElement; len: number; sysEl: HTMLElement }[] = [];
+    let outWires: { path: SVGPathElement; len: number; sysEl: HTMLElement }[] =
+      [];
 
     function build() {
       if (!viz || !svg || !wiresG || !signalsG || !chat || !mandate) return;
@@ -97,7 +106,10 @@ export function Pshift() {
       onDone?: () => void,
     ) {
       if (!signalsG) return;
-      const dot = document.createElementNS(SVG_NS, "circle") as SVGCircleElement;
+      const dot = document.createElementNS(
+        SVG_NS,
+        "circle",
+      ) as SVGCircleElement;
       dot.setAttribute("r", "2.5");
       dot.setAttribute("class", "pshift__signal");
       signalsG.appendChild(dot);
@@ -188,106 +200,109 @@ export function Pshift() {
             execution.
           </p>
           <p className="pshift__kicker">
-            Let systems autonomously verify whether actions are allowed{" "}
+            AI agents, banks, ERPs, auditors and partner APIs, all can
+            autonomously verify whether actions are allowed{" "}
             <em>before execution</em>.
           </p>
         </div>
 
         <MobileVisualDrawer label="Expand the authorization layer">
-        <div className="pshift__viz" ref={vizRef}>
-          <svg
-            className="pshift__svg"
-            ref={svgRef}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <g ref={wiresRef} />
-            <g ref={signalsRef} />
-          </svg>
+          <div className="pshift__viz" ref={vizRef}>
+            <svg
+              className="pshift__svg"
+              ref={svgRef}
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <g ref={wiresRef} />
+              <g ref={signalsRef} />
+            </svg>
 
-          <div className="pshift__left">
-            <span className="pshift__col-label">Existing approval</span>
-            <div className="pshift__chat" ref={chatRef}>
-              <div className="pshift__chat-avatar" aria-hidden="true">
-                ER
+            <div className="pshift__left">
+              <span className="pshift__col-label">Existing approval</span>
+              <div className="pshift__chat" ref={chatRef}>
+                <div className="pshift__chat-avatar" aria-hidden="true">
+                  ER
+                </div>
+                <div className="pshift__chat-meta">
+                  <span className="pshift__chat-name">Elena Ruiz</span>
+                  <span className="pshift__chat-time">14:22</span>
+                </div>
+                <p className="pshift__chat-msg">
+                  Authorize treasury transfers up to €10,000 / day to AWS until
+                  June 1.
+                </p>
+                <div className="pshift__chat-foot">
+                  <span className="tick">✔</span> Signed
+                </div>
               </div>
-              <div className="pshift__chat-meta">
-                <span className="pshift__chat-name">Elena Ruiz</span>
-                <span className="pshift__chat-time">14:22</span>
-              </div>
-              <p className="pshift__chat-msg">
-                Authorize treasury transfers up to €10,000 / day to AWS until
-                June 1.
-              </p>
-              <div className="pshift__chat-foot">
-                <span className="tick">✔</span> Signed
-              </div>
+            </div>
+
+            <div className="pshift__center">
+              <span className="pshift__col-label pshift__col-label--accent">
+                Live mandate
+              </span>
+              <article className="pshift__mandate" ref={mandateRef}>
+                <header className="pshift__mandate-head">
+                  <span className="pshift__mandate-kind">
+                    <span className="dot" />
+                    Mandate
+                  </span>
+                  <span className="pshift__mandate-id">0xA13F…E2C9</span>
+                </header>
+                <div className="pshift__mandate-rows">
+                  <span className="pshift__mandate-k">Subject</span>
+                  <span className="pshift__mandate-v">treasury@acme</span>
+                  <span className="pshift__mandate-k">Scope</span>
+                  <span className="pshift__mandate-v">transfer.usd</span>
+                  <span className="pshift__mandate-k">Constraint</span>
+                  <span className="pshift__mandate-v">≤ €10,000 / day</span>
+                  <span className="pshift__mandate-k">Signatures</span>
+                  <span className="pshift__mandate-v">2 of 2</span>
+                  <span className="pshift__mandate-k">Expires</span>
+                  <span className="pshift__mandate-v">2026-06-01T00:00Z</span>
+                </div>
+                <footer className="pshift__mandate-foot">
+                  <span className="ok">Verified by Humanos</span>
+                  <span>VC · v2.0</span>
+                </footer>
+              </article>
+            </div>
+
+            <div className="pshift__right">
+              <span className="pshift__col-label">
+                Verified before execution
+              </span>
+              <ul className="pshift__systems">
+                {SYSTEMS.map((s) => (
+                  <li key={s.name} className="pshift__system" data-pshift-sys>
+                    <span className="pshift__system-name">{s.name}</span>
+                    <span className="pshift__system-meta">{s.meta}</span>
+                    <span className="pshift__system-ring" />
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className="pshift__center">
-            <span className="pshift__col-label pshift__col-label--accent">
-              Live mandate
-            </span>
-            <article className="pshift__mandate" ref={mandateRef}>
-              <header className="pshift__mandate-head">
-                <span className="pshift__mandate-kind">
-                  <span className="dot" />
-                  Mandate
-                </span>
-                <span className="pshift__mandate-id">0xA13F…E2C9</span>
-              </header>
-              <div className="pshift__mandate-rows">
-                <span className="pshift__mandate-k">Subject</span>
-                <span className="pshift__mandate-v">treasury@acme</span>
-                <span className="pshift__mandate-k">Scope</span>
-                <span className="pshift__mandate-v">transfer.usd</span>
-                <span className="pshift__mandate-k">Constraint</span>
-                <span className="pshift__mandate-v">≤ €10,000 / day</span>
-                <span className="pshift__mandate-k">Signatures</span>
-                <span className="pshift__mandate-v">2 of 2</span>
-                <span className="pshift__mandate-k">Expires</span>
-                <span className="pshift__mandate-v">2026-06-01T00:00Z</span>
-              </div>
-              <footer className="pshift__mandate-foot">
-                <span className="ok">Verified by Humanos</span>
-                <span>VC · v2.0</span>
-              </footer>
-            </article>
-          </div>
-
-          <div className="pshift__right">
-            <span className="pshift__col-label">Verified before execution</span>
-            <ul className="pshift__systems">
-              {SYSTEMS.map((s) => (
-                <li key={s.name} className="pshift__system" data-pshift-sys>
-                  <span className="pshift__system-name">{s.name}</span>
-                  <span className="pshift__system-meta">{s.meta}</span>
-                  <span className="pshift__system-ring" />
-                </li>
+          <div
+            className="pshift__regs"
+            role="group"
+            aria-label="Built to operate within existing regulatory frameworks"
+          >
+            <p className="pshift__regs-label">
+              Built to operate within existing regulatory frameworks, enabling{" "}
+              <span className="pshift__regs-accent">
+                defensible, auditable and compliant
+              </span>{" "}
+              autonomous execution.
+            </p>
+            <ul className="pshift__regs-list">
+              {REGS.map((r) => (
+                <li key={r}>{r}</li>
               ))}
             </ul>
           </div>
-        </div>
-
-        <div
-          className="pshift__regs"
-          role="group"
-          aria-label="Built to operate within existing regulatory frameworks"
-        >
-          <p className="pshift__regs-label">
-            Built to operate within existing regulatory frameworks, enabling{" "}
-            <span className="pshift__regs-accent">
-              defensible and compliant
-            </span>{" "}
-            autonomous execution.
-          </p>
-          <ul className="pshift__regs-list">
-            {REGS.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-        </div>
         </MobileVisualDrawer>
       </div>
     </section>

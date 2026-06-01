@@ -164,198 +164,321 @@
   display: none;
 }
 
-/* ============== Runtime authorization flow (hero, vertical) ============== */
-.rtflow {
-  --rt-line: rgba(17, 17, 17, 0.1);
-  --rt-line-soft: rgba(17, 17, 17, 0.06);
-  --rt-text: #111111;
-  --rt-text-2: #5a5957;
-  --rt-text-3: #8c8b89;
-  --rt-accent: #4b49ca;
-  --rt-accent-soft: rgba(75, 73, 202, 0.07);
-  --rt-ok: #2f7a5a;
-  --rt-warn: #b58a2d;
-  --rt-block: #be3d36;
-  --rt-bg: #ffffff;
+/* ============== Homepage hero — three-card narrative =================
+   Three stacked cards in the hero's right pane, replacing the older
+   vertical scroll-step diagram:
+     1. .hf-flip   — approval ↔ mandate (flips every 4s)
+     2. .hf-exec   — live agent execution stream
+     3. .hf-audit  — portable execution receipts / audit trail
+   See components/sections/home/RuntimeFlow.tsx for the JSX.
+   ======================================================================= */
+.hf {
+  --hf-bg: #ffffff;
+  --hf-bg-2: #fbfaf7;
+  --hf-line: rgba(17, 17, 17, 0.08);
+  --hf-line-2: rgba(17, 17, 17, 0.14);
+  --hf-ink: #111111;
+  --hf-ink-2: #5a5957;
+  --hf-ink-3: #8c8b89;
+  --hf-accent: #4b49ca;
+  --hf-accent-wash: rgba(75, 73, 202, 0.08);
+  --hf-ok: #1f8a5b;
+  --hf-err: #be3d36;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   margin-left: auto;
-  font-family: var(--font-sans);
-  color: var(--rt-text);
 }
-.rtflow__rail {
+.hf-card {
+  position: relative;
+  background: var(--hf-bg);
+  border: 1px solid var(--hf-line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.02);
+}
+.hf-card__head {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 8px 4px;
-}
-.rtstep {
-  opacity: 0;
-  transform: translateY(2px);
-  transition:
-    opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  padding: 4px 0;
-}
-.rtstep:not(.rtdown) {
-  border: 1px solid var(--rt-line);
-  border-radius: 6px;
-  padding: 12px 14px;
-  background: var(--rt-bg);
-}
-.rtflow__rail > .rtstep:first-child {
-  border-color: var(--rt-accent);
-  background: var(--rt-accent-soft);
-  margin-bottom: 18px;
-}
-.rtflow__rail > .rtstep:first-child + .rtstep.rtdown {
-  display: none;
-}
-.rtstep.is-on {
-  opacity: 1;
-  transform: translateY(0);
-}
-.rtstep__eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--rt-text-3);
-  margin-bottom: 6px;
-}
-.rtstep__eyebrow--accent {
-  color: var(--rt-accent);
-}
-.rtstep__title {
-  font-size: 16px;
-  line-height: 1.35;
-  color: var(--rt-text);
-  letter-spacing: -0.005em;
-  font-weight: 500;
-}
-.rtstep__title--mono {
-  font-family: var(--font-mono);
-  font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: 0;
-}
-.rtstep__title--run {
-  font-size: 16px;
-}
-.rtstep__call {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--rt-accent);
-  letter-spacing: -0.005em;
-  background: var(--rt-accent-soft);
-  padding: 6px 10px;
-  border-radius: 4px;
-  display: inline-block;
-}
-.rtstep__status {
-  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: var(--rt-ok);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-}
-.rtstep__ic {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.rtstep__ic--ok {
-  background: rgba(47, 122, 90, 0.1);
-  border: 1px solid rgba(47, 122, 90, 0.25);
-  color: var(--rt-ok);
-}
-
-.rtstep__authstack {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.rtauth {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 13.5px;
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-  flex-wrap: wrap;
-}
-.rtauth__src {
-  font-weight: 600;
-  color: var(--rt-text);
-}
-.rtauth__sep {
-  color: var(--rt-text-3);
-}
-.rtauth__rule {
-  color: var(--rt-text-2);
-}
-
-.rtreceipt {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px 12px;
-  background: rgba(17, 17, 17, 0.025);
-  border-left: 2px solid rgba(17, 17, 17, 0.18);
-  border-radius: 0 4px 4px 0;
-}
-.rtreceipt__row {
-  display: flex;
-  gap: 12px;
-  align-items: baseline;
-  font-size: 12.5px;
-  line-height: 1.45;
-}
-.rtreceipt__k {
+  justify-content: space-between;
+  margin-bottom: 14px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--rt-text-3);
-  min-width: 96px;
-  flex-shrink: 0;
+  color: var(--hf-ink-3);
 }
-.rtreceipt__v {
-  color: var(--rt-text);
-  letter-spacing: -0.005em;
+.hf-card__head-r {
+  color: var(--hf-accent);
+  font-weight: 500;
 }
-.rtreceipt__v--mono {
+
+/* ---------- Card 1 · approval ↔ mandate crossfade ---------- */
+.hf-flip {
+  /* The two faces sit in the same box and cross-fade with a small
+     horizontal slide. No 3D — just opacity + translateX. The
+     container has no fixed height; it auto-sizes to whichever face
+     is taller. */
+  position: relative;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.hf-flip__inner {
+  /* CSS grid stacking trick: both faces occupy the same single
+     grid cell, so they layer on top of each other and the cell's
+     height = max(front, back). Drop or add mandate rows and the
+     card height follows. */
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+.hf-flip__face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  /* Outgoing face slides left + fades; incoming slides in from the
+     right. ease-in-out keeps the swap calm. */
+  transition:
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Front face = approval message. Plain card surface, same as the
+   other two cards in the hero diagram. */
+.hf-flip__face--front {
+  opacity: 1;
+  transform: translateX(0);
+  padding: 16px 18px;
+  background: var(--hf-bg);
+  border: 1px solid var(--hf-line);
+  border-radius: 12px;
+}
+/* Back face = pshift mandate. Stays transparent + borderless so the
+   embedded .pshift__mandate (dark, with its own indigo pulse) is the
+   visible card and the crossfade still reads as a face swap. */
+.hf-flip__face--back {
+  opacity: 0;
+  transform: translateX(28px);
+  pointer-events: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+/* (No height pin needed — the grid cell auto-sizes to the mandate.) */
+/* Flipped state — front exits left, back slides in. */
+.hf-flip.is-flipped .hf-flip__face--front {
+  opacity: 0;
+  transform: translateX(-28px);
+  pointer-events: none;
+}
+.hf-flip.is-flipped .hf-flip__face--back {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* approval (front) */
+.hf-approval {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.hf-approval__avatar {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--hf-accent-wash);
+  color: var(--hf-accent);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.hf-approval__body {
+  min-width: 0;
+}
+.hf-approval__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.hf-approval__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hf-ink);
+}
+.hf-approval__time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--hf-ink-3);
+}
+.hf-approval__msg {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--hf-ink);
+}
+.hf-approval__msg strong {
+  font-weight: 600;
+}
+
+/* (Mandate-back styling now provided by .pshift__mandate from
+   sections/pshift.css — same dark card used in the "Authorization
+   layer" section, embedded inside .hf-flip__face--back.) */
+
+/* ---------- Card 2 · live agent execution ---------- */
+.hf-exec__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.hf-exec__row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-top: 1px solid var(--hf-line);
   font-family: var(--font-mono);
   font-size: 12px;
 }
+.hf-exec__row:first-child {
+  border-top: 0;
+  padding-top: 2px;
+}
+.hf-exec__amount {
+  color: var(--hf-ink);
+  font-weight: 500;
+}
+.hf-exec__vendor {
+  color: var(--hf-ink-2);
+}
+.hf-exec__verdict {
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hf-exec__row--ok .hf-exec__verdict {
+  color: var(--hf-ok);
+}
+.hf-exec__row--no .hf-exec__verdict {
+  color: var(--hf-err);
+}
+.hf-exec__row--no .hf-exec__amount {
+  text-decoration: line-through;
+  color: var(--hf-ink-3);
+}
+.hf-exec__row.is-new {
+  animation: hf-row-in 320ms ease-out;
+}
+@keyframes hf-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hf-exec__foot {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--hf-line);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--hf-ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
 
-.rtdown {
-  width: 1px;
-  height: 22px;
-  margin-left: 9px;
-  position: relative;
+/* ---------- Card 3 · audit trail ---------- */
+.hf-audit__list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hf-audit__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--hf-line);
+  border-radius: 6px;
+  background: var(--hf-bg-2);
+}
+.hf-audit__row-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  min-width: 0;
+}
+.hf-audit__row-time {
+  color: var(--hf-ink-3);
+}
+.hf-audit__row-amount {
+  color: var(--hf-ink);
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
-.rtdown__bar {
-  position: absolute;
-  inset: 100% 0 0 0;
-  background: var(--rt-text-2);
-  transition: top 500ms cubic-bezier(0.22, 1, 0.36, 1);
+.hf-audit__proof {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--hf-accent);
+  background: var(--hf-accent-wash);
+  padding: 3px 9px;
+  border-radius: 999px;
 }
-.rtdown.is-on .rtdown__bar {
-  inset: 0 0 0 0;
+.hf-audit__verifiers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  background: var(--hf-accent-wash);
+  border: 1px solid rgba(75, 73, 202, 0.16);
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
-.rtdown::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--rt-line-soft);
+.hf-audit__verifier {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--hf-ink);
+  padding: 3px 8px;
+  border: 1px solid var(--hf-line-2);
+  background: var(--hf-bg);
+  border-radius: 4px;
+}
+.hf-audit__verifier-note {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--hf-accent);
+  margin-left: 2px;
+}
+.hf-audit__foot {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--hf-ok);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 1080px) {
@@ -366,8 +489,9 @@
     grid-template-columns: 1fr;
     gap: 48px;
   }
-  .rtflow {
+  .hf {
     margin-left: 0;
+    max-width: 100%;
   }
 }
 @media (max-width: 720px) {

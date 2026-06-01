@@ -19,7 +19,9 @@ export type Story = {
   /** Title with optional <em> highlight via JSX. */
   title: ReactNode;
   desc: string;
-  stats: Array<{ num: string; lab: string }>;
+  /** Optional — no longer rendered on the cards, kept for back-compat
+   *  with existing story data. */
+  stats?: Array<{ num: string; lab: string }>;
   /** Story link — pass "#" for placeholders. */
   href: string;
   /** CTA copy on the bottom-left link. */
@@ -152,14 +154,6 @@ export function StoriesGrid({
                 </div>
                 <h3 className="fcard__title">{s.title}</h3>
                 <p className="fcard__desc">{s.desc}</p>
-                <div className="fcard__stats">
-                  {s.stats.map((st, j) => (
-                    <div key={j} className="fcard__stat">
-                      <div className="fcard__stat-num">{st.num}</div>
-                      <div className="fcard__stat-lab">{st.lab}</div>
-                    </div>
-                  ))}
-                </div>
                 <span className="fcard__link">
                   {s.cta} <span className="arrow">→</span>
                 </span>

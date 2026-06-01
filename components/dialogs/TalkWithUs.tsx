@@ -57,9 +57,9 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
                 >
                   <span className="dlg__choice-title">Book a demo</span>
                   <span className="dlg__choice-sub">
-                    Schedule 30 minutes with our team via Calendly.
+                    Schedule 30 minutes with our team via our open Calendar.
                   </span>
-                  <span className="dlg__choice-arrow">Open Calendly →</span>
+                  <span className="dlg__choice-arrow">Open Calendar →</span>
                 </a>
                 <button
                   type="button"
@@ -68,7 +68,7 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
                 >
                   <span className="dlg__choice-title">Send a message</span>
                   <span className="dlg__choice-sub">
-                    Send us a message. We&apos;ll reply by email.
+                    Send us a message. We&apos;ll reply in less than 24 hours.
                   </span>
                   <span className="dlg__choice-arrow">Open form →</span>
                 </button>
@@ -88,7 +88,8 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
                 Send us a message.
               </Dialog.Title>
               <Dialog.Description className="dlg__sub">
-                Someone from the Humanos team will follow up by email.
+                Someone from the Humanos team will follow up in less than 24
+                hours.
               </Dialog.Description>
               <SendMessageForm onSuccess={() => setOpen(false)} />
             </>

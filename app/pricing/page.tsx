@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const FREE_INCLUDES = [
   "Runtime verification API",
   "Mandate issuance",
-  "Basic execution receipts",
+  "Universal execution receipts",
   "Dynamic approval collection",
   "SDK + API access",
 ];

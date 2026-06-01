@@ -33,7 +33,11 @@ export const PLATFORM_MENU: MegaMenu = {
       items: [
         { title: "Mandates", sub: "Standing authority records", href: "#" },
         { title: "Requests", sub: "Capture human intent", href: "#" },
-        { title: "Execution Receipts", sub: "Independently verifiable", href: "#" },
+        {
+          title: "Execution Receipts",
+          sub: "Independently verifiable",
+          href: "#",
+        },
         { title: "Verification", sub: "humanos.verify()", href: "#" },
       ],
     },
@@ -78,22 +82,22 @@ export const DEVELOPERS_MENU: MegaMenu = {
         {
           title: "Get API keys",
           sub: "Create production credentials",
-          href: "https://app.humanos.id",
+          href: "https://app.humanos.tech",
         },
         {
           title: "Quickstart",
           sub: "5-minute integration",
-          href: "https://docs.humanos.id/essentials/quick-start",
+          href: "https://docs.humanos.tech/essentials/quick-start",
         },
         {
           title: "Dashboard",
           sub: "Manage mandates & receipts",
-          href: "https://app.humanos.id",
+          href: "https://app.humanos.tech",
         },
         {
           title: "API reference",
           sub: "All endpoints & types",
-          href: "https://docs.humanos.id",
+          href: "https://docs.humanos.tech",
         },
         {
           title: "VIA",
@@ -151,22 +155,22 @@ export const DEVELOPERS_MENU: MegaMenu = {
         {
           title: "humanos.verify()",
           sub: "Verify before execution",
-          href: "https://docs.humanos.id/api-reference/2026-05-17/credentials/verify-vp",
+          href: "https://docs.humanos.tech/api-reference/latest/credentials/verify-vp",
         },
         {
           title: "Requesting approvals",
           sub: "Capture approval at runtime",
-          href: "https://docs.humanos.id/api-reference/2026-05-17/requests/create-request",
+          href: "https://docs.humanos.tech/api-reference/latest/requests/create-request",
         },
         {
           title: "Revocation",
           sub: "Invalidate credentials",
-          href: "https://docs.humanos.id/api-reference/2026-05-17/credentials/revoke-credential",
+          href: "https://docs.humanos.tech/api-reference/latest/credentials/revoke-credential",
         },
         {
           title: "Webhooks",
           sub: "Event-driven integration",
-          href: "https://docs.humanos.id/essentials/webhooks-intro",
+          href: "https://docs.humanos.tech/essentials/webhooks-intro",
         },
       ],
     },
@@ -179,7 +183,11 @@ export const USE_CASES_MENU: MegaMenu = {
     {
       label: "By industry",
       items: [
-        { title: "Agentic finance", sub: "Capital allocation by AI", href: "#" },
+        {
+          title: "Agentic finance",
+          sub: "Capital allocation by AI",
+          href: "#",
+        },
         { title: "Trading", sub: "Pre-trade authorization", href: "#" },
         { title: "Treasury", sub: "Programmable approvals", href: "#" },
         { title: "Healthcare", sub: "Consent at execution time", href: "#" },
@@ -207,7 +215,10 @@ export const USE_CASES_MENU: MegaMenu = {
       items: [
         { title: "Numo — banking", href: "/case-studies/numo" },
         { title: "Ralio — operations", href: "/case-studies/ralio" },
-        { title: "DataWhisper — regulated AI", href: "/case-studies/datawhisper" },
+        {
+          title: "DataWhisper — regulated AI",
+          href: "/case-studies/datawhisper",
+        },
         { title: "Lusíadas — healthcare", href: "/case-studies/lusiadas" },
         { title: "Paymove — agentic payments", href: "/case-studies/paymove" },
         { title: "All case studies", href: "/case-studies" },

@@ -32,7 +32,7 @@
   display: flex;
   width: max-content;
   align-items: stretch;
-  animation: logos-scroll 35s linear infinite;
+  animation: logos-scroll 70s linear infinite;
   will-change: transform;
 }
 .logos__marquee:hover .logos__track {
