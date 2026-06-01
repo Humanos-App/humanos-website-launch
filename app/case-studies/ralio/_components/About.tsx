@@ -6,12 +6,13 @@ export function About() {
         <div className="cust__grid">
           <div className="cust__copy">
             <h2>
-              Ralio is an agent runtime for autonomous commerce, where agents
-              transact across external marketplaces.
+              Ralio is the trust layer for agentic B2B payments, giving
+              businesses the guardrails, identity, and audit their AI agents
+              need before money moves.
             </h2>
             <p>
-              Procurement and payment agents source vendors, compare pricing,
-              and execute purchases across external B2B marketplaces.
+              Ralio lets business agents safely execute transactions — spend,
+              payroll, treasury — on behalf of business customers.
             </p>
             <p>
               Humanos sits at the merchant boundary and verifies every
@@ -27,14 +28,12 @@ export function About() {
             <div className="cust__rows">
               <div className="cust__row">
                 <div className="cust__row-k">Domain</div>
-                <div className="cust__row-v">
-                  Autonomous procurement &amp; payments
-                </div>
+                <div className="cust__row-v">Agentic B2B payments</div>
               </div>
               <div className="cust__row">
                 <div className="cust__row-k">Surface area</div>
                 <div className="cust__row-v">
-                  Marketplaces · Merchants · Processors · Acquirers
+                  Bank accounts · Cards · Stablecoins
                 </div>
               </div>
               <div className="cust__row">

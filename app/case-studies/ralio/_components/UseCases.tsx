@@ -22,7 +22,7 @@ export function UseCases() {
             {
               num: "01",
               h3: "B2B procurement",
-              p: "Source vendors and execute purchases across external B2B marketplaces — hardware, software, services.",
+              p: "Execute purchases on external B2B marketplaces — hardware, software, services.",
               pills: ["purchase", "renewal", "subscription"],
             },
             {
@@ -40,7 +40,7 @@ export function UseCases() {
             {
               num: "04",
               h3: "Cross-org workflows",
-              p: "Agents acting across partner systems — verified by every system they touch, not just the issuing runtime.",
+              p: "Agents acting across partner systems, verified independently by every system they touch.",
               pills: ["delegate", "attest", "audit"],
             },
           ].map((c) => (

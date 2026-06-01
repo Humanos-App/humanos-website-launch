@@ -26,7 +26,7 @@ export function Category() {
             <div className="cat__attr">
               <div className="cat__attr-eye">Independently verifiable</div>
               <h4>External counterparties check authority directly.</h4>
-              <p>No trust in the agent provider required.</p>
+              <p>No bilateral relationship with the agent operator required.</p>
             </div>
             <div className="cat__attr">
               <div className="cat__attr-eye">Provable</div>
@@ -38,7 +38,7 @@ export function Category() {
 
         <div className="cat__close">
           <div className="cat__close-bad">
-            Authorization lives in your runtime.
+            Authorization stays local to each system.
           </div>
           <div className="cat__close-good">
             Authorization becomes network infrastructure.

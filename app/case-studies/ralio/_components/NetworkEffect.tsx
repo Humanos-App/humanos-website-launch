@@ -5,9 +5,12 @@ export function NetworkEffect() {
         <div className="net__head">
           <div className="eyebrow">§ 08 · Network effect</div>
           <h2 className="h-section">
-            Authorization becomes <em>a shared primitive</em> — not something
-            rebuilt per system.
+            Counterparties <em>verify independently.</em>
           </h2>
+          <p className="h-lede">
+            External parties can check authority directly through Humanos,
+            with no bilateral relationship required.
+          </p>
         </div>
 
         <div className="net__grid">

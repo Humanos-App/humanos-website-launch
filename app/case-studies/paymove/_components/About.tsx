@@ -56,7 +56,7 @@ export function About() {
                 <div className="cust__row-k">Site</div>
                 <div className="cust__row-v">
                   <a
-                    href="https://paymove.io"
+                    href="https://www.paymove.io"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

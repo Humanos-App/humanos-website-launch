@@ -5,14 +5,16 @@ export function Solution() {
         <div className="solution__head">
           <div className="eyebrow eyebrow--chalk">§ 03 · Solution</div>
           <h2 className="h-section" style={{ color: "var(--hm-chalk-0)" }}>
-            Verification captured in real time,
+            Issued at the source.
             <br />
-            <em>at the moment of execution.</em>
+            <em>Verified at the merchant.</em>
           </h2>
           <p className="solution__intro">
-            When the merchant accepts an agent transaction, Humanos verifies
-            the mandate live — identity, scope, counterparty, amount, validity
-            — and returns a deterministic decision before settlement.
+            Humanos issues a certificate scoped to the purchase — counterparty,
+            amount ceiling, expiry — at Ralio&rsquo;s request and authorised by
+            the customer. The certificate is cryptographically signed and bound
+            to the agent&rsquo;s identity, then verified by the merchant in
+            real time before settlement.
           </p>
         </div>
 
@@ -69,7 +71,7 @@ export function Solution() {
                 <div className="cap-verify-title">
                   humanos.verify() · live capture
                 </div>
-                <div className="cap-verify-tot">181 ms</div>
+                <div className="cap-verify-tot">82 ms</div>
               </div>
 
               <div className="cap-check">
@@ -78,7 +80,7 @@ export function Solution() {
                   <b>identity</b>
                   <i>principal verified</i>
                 </div>
-                <div className="cap-check__ms">27 ms</div>
+                <div className="cap-check__ms">12 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -86,15 +88,15 @@ export function Solution() {
                   <b>scope</b>
                   <i>procurement · hardware</i>
                 </div>
-                <div className="cap-check__ms">48 ms</div>
+                <div className="cap-check__ms">24 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
                 <div className="cap-check__t">
                   <b>counterparty</b>
-                  <i>approved vendor list</i>
+                  <i>techsupply.eu · approved</i>
                 </div>
-                <div className="cap-check__ms">80 ms</div>
+                <div className="cap-check__ms">38 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -102,7 +104,7 @@ export function Solution() {
                   <b>amount</b>
                   <i>within € 24,000.00 ceiling</i>
                 </div>
-                <div className="cap-check__ms">134 ms</div>
+                <div className="cap-check__ms">58 ms</div>
               </div>
               <div className="cap-check">
                 <div className="cap-check__mark">✓</div>
@@ -110,7 +112,7 @@ export function Solution() {
                   <b>validity</b>
                   <i>mandate active until 2026-06-19</i>
                 </div>
-                <div className="cap-check__ms">172 ms</div>
+                <div className="cap-check__ms">72 ms</div>
               </div>
 
               <div className="cap-verdict">
@@ -145,8 +147,7 @@ export function Solution() {
         </div>
 
         <div className="section__quote">
-          The merchant verifies the mandate directly through Humanos — not the
-          agent&rsquo;s runtime.
+          The merchant verifies the mandate directly through Humanos.
         </div>
       </div>
     </section>

@@ -53,7 +53,7 @@ export function Hero() {
             <div className="hero__qs-k">Site</div>
             <div className="hero__qs-v">
               <a
-                href="https://www.lusiadas.pt"
+                href="https://www.lusiadas.pt/en"
                 target="_blank"
                 rel="noopener noreferrer"
               >

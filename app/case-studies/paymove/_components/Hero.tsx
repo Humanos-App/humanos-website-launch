@@ -50,7 +50,7 @@ export function Hero() {
             <div className="hero__qs-k">Site</div>
             <div className="hero__qs-v">
               <a
-                href="https://paymove.io"
+                href="https://www.paymove.io"
                 target="_blank"
                 rel="noopener noreferrer"
               >

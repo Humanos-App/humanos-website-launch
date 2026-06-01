@@ -5,60 +5,64 @@ export function Problem() {
         <div className="problem__head">
           <div className="eyebrow">§ 02 · Problem</div>
           <h2 className="h-section">
-            Transactions cross trust boundaries
+            Transactions cross boundaries
             <br />
-            <em>no runtime can speak for.</em>
+            <em>bank channels can&rsquo;t span.</em>
           </h2>
           <p className="h-lede">
-            Agents now transact with external counterparties. Merchants,
-            marketplaces, processors, and acquirers do not trust the
-            agent&rsquo;s runtime — and runtime guardrails alone cannot prove
-            a human authorized the action.
+            Ralio today operates inside the customer&rsquo;s own bank API.
+            Every payment flows through that customer-owned channel, so
+            Ralio&rsquo;s guardrails are enough — no external system has to
+            recognise or authenticate the agent itself. The moment the agent
+            has to transact outside the bank API — hosted checkouts, B2B
+            marketplaces, acquirer networks — the same approach no longer
+            applies.
           </p>
         </div>
 
         <div className="problem__grid">
           <article className="problem__card">
             <div className="problem__card-eye">What&rsquo;s happening</div>
-            <h3>Agents act, money moves, no external party verifies.</h3>
+            <h3>The agent is trusted inside the channel, unknown outside it.</h3>
             <p>
-              Decisions are defined in one system. Agents execute in another.
-              Settlement happens across merchants, processors, and networks
-              the customer does not control. Nothing answers, in real time,
-              whether a specific transaction was actually authorized by a
-              human.
+              Ralio governs the agent inside the customer-owned bank API
+              channel by design. The moment the same agent transacts at a
+              venue the customer doesn&rsquo;t own — a marketplace checkout,
+              an acquirer, a third-party processor — the merchant side has no
+              credential to verify, no registry to consult, no way to confirm
+              the action is authorised.
             </p>
             <div className="problem__chain">
-              <b>runtime</b>
-              <span className="arrow">→</span>
-              <b>merchant</b>
-              <span className="arrow">→</span>
-              <b>processor</b>
-              <span className="arrow">→</span>
-              <span className="red">fragmented</span>
+              <b>bank API channel</b>
+              <span className="arrow">✓</span>
+              <span className="arrow">·</span>
+              <b>external venues</b>
+              <span className="red">held back</span>
             </div>
           </article>
           <article className="problem__card">
             <div className="problem__card-eye">What it costs</div>
-            <h3>Closed channels. Stranded trust. Unprovable authority.</h3>
+            <h3>Reach stops at the channel boundary.</h3>
             <p>
-              Authorization is local application state. External
-              counterparties cannot verify the agent acted within scope.
-              Audits reconstruct trails after the fact. Every new integration
-              restarts the work.
+              Inside the channel, Ralio&rsquo;s guardrails, identity, and
+              audit are sufficient. Outside it, agentic payments stay off the
+              table. Without a shared credential bridging Ralio to merchants,
+              marketplace checkouts, acquirers, and hosted checkouts remain
+              unreachable, and the customer&rsquo;s agentic payment footprint
+              can&rsquo;t grow past the bank API.
             </p>
             <div className="problem__chain">
-              <span className="red">no shared answer</span>
+              <span className="red">no shared credential</span>
               <span className="arrow">·</span>
-              <b>&ldquo;was this allowed?&rdquo;</b>
+              <b>&ldquo;is this agent allowed here?&rdquo;</b>
             </div>
           </article>
         </div>
 
         <div className="problem__verdict">
           <div className="problem__verdict-q">
-            Authorization stops at the runtime boundary.{" "}
-            <em>Commerce doesn&rsquo;t.</em>
+            Trust stops at the channel boundary.{" "}
+            <em>Payments don&rsquo;t.</em>
           </div>
           <div className="problem__verdict-tag">§ 02 · close</div>
         </div>

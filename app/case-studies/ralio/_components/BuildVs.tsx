@@ -23,27 +23,27 @@ export function BuildVs() {
 
           {[
             {
-              bad: "Trust ends at the runtime boundary.",
-              good: "Authorization is independently verifiable outside the runtime.",
+              bad: "Trust stays inside the customer-owned channel.",
+              good: "Authorisation is independently verifiable beyond the channel.",
             },
             {
-              bad: "External merchants must trust the agent provider.",
+              bad: "External merchants have no shared way to verify the agent.",
               good: "Merchants verify the mandate directly against Humanos.",
             },
             {
-              bad: "Authorization is local application state.",
-              good: "Authorization is a portable, machine-verifiable object.",
+              bad: "Authorisation is tied to the agent's home environment.",
+              good: "Authorisation is a portable, machine-verifiable certificate.",
             },
             {
-              bad: "Audit reconstructed from internal logs.",
-              good: "Proof attached to every settlement, portable forever.",
+              bad: "Each party holds its own audit trail in isolation.",
+              good: "Verifiable record attached to every settlement, portable forever.",
             },
             {
-              bad: "Every integration restarts the work.",
+              bad: "Every new external counterparty requires bilateral setup.",
               good: "One verify() call covers every counterparty.",
             },
             {
-              bad: "Permission changes require system rebuilds.",
+              bad: "Permission changes coordinate party-by-party.",
               good: "Revoke the mandate; effective everywhere on next verify.",
             },
           ].map((row, i) => (

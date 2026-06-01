@@ -3,7 +3,7 @@ export function Outcome() {
     <section className="section" data-screen-label="07 Outcome">
       <div className="wrap">
         <div className="outc__head">
-          <div className="eyebrow">§ 04 · Outcome</div>
+          <div className="eyebrow">§ 05 · Outcome</div>
           <h2 className="h-section">
             What you get
             <br />

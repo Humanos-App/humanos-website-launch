@@ -6,7 +6,7 @@ export function SystemFlow() {
     >
       <div className="wrap">
         <div className="flow__head">
-          <div className="eyebrow eyebrow--chalk">§ 05 · System flow</div>
+          <div className="eyebrow eyebrow--chalk">§ 06 · System flow</div>
           <h2 className="h-section" style={{ color: "var(--hm-chalk-0)" }}>
             Agent → verify() →
             <br />

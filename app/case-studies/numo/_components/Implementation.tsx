@@ -224,7 +224,7 @@ export function Implementation() {
     <section className="section" data-screen-label="06 Implementation">
       <div className="wrap">
         <div className="impl__head">
-          <div className="eyebrow">§ 06 · Implementation</div>
+          <div className="eyebrow">§ 04 · Implementation</div>
           <h2 className="h-section">How Numo implemented it.</h2>
           <p className="h-lede">
             Five stages in chronological order. The animation on the right

@@ -2,13 +2,21 @@
 
 import { useEffect, useRef } from "react";
 
-const STAGES = ["issue", "prepare", "verify", "settle", "prove"] as const;
+const STAGES = [
+  "configure",
+  "issue",
+  "prepare",
+  "verify",
+  "settle",
+  "prove",
+] as const;
 const LABEL: Record<string, string> = {
-  issue: "§ 01 · Issue",
-  prepare: "§ 02 · Prepare",
-  verify: "§ 03 · Verify",
-  settle: "§ 04 · Settle",
-  prove: "§ 05 · Prove",
+  configure: "§ 01 · Configure",
+  issue: "§ 02 · Issue",
+  prepare: "§ 03 · Prepare",
+  verify: "§ 04 · Verify",
+  settle: "§ 05 · Settle",
+  prove: "§ 06 · Prove",
 };
 
 const ACTIONS_DATA = [
@@ -60,6 +68,7 @@ export function Implementation() {
     const scrollPhaseIntoView = (phase: string) => {
       if (!bodyEl) return;
       const sel: Record<string, string> = {
+        configure: ".iv-mandate",
         issue: ".iv-mandate",
         prepare: ".iv-actions",
         verify: ".iv-verify",
@@ -131,14 +140,13 @@ export function Implementation() {
     const applyStage = (stage: string) => {
       if (stageLabel) stageLabel.textContent = LABEL[stage] || "";
       const idx = STAGES.indexOf(stage as (typeof STAGES)[number]);
-      frame.setAttribute(
-        "data-iv-mandate",
-        stage === "issue" || idx > 0 ? "on" : "off",
-      );
-      frame.setAttribute("data-iv-verify", idx >= 2 ? "on" : "off");
-      frame.setAttribute("data-iv-settle", idx >= 3 ? "on" : "off");
+      // configure (idx=0): no mandate, no verify, no settle.
+      // issue (idx=1) onwards: mandate is on.
+      frame.setAttribute("data-iv-mandate", idx >= 1 ? "on" : "off");
+      frame.setAttribute("data-iv-verify", idx >= 3 ? "on" : "off");
+      frame.setAttribute("data-iv-settle", idx >= 4 ? "on" : "off");
 
-      if (stage === "issue") resetVerify();
+      if (stage === "configure" || stage === "issue") resetVerify();
       else if (stage === "prepare") {
         resetVerify();
         actions.forEach((el) => el.classList.add("is-running"));
@@ -208,7 +216,7 @@ export function Implementation() {
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    applyStage("issue");
+    applyStage("configure");
 
     return () => {
       window.removeEventListener("scroll", onScroll);
@@ -224,10 +232,10 @@ export function Implementation() {
     <section className="section" data-screen-label="06 Implementation">
       <div className="wrap">
         <div className="impl__head">
-          <div className="eyebrow">§ 06 · Implementation</div>
+          <div className="eyebrow">§ 04 · Implementation</div>
           <h2 className="h-section">How Ralio implemented it.</h2>
           <p className="h-lede">
-            Five stages in chronological order. The animation on the right is
+            Six stages in chronological order. The animation on the right is
             the exact flow from our product page — adapted to Ralio&rsquo;s
             €23,840.00 procurement order, settled at{" "}
             <span
@@ -244,11 +252,51 @@ export function Implementation() {
 
         <div className="impl__grid" ref={rootRef}>
           <div className="impl__stages" role="list">
-            <article className="istage is-active" data-istage="issue">
+            <article className="istage is-active" data-istage="configure">
               <div className="istage__num">
                 <span>01</span>
               </div>
-              <div className="istage__eye">§ 01 · Issue</div>
+              <div className="istage__eye">§ 01 · Configure</div>
+              <h3 className="istage__title">Agent configuration.</h3>
+              <p className="istage__lede">
+                The company&rsquo;s finance lead creates a procurement agent
+                on Ralio, connects it to the company&rsquo;s bank, and defines
+                its tasks and transaction limits. Ralio&rsquo;s guardrails
+                govern every action the agent takes inside that channel.
+              </p>
+              <div className="istage__facts">
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Agent</span>
+                  <span className="istage__fact-v">
+                    ralio.procurement.agent
+                  </span>
+                </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Task</span>
+                  <span className="istage__fact-v">
+                    procurement · hardware · IT supplies
+                  </span>
+                </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Limits</span>
+                  <span className="istage__fact-v">
+                    transaction caps · approval rules
+                  </span>
+                </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Channel</span>
+                  <span className="istage__fact-v">
+                    customer bank API · open banking
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <article className="istage" data-istage="issue">
+              <div className="istage__num">
+                <span>02</span>
+              </div>
+              <div className="istage__eye">§ 02 · Issue</div>
               <h3 className="istage__title">Define mandate.</h3>
               <p className="istage__lede">
                 Finance lead authorizes scope, counterparties, ceiling, and
@@ -263,10 +311,8 @@ export function Implementation() {
                   </span>
                 </div>
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Scope</span>
-                  <span className="istage__fact-v indigo">
-                    procurement · hardware
-                  </span>
+                  <span className="istage__fact-k">Counterparty</span>
+                  <span className="istage__fact-v indigo">techsupply.eu</span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Ceiling</span>
@@ -281,14 +327,17 @@ export function Implementation() {
 
             <article className="istage" data-istage="prepare">
               <div className="istage__num">
-                <span>02</span>
+                <span>03</span>
               </div>
-              <div className="istage__eye">§ 02 · Prepare</div>
+              <div className="istage__eye">§ 03 · Prepare</div>
               <h3 className="istage__title">Agent prepares action.</h3>
               <p className="istage__lede">
-                Ralio runtime sources vendors, compares pricing, and assembles
-                the procurement order. The agent attaches the mandate to its
-                outbound request as{" "}
+                Triggered by the procurement request, Ralio&rsquo;s agent calls
+                Humanos to receive the certificate. Humanos issues it scoped to
+                the mandate, signs it cryptographically, and binds it to the
+                agent&rsquo;s identity. The agent assembles the order at
+                techsupply.eu and attaches the certificate to its outbound
+                request as{" "}
                 <span
                   style={{
                     fontFamily: "var(--font-mono)",
@@ -301,15 +350,19 @@ export function Implementation() {
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Agent</span>
+                  <span className="istage__fact-k">Requested by</span>
                   <span className="istage__fact-v">
                     ralio.procurement.agent
                   </span>
                 </div>
                 <div className="istage__fact">
+                  <span className="istage__fact-k">Issued by</span>
+                  <span className="istage__fact-v indigo">Humanos · signed</span>
+                </div>
+                <div className="istage__fact">
                   <span className="istage__fact-k">Order</span>
                   <span className="istage__fact-v">
-                    12 × MacBook Pro · 12 × dock
+                    12 × MacBook Pro 14&quot; · 12 × USB-C dock
                   </span>
                 </div>
                 <div className="istage__fact">
@@ -320,14 +373,18 @@ export function Implementation() {
                   <span className="istage__fact-k">Total</span>
                   <span className="istage__fact-v">€ 23,840.00</span>
                 </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Attached as</span>
+                  <span className="istage__fact-v">x-humanos-mandate</span>
+                </div>
               </div>
             </article>
 
             <article className="istage" data-istage="verify">
               <div className="istage__num">
-                <span>03</span>
+                <span>04</span>
               </div>
-              <div className="istage__eye">§ 03 · Verify</div>
+              <div className="istage__eye">§ 04 · Verify</div>
               <h3 className="istage__title">Merchant verifies.</h3>
               <p className="istage__lede">
                 At checkout, the merchant calls{" "}
@@ -339,9 +396,8 @@ export function Implementation() {
                 >
                   humanos.verify()
                 </span>{" "}
-                directly against the mandate — not against Ralio&rsquo;s
-                runtime. Identity, scope, counterparty, amount, and validity
-                are checked in 181 ms.
+                directly against the certificate. Identity, scope, counterparty,
+                amount, and validity are checked in 82 ms.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
@@ -351,51 +407,57 @@ export function Implementation() {
                 <div className="istage__fact">
                   <span className="istage__fact-k">Identity</span>
                   <span className="istage__fact-v indigo">
-                    verified · 27 ms
+                    verified · 12 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Amount</span>
                   <span className="istage__fact-v indigo">
-                    € 23,840 ≤ € 24,000 · 134 ms
+                    € 23,840 ≤ € 24,000 · 58 ms
                   </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Latency</span>
-                  <span className="istage__fact-v">181 ms total</span>
+                  <span className="istage__fact-v">82 ms total</span>
                 </div>
               </div>
             </article>
 
             <article className="istage" data-istage="settle">
               <div className="istage__num">
-                <span>04</span>
+                <span>05</span>
               </div>
-              <div className="istage__eye">§ 04 · Settle</div>
-              <h3 className="istage__title">Execute payment.</h3>
+              <div className="istage__eye">§ 05 · Settle</div>
+              <h3 className="istage__title">Agent executes the payment.</h3>
               <p className="istage__lede">
-                Authorized → payment settles. Not authorized → merchant
-                declines deterministically. For Ralio&rsquo;s out-of-scope
-                attempts (a €50,000 server rack), Humanos blocks at the
+                Authorised → Ralio&rsquo;s agent executes the payment through
+                the customer&rsquo;s bank API channel and money moves. Not
+                authorised → the merchant declines, and Humanos blocks at the
                 boundary and triggers real-time step-up authorization.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Authorized</span>
-                  <span className="istage__fact-v indigo">
-                    € 23,840.00 · settled
-                  </span>
-                </div>
-                <div className="istage__fact">
-                  <span className="istage__fact-k">Blocked</span>
-                  <span className="istage__fact-v red">
-                    € 50,000.00 · out_of_scope
-                  </span>
-                </div>
-                <div className="istage__fact">
-                  <span className="istage__fact-k">Recover</span>
+                  <span className="istage__fact-k">Executor</span>
                   <span className="istage__fact-v">
-                    step-up · SMS · resumes
+                    ralio.procurement.agent
+                  </span>
+                </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Rail</span>
+                  <span className="istage__fact-v">
+                    customer bank API channel
+                  </span>
+                </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Authorised</span>
+                  <span className="istage__fact-v indigo">
+                    ✓ € 23,840.00 · settled
+                  </span>
+                </div>
+                <div className="istage__fact">
+                  <span className="istage__fact-k">Not authorised</span>
+                  <span className="istage__fact-v red">
+                    ✗ merchant declines · Humanos blocks · step-up
                   </span>
                 </div>
               </div>
@@ -403,24 +465,29 @@ export function Implementation() {
 
             <article className="istage" data-istage="prove">
               <div className="istage__num">
-                <span>05</span>
+                <span>06</span>
               </div>
-              <div className="istage__eye">§ 05 · Prove</div>
-              <h3 className="istage__title">Audit proof.</h3>
+              <div className="istage__eye">§ 06 · Prove</div>
+              <h3 className="istage__title">Dual audit trail.</h3>
               <p className="istage__lede">
-                Every transaction emits a cryptographic Proof — attached to the
-                settlement, portable forever. Auditors, processors, and
-                acquirers verify the Proof directly against Humanos; nothing
-                reconstructs trails from internal logs.
+                Both Ralio and Humanos hold verifiable records. Ralio&rsquo;s
+                audit records every agent tool-call decision; Humanos&rsquo;s
+                registry records the certificate verification. Together they
+                form a complete chain of authority from finance lead to
+                merchant, independently verifiable forever.
               </p>
               <div className="istage__facts">
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Proof ID</span>
-                  <span className="istage__fact-v">proof:0xA13F…84e9</span>
+                  <span className="istage__fact-k">Ralio</span>
+                  <span className="istage__fact-v">
+                    agent ID and tool-call decisions
+                  </span>
                 </div>
                 <div className="istage__fact">
-                  <span className="istage__fact-k">Attached</span>
-                  <span className="istage__fact-v">settlement.receipt</span>
+                  <span className="istage__fact-k">Humanos</span>
+                  <span className="istage__fact-v">
+                    certificate verifications
+                  </span>
                 </div>
                 <div className="istage__fact">
                   <span className="istage__fact-k">Verifiers</span>
@@ -451,13 +518,13 @@ export function Implementation() {
                   Live · humanos.verify() · Ralio × techsupply.eu
                 </div>
                 <div className="impl__viz-head-r" data-iv-stage-label>
-                  § 01 · Issue
+                  § 01 · Configure
                 </div>
               </div>
 
               <div className="impl__viz-body">
                 <div className="impl__viz-phase">
-                  <b>01 · Issue</b> · mandate signed by Finance Lead
+                  <b>02 · Issue</b> · mandate signed by Finance Lead
                 </div>
                 <div className="iv-mandate">
                   <div className="iv-mandate__bar">
@@ -499,7 +566,7 @@ export function Implementation() {
                     <div>
                       <span className="k">counterparty</span>
                       <span className="c">:</span>{" "}
-                      <span className="v">approved_vendor_list</span>
+                      <span className="v">&quot;techsupply.eu&quot;</span>
                       <span className="c">,</span>
                     </div>
                     <div>
@@ -517,7 +584,7 @@ export function Implementation() {
                 </div>
 
                 <div className="impl__viz-phase">
-                  <b>02·03·04 · Prepare → Verify → Settle</b>
+                  <b>03·04·05 · Prepare → Verify → Settle</b>
                 </div>
                 <ol className="iv-actions">
                   {[
@@ -595,21 +662,20 @@ export function Implementation() {
                     </span>
                     ){" "}
                     <span className="iv-c-comment">
-                      // 181 ms · deterministic
+                      // 82 ms · deterministic
                     </span>
                   </div>
                 </div>
 
                 <div className="iv-settle">
                   <div className="iv-settle__l">
-                    settled · € 23,840.00 · at techsupply.eu
+                    settled · € 23,840.00 · via customer bank API channel
                   </div>
                   <div>0xA13F…84e9</div>
                 </div>
 
                 <div className="impl__viz-phase">
-                  <b>05 · Prove</b> · cryptographic receipt, attached to
-                  settlement
+                  <b>06 · Prove</b> · dual audit trail, independently verifiable
                 </div>
                 <div className="iv-proof">
                   <div className="iv-proof__bar">

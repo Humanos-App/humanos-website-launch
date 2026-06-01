@@ -60,7 +60,7 @@ export function About() {
                 <div className="cust__row-k">Site</div>
                 <div className="cust__row-v">
                   <a
-                    href="https://www.lusiadas.pt"
+                    href="https://www.lusiadas.pt/en"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
