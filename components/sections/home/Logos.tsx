@@ -63,7 +63,7 @@ const CELLS: LogoCell[] = [
     name: "medify",
     src: "/assets/logos/medify.png",
     nameClass: "logos__name--medify",
-    desc: "+350 hospitals",
+    desc: "+30 hospitals",
     href: "https://medify.eu/",
   },
   {
@@ -92,7 +92,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Agentic Payments",
     name: "Ralio",
-    src: "/assets/logos/ralio.png",
+    src: "/assets/logos/ralio.webp",
     nameClass: "logos__name--ralio",
     desc: "B2B Agentic Payments",
     href: "https://ralio.co",
@@ -100,6 +100,7 @@ const CELLS: LogoCell[] = [
   {
     tag: "Agentic Payments",
     name: "Paymove",
+    src: "/assets/logos/paymove.png",
     nameClass: "logos__name--ralio",
     desc: "500K+ users across Europe",
     href: "https://www.paymove.io",
