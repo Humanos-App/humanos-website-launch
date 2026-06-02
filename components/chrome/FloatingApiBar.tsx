@@ -1,4 +1,5 @@
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
+import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 export function FloatingApiBar() {
   return (
@@ -15,7 +16,12 @@ export function FloatingApiBar() {
           Talk with us
         </button>
       </TalkWithUs>
-      <a className="rtbar__cta rtbar__cta--primary" href="#get-api-key">
+      <a
+        className="rtbar__cta rtbar__cta--primary"
+        href={EXTERNAL_LINKS.app}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Get API key
       </a>
     </aside>

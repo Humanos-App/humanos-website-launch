@@ -1,5 +1,6 @@
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 import { RuntimeFlow } from "./RuntimeFlow";
+import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 type CompatItem = {
   label: string;
@@ -207,7 +208,12 @@ export function Hero() {
           </p>
 
           <div className="hero__ctas">
-            <a className="btn btn--primary" href="#">
+            <a
+              className="btn btn--primary"
+              href={EXTERNAL_LINKS.app}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Get API key <span className="arrow">→</span>
             </a>
             <TalkWithUs>
