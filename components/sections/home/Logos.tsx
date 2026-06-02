@@ -59,7 +59,7 @@ const CELLS: LogoCell[] = [
     href: "https://www.bloodflow.eu/",
   },
   {
-    tag: "Clinical software",
+    tag: "Healthtech",
     name: "medify",
     src: "/assets/logos/medify.png",
     nameClass: "logos__name--medify",
