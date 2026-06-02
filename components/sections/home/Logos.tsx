@@ -162,8 +162,7 @@ export function Logos() {
     <section className="logos">
       <div className="wrap">
         <div className="logos__caption">
-          Deployed in 350+ hospitals, clinics, insurers, logistics and fintech
-          players
+          Deployed in 350+ hospitals, insurers, and fintech players
         </div>
       </div>
       <div className="logos__marquee" role="group" aria-label="Customers">
