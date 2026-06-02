@@ -31,7 +31,7 @@ const CELLS: LogoCell[] = [
     name: "Lusíadas",
     src: "/assets/logos/lusiadas.png.webp",
     nameClass: "logos__name--lusiadas",
-    desc: "Private hospital network",
+    desc: "60+ hospitals and clinics",
     href: "https://www.lusiadas.pt/en",
   },
   {
@@ -39,7 +39,7 @@ const CELLS: LogoCell[] = [
     name: "Joaquim Chaves",
     src: "/assets/logos/joaquim_chaves.svg",
     nameClass: "logos__name--jcs",
-    desc: "Millions of exams / year",
+    desc: "300+ clinics",
     href: "https://jcs.pt/en",
   },
   {
