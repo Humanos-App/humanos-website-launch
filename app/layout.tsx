@@ -11,6 +11,7 @@ import {
 } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Navbar } from "@/components/chrome/Navbar";
+import { AnnouncementBanner } from "@/components/chrome/AnnouncementBanner";
 
 // Self-hosted, non-render-blocking. Variable fonts → all weights available;
 // OpenType features (ss01/cv11/tnum) still applied via CSS in globals.css.
@@ -120,6 +121,7 @@ export default function RootLayout({
         <JsonLd data={ORGANIZATION_LD} />
         <JsonLd data={WEBSITE_LD} />
         <ConsentProvider>
+          <AnnouncementBanner />
           <Navbar />
           {children}
           <FloatingApiBar />

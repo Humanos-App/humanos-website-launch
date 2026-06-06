@@ -101,6 +101,7 @@ export const DEVELOPERS_MENU: MegaMenu = {
         },
         {
           title: "VIA",
+          tag: "Coming soon",
           sub: "Open verification protocol",
           href: "#",
         },
