@@ -1,0 +1,18 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/multikey/v1"
+  ],
+  "id": "did:web:humanos.tech",
+  "verificationMethod": [
+    {
+      "id": "did:web:humanos.tech#key-1",
+      "type": "Multikey",
+      "controller": "did:web:humanos.tech",
+      "publicKeyMultibase": "z6MkwBgSY4WjNBBzfrAMQnWhCvyKN2LDQrMx8bLp1sNPwW2G"
+    }
+  ],
+  "assertionMethod": [
+    "did:web:humanos.tech#key-1"
+  ]
+}
