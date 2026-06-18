@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Homepage hero visual — two stacked elements:
  *
- *   1. A flip card on top that toggles every 8s between two views of the
+ *   1. A flip card on top that toggles every 5s between two views of the
  *      same authorization:
  *        - "Human approval"   — Maria Costa signs a casual chat-style note.
  *        - "Mandate"          — the same authorization as a machine-
@@ -91,7 +91,7 @@ export function RuntimeFlow() {
     };
   }, [isMandate]);
 
-  /* ----- flip card toggle (loop: 2s approval / 8s mandate) -----
+  /* ----- flip card toggle (loop: 5s approval / 5s mandate) -----
      Chained setTimeout so the duration matches the face that just
      became visible. State is tracked in a plain local variable
      (`current`) — calling setIsMandate as a simple value setter
@@ -108,7 +108,7 @@ export function RuntimeFlow() {
     const tick = () => {
       current = !current;
       setIsMandate(current);
-      timeoutId = window.setTimeout(tick, current ? 8_000 : 2_000);
+      timeoutId = window.setTimeout(tick, 5_000);
     };
 
     const io = new IntersectionObserver(
@@ -116,8 +116,8 @@ export function RuntimeFlow() {
         const visible = entries[0]?.isIntersecting ?? false;
         if (visible && timeoutId === null) {
           /* Approval is the initial state — first flip to mandate
-             happens after 2 seconds. */
-          timeoutId = window.setTimeout(tick, 2_000);
+             happens after 5 seconds. */
+          timeoutId = window.setTimeout(tick, 5_000);
         } else if (!visible && timeoutId !== null) {
           window.clearTimeout(timeoutId);
           timeoutId = null;
