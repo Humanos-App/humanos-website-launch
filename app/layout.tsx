@@ -121,8 +121,10 @@ export default function RootLayout({
         <JsonLd data={ORGANIZATION_LD} />
         <JsonLd data={WEBSITE_LD} />
         <ConsentProvider>
-          <AnnouncementBanner />
-          <Navbar />
+          <div className="site-chrome">
+            <AnnouncementBanner />
+            <Navbar />
+          </div>
           {children}
           <FloatingApiBar />
           <Footer />

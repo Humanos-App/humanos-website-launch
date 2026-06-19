@@ -1,7 +1,16 @@
+/* ---------- STICKY SITE CHROME ----------
+   Single sticky stack at the top of every page: announcement banner
+   on top, navbar underneath. They move together so the Mastercard
+   For Fintechs win stays in view as you scroll. */
+.site-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
 /* ---------- ANNOUNCEMENT BANNER ----------
-   Site-wide bar above the navbar. Dark surface, mono caption, scrolls
-   away naturally because it isn't sticky (the .nav below is). Whole
-   bar is a single anchor → press release. */
+   Dark surface, mono caption, whole bar is one anchor → press
+   release. Pinned at the top via .site-chrome. */
 .announce {
   display: block;
   background: var(--hm-authority);
@@ -58,11 +67,12 @@
   }
 }
 
-/* ---------- NAV ---------- */
+/* ---------- NAV ----------
+   Stickiness now lives on the .site-chrome wrapper above; the nav
+   keeps its own background + blur so it still reads as a frosted
+   bar on top of page content. */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  position: relative;
   background: rgba(244, 243, 239, 0.85);
   backdrop-filter: saturate(180%) blur(8px);
   -webkit-backdrop-filter: saturate(180%) blur(8px);
