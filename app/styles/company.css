@@ -253,4 +253,15 @@
 @media (max-width: 720px) {
   .company-page .wrap { padding: 0 20px; }
   .company-page .vision__co { margin-left: 4px; }
+  /* Drop the fixed photo height on phones. The 420px box from the
+     tablet breakpoint was much taller than the viewport is wide, so
+     object-fit: cover was cropping people off the sides. Let the
+     image's native aspect ratio drive the height here. */
+  .company-page .team__photo {
+    height: auto;
+  }
+  .company-page .team__photo img {
+    height: auto;
+    object-fit: contain;
+  }
 }
