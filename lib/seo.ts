@@ -49,6 +49,7 @@ export const ROUTES: string[] = [
   "/trust",
   "/pricing",
   "/legal/cookies",
+  "/status",
 ];
 
 /** Absolute URL for a path on the canonical origin. */
