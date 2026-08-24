@@ -18,12 +18,12 @@ type Component = {
 const COMPONENTS: Component[] = [
   {
     name: "Application",
-    description: "app.humanos.id — identity verification and credential flows",
+    description: "app.humanos.tech — identity verification and credential flows",
     status: "operational",
   },
   {
     name: "Public API",
-    description: "api.humanos.id — REST API and webhooks",
+    description: "api.humanos.tech — REST API and webhooks",
     status: "operational",
   },
   {
