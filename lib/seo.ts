@@ -50,6 +50,7 @@ export const ROUTES: string[] = [
   "/pricing",
   "/legal/cookies",
   "/status",
+  "/changelog",
 ];
 
 /** Absolute URL for a path on the canonical origin. */
