@@ -120,7 +120,9 @@ export default function StatusPage() {
             here, email{" "}
             <a href="mailto:support@humanos.tech">support@humanos.tech</a> and
             we will look at it right away. You can also write to the same
-            address to be notified about incidents by email.
+            address to be notified about incidents by email. Product
+            updates and release notes are published on the{" "}
+            <a href="/changelog">changelog</a>.
           </p>
         </div>
       </div>

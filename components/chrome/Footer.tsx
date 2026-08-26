@@ -44,6 +44,7 @@ const COLUMNS: FooterColumn[] = [
       { label: "Python SDK", href: SDKS.py },
       { label: "C# SDK", href: SDKS.cs },
       { label: "Get API keys", href: EXTERNAL_LINKS.app },
+      { label: "Changelog", href: "/changelog" },
     ],
   },
   {
