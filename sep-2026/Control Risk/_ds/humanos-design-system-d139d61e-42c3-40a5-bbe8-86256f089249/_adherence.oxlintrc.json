@@ -1,0 +1,271 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "deck-stage.js",
+              "doc-page.js",
+              "social/**",
+              "ui_kits/humanos-app/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Inter|JetBrains Mono))/i]",
+        "message": "Font not provided by the design system. Available: Inter, JetBrains Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='AgentConsoleMandate'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|status|action|subject|scope|key|ref|className|style|children)$/]",
+        "message": "<AgentConsoleMandate> doesn't accept that prop. Declared props: id, status, action, subject, scope."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SidebarMandate'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|status|action|subject|key|ref|className|style|children)$/]",
+        "message": "<SidebarMandate> doesn't accept that prop. Declared props: id, status, action, subject."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "AgentConsoleMandate": {
+        "replaces": []
+      },
+      "App": {
+        "replaces": []
+      },
+      "Dashboard": {
+        "replaces": []
+      },
+      "SidebarMandate": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--bg-authority",
+      "--bg-human",
+      "--bg-machine",
+      "--bg-page",
+      "--border-1",
+      "--border-2",
+      "--dur-base",
+      "--dur-fast",
+      "--dur-slow",
+      "--ease-exit",
+      "--ease-standard",
+      "--elev-active",
+      "--elev-base",
+      "--elev-focus",
+      "--elev-record",
+      "--fg-1",
+      "--fg-2",
+      "--fg-3",
+      "--fg-inverse",
+      "--font-features-mono",
+      "--font-features-sans",
+      "--font-mono",
+      "--font-sans",
+      "--hm-authority",
+      "--hm-chalk-0",
+      "--hm-chalk-1",
+      "--hm-chalk-2",
+      "--hm-clarity",
+      "--hm-execution",
+      "--hm-execution-wash",
+      "--hm-humanity",
+      "--hm-ink-0",
+      "--hm-ink-1",
+      "--hm-ink-2",
+      "--hm-ink-3",
+      "--hm-ink-4",
+      "--hm-line",
+      "--hm-line-dark",
+      "--hm-line-strong",
+      "--hm-pending",
+      "--hm-pending-wash",
+      "--hm-rejection",
+      "--hm-rejection-wash",
+      "--hm-surface-raised",
+      "--hm-verification",
+      "--hm-verification-wash",
+      "--r-0",
+      "--r-1",
+      "--r-2",
+      "--r-3",
+      "--r-full",
+      "--sp-1",
+      "--sp-10",
+      "--sp-11",
+      "--sp-2",
+      "--sp-3",
+      "--sp-4",
+      "--sp-5",
+      "--sp-6",
+      "--sp-7",
+      "--sp-8",
+      "--sp-9",
+      "--state-authorized",
+      "--state-executing",
+      "--state-pending",
+      "--state-rejected",
+      "--type-body-leading",
+      "--type-body-size",
+      "--type-body-size-lg",
+      "--type-body-weight",
+      "--type-hero-leading",
+      "--type-hero-size",
+      "--type-hero-track",
+      "--type-hero-weight",
+      "--type-label-leading",
+      "--type-label-size",
+      "--type-label-size-lg",
+      "--type-label-track",
+      "--type-label-weight",
+      "--type-mono-leading",
+      "--type-mono-size",
+      "--type-section-leading",
+      "--type-section-size",
+      "--type-section-size-lg",
+      "--type-section-track",
+      "--type-section-weight",
+      "--type-title-leading",
+      "--type-title-size",
+      "--type-title-size-lg",
+      "--type-title-size-sm",
+      "--type-title-track",
+      "--type-title-weight"
+    ],
+    "tokenKinds": {
+      "--hm-authority": "color",
+      "--hm-clarity": "color",
+      "--hm-humanity": "color",
+      "--hm-verification": "color",
+      "--hm-execution": "color",
+      "--hm-pending": "color",
+      "--hm-rejection": "color",
+      "--hm-verification-wash": "color",
+      "--hm-execution-wash": "color",
+      "--hm-pending-wash": "color",
+      "--hm-rejection-wash": "color",
+      "--hm-ink-0": "color",
+      "--hm-ink-1": "color",
+      "--hm-ink-2": "color",
+      "--hm-ink-3": "color",
+      "--hm-ink-4": "color",
+      "--hm-line": "color",
+      "--hm-line-strong": "color",
+      "--hm-surface-raised": "color",
+      "--hm-chalk-0": "color",
+      "--hm-chalk-1": "color",
+      "--hm-chalk-2": "color",
+      "--hm-line-dark": "color",
+      "--fg-1": "color",
+      "--fg-2": "color",
+      "--fg-3": "color",
+      "--fg-inverse": "color",
+      "--bg-page": "color",
+      "--bg-human": "color",
+      "--bg-machine": "color",
+      "--bg-authority": "color",
+      "--border-1": "color",
+      "--border-2": "color",
+      "--state-authorized": "color",
+      "--state-executing": "color",
+      "--state-pending": "color",
+      "--state-rejected": "color",
+      "--font-sans": "font",
+      "--font-mono": "font",
+      "--font-features-sans": "font",
+      "--font-features-mono": "font",
+      "--type-hero-size": "font",
+      "--type-hero-weight": "font",
+      "--type-hero-leading": "font",
+      "--type-hero-track": "font",
+      "--type-section-size": "font",
+      "--type-section-size-lg": "font",
+      "--type-section-weight": "font",
+      "--type-section-leading": "font",
+      "--type-section-track": "font",
+      "--type-title-size": "font",
+      "--type-title-size-lg": "font",
+      "--type-title-size-sm": "font",
+      "--type-title-weight": "font",
+      "--type-title-leading": "font",
+      "--type-title-track": "font",
+      "--type-body-size": "font",
+      "--type-body-size-lg": "font",
+      "--type-body-weight": "font",
+      "--type-body-leading": "font",
+      "--type-label-size": "font",
+      "--type-label-size-lg": "font",
+      "--type-label-weight": "font",
+      "--type-label-leading": "font",
+      "--type-label-track": "font",
+      "--type-mono-size": "font",
+      "--type-mono-leading": "font",
+      "--sp-1": "spacing",
+      "--sp-2": "spacing",
+      "--sp-3": "spacing",
+      "--sp-4": "spacing",
+      "--sp-5": "spacing",
+      "--sp-6": "spacing",
+      "--sp-7": "spacing",
+      "--sp-8": "spacing",
+      "--sp-9": "spacing",
+      "--sp-10": "spacing",
+      "--sp-11": "spacing",
+      "--r-0": "radius",
+      "--r-1": "spacing",
+      "--r-2": "spacing",
+      "--r-3": "spacing",
+      "--r-full": "spacing",
+      "--elev-base": "shadow",
+      "--elev-record": "shadow",
+      "--elev-active": "shadow",
+      "--elev-focus": "shadow",
+      "--ease-standard": "other",
+      "--ease-exit": "other",
+      "--dur-fast": "other",
+      "--dur-base": "other",
+      "--dur-slow": "other"
+    },
+    "fontFamilies": [
+      "Inter",
+      "JetBrains Mono"
+    ]
+  }
+}

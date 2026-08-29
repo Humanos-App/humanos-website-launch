@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/styles.css">
+  <script src="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    a { color: var(--hm-verification); text-decoration: none; }
+    a:hover { color: var(--hm-authority); }
+    div.sc-host[data-sc-name="Homepage"] { font-size: 0; }
+    @keyframes kriPanelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+      @keyframes eiPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.65; } }
+    @keyframes eiFloat { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-3px) rotate(var(--r, 0deg)); } }
+    @keyframes eiShimmer { 0% { left: -40%; } 100% { left: 100%; } }
+    @keyframes askFlow { to { background-position-y: 8px; } }
+    @keyframes nvFlowIn { to { stroke-dashoffset: -24; } }
+    @keyframes nvFlowOut { to { stroke-dashoffset: 24; } }
+  </style>
+</helmet>
+
+<div style="background:var(--hm-clarity); min-height:100vh; display:flex; flex-direction:column;">
+
+  <nav style="display:flex; align-items:center; justify-content:space-between; padding:0 var(--sp-5); height:72px; border-bottom:1px solid var(--hm-line); position:sticky; top:0; background:var(--hm-clarity); z-index:10; gap:var(--sp-3);">
+    <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+      <x-import component-from-global-scope="HumanosDesignSystem_d139d6.Mark" size="20" color="var(--hm-authority)" hint-size="20px,20px"></x-import>
+      <span style="font-size:16px; font-weight:600; letter-spacing:-0.01em; color:var(--hm-authority); white-space:nowrap;">Humanos</span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:var(--sp-4); white-space:nowrap; flex:1;">
+        <div style="position:relative;" onmouseenter="{{ openSolutions }}" onmouseleave="{{ closeSolutions }}">
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--hm-ink-2); white-space:nowrap; cursor:pointer;">Solutions <span style="font-size:9px;">▾</span></span>
+          <div style="position:absolute; top:100%; left:0; padding-top:12px; opacity:{{ solutionsOpacity }}; pointer-events:{{ solutionsPointerEvents }}; transition:opacity 140ms cubic-bezier(0.2,0,0,1);">
+            <div style="display:flex; gap:32px; background:#FFFFFF; border:1px solid var(--hm-line); border-radius:8px; padding:20px 24px; box-shadow:0 12px 32px -16px rgba(17,17,17,0.18);">
+              <div>
+                <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700;">SOLUTIONS</div>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Monitor</a>
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Control</a>
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Risk Intelligence</a>
+                  <span style="display:inline-flex; align-items:center; gap:8px; font-size:14px; color:var(--hm-ink-4); white-space:nowrap;">Marketplace <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.07em; text-transform:uppercase; font-weight:700; color:var(--hm-verification); border:1px solid var(--hm-verification); border-radius:2px; padding:2px 5px;">Coming soon</span></span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700;">INDUSTRIES</div>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">AI Builders</a>
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Insurance</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Customers</a>
+        <a href="#" style="display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Company <span style="font-size:9px;">▾</span></a>
+        <a href="#" style="display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Developers <span style="font-size:9px;">▾</span></a>
+    </div>
+    <div style="display:flex; align-items:center; gap:var(--sp-3); white-space:nowrap; flex-shrink:0;">
+      <a href="#" style="font-size:14px; color:var(--hm-ink-2); padding:10px 4px; white-space:nowrap;">Sign in</a>
+      <x-import component-from-global-scope="HumanosDesignSystem_d139d6.Button" variant="primary" style="padding:9px 14px; font-size:14px;" hint-size="auto,38px">Get API access</x-import>
+    </div>
+  </nav>
+
+  <main style="flex:1; display:flex; flex-direction:column; padding:var(--sp-8) var(--sp-7) var(--sp-6); max-width:1200px; width:100%; margin:0 auto; position:relative; box-sizing:border-box;">
+   <div style="display:flex; align-items:stretch; gap:var(--sp-8); min-height:600px;">
+
+    <div style="flex:0 1 53%; min-width:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:var(--sp-4); text-align:left; padding:var(--sp-6) 0;">
+      <span style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-3); font-weight: 600; padding: 8px 16px; border: 1px solid var(--hm-line); border-radius: 999px"><span style="width:7px; height:7px; border-radius:50%; background:var(--hm-verification); box-shadow:0 0 0 3px rgba(75,73,202,0.2); animation:eiPulse 1.8s ease-in-out infinite;"></span>The Risk Network for AI</span>
+
+      <h1 style="font-size: clamp(44px, 5.4vw, 68px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.04; color: var(--hm-authority); max-width: 14ch;">
+        <span style="color: var(--hm-verification);">AI risk.</span><br>Under control.
+      </h1>
+
+      <p style="font-size:19px; color:var(--hm-ink-2); max-width:560px; line-height:1.55; font-weight:400;">Continuously measure AI risk, build a verified risk reputation, reduce it with free controls, and insure what remains.</p>
+
+      <div style="margin-top:var(--sp-4); padding-top:var(--sp-4); border-top:1px solid var(--hm-line); width:100%; max-width:600px; display:flex; align-items:center; gap:8px 12px; flex-wrap:wrap;">
+      <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:600;">Compatible with</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:3px; background:#1A1F71; color:#fff; font-size:7px; font-weight:700; display:flex; align-items:center; justify-content:center;">VISA</span>Visa Intelligent Commerce Connect</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:3px; background:#1652F0; color:#fff; font-size:8px; font-weight:700; display:flex; align-items:center; justify-content:center;">x4</span>x402</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:3px; background:#003399; color:#FFD617; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center;">EU</span>EU Digital Identity Wallet</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:50%; background:linear-gradient(90deg,#EB001B 50%,#F79E1B 50%); flex-shrink:0;"></span>Mastercard Verifiable Intent</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:3px; background:#F4F3EF; border:1px solid var(--hm-line); color:#4285F4; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center;">G</span>Google AP2</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:5px; background:#635BFF; color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center;">S</span>Stripe Agentic Commerce</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:50%; background:#111111; color:#fff; font-size:9px; display:flex; align-items:center; justify-content:center;">◎</span>OAuth 2.0</span>
+      <span style="color:var(--hm-ink-4);">·</span>
+      <span style="font-size:13px; font-style:italic; color:var(--hm-ink-4);">and more…</span>
+      </div>
+    </div>
+
+    <div style="flex:1 1 47%; min-width:0; align-self:stretch; border:1px solid var(--hm-line); border-radius:2px; display:flex; align-items:center; justify-content:center;">
+      <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700;">Risk Network</span>
+    </div>
+   </div>
+
+  </main>
+
+  <div style="border-bottom:1px solid var(--hm-line); padding:var(--sp-6) var(--sp-7); background:var(--hm-clarity);">
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:var(--sp-4);">
+      <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-4)">Live in 350+ fintechs, hospitals, and insurers.</span>
+      <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:var(--sp-7); width:100%;">
+        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Meridian Re</span>
+        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Northstar Audit</span>
+        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Vaultline</span>
+        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Cascade Bank</span>
+        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Arcform</span>
+        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Ledgerpoint</span>
+      </div>
+    </div>
+  </div>
+
+  <div ref="{{ setProbRef }}" style="position:relative; background:#14122E; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-5);">
+
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+      <h2 style="font-size:32px; font-weight:600; letter-spacing:-0.02em; line-height:1.18; color:#F4F3EF; max-width:40ch;"><span style="color:#FF9A8B;">AI risk changes every time AI acts.</span> The old ways of measuring and controlling risk <span style="color:#FF9A8B;">no longer work</span>.</h2>
+    </div>
+
+    <div style="width:100%; max-width:640px; display:flex; align-items:stretch; gap:var(--sp-5); flex-wrap:wrap;">
+
+      <div style="flex:1 1 400px; min-width:0; display:flex; flex-direction:column; gap:10px;">
+        <div style="flex:1; box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:4px; padding:20px 22px; display:flex; flex-direction:column; box-shadow:0 12px 34px -20px rgba(75,73,202,0.5);">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid var(--hm-line);">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <div style="display:flex; align-items:center; gap:9px;">
+                <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-authority);">TREASURY-01</span>
+                <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.07em; text-transform:uppercase; color:var(--hm-verification); font-weight:700; white-space:nowrap;">Verified agent ✓</span>
+              </div>
+              <span style="font-size:11.5px; color:var(--hm-ink-3);">Acme Corp</span>
+            </div>
+            <span style="display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.07em; text-transform:uppercase; color:var(--hm-verification); font-weight:700; white-space:nowrap;"><span style="width:6px; height:6px; border-radius:50%; background:var(--hm-verification); animation:eiPulse 1.6s ease-in-out infinite;"></span>Live</span>
+          </div>
+
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.07em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700; margin-top:14px;">Live AI risk</span>
+
+          <div style="display:flex; align-items:baseline; gap:10px; margin-top:6px; height:52px;">
+            <span style="{{ probScoreStyle }}">{{ probScore }}</span>
+            <span style="font-family:var(--font-mono); font-size:18px; font-weight:700; color:var(--hm-ink-4); white-space:nowrap;">/ 100</span>
+          </div>
+
+          <div style="margin-top:10px; height:92px;">{{ probChart }}</div>
+          <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.09em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700; display:block; margin-top:6px;">Risk score / time</span>
+
+          <div style="display:flex; flex-direction:column; margin-top:auto; padding-top:12px; border-top:1px solid var(--hm-line); box-sizing:border-box; overflow:hidden;">
+            <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.07em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700; margin-bottom:4px;">Latest runtime events</span>
+            <sc-for list="{{ probEvents }}" as="ev" hint-placeholder-count="3">
+              <div style="{{ ev.rowStyle }}">
+                <span style="font-family:var(--font-mono); font-size:11px; color:var(--hm-ink-4); font-variant-numeric:tabular-nums;">{{ ev.stamp }}</span>
+                <span style="font-family:var(--font-mono); font-size:12px; color:var(--hm-authority);">{{ ev.label }}</span>
+                <span style="{{ ev.riskStyle }}">{{ ev.risk }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#F4F3EF; font-weight:700; text-align:center;">Risk continuously changes as AI acts</span>
+  </div>
+
+  <div ref="{{ setSolRef }}" style="position:relative; background:var(--hm-clarity); border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-6);">
+
+    <p style="max-width: 860px; text-align: center; font-size: 50px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.22; color: var(--hm-authority); text-wrap: pretty">Humanos makes <span style="color:var(--hm-rejection);">dynamic AI risk</span> <span style="color:var(--hm-verification);">understandable</span>, <span style="color:var(--hm-verification);">manageable</span>, and <span style="color:var(--hm-verification);">provable</span> across a <span style="color:var(--hm-verification);">shared network</span>.</p>
+
+  </div>
+
+  <div ref="{{ setKriRef }}" style="background:var(--hm-clarity); background-image:linear-gradient(to right, rgba(17,17,17,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,17,0.045) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+
+    <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
+        <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-3);">Risk Management</span>
+        <h2 style="font-size:44px; font-weight:600; letter-spacing:-0.025em; line-height:1.12; color:var(--hm-authority); display:flex; align-items:center; gap:14px; flex-wrap:wrap;"><span>Manage AI risk from <span style="color:var(--hm-verification);">end to end</span>.</span><span style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; background: var(--hm-verification); padding: 6px 12px; border-radius: 999px; white-space: nowrap">Free</span></h2>
+        <p style="font-size:17px; color:var(--hm-ink-2); line-height:1.6; max-width:600px;">Continuously score the risk behind your agents, prove it with runtime evidence, reduce it with free controls, and insure what remains.</p>
+      </div>
+    </div>
+
+    <div style="width:100%; max-width:1200px; display:flex; align-items:stretch; gap:var(--sp-5); flex-wrap:wrap;">
+
+      <div style="flex:1 1 280px; min-width:260px; display:flex; flex-direction:column; justify-content:center; gap:var(--sp-4);">
+        <sc-for list="{{ kriSteps }}" as="s" hint-placeholder-count="4">
+          <div onClick="{{ s.select }}" style="{{ s.style }}">
+            <span style="{{ s.titleStyle }}">{{ s.title }}</span>
+            <span style="{{ s.descStyle }}">{{ s.desc }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="flex:1.4 1 520px; min-width:440px; display:flex; flex-direction:column; align-items:center; gap:18px;">
+      <div style="width:100%; box-sizing:border-box; border:1px solid var(--hm-line-strong); background:#FFFFFF; border-radius:6px; padding:24px 26px; height:510px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 24px 60px -40px rgba(20,18,46,0.35);">
+
+        <div style="{{ knowPanelStyle }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--hm-line);">
+            <div style="display:flex; align-items:baseline; gap:10px;">
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-authority);">TREASURY-01</span>
+              <span style="font-size:12px; color:var(--hm-ink-3);">Acme Corp</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification); white-space:nowrap;">Verified agent ✓</span>
+          </div>
+
+          <div style="flex:1; min-height:0; display:grid; grid-template-columns:1fr 1fr; gap:26px; padding-top:16px;">
+            <div style="display:flex; flex-direction:column; min-width:0;">
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Continuous risk score</span>
+              <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;">
+                <span style="font-family:var(--font-mono); font-size:62px; font-weight:700; line-height:1; letter-spacing:-0.04em; color:var(--hm-verification); font-variant-numeric:tabular-nums;">{{ knowScore }}</span>
+                <span style="font-family:var(--font-mono); font-size:20px; font-weight:700; color:var(--hm-ink-4);">/ 100</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; margin-top:12px;">
+                <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:#FFFFFF; background:var(--hm-verification); padding:5px 9px; border-radius:2px;">Low risk</span>
+                <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--hm-verification);">↓ 4 pts this week</span>
+              </div>
+              <div style="margin-top:auto; height:104px;">{{ knowChart }}</div>
+              <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4); margin-top:6px;">Risk history / 30 days</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; min-width:0;">
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Risk drivers</span>
+              <div style="display:flex; flex-direction:column; margin-top:6px;">
+                <sc-for list="{{ knowDrivers }}" as="d" hint-placeholder-count="4">
+                  <div style="{{ d.style }}">
+                    <span style="font-size:13px; color:var(--hm-ink-2);">{{ d.label }}</span>
+                    <span style="{{ d.valStyle }}">{{ d.val }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; padding:14px 0 0 16px; border-top:1px solid var(--hm-line); border-left:2px solid var(--hm-verification); display:flex; flex-direction:column; gap:4px;">
+            <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">You now know</span>
+            <span style="font-size:14px; color:var(--hm-ink-2); line-height:1.5;">Where your AI risk comes from and how it changes.</span>
+          </div>
+        </div>
+
+        <div style="{{ provePanelStyle }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--hm-line);">
+            <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.11em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">Humanos verified profile</span>
+            <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification); white-space:nowrap;">Verified ✓</span>
+          </div>
+
+          <div style="flex:1; min-height:0; display:grid; grid-template-columns:1.15fr 1fr; gap:26px; padding-top:16px;">
+            <div style="display:flex; flex-direction:column; min-width:0;">
+              <div style="display:flex; align-items:baseline; gap:10px;">
+                <span style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--hm-authority);">TREASURY-01</span>
+                <span style="font-size:12px; color:var(--hm-ink-3);">Acme Corp</span>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4); margin-top:14px;">AI risk score</span>
+              <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;">
+                <span style="font-family:var(--font-mono); font-size:52px; font-weight:700; line-height:1; letter-spacing:-0.04em; color:var(--hm-verification); font-variant-numeric:tabular-nums;">13</span>
+                <span style="font-family:var(--font-mono); font-size:18px; font-weight:700; color:var(--hm-ink-4);">/ 100</span>
+                <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:#FFFFFF; background:var(--hm-verification); padding:5px 9px; border-radius:2px;">Low risk</span>
+              </div>
+              <div style="display:flex; flex-direction:column; margin-top:14px;">
+                <sc-for list="{{ proveRows }}" as="r" hint-placeholder-count="5">
+                  <div style="{{ r.style }}">
+                    <span style="font-size:13px; color:var(--hm-ink-2);">{{ r.label }}</span>
+                    <span style="{{ r.valStyle }}">{{ r.val }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:auto; height:56px;">{{ proveChart }}</div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; min-width:0; padding-left:24px; border-left:1px solid var(--hm-line);">
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Share your verified risk with</span>
+              <div style="display:flex; flex-direction:column; margin-top:8px;">
+                <sc-for list="{{ proveAudience }}" as="a" hint-placeholder-count="4">
+                  <div style="{{ a.style }}">
+                    <span style="font-family:var(--font-mono); font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">{{ a.label }}</span>
+                    <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--hm-verification);">→</span>
+                  </div>
+                </sc-for>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.05em; color:var(--hm-ink-3); margin-top:14px;">Verified 12 sec ago</span>
+              <a href="#" style="margin-top:auto; display:inline-flex; align-items:center; justify-content:center; height:44px; box-sizing:border-box; background:var(--hm-verification); color:#FFFFFF; border-radius:2px; font-family:var(--font-mono); font-size:11.5px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase;">Share risk profile →</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="{{ reducePanelStyle }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--hm-line);">
+            <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">Humanos controls</span>
+            <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#FFFFFF; background:var(--hm-verification); padding:4px 8px; border-radius:2px;">Free</span>
+          </div>
+
+          <div style="flex:1; min-height:0; display:grid; grid-template-columns:1fr 0.9fr; gap:26px; padding-top:16px;">
+            <div style="display:flex; flex-direction:column; min-width:0;">
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Reduce exposure</span>
+              <div style="display:flex; flex-direction:column; margin-top:6px;">
+                <sc-for list="{{ reduceControls }}" as="c" hint-placeholder-count="4">
+                  <div style="{{ c.style }}">
+                    <span style="font-size:13px; color:var(--hm-ink-2);">{{ c.label }}</span>
+                    <span style="{{ c.deltaStyle }}">{{ c.delta }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.05em; color:var(--hm-ink-3); line-height:1.5; margin-top:auto;">Humanos controls, or evidence from the controls you already run.</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; min-width:0; padding-left:24px; border-left:1px solid var(--hm-line);">
+              <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Before controls</span>
+              <div style="display:flex; align-items:baseline; gap:7px; margin-top:6px;">
+                <span style="font-family:var(--font-mono); font-size:40px; font-weight:700; line-height:1; letter-spacing:-0.035em; color:var(--hm-ink-4); font-variant-numeric:tabular-nums;">38</span>
+                <span style="font-family:var(--font-mono); font-size:15px; font-weight:700; color:var(--hm-ink-4);">/ 100</span>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:18px; font-weight:700; color:var(--hm-verification); margin-top:12px;">↓</span>
+              <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification); margin-top:12px;">After controls</span>
+              <div style="display:flex; align-items:baseline; gap:8px; margin-top:6px;">
+                <span style="font-family:var(--font-mono); font-size:64px; font-weight:700; line-height:1; letter-spacing:-0.04em; color:var(--hm-verification); font-variant-numeric:tabular-nums;">{{ reduceScore }}</span>
+                <span style="font-family:var(--font-mono); font-size:20px; font-weight:700; color:var(--hm-ink-4);">/ 100</span>
+              </div>
+              <span style="{{ reduceBadgeStyle }}">↓ 25 points lower exposure</span>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; padding:14px 0 0 16px; border-top:1px solid var(--hm-line); border-left:2px solid var(--hm-verification); display:flex; flex-direction:column; gap:4px;">
+            <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">Outcome</span>
+            <span style="font-size:14px; color:var(--hm-ink-2); line-height:1.5;">Controls reduced exposure by 25 points.</span>
+          </div>
+        </div>
+
+        <div style="{{ insurePanelStyle }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding-bottom:12px; border-bottom:1px solid var(--hm-line);">
+            <div style="display:flex; align-items:baseline; gap:9px;">
+              <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Your verified risk</span>
+              <span style="font-family:var(--font-mono); font-size:26px; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--hm-verification); font-variant-numeric:tabular-nums;">13</span>
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-ink-4);">/ 100</span>
+              <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:#FFFFFF; background:var(--hm-verification); padding:4px 8px; border-radius:2px;">Low risk</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-3);">Controls ✓</span>
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-3);">184 days history ✓</span>
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-3);">Runtime evidence ✓</span>
+            </div>
+          </div>
+
+          <div style="flex:1; min-height:0; display:flex; flex-direction:column; padding-top:16px;">
+            <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">3 insurers competing for your risk</span>
+            <div style="display:flex; flex-direction:column; margin-top:8px;">
+              <sc-for list="{{ insureOffers }}" as="o" hint-placeholder-count="3">
+                <div style="{{ o.style }}">
+                  <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-authority);">{{ o.name }}</span>
+                  <span style="{{ o.priceStyle }}">{{ o.price }}</span>
+                  <span style="{{ o.tagStyle }}">Best</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="{{ insureBestStyle }}">
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#C7C5E8;">Best available coverage</span>
+                <span style="font-family:var(--font-mono); font-size:30px; font-weight:700; line-height:1.05; letter-spacing:-0.025em; color:#FFFFFF;">$6,750 / mo</span>
+                <span style="font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.04em; color:#DEDDF4;">$5M coverage · Insurer C</span>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#FFFFFF; align-self:flex-end;">Residual risk transferred ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:center;">
+        <a href="#" style="{{ kriCtaStyle }}">{{ kriCtaLabel }}</a>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div ref="{{ setRiRef }}" style="background:#14122E; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line-dark); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+
+    <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
+        <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:#F4F3EF;">Risk Intelligence</span>
+        <h2 style="font-size:44px; font-weight:600; letter-spacing:-0.025em; line-height:1.12; color:#F4F3EF; display:flex; align-items:center; gap:14px; flex-wrap:wrap;"><span style="white-space:nowrap;">Understand the AI risk you're <span style="color:#A9A6F5;">exposed to</span>.</span><span style="font-family:var(--font-mono); font-size:16px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--hm-authority); background:#F4F3EF; padding:6px 12px; border-radius:999px; white-space:nowrap;">Custom</span></h2>
+        <p style="font-size:17px; color:#C7C5E8; line-height:1.6; max-width:640px;">The same evidence that builds an agent's risk reputation becomes continuous Risk Intelligence for insurers, banks, compliance teams and auditors.</p>
+      </div>
+    </div>
+
+    <div style="width:100%; max-width:1200px; display:flex; align-items:stretch; gap:var(--sp-4); flex-wrap:nowrap;">
+
+      <div style="flex:1 1 240px; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:4px; padding:22px 24px; display:flex; flex-direction:column; height:340px;">
+        <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Raw runtime events</span>
+        <div style="display:flex; flex-direction:column; margin-top:10px; flex:1; overflow:hidden;">
+          <sc-for list="{{ riEvents }}" as="e" hint-placeholder-count="6">
+            <div style="{{ e.style }}">
+              <span style="font-family:var(--font-mono); font-size:10px; color:var(--hm-ink-4); font-variant-numeric:tabular-nums;">{{ e.stamp }}</span>
+              <span style="{{ e.labelStyle }}">{{ e.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:0 1 130px; min-width:96px; display:flex; align-items:center; justify-content:center; gap:8px;">
+        <div style="{{ riWireStyle }}">
+          <div style="{{ riDotAStyle }}"></div>
+          <div style="{{ riDotBStyle }}"></div>
+        </div>
+        <div style="{{ riCoreStyle }}">
+          <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.11em; text-transform:uppercase; font-weight:700; color:#FFFFFF;">Humanos</span>
+          <span style="font-family:var(--font-mono); font-size:8.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:#C7C5E8; margin-top:5px;">Standardize · score</span>
+        </div>
+        <div style="{{ riWire2Style }}">
+          <div style="{{ riDotCStyle }}"></div>
+        </div>
+      </div>
+
+      <div style="{{ riCardStyle }}">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">Risk intelligence · {{ riWhoLabel }}</span>
+          <span style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);"><span style="width:6px; height:6px; border-radius:50%; background:var(--hm-verification); animation:eiPulse 1.6s ease-in-out infinite;"></span>Live</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;">
+          <span style="{{ riScoreStyle }}">{{ riScore }}</span>
+          <span style="font-family:var(--font-mono); font-size:16px; font-weight:700; color:var(--hm-ink-4);">/ 100</span>
+          <span style="{{ riArrowStyle }}">{{ riArrow }}</span>
+        </div>
+        <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4); display:block; margin-top:6px;">Agent risk score</span>
+        <div style="display:flex; flex-direction:column; margin-top:8px;">
+          <sc-for list="{{ riRows }}" as="r" hint-placeholder-count="4">
+            <div style="{{ r.style }}"><span style="font-family:var(--font-mono); font-size:11.5px; color:var(--hm-ink-3);">{{ r.k }}</span><span style="{{ r.vStyle }}">{{ r.v }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:0 1 220px; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:4px; padding:22px 24px; display:flex; flex-direction:column; gap:14px; height:340px;">
+        <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Decisions it supports</span>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <sc-for list="{{ riDecisions }}" as="d" hint-placeholder-count="4">
+            <span style="{{ d.style }}">{{ d.label }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%; max-width:1200px; display:flex; flex-direction:column; gap:8px; padding-top:var(--sp-7);">
+      <h3 style="font-size:34px; font-weight:600; letter-spacing:-0.025em; line-height:1.15; color:#F4F3EF;">Ask your <span style="color:#FF9A8B;">risk</span> and get the answer you need.</h3>
+      <span style="font-size:15px; color:#C7C5E8; line-height:1.55;">Turn continuous AI activity into answers you can act on.</span>
+    </div>
+
+    <div style="width:100%; max-width:1200px; display:flex; align-items:stretch; gap:var(--sp-4); flex-wrap:wrap;">
+
+      <div style="flex:1 1 320px; min-width:280px; display:flex; flex-direction:column;">
+        <sc-for list="{{ askItems }}" as="q" hint-placeholder-count="5">
+          <div onClick="{{ q.select }}" style="{{ q.style }}">
+            <span style="{{ q.numStyle }}">{{ q.num }}</span>
+            <div style="display:flex; flex-direction:column; gap:4px; min-width:0;">
+              <span style="{{ q.whoStyle }}">{{ q.who }}</span>
+              <span style="{{ q.qStyle }}">{{ q.q }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="flex:0 0 104px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;">
+        <div style="{{ askWireInStyle }}"></div>
+        <div style="{{ askNodeStyle }}">
+          <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; color:#FFFFFF; text-align:center; line-height:1.4;">Humanos<br>risk<br>intelligence</span>
+        </div>
+        <div style="{{ askWireOutStyle }}"></div>
+      </div>
+
+      <div style="flex:1.6 1 480px; min-width:400px; box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:4px; padding:22px 24px; height:430px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 20px 50px -34px rgba(75,73,202,0.5);">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:12px; border-bottom:1px solid var(--hm-line);">
+          <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.11em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">Humanos risk intelligence</span>
+          <span style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);"><span style="width:6px; height:6px; border-radius:50%; background:var(--hm-verification); animation:eiPulse 1.6s ease-in-out infinite;"></span>Live</span>
+        </div>
+
+        <div style="{{ askBodyStyle }}">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4); margin-top:16px;">Query</span>
+          <span style="font-size:15px; color:var(--hm-ink-2); line-height:1.5; margin-top:5px;">{{ askQuery }}</span>
+
+          <div style="display:flex; align-items:flex-end; gap:26px; flex-wrap:wrap; margin-top:18px; padding-bottom:16px; border-bottom:1px solid var(--hm-line);">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">{{ askVerdictLabel }}</span>
+              <span style="font-family:var(--font-mono); font-size:38px; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--hm-verification);">{{ askVerdict }}</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">{{ askMetricLabel }}</span>
+              <span style="font-family:var(--font-mono); font-size:38px; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--hm-authority); font-variant-numeric:tabular-nums;">{{ askMetric }}</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; margin-top:2px;">
+            <sc-for list="{{ askRows }}" as="r" hint-placeholder-count="4">
+              <div style="{{ r.style }}">
+                <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.07em; text-transform:uppercase; color:var(--hm-ink-3);">{{ r.k }}</span>
+                <span style="{{ r.vStyle }}">{{ r.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4); margin-top:auto; padding-top:14px;">Based on continuous runtime evidence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--hm-clarity); border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7);">
+    <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-8); align-items:center;">
+
+      <div style="display:flex; flex-direction:column; gap:var(--sp-5); max-width:540px;">
+        <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; font-weight:600; color:var(--hm-ink-3);">[The risk network]</span>
+        <h2 style="font-size:44px; font-weight:600; letter-spacing:-0.025em; line-height:1.12; color:var(--hm-authority);"><span style="color:var(--hm-verification);">Build a risk reputation once.</span> Use it everywhere.</h2>
+        <p style="font-size:17px; color:var(--hm-ink-2); line-height:1.6;">Every AI agent builds a continuously evolving risk profile from its identity, authority, controls and runtime activity.</p>
+        <p style="font-size:15px; color:var(--hm-ink-3); line-height:1.65;">Its Risk Score and verified history can be reused across customers, platforms, banks, insurers and other participants in the network.</p>
+        <p style="font-size:20px; font-weight:600; letter-spacing:-0.015em; line-height:1.35; color:var(--hm-authority);">Your AI doesn't start from zero every time someone needs to trust it.</p>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:var(--sp-4); padding-left:20px; border-left:1px solid var(--hm-verification);">
+          <h3 style="font-size:30px; font-weight:600; letter-spacing:-0.02em; line-height:1.15; color:var(--hm-verification);">Risk becomes portable.</h3>
+          <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; color:var(--hm-ink-2);">Measure once. Verify continuously. Reuse across the network.</span>
+        </div>
+      </div>
+
+      <div style="position:relative; min-height:560px; box-sizing:border-box;">
+
+        <svg viewBox="0 0 600 520" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%;" fill="none">
+          <line x1="150" y1="70" x2="210" y2="238" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowIn 2.4s linear infinite;"></line>
+          <line x1="150" y1="260" x2="210" y2="260" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowIn 2.4s linear infinite;"></line>
+          <line x1="150" y1="450" x2="210" y2="282" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowIn 2.4s linear infinite;"></line>
+          <line x1="390" y1="248" x2="450" y2="50" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowOut 2.8s linear infinite;"></line>
+          <line x1="390" y1="254" x2="450" y2="190" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowOut 2.8s linear infinite;"></line>
+          <line x1="390" y1="266" x2="450" y2="330" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowOut 2.8s linear infinite;"></line>
+          <line x1="390" y1="272" x2="450" y2="470" stroke="var(--hm-verification)" stroke-width="1" stroke-dasharray="3 9" style="animation:nvFlowOut 2.8s linear infinite;"></line>
+        </svg>
+
+        <span style="position:absolute; top:0; left:0; font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Evidence in →</span>
+        <span style="position:absolute; top:0; right:0; font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">→ Verified risk out</span>
+
+        <div style="position:absolute; left:0; top:13.5%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-line-strong); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Runtime platform</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Runtime evidence</span>
+        </div>
+        <div style="position:absolute; left:0; top:50%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-line-strong); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Wallet / payments</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Transaction evidence</span>
+        </div>
+        <div style="position:absolute; left:0; top:86.5%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-line-strong); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Humanos controls</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Authorization + authority</span>
+        </div>
+
+        <div style="position:absolute; left:50%; top:50%; width:32%; transform:translate(-50%,-50%); box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:2px; padding:16px 16px; display:flex; flex-direction:column; gap:5px; box-shadow:0 18px 44px -26px rgba(75,73,202,0.6);">
+          <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:var(--hm-authority);">TREASURY-01</span>
+          <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.07em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">Verified agent ✓</span>
+          <div style="display:flex; align-items:baseline; gap:6px; margin-top:8px; padding-top:10px; border-top:1px solid var(--hm-line);">
+            <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Risk score</span>
+            <span style="font-family:var(--font-mono); font-size:26px; font-weight:700; line-height:1; letter-spacing:-0.03em; color:var(--hm-verification); font-variant-numeric:tabular-nums; margin-left:auto;">13</span>
+          </div>
+        </div>
+
+        <div style="position:absolute; right:0; top:9.6%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Customer</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Consumes verified profile</span>
+        </div>
+        <div style="position:absolute; right:0; top:36.5%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Bank</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Consumes Risk Intelligence</span>
+        </div>
+        <div style="position:absolute; right:0; top:63.5%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Insurer</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Prices / underwrites risk</span>
+        </div>
+        <div style="position:absolute; right:0; top:90.4%; width:26%; transform:translateY(-50%); box-sizing:border-box; border:1px solid var(--hm-verification); background:#FFFFFF; border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+          <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Auditor</span>
+          <span style="font-size:11px; color:var(--hm-ink-3); line-height:1.35;">Verifies evidence</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div style="padding:var(--sp-10) var(--sp-7); display:flex; align-items:center; justify-content:center; background:#14122E; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px;">
+    <div style="max-width:800px; margin:0 auto; text-align:center;">
+      <p style="font-size: 30px; font-weight: 500; font-style: italic; color: #F4F3EF; line-height: 1.5; letter-spacing: -0.01em">"Your execution receipts solve the hardest problem in underwriting AI liability, establishing the triggering event and the scope of authority at the moment of execution. <span style="font-weight:700;">That is what makes this class of risk insurable at all.</span>"</p>
+      <div style="margin-top: var(--sp-3); font-size: 20px; color: #C7C5E8; font-style: italic">Mehdi Chaabi, CEO of <a href="https://insurenow.eu/" target="_blank">InsureNow</a></div>
+    </div>
+  </div>
+
+  <div style="padding:var(--sp-10) 0;">
+    <div style="max-width:1200px; margin:0 auto; padding:0 var(--sp-7); display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-6); flex-wrap:wrap;">
+      <div>
+        <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--hm-ink-3); font-weight:600;">CUSTOMER STORIES</span>
+        <h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; color:var(--hm-authority); margin-top:10px;">AI acts differently everywhere. <span style="color:var(--hm-verification);">Risk needs one network.</span></h2>
+      </div>
+      <span style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--hm-verification); cursor:pointer; white-space:nowrap;">View all customer stories →</span>
+    </div>
+
+    <div style="position:relative; margin-top:var(--sp-6); overflow:hidden;">
+      <div ref="{{ setCarouselRef }}" style="display:flex; gap:20px; transform:translateX(calc(-{{ storyIdx }} * (85% + 20px))); transition:transform 460ms cubic-bezier(0.2,0,0,1); padding-left:max(var(--sp-7), calc((100vw - 1200px) / 2 + var(--sp-7))); padding-right:20px;">
+
+        <div style="flex:0 0 85%; max-width:1080px; position:relative; height:500px; border-radius:12px; overflow:hidden;">
+          <image-slot id="story-numo" shape="rect" placeholder="Treasury / institutional finance operations environment" style="position:absolute; inset:0;"></image-slot>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
+          <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
+            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[FINANCE]</span>
+            <div style="font-size:14px; color:#F4F3EF; margin-top:6px; font-weight:600;">Numo</div>
+            <h3 style="font-size:28px; font-weight:600; color:#F4F3EF; line-height:1.25; margin-top:14px;">Controlling how AI moves money.</h3>
+            <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Numo uses Humanos to verify AI agent identity, delegated authority and human authorization before executing payments and treasury operations.</p>
+            <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
+          </div>
+        </div>
+
+        <div style="flex:0 0 85%; max-width:1080px; position:relative; height:500px; border-radius:12px; overflow:hidden;">
+          <image-slot id="story-arcrisk" shape="rect" placeholder="Commercial underwriting / insurance operations environment" style="position:absolute; inset:0;"></image-slot>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
+          <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
+            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[INSURANCE]</span>
+            <div style="font-size:14px; color:#F4F3EF; margin-top:6px; font-weight:600;">ArcRisk</div>
+            <h3 style="font-size:28px; font-weight:600; color:#F4F3EF; line-height:1.25; margin-top:14px;">Making AI insurable.</h3>
+            <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">ArcRisk uses Humanos Risk Intelligence to evaluate AI risk with verifiable signals from real runtime activity.</p>
+            <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
+          </div>
+        </div>
+
+        <div style="flex:0 0 85%; max-width:1080px; position:relative; height:500px; border-radius:12px; overflow:hidden;">
+          <image-slot id="story-lusiadas" shape="rect" placeholder="Hospital corridor / clinical operations environment" style="position:absolute; inset:0;"></image-slot>
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
+          <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
+            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[HEALTHCARE]</span>
+            <div style="font-size:14px; color:#F4F3EF; margin-top:6px; font-weight:600;">Lusíadas</div>
+            <h3 style="font-size:28px; font-weight:600; color:#F4F3EF; line-height:1.25; margin-top:14px;">Enforcing consent across healthcare.</h3>
+            <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Lusíadas uses Humanos to capture, verify and enforce patient authorization across healthcare operations.</p>
+            <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:var(--sp-5);">
+      <div onclick="{{ carouselPrev }}" style="width:36px; height:36px; border:1px solid var(--hm-line-strong); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--hm-authority);">←</div>
+      <div onclick="{{ carouselNext }}" style="width:36px; height:36px; border:1px solid var(--hm-line-strong); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--hm-authority);">→</div>
+    </div>
+
+
+  </div>
+
+  <div style="padding:var(--sp-10) var(--sp-7); background:var(--hm-clarity); border-top:1px solid var(--hm-line);">
+    <div style="max-width:1320px; margin:0 auto; display:flex; align-items:stretch; gap:var(--sp-5); flex-wrap:wrap;">
+
+      <div style="flex:1 1 220px; min-width:200px; display:flex; flex-direction:column; gap:14px; justify-content:center;">
+        <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--hm-ink-3); font-weight:700;">For developers</span>
+        <h2 style="font-size:32px; font-weight:600; letter-spacing:-0.025em; line-height:1.14; color:var(--hm-authority);">One risk layer.<br>Multiple ways to integrate.</h2>
+        <p style="font-size:15px; color:var(--hm-ink-2); line-height:1.6;">Use the SDK to instrument your agents in minutes, or connect directly through the API. Continuously score AI risk, enforce controls, and consume Risk Intelligence from the same infrastructure.</p>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+          <a href="#" style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-verification);">→ Install the SDK</a>
+          <a href="#" style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-verification);">→ Explore the API</a>
+        </div>
+      </div>
+
+      <div style="flex:1.1 1 270px; min-width:250px; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:6px; padding:18px 18px; display:flex; flex-direction:column; gap:12px;">
+        <div style="border:1px solid var(--hm-line-strong); border-radius:4px; padding:14px 16px; text-align:center;">
+          <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Your agent / system</span>
+        </div>
+        <div style="display:flex; justify-content:center; font-family:var(--font-mono); font-size:13px; color:var(--hm-line-strong);">↓</div>
+        <div style="display:flex; align-items:stretch; gap:10px;">
+        <div style="flex:1 1 0; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line-strong); border-radius:4px; padding:13px 12px; display:flex; flex-direction:column; gap:7px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Humanos SDK</span>
+          <span style="font-size:12px; color:var(--hm-ink-3); line-height:1.45;">Instrument your agents</span>
+          <div style="display:flex; flex-direction:column; gap:5px; margin-top:4px;">
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Runtime events</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Existing guardrails</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Governance</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Execution</span>
+          </div>
+        </div>
+        <div style="flex:1 1 0; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line-strong); border-radius:4px; padding:13px 12px; display:flex; flex-direction:column; gap:7px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Humanos API</span>
+          <span style="font-size:12px; color:var(--hm-ink-3); line-height:1.45;">Programmatic access to the risk layer</span>
+          <div style="display:flex; flex-direction:column; gap:5px; margin-top:4px;">
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Send events</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Query intelligence</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Evaluate risk</span>
+            <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--hm-ink-2);">Enforce controls</span>
+          </div>
+        </div>
+        </div>
+        <div style="display:flex; justify-content:center; font-family:var(--font-mono); font-size:13px; color:var(--hm-verification);">↓</div>
+
+        <div style="background:var(--hm-verification); border-radius:4px; padding:18px 20px; display:flex; flex-direction:column; gap:10px; box-shadow:0 16px 40px -28px rgba(75,73,202,0.8);">
+          <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.11em; text-transform:uppercase; font-weight:700; color:#FFFFFF;">Humanos · AI risk layer</span>
+          <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#C7C5E8; width:100%;">Continuous risk score</span>
+            <span style="font-family:var(--font-mono); font-size:34px; font-weight:700; line-height:1; letter-spacing:-0.03em; color:#FFFFFF; font-variant-numeric:tabular-nums;">38</span>
+            <span style="font-family:var(--font-mono); font-size:16px; font-weight:700; color:#C7C5E8;">/ 100</span>
+            <span style="display:inline-flex; align-items:center; gap:6px; margin-left:auto; font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#FFFFFF;"><span style="width:6px; height:6px; border-radius:50%; background:#FFFFFF; animation:eiPulse 1.6s ease-in-out infinite;"></span>Live</span>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; font-family:var(--font-mono); font-size:13px; color:var(--hm-verification);">↓</div>
+
+        <div style="display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px;">
+          <sc-for list="{{ devOutputs }}" as="o" hint-placeholder-count="6">
+            <div style="border:1px solid var(--hm-line-strong); border-radius:4px; padding:11px 12px;">
+              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-verification);">{{ o.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="flex:1.1 1 270px; min-width:250px; display:flex;">
+        <div style="flex:1; min-width:0; background:#141319; border:1px solid var(--hm-line-dark); border-radius:6px; overflow:hidden; display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:stretch; flex-wrap:wrap; border-bottom:1px solid var(--hm-line-dark);">
+            <sc-for list="{{ devTabs }}" as="t" hint-placeholder-count="4">
+              <div onclick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</div>
+            </sc-for>
+          </div>
+          <div style="flex:1; padding:18px 16px; font-family:var(--font-mono); font-size:11px; line-height:1.65; color:var(--hm-clarity); box-sizing:border-box; overflow-wrap:break-word;">
+            <div style="{{ devBodyStyle }}">
+              <div style="color:#8B89E8; font-weight:700;">{{ devCall }}</div>
+              <div style="margin-top:14px;">
+                <sc-for list="{{ devReqLines }}" as="l" hint-placeholder-count="5">
+                  <div style="{{ l.style }}">{{ l.text }}</div>
+                </sc-for>
+              </div>
+              <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--hm-line-dark);">
+                <sc-for list="{{ devResLines }}" as="l" hint-placeholder-count="6">
+                  <div style="{{ l.style }}">{{ l.text }}</div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="background:#14122E; position:relative; overflow:hidden; padding:var(--sp-9) var(--sp-7) 0;">
+
+    <svg style="position:absolute; top:-40px; left:-60px; width:340px; height:340px; opacity:0.5;" viewBox="0 0 340 340" fill="none">
+      <circle cx="170" cy="170" r="2.5" fill="#8B89E8"></circle>
+      <circle cx="60" cy="90" r="2" fill="#5F5DA8"></circle>
+      <circle cx="260" cy="60" r="2" fill="#5F5DA8"></circle>
+      <circle cx="40" cy="230" r="2" fill="#5F5DA8"></circle>
+      <line x1="170" y1="170" x2="60" y2="90" stroke="#5F5DA8" stroke-width="1"></line>
+      <line x1="170" y1="170" x2="260" y2="60" stroke="#5F5DA8" stroke-width="1"></line>
+      <line x1="170" y1="170" x2="40" y2="230" stroke="#5F5DA8" stroke-width="1"></line>
+    </svg>
+    <svg style="position:absolute; bottom:-30px; right:-50px; width:300px; height:300px; opacity:0.5;" viewBox="0 0 300 300" fill="none">
+      <circle cx="150" cy="150" r="2.5" fill="#8B89E8"></circle>
+      <circle cx="250" cy="90" r="2" fill="#5F5DA8"></circle>
+      <circle cx="230" cy="230" r="2" fill="#5F5DA8"></circle>
+      <circle cx="70" cy="200" r="2" fill="#5F5DA8"></circle>
+      <line x1="150" y1="150" x2="250" y2="90" stroke="#5F5DA8" stroke-width="1"></line>
+      <line x1="150" y1="150" x2="230" y2="230" stroke="#5F5DA8" stroke-width="1"></line>
+      <line x1="150" y1="150" x2="70" y2="200" stroke="#5F5DA8" stroke-width="1"></line>
+    </svg>
+
+    <div style="position:relative; max-width:900px; margin:0 auto; text-align:center;">
+      <h2 style="font-size:64px; font-weight:600; letter-spacing:-0.03em; line-height:1.05; color:#F4F3EF;">AI risk.<br><span style="color:#F4F3EF;">Under control.</span></h2>
+      <div style="margin-top:var(--sp-5); display:flex; align-items:center; justify-content:center; gap:16px;">
+        <a href="#" style="display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 30px; box-sizing:border-box; background:#FFFFFF; color:#111111; border-radius:4px; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">Read Docs</a>
+        <a href="#" style="display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 30px; box-sizing:border-box; background:#FFFFFF; color:#111111; border-radius:4px; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;">Book a Call</a>
+      </div>
+    </div>
+
+    <div style="position:relative; max-width:1280px; margin:0 auto; margin-top:var(--sp-8); padding:var(--sp-5) 0; border-top:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+      <div style="display:flex; align-items:center; gap:24px;">
+        <a href="#" style="font-size:12px; color:#7A78AE;">Terms</a>
+        <a href="#" style="font-size:12px; color:#7A78AE;">Privacy</a>
+        <a href="#" style="font-size:12px; color:#7A78AE;">Security</a>
+        <a href="#" style="font-size:12px; color:#7A78AE;">DPA</a>
+      </div>
+      <span style="font-size:12px; color:#7A78AE;">© Humanos 2026</span>
+    </div>
+
+  <div data-pill="1" style="{{ pillWrapStyle }}">
+    <div style="{{ pillTipStyle }}">
+      Click to copy a setup prompt for your AI coding tool
+      <span style="position:absolute; bottom:-5px; left:50%; margin-left:-5px; width:10px; height:10px; background:var(--hm-verification); transform:rotate(45deg);"></span>
+    </div>
+
+      <div ref="{{ setPillRef }}" onClick="{{ copyPrompt }}" onMouseOver="{{ tipOn }}" onMouseOut="{{ tipOff }}" style="{{ pillStyle }}">
+        <span style="{{ pillTextStyle }}">{{ pillText }}</span>
+        <span style="{{ pillSparkStyle }}">✦</span>
+        <div style="display:flex; align-items:center; gap:9px;">
+          <div onClick="{{ logoClaude.select }}" onMouseOver="{{ logoClaude.hoverOn }}" onMouseOut="{{ logoClaude.hoverOff }}" style="{{ logoClaude.style }}">
+            <div style="{{ logoClaude.capStyle }}">Claude Code</div>
+            <img src="logos/claude-symbol.webp" alt="Claude Code" style="{{ logoClaude.logoStyle }}">
+          </div>
+          <div onClick="{{ logoCursor.select }}" onMouseOver="{{ logoCursor.hoverOn }}" onMouseOut="{{ logoCursor.hoverOff }}" style="{{ logoCursor.style }}">
+            <div style="{{ logoCursor.capStyle }}">Cursor</div>
+            <img src="logos/cursor.png" alt="Cursor" style="{{ logoCursor.logoStyle }}">
+          </div>
+          <div onClick="{{ logoCodex.select }}" onMouseOver="{{ logoCodex.hoverOn }}" onMouseOut="{{ logoCodex.hoverOff }}" style="{{ logoCodex.style }}">
+            <div style="{{ logoCodex.capStyle }}">Codex</div>
+            <img src="logos/codex.png" alt="Codex" style="{{ logoCodex.logoStyle }}">
+          </div>
+          <div onClick="{{ logoWindsurf.select }}" onMouseOver="{{ logoWindsurf.hoverOn }}" onMouseOut="{{ logoWindsurf.hoverOff }}" style="{{ logoWindsurf.style }}">
+            <div style="{{ logoWindsurf.capStyle }}">Windsurf</div>
+            <img src="logos/windsurf.webp" alt="Windsurf" style="{{ logoWindsurf.logoStyle }}">
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div>
+</div></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static PROMPTS = {
+    Claude: "Install the Humanos SDK in this project and configure the Humanos Risk Score for its AI agents. Identify agent actions that create economic exposure and instrument them so Humanos can continuously risk-score their activity. Preserve existing agent behavior and controls, follow the official Humanos integration documentation, and verify that risk events are successfully reaching Humanos.",
+    Cursor: null,
+    Codex: null,
+    Windsurf: null,
+  };
+
+  static BASE_PROMPT = "Install the Humanos SDK in this project and configure the Humanos Risk Score for its AI agents. Identify agent actions that create economic exposure and instrument them so Humanos can continuously risk-score their activity. Preserve existing agent behavior and controls, follow the official Humanos integration documentation, and verify that risk events are successfully reaching Humanos.";
+
+  state = { progress: 0, progress2: 0, enfTick: 0, storyIdx: 0, solutionsOpen: false, agent: 'Claude', copied: false, tip: false, hoverAgent: null, pillClosed: false, narrow: typeof window !== 'undefined' && window.innerWidth < 720, probT: 0, solT: 0, kriStep: 0, kriT: 0, riWho: null, riT: 0, headT: 0 };
+
+  static PROB_EVENTS = [
+    { label: '+$50K payment', risk: 24, ok: false },
+    { label: 'New destination', risk: 41, ok: false },
+    { label: 'Human Authorization ✔', risk: 19, ok: true },
+    { label: 'Authority expanded', risk: 38, ok: false },
+    { label: 'Transaction limit enforced ✔', risk: 16, ok: true },
+    { label: 'Human Authorization missing', risk: 67, ok: false },
+    { label: 'Policy re-evaluated ✔', risk: 34, ok: true },
+    { label: 'New counterparty', risk: 52, ok: false },
+    { label: 'Scope narrowed ✔', risk: 21, ok: true },
+    { label: '+$180K payment', risk: 45, ok: false },
+  ];
+  static PROB_STEP = 1.35;
+  static PROB_LOOP = 1.35 * 11;
+
+  probVals() {
+    this.ensureClock();
+    const T = this.state.probT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const evs = Component.PROB_EVENTS;
+    const step = Component.PROB_STEP;
+    const ease = (x) => x < 0 ? 0 : x > 1 ? 1 : 1 - Math.pow(1 - x, 3);
+
+    const pts = [{ risk: 18 }];
+    for (let i = 0; i < evs.length; i++) pts.push({ risk: evs[i].risk, label: evs[i].label, ok: evs[i].ok, t: (i + 1) * step });
+
+    const idx = Math.min(evs.length, Math.floor(T / step));
+    const frac = ease((T - idx * step) / step);
+    const cur = idx === 0 ? 18 : pts[idx].risk;
+    const nxt = idx < evs.length ? pts[idx + 1].risk : cur;
+    const live = Math.round(cur + (nxt - cur) * frac);
+
+    // chart geometry
+    const W = 100, H = 100, n = evs.length + 1;
+    const xAt = (i) => (i / (n - 1)) * W;
+    const yAt = (r) => H - (Math.min(100, r) / 100) * H;
+    const path = [];
+    for (let i = 0; i <= idx; i++) path.push([xAt(i), yAt(pts[i].risk)]);
+    if (idx < evs.length) {
+      const x = xAt(idx) + (xAt(idx + 1) - xAt(idx)) * frac;
+      path.push([x, yAt(live)]);
+    }
+    const d = path.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' ');
+    const area = d + ' L' + path[path.length - 1][0].toFixed(2) + ' ' + H + ' L' + path[0][0].toFixed(2) + ' ' + H + ' Z';
+    const h = React.createElement;
+    const chart = h('svg', {
+      viewBox: '0 0 100 100', preserveAspectRatio: 'none',
+      style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
+    }, [
+      ...[25, 50, 75].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: '#EFEDE7', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
+      h('line', { key: 'gb', x1: 0, y1: yAt(18), x2: 100, y2: yAt(18), stroke: '#DDD9D0', strokeWidth: 1, strokeDasharray: '3 3', vectorEffect: 'non-scaling-stroke' }),
+      h('line', {
+        key: 'now', x1: path[path.length - 1][0], y1: 0, x2: path[path.length - 1][0], y2: H,
+        stroke: '#4B49CA', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke',
+      }),
+      h('path', { key: 'p', d, fill: 'none', stroke: '#4B49CA', strokeWidth: 1.5, strokeLinejoin: 'round', strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      ...path.slice(0, -1).flatMap((p, i) => [
+        h('path', { key: 'mo' + i, d: 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'l0 0', stroke: '#4B49CA', strokeWidth: 6, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+        h('path', { key: 'mi' + i, d: 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'l0 0', stroke: '#FFFFFF', strokeWidth: 3.4, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      ]),
+      h('path', {
+        key: 'cur',
+        d: 'M' + path[path.length - 1][0].toFixed(2) + ' ' + path[path.length - 1][1].toFixed(2) + 'l0 0',
+        stroke: '#4B49CA', strokeWidth: 8, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke',
+      }),
+    ]);
+
+    const startSec = 41 * 60 + 2;
+    const shown = [];
+    for (let i = Math.max(0, idx - 3); i < idx; i++) {
+      void 0;
+      const total = startSec + (i + 1) * 7;
+      const mm = String(Math.floor(total / 60)).padStart(2, '0');
+      const ss = String(total % 60).padStart(2, '0');
+      shown.push({
+        blank: false,
+        stamp: '10:' + mm + ':' + ss,
+        label: evs[i].label,
+        risk: 'RISK ' + evs[i].risk,
+        up: i === 0 ? false : evs[i].risk > evs[i - 1].risk,
+        ok: evs[i].ok,
+        fresh: i === idx - 1,
+      });
+    }
+    while (shown.length < 3) shown.unshift({ blank: true, stamp: '', label: '', risk: '', up: false, ok: false, fresh: false });
+
+    const probUp = idx === 0 ? false : nxt > cur || (idx >= evs.length && cur > (evs.length > 1 ? evs[evs.length - 2].risk : 18));
+    return {
+      probScore: String(live),
+      probScoreStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '48px', fontWeight: 700,
+        lineHeight: 1, letterSpacing: '-0.03em', fontVariantNumeric: 'tabular-nums',
+        color: probUp ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        transition: 'color 260ms ' + ez,
+      },
+      probChart: chart,
+      probDivergeText: '18 ≠ ' + live,
+      probDivergeStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+        letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+        color: 'var(--hm-verification)', border: '1px solid var(--hm-verification)',
+        borderRadius: '2px', padding: '3px 8px', marginLeft: 'auto',
+        opacity: idx >= 3 ? 1 : 0,
+        transition: 'opacity 300ms ' + ez,
+      },
+      probEvents: shown.map((e, i) => ({
+        stamp: e.stamp,
+        label: e.label,
+        risk: e.risk,
+        rowStyle: {
+          display: 'flex', alignItems: 'center', gap: '14px',
+          height: '25px', boxSizing: 'border-box', padding: '4px 0',
+          borderBottom: e.blank || i === shown.length - 1 ? 'none' : '1px solid var(--hm-line)',
+          opacity: e.blank ? 0 : (e.fresh ? Math.min(1, 0.35 + frac * 1.3) : 1),
+          transition: 'opacity 200ms linear',
+        },
+        riskStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+          marginLeft: 'auto', whiteSpace: 'nowrap',
+          color: e.up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        },
+      })),
+    };
+  }
+
+  static SOL_LOOP = 12.0;
+
+  solVals() {
+    this.ensureClock();
+    const T = this.state.solT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const seg = (a, b) => Math.min(1, Math.max(0, (T - a) / (b - a)));
+    const ease = (x) => 1 - Math.pow(1 - x, 3);
+    const fade = (at, dy) => ({
+      opacity: T >= at ? 1 : 0,
+      transform: T >= at ? 'translateY(0)' : 'translateY(' + (dy || 8) + 'px)',
+      transition: 'opacity 380ms ' + ez + ', transform 380ms ' + ez,
+    });
+    const wire = (a, b) => ({
+      position: 'relative', flex: '0 1 70px', minWidth: '24px', alignSelf: 'center', height: '1px',
+      background: T >= b ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+      transition: 'background 300ms ' + ez,
+    });
+    const dot = (a, b) => ({
+      position: 'absolute', top: '-3px', left: (seg(a, b) * 100) + '%',
+      width: '7px', height: '7px', marginLeft: '-3px', borderRadius: '50%',
+      background: 'var(--hm-verification)',
+      opacity: T >= a && T <= b + 0.15 ? 1 : 0,
+      transition: 'opacity 160ms linear',
+    });
+    const chip = (on, hero) => ({
+      fontFamily: 'var(--font-mono)', fontSize: '9.5px', fontWeight: 700,
+      letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+      padding: '5px 9px', borderRadius: '2px',
+      color: hero ? '#FFFFFF' : 'var(--hm-ink-2)',
+      background: hero ? 'var(--hm-verification)' : 'transparent',
+      border: '1px solid ' + (hero ? 'var(--hm-verification)' : 'var(--hm-line-strong)'),
+      opacity: on ? 1 : 0,
+      transform: on ? 'translateY(0)' : 'translateY(4px)',
+      transition: 'opacity 240ms ' + ez + ', transform 240ms ' + ez,
+    });
+
+    const rise = ease(seg(1.9, 2.7));
+    const drop = ease(seg(4.0, 4.9));
+    const score = Math.max(0, Math.round(38 * rise - 25 * drop));
+    const reduced = T >= 4.3;
+
+    const knowVals = [18, 24, 41, 19, 38, 26];
+    const knowIdx = Math.min(knowVals.length, Math.floor(seg(0.6, 5.6) * knowVals.length) + 1);
+
+    const redDrop = ease(seg(4.0, 4.9));
+    const redScore = Math.round(38 - 25 * redDrop);
+    const redCtrls = [
+      { t: 3.0, label: 'Human Authorization' },
+      { t: 3.5, label: 'Transaction Limit enforced' },
+      { t: 4.0, label: 'Runtime Policy applied' },
+    ];
+    const bidRows = [
+      { t: 6.4, name: 'Insurer A', terms: 'Bid received' },
+      { t: 7.0, name: 'Insurer B', terms: 'Bid received' },
+      { t: 7.6, name: 'Insurer C', terms: 'Bid received' },
+    ];
+
+    return {
+      solLeftStyle: { ...fade(0.3), flex: '0 1 210px', minWidth: 0, display: 'flex', flexDirection: 'column' },
+      solWire1Style: wire(1.0, 1.7),
+      solDot1Style: dot(1.0, 1.7),
+      solScoreStyle: {
+        ...fade(0.3), flex: '1.6 1 380px', minWidth: 0, boxSizing: 'border-box',
+        display: 'flex', flexDirection: 'column',
+        background: '#FFFFFF', borderRadius: '4px', padding: '20px 24px',
+        border: '1px solid var(--hm-verification)',
+        boxShadow: '0 14px 40px -20px rgba(75,73,202,0.55)',
+      },
+      solScore: String(score),
+      solBarStyle: {
+        position: 'absolute', left: 0, top: 0, bottom: 0, width: score + '%',
+        background: 'var(--hm-verification)', transition: 'width 160ms linear',
+      },
+      solReducedStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+        color: 'var(--hm-verification)', border: '1px solid var(--hm-verification)',
+        borderRadius: '2px', padding: '3px 7px',
+        opacity: reduced ? 1 : 0, transition: 'opacity 300ms ' + ez,
+      },
+      solCtrlStyle: {
+        ...fade(3.0, -6), boxSizing: 'border-box', width: '100%',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+        border: '1px solid ' + (reduced ? 'var(--hm-verification)' : 'var(--hm-line-strong)'),
+        background: reduced ? 'rgba(75,73,202,0.05)' : 'transparent',
+        borderRadius: '4px', padding: '12px 16px',
+        transition: 'opacity 380ms ' + ez + ', transform 380ms ' + ez + ', border-color 320ms ' + ez + ', background 320ms ' + ez,
+      },
+      solVertWireStyle: {
+        position: 'relative', width: '1px', height: '48px',
+        background: reduced ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+        opacity: T >= 3.3 ? 1 : 0,
+        transition: 'opacity 300ms ' + ez + ', background 300ms ' + ez,
+      },
+      solReduceLabelStyle: {
+        position: 'absolute', left: '12px', top: '2px', whiteSpace: 'nowrap',
+        fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--hm-verification)',
+        opacity: T >= 3.6 ? 1 : 0, transition: 'opacity 300ms ' + ez,
+      },
+      solVertDotStyle: {
+        position: 'absolute', left: '-3px', top: (seg(3.6, 4.2) * 100) + '%',
+        width: '7px', height: '7px', borderRadius: '50%', background: 'var(--hm-verification)',
+        opacity: T >= 3.6 && T <= 4.35 ? 1 : 0, transition: 'opacity 160ms linear',
+      },
+      solWire2Style: wire(5.4, 6.1),
+      solDot2Style: dot(5.4, 6.1),
+      solRightStyle: { ...fade(0.3), flex: '0 1 210px', minWidth: 0, display: 'flex', flexDirection: 'column' },
+
+    };
+  }
+
+  static RI_FEED = [
+    { label: 'AI identity verified', up: false, score: 27, field: 'Evidence', fv: 'Verifiable ✔' },
+    { label: '+$250K payment', up: true, score: 34, field: 'Residual exposure', fv: 'Moderate' },
+    { label: 'Delegated authority valid', up: false, score: 29, field: 'Authority risk', fv: 'Low' },
+    { label: 'New destination detected', up: true, score: 41, field: 'Residual exposure', fv: 'Elevated' },
+    { label: 'Human authorization missing', up: true, score: 47, field: 'Authority risk', fv: 'Elevated' },
+    { label: 'Human authorization collected', up: false, score: 26, field: 'Authority risk', fv: 'Low' },
+    { label: 'Transaction limit exceeded', up: true, score: 35, field: 'Runtime anomalies', fv: '2' },
+    { label: 'Runtime policy passed', up: false, score: 24, field: 'Control effectiveness', fv: '91%' },
+    { label: 'Scope denied: export PII', up: false, score: 18, field: 'Control effectiveness', fv: '94%' },
+    { label: 'Authority expanded', up: true, score: 27, field: 'Authority risk', fv: 'Moderate' },
+    { label: 'Transaction limit enforced', up: false, score: 21, field: 'Control effectiveness', fv: '96%' },
+    { label: 'New tool permission requested', up: true, score: 29, field: 'Residual exposure', fv: 'Moderate' },
+    { label: 'Anomalous execution detected', up: true, score: 38, field: 'Runtime anomalies', fv: '3' },
+    { label: 'Runtime policy passed', up: false, score: 27, field: 'Runtime anomalies', fv: '1' },
+  ];
+  static RI_STEP = 1.7;
+  static RI_WHO = [
+    { who: 'Insurer', rows: ['Risk trend', 'Residual exposure', 'Control effectiveness', 'Evidence'], decisions: ['Underwrite', 'Price', 'Monitor', 'Investigate claims'] },
+    { who: 'Bank', rows: ['Risk trend', 'Authority risk', 'Exposure vs limit', 'Runtime anomalies'], decisions: ['Approve agents', 'Set limits', 'Monitor exposure', 'Review incidents'] },
+    { who: 'Compliance', rows: ['Policy adherence', 'Control effectiveness', 'Exceptions', 'Evidence'], decisions: ['Verify policy adherence', 'Monitor controls', 'Investigate exceptions', 'Produce evidence'] },
+    { who: 'Auditor', rows: ['Evidence', 'Authorization trace', 'Control coverage', 'Runtime anomalies'], decisions: ['Verify what happened', 'Review controls', 'Trace authorization', 'Access evidence'] },
+  ];
+  static RI_LOOP = 1.7 * 20;
+
+  static ASK = [
+    {
+      num: '01', who: 'Insurer', q: 'Should I underwrite this risk?',
+      verdictLabel: 'Underwrite', verdict: 'Yes ✓', metricLabel: 'Risk', metric: '21 / 100',
+      rows: [
+        { k: 'Trend', v: '↓ 8 pts / 30 days' },
+        { k: 'Control effectiveness', v: '96%' },
+        { k: 'Evidence', v: 'Verified ✓' },
+        { k: 'Claim scope', v: 'Within authorized scope ✓' },
+      ],
+    },
+    {
+      num: '02', who: 'Bank', q: 'Should I approve this agent or action?',
+      verdictLabel: 'Approve', verdict: 'Yes ✓', metricLabel: 'Agent risk', metric: '12 / 100',
+      rows: [
+        { k: 'Identity', v: 'Verified ✓' },
+        { k: 'Authority', v: 'Verified ✓' },
+        { k: 'Transaction', v: '$18,000', neutral: true },
+        { k: 'Authorized limit', v: '$50,000', neutral: true },
+      ],
+    },
+    {
+      num: '03', who: 'Compliance', q: 'Is this activity within policy?',
+      verdictLabel: 'Compliant', verdict: 'Yes ✓', metricLabel: 'Policy adherence', metric: '99.7%',
+      rows: [
+        { k: 'Control effectiveness', v: '96%' },
+        { k: 'Exceptions', v: '1', neutral: true },
+        { k: 'Review required', v: '1 exception', neutral: true },
+        { k: 'Evidence', v: 'Verifiable ✓' },
+      ],
+    },
+    {
+      num: '04', who: 'Audit', q: 'Can I verify what actually happened?',
+      verdictLabel: 'Execution', verdict: 'Verified ✓', metricLabel: 'Action', metric: '+$18K',
+      rows: [
+        { k: 'Identity', v: 'Verified ✓' },
+        { k: 'Authority', v: 'Verified ✓' },
+        { k: 'Policy', v: 'Passed ✓' },
+        { k: 'Execution receipt', v: 'Available ✓' },
+      ],
+    },
+    {
+      num: '05', who: 'Enterprise risk', q: 'Where is our AI exposure increasing?',
+      verdictLabel: 'Highest increase', verdict: 'Treasury', metricLabel: 'Treasury agents', metric: '↑ 18%',
+      rows: [
+        { k: 'Primary driver', v: 'Payment actions', neutral: true },
+        { k: 'Agents requiring review', v: '3', neutral: true },
+        { k: 'Portfolio risk', v: '27 / 100 ↑', neutral: true },
+        { k: 'Evidence', v: 'Continuous ✓' },
+      ],
+    },
+  ];
+
+  setAskStep(n) {
+    if ((this.state.askStep || 0) === n) return;
+    this.setState({ askStep: n, askPulse: Date.now() });
+  }
+
+  askVals() {
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const active = this.state.askStep || 0;
+    const a = Component.ASK[active];
+    return {
+      askItems: Component.ASK.map((it, i) => {
+        const on = i === active;
+        return {
+          num: it.num, who: it.who, q: it.q,
+          select: () => this.setAskStep(i),
+          style: {
+            display: 'flex', gap: '16px', cursor: 'pointer', alignItems: 'flex-start',
+            padding: '16px 16px 16px 14px',
+            borderTop: '1px solid rgba(255,255,255,0.14)',
+            borderBottom: i === Component.ASK.length - 1 ? '1px solid rgba(255,255,255,0.14)' : 'none',
+            borderLeft: '2px solid ' + (on ? '#A9A6F5' : 'transparent'),
+            background: on ? 'rgba(169,166,245,0.12)' : 'transparent',
+            transition: 'background 220ms ' + ez + ', border-color 220ms ' + ez,
+          },
+          numStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.09em', paddingTop: '3px',
+            color: on ? '#A9A6F5' : '#7A78AE',
+          },
+          whoStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+            letterSpacing: '0.09em', textTransform: 'uppercase',
+            color: '#F4F3EF',
+          },
+          qStyle: {
+            fontSize: '15px', lineHeight: 1.45,
+            color: on ? '#F4F3EF' : '#C7C5E8',
+          },
+        };
+      }),
+      askQuery: a.q,
+      askVerdictLabel: a.verdictLabel,
+      askVerdict: a.verdict,
+      askMetricLabel: a.metricLabel,
+      askMetric: a.metric,
+      askRows: a.rows.map((r, i) => ({
+        k: r.k, v: r.v,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px',
+          padding: '13px 0', borderBottom: '1px solid var(--hm-line)',
+        },
+        vStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '12.5px', fontWeight: 700,
+          textAlign: 'right',
+          color: r.neutral ? 'var(--hm-authority)' : 'var(--hm-verification)',
+        },
+      })),
+      askBodyStyle: {
+        display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+        animation: 'kriPanelIn 380ms ' + ez + ' both',
+        key: active,
+      },
+      askNodeStyle: {
+        width: '84px', height: '84px', borderRadius: '3px',
+        background: 'var(--hm-verification)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '8px', boxSizing: 'border-box',
+      },
+      askWireInStyle: {
+        width: '1px', flex: 1, minHeight: '40px',
+        backgroundImage: 'linear-gradient(to bottom, var(--hm-verification) 50%, transparent 50%)',
+        backgroundSize: '1px 8px',
+        animation: 'askFlow 1.4s linear infinite',
+      },
+      askWireOutStyle: {
+        width: '1px', flex: 1, minHeight: '40px',
+        backgroundImage: 'linear-gradient(to bottom, var(--hm-verification) 50%, transparent 50%)',
+        backgroundSize: '1px 8px',
+        animation: 'askFlow 1.4s linear infinite',
+      },
+    };
+  }
+
+  riVals() {
+    this.ensureClock();
+    const T = this.state.riT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+    const feed = Component.RI_FEED;
+    const N = feed.length;
+    const step = Component.RI_STEP;
+    const i = Math.floor(T / step);
+    const frac = (T - i * step) / step;
+    const cur = feed[((i % N) + N) % N];
+    const prevE = feed[(((i - 1) % N) + N) % N];
+
+    const score = Math.round(prevE.score + (cur.score - prevE.score) * ease(frac / 0.45));
+    const up = cur.up;
+    const fresh = frac < 0.28;
+
+    const rows = [];
+    for (let k = 0; k < 6; k++) {
+      const ev = feed[(((i - k) % N) + N) % N];
+      const total = 38400 + (i - k) * 4;
+      const mm = Math.floor(total / 60) % 60;
+      const ss = total % 60;
+      const hh = Math.floor(total / 3600) % 24;
+      rows.push({ e: ev, k, stamp: String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0') });
+    }
+
+    const base = {
+      'Risk trend': up ? 'Elevating' : 'Improving',
+      'Authority risk': 'Moderate',
+      'Control effectiveness': '88%',
+      'Residual exposure': 'Moderate',
+      'Runtime anomalies': '1',
+      'Evidence': 'Verifiable ✔',
+    };
+    for (let k = rows.length - 1; k >= 0; k--) {
+      const ev = rows[k].e;
+      if (ev.field) base[ev.field] = ev.fv;
+    }
+    base['Risk trend'] = up ? 'Elevating' : 'Improving';
+    base['Exposure vs limit'] = '62% of limit';
+    base['Policy adherence'] = '100%';
+    base['Exceptions'] = base['Runtime anomalies'];
+    base['Authorization trace'] = 'Complete ✔';
+    base['Control coverage'] = base['Control effectiveness'];
+
+    const autoIdx = Math.floor(T / 4.2) % Component.RI_WHO.length;
+    const whoIdx = this.state.riWho == null ? autoIdx : this.state.riWho;
+    const who = Component.RI_WHO[whoIdx];
+    const pulseP = Math.min(1, frac / 0.5);
+
+    return {
+      setRiRef: this.setRiRef,
+      riWhoLabel: who.who,
+      riStakeholders: Component.RI_WHO.map((p, idx) => {
+        const on = idx === whoIdx;
+        return {
+          who: p.who,
+          select: () => this.setState({ riWho: idx }),
+          style: {
+            fontFamily: 'var(--font-mono)', fontSize: '11.5px', fontWeight: 700,
+            letterSpacing: '0.09em', textTransform: 'uppercase', whiteSpace: 'nowrap', cursor: 'pointer',
+            padding: '8px 14px', borderRadius: '2px',
+            color: on ? '#FFFFFF' : '#C7C5E8',
+            background: on ? 'var(--hm-verification)' : 'transparent',
+            border: '1px solid ' + (on ? 'var(--hm-verification)' : 'rgba(255,255,255,0.22)'),
+            transition: 'color 240ms ' + ez + ', background 240ms ' + ez + ', border-color 240ms ' + ez,
+          },
+        };
+      }),
+      riDecisions: who.decisions.map((d) => ({
+        label: d,
+        style: {
+          fontFamily: 'var(--font-mono)', fontSize: '11.5px', fontWeight: 700,
+          letterSpacing: '0.04em', color: 'var(--hm-authority)',
+          borderLeft: '2px solid var(--hm-verification)', padding: '10px 0 10px 14px',
+        },
+      })),
+      riEvents: rows.map((r) => {
+        const isNew = r.k === 0;
+        return {
+          stamp: r.stamp,
+          label: r.e.label,
+          labelStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            fontWeight: isNew && frac < 0.3 ? 700 : 500,
+            color: r.e.up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            minWidth: 0, flex: '1 1 auto',
+          },
+          style: {
+            display: 'flex', alignItems: 'center', gap: '10px', height: '36px',
+            boxSizing: 'border-box', padding: '6px 0',
+            borderBottom: '1px solid var(--hm-line)',
+            background: isNew && frac < 0.28 ? (r.e.up ? 'rgba(243,121,126,0.10)' : 'rgba(75,73,202,0.08)') : 'transparent',
+            transform: isNew && frac < 0.12 ? 'translateY(-4px)' : 'translateY(0)',
+            transition: 'background 320ms linear, transform 180ms ' + ez,
+          },
+        };
+      }),
+      riWireStyle: { position: 'relative', flex: '1 1 auto', minWidth: '14px', height: '1px', background: 'rgba(255,255,255,0.28)' },
+      riDotAStyle: {
+        position: 'absolute', top: '-3px', left: (pulseP * 100) + '%',
+        width: '7px', height: '7px', marginLeft: '-3px', borderRadius: '50%',
+        background: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        opacity: frac < 0.55 ? 1 : 0, transition: 'opacity 160ms linear',
+      },
+      riDotBStyle: { display: 'none' },
+      riWire2Style: { position: 'relative', flex: '1 1 auto', minWidth: '14px', height: '1px', background: 'var(--hm-verification)' },
+      riDotCStyle: {
+        position: 'absolute', top: '-3px', left: (Math.max(0, (frac - 0.35) / 0.45) * 100) + '%',
+        width: '7px', height: '7px', marginLeft: '-3px', borderRadius: '50%',
+        background: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        opacity: frac > 0.32 && frac < 0.85 ? 1 : 0, transition: 'opacity 160ms linear',
+      },
+      riCoreStyle: {
+        boxSizing: 'border-box', flex: '1 1 auto', minWidth: 0, maxWidth: '108px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+        background: 'var(--hm-verification)', borderRadius: '4px', padding: '14px 12px',
+        boxShadow: '0 10px 28px -18px rgba(75,73,202,0.7)',
+      },
+      riCardStyle: {
+        flex: '1.2 1 300px', minWidth: 0, boxSizing: 'border-box', height: '340px',
+        display: 'flex', flexDirection: 'column',
+        border: '1px solid var(--hm-verification)', borderRadius: '4px',
+        background: '#FFFFFF', padding: '22px 26px',
+        boxShadow: '0 0 0 ' + (fresh ? 3 : 1) + 'px rgba(75,73,202,' + (fresh ? 0.1 : 0.05) + '), 0 14px 40px -24px rgba(75,73,202,0.45)',
+        transition: 'box-shadow 400ms ' + ez,
+      },
+      riScore: String(score),
+      riScoreStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '44px', fontWeight: 700,
+        lineHeight: 1, letterSpacing: '-0.035em', fontVariantNumeric: 'tabular-nums',
+        color: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        transition: 'color 260ms ' + ez,
+      },
+      riArrow: up ? '↑' : '↓',
+      riArrowStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '18px', fontWeight: 700,
+        color: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        transition: 'color 260ms ' + ez,
+      },
+      riRows: who.rows.map((k, idx) => {
+        const hot = (k === cur.field || k === 'Risk trend') && frac < 0.6;
+        return {
+          k, v: base[k],
+          style: {
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            gap: '12px', height: '38px', boxSizing: 'border-box', padding: '7px 0',
+            borderBottom: idx < who.rows.length - 1 ? '1px solid var(--hm-line)' : 'none',
+          },
+          vStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+            color: hot ? (up ? 'var(--hm-rejection)' : 'var(--hm-verification)') : 'var(--hm-authority)',
+            transition: 'color 400ms ' + ez,
+          },
+        };
+      }),
+    };
+  }
+
+  setRiRef = (el) => {
+    if (!el || el === this.riEl) return;
+    this.riEl = el;
+    if (this.riObs) this.riObs.disconnect();
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (typeof IntersectionObserver === 'undefined') return;
+    this.riObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (e) this.riVisible = e.isIntersecting;
+    }, { threshold: [0, 0.15] });
+    this.riObs.observe(this.riEl);
+  };
+
+  static KRI_LOOP = 28.0;
+  static KRI_SPAN = 7.0;
+  static KRI_STEPS = [
+    { num: '01 — Know', title: 'Know your risk.', desc: 'See what is creating risk and how it changes as your AI acts.' },
+    { num: '02 — Prove', title: 'Prove your risk.', desc: 'Give customers and partners verified evidence of how safely your AI operates.' },
+    { num: '03 — Control', title: 'Control your risk.', desc: 'See what is driving exposure and apply controls to bring it down.' },
+    { num: '04 — Insure', title: 'Insure what remains.', desc: "Put verified risk in front of insurers and transfer the exposure you can't eliminate." },
+  ];
+  static KRI_CONTROLS = [
+    { t: 1.0, label: 'Human authorization', delta: '−6' },
+    { t: 1.5, label: 'Transaction limits', delta: '−8' },
+    { t: 2.0, label: 'Delegated authority', delta: '−5' },
+    { t: 2.5, label: 'Runtime policy', delta: '−6' },
+  ];
+  static KRI_OFFERS = [
+    { t: 1.2, name: 'Insurer A', price: '$8,400 / mo' },
+    { t: 1.9, name: 'Insurer B', price: '$7,200 / mo' },
+    { t: 2.6, name: 'Insurer C', price: '$6,750 / mo', best: true },
+  ];
+  static KRI_TRACK = [22, 19, 26, 21, 17, 24, 18, 15, 20, 16, 13];
+
+  kriChart(prog) {
+    const pts = Component.KRI_TRACK;
+    const W = 420, H = 120, pad = 10;
+    const n = pts.length;
+    const live = Math.max(1, Math.min(n, Math.round(1 + (n - 1) * prog)));
+    const xAt = (i) => pad + (i / (n - 1)) * (W - pad * 2);
+    const yAt = (v) => pad + (1 - (v - 8) / 26) * (H - pad * 2);
+    let d = '';
+    for (let i = 0; i < live; i++) d += (i ? ' L' : 'M') + xAt(i).toFixed(1) + ' ' + yAt(pts[i]).toFixed(1);
+    const cx = xAt(live - 1), cy = yAt(pts[live - 1]);
+    const el = React.createElement;
+    return el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', height: '100%', preserveAspectRatio: 'none', key: 'kc' }, [
+      el('line', { key: 'g1', x1: pad, x2: W - pad, y1: yAt(26), y2: yAt(26), stroke: 'var(--hm-line)', strokeWidth: 1 }),
+      el('line', { key: 'g2', x1: pad, x2: W - pad, y1: yAt(17), y2: yAt(17), stroke: 'var(--hm-line)', strokeWidth: 1 }),
+      el('path', { key: 'p', d: d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 1.6, strokeLinejoin: 'round' }),
+      el('line', { key: 'v', x1: cx, x2: cx, y1: pad, y2: H - pad, stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 4', opacity: 0.5 }),
+      el('circle', { key: 'c', cx: cx, cy: cy, r: 4, fill: 'var(--hm-verification)' }),
+    ]);
+  }
+
+  kriVals() {
+    this.ensureClock();
+    const T = this.state.kriT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const clamp = (x) => Math.min(1, Math.max(0, x));
+    const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+    const span = Component.KRI_SPAN;
+
+    const held = this.kriHold && Date.now() - this.kriHold < 20000;
+    const auto = Math.floor(T / span) % 4;
+    const active = held ? (this.state.kriStep || 0) : auto;
+    const p = held ? Math.min(span, (Date.now() - this.kriHold) / 1000) : (T - Math.floor(T / span) * span);
+
+    const knowProg = clamp(p / 4.2);
+    const knowScore = Component.KRI_TRACK[Math.max(0, Math.min(Component.KRI_TRACK.length - 1, Math.round((Component.KRI_TRACK.length - 1) * knowProg)))];
+    const reduceScore = Math.round(38 - 25 * ease((p - 2.8) / 1.6));
+    const decided = p >= 3.4;
+
+    const panel = (idx) => ({
+      display: active === idx ? 'flex' : 'none',
+      flexDirection: 'column', flex: 1, minHeight: 0,
+      animation: 'kriPanelIn 420ms ' + ez + ' both',
+    });
+
+    const verbs = ['Know', 'Prove', 'Control', 'Insure'];
+    const hT = this.state.headT || 0;
+    const vIdx = Math.floor(hT / 2.2) % verbs.length;
+    const vFrac = (hT - Math.floor(hT / 2.2) * 2.2) / 2.2;
+
+    return {
+      setKriRef: this.setKriRef,
+      kriStepLabel: Component.KRI_STEPS[active].num,
+      kriCtaLabel: active === 3 ? 'Coming soon' : 'Learn more →',
+      kriCtaStyle: {
+        display: 'inline-flex', alignItems: 'center', gap: '10px', boxSizing: 'border-box',
+        height: '56px', padding: '0 26px', borderRadius: '3px',
+        fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
+        letterSpacing: '0.07em', textTransform: 'uppercase',
+        border: '1px solid ' + (active === 3 ? 'var(--hm-line-strong)' : 'var(--hm-verification)'),
+        background: active === 3 ? '#E7E4DC' : 'var(--hm-verification)',
+        color: active === 3 ? 'var(--hm-authority)' : '#F4F3EF',
+        transition: 'background 260ms ' + ez + ', color 260ms ' + ez + ', border-color 260ms ' + ez,
+      },
+      kriVerb: verbs[vIdx],
+      kriVerbStyle: {
+        color: 'var(--hm-verification)', display: 'inline-block',
+        opacity: vFrac < 0.08 || vFrac > 0.94 ? 0 : 1,
+        transform: vFrac < 0.08 ? 'translateY(6px)' : 'translateY(0)',
+        transition: 'opacity 200ms ' + ez + ', transform 200ms ' + ez,
+      },
+      kriSteps: Component.KRI_STEPS.map((s, i) => {
+        const on = i === active;
+        return {
+          num: s.num, title: s.title, desc: s.desc,
+          select: () => this.setKriStep(i),
+          style: {
+            display: 'flex', flexDirection: 'column', gap: '7px', cursor: 'pointer',
+            padding: '18px 0 18px 22px',
+            borderLeft: '2px solid ' + (on ? 'var(--hm-verification)' : 'var(--hm-line)'),
+            alignItems: 'flex-start',
+            transition: 'border-color 260ms ' + ez,
+          },
+          numStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '10.5px', fontWeight: 700,
+            letterSpacing: '0.09em', textTransform: 'uppercase',
+            color: on ? 'var(--hm-verification)' : 'var(--hm-ink-4)',
+            transition: 'color 260ms ' + ez,
+          },
+          titleStyle: {
+            fontSize: '22px', fontWeight: 600, letterSpacing: '-0.018em',
+            display: 'inline-block',
+            color: '#F4F3EF',
+            background: on ? 'var(--hm-verification)' : 'var(--hm-authority)',
+            padding: '3px 10px',
+            transition: 'color 260ms ' + ez + ', background 260ms ' + ez,
+          },
+          descStyle: { fontSize: '14.5px', lineHeight: 1.55, color: on ? 'var(--hm-ink-2)' : 'var(--hm-ink-3)', maxWidth: '34ch' },
+        };
+      }),
+
+      knowPanelStyle: panel(0),
+      provePanelStyle: panel(1),
+      proveChart: this.kriChart(1),
+      knowScore: String(knowScore),
+      knowChart: this.kriChart(knowProg),
+      knowDrivers: [
+        { label: 'Identity & authority', val: 'Low' },
+        { label: 'Financial exposure', val: 'Medium' },
+        { label: 'Control effectiveness', val: 'Strong' },
+        { label: 'Runtime anomalies', val: 'None' },
+      ].map((d, i) => ({
+        label: d.label, val: d.val,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '12px 0', borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === 3 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= 0.5 + i * 0.3 ? 1 : 0,
+          transform: p >= 0.5 + i * 0.3 ? 'translateY(0)' : 'translateY(5px)',
+          transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez,
+        },
+        valStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+          letterSpacing: '0.07em', textTransform: 'uppercase',
+          color: d.val === 'Medium' ? 'var(--hm-ink-3)' : 'var(--hm-verification)',
+        },
+      })),
+      proveRows: [
+        { label: 'Risk history', val: '184 days', authority: true },
+        { label: 'Identity', val: 'Verified ✓' },
+        { label: 'Authority', val: 'Verified ✓' },
+        { label: 'Controls', val: 'Verified ✓' },
+        { label: 'Runtime evidence', val: 'Continuous ✓' },
+      ].map((r, i) => ({
+        label: r.label, val: r.val,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '9px 0', borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === 4 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= 0.4 + i * 0.22 ? 1 : 0,
+          transition: 'opacity 300ms ' + ez,
+        },
+        valStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+          color: r.authority ? 'var(--hm-authority)' : 'var(--hm-verification)',
+        },
+      })),
+      proveAudience: ['Customers', 'Banks', 'Insurers', 'Partners'].map((label, i) => ({
+        label,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '11px 0', borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === 3 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= 1.0 + i * 0.3 ? 1 : 0.2,
+          transition: 'opacity 320ms ' + ez,
+        },
+      })),
+
+      reducePanelStyle: panel(2),
+      reduceScore: String(reduceScore),
+      reduceBadgeStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '10.5px', fontWeight: 700, marginTop: '10px',
+        letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--hm-verification)',
+        opacity: p >= 4.2 ? 1 : 0, transition: 'opacity 320ms ' + ez,
+      },
+      reduceControls: Component.KRI_CONTROLS.map((c, i) => ({
+        label: c.label, delta: c.delta,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '12px 0',
+          borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === Component.KRI_CONTROLS.length - 1 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= c.t ? 1 : 0.18,
+          transition: 'opacity 300ms ' + ez,
+        },
+        deltaStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+          color: 'var(--hm-verification)',
+          opacity: p >= c.t + 0.2 ? 1 : 0, transition: 'opacity 300ms ' + ez,
+        },
+      })),
+
+      insurePanelStyle: panel(3),
+      insureOffers: Component.KRI_OFFERS.map((o, i) => {
+        const win = o.best && decided;
+        return {
+          name: o.name, price: o.price,
+          tagStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+            letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'right',
+            color: 'var(--hm-verification)', opacity: win ? 1 : 0,
+            transition: 'opacity 320ms ' + ez,
+          },
+          style: {
+            display: 'grid', gridTemplateColumns: '1fr auto 52px', alignItems: 'center', gap: '14px',
+            padding: '12px 14px', marginBottom: '6px', borderRadius: '3px',
+            border: '1px solid ' + (win ? 'var(--hm-verification)' : 'var(--hm-line)'),
+            background: win ? 'rgba(75,73,202,0.05)' : 'transparent',
+            opacity: p >= o.t ? (decided && !o.best ? 0.45 : 1) : 0,
+            transform: p >= o.t ? 'translateY(0)' : 'translateY(6px)',
+            transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez + ', border-color 320ms ' + ez + ', background 320ms ' + ez,
+          },
+          priceStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '14px', fontWeight: 700,
+            color: win ? 'var(--hm-verification)' : 'var(--hm-authority)',
+            transition: 'color 320ms ' + ez,
+          },
+        };
+      }),
+      insureBestStyle: {
+        marginTop: 'auto', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap',
+        background: 'var(--hm-verification)', borderRadius: '4px', padding: '20px 22px',
+        opacity: p >= 3.8 ? 1 : 0,
+        transform: p >= 3.8 ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 380ms ' + ez + ', transform 380ms ' + ez,
+      },
+    };
+  }
+
+  setKriStep(n) {
+    this.kriHold = Date.now();
+    this.setState({ kriStep: n });
+  }
+
+  setKriRef = (el) => {
+    if (!el || el === this.kriEl) return;
+    this.kriEl = el;
+    if (this.kriObs) this.kriObs.disconnect();
+    if (typeof IntersectionObserver === 'undefined') return;
+    this.kriObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (e) this.kriVisible = e.isIntersecting;
+    }, { threshold: [0, 0.2] });
+    this.kriObs.observe(this.kriEl);
+  };
+
+
+  setSolRef = (el) => {
+    if (!el || el === this.solEl) return;
+    this.solEl = el;
+    if (this.solObs) this.solObs.disconnect();
+    if (this.riObs) this.riObs.disconnect();
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (typeof IntersectionObserver === 'undefined') return;
+    this.solObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (e) this.solVisible = e.isIntersecting;
+    }, { threshold: [0, 0.2] });
+    this.solObs.observe(this.solEl);
+  };
+
+  setProbRef = (el) => {
+    if (!el || el === this.probEl) return;
+    this.probEl = el;
+    this.observeProb();
+  };
+
+  observeProb() {
+    if (this.probObs) { this.probObs.disconnect(); this.probObs = null; }
+    if (!this.probEl || typeof IntersectionObserver === 'undefined') return;
+    this.probObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (!e) return;
+      this.probVisible = e.isIntersecting;
+    }, { threshold: [0, 0.2] });
+    this.probObs.observe(this.probEl);
+  }
+
+  ensureClock() {
+    this._clk = this._clk || { prob: 0, sol: 0, kri: 0, ri: 0, last: null, at: 0 };
+    // watchdog: re-arm if the scheduler was stranded (hot reload, cleared timers)
+    if (Date.now() - (this._clk.at || 0) > 300) this.armClock();
+  }
+
+  armClock() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    const self = this;
+    const frame = function () {
+      self._raf = requestAnimationFrame(frame);
+      self.clockTick();
+    };
+    this._raf = requestAnimationFrame(frame);
+    this._timer = setInterval(function () { self.clockTick(); }, 120);
+  }
+
+  clockTick = () => {
+    const C = this._clk;
+    if (!C) return;
+    const now = Date.now();
+    if (now - (C.at || 0) < 45) return;
+    C.at = now;
+    if (C.last == null) C.last = now;
+    const dt = Math.min(0.25, (now - C.last) / 1000);
+    C.last = now;
+    if (this.probVisible !== false) { C.prob += dt; if (C.prob >= Component.PROB_LOOP) C.prob = 0; }
+    if (this.solVisible !== false) { C.sol += dt; if (C.sol >= Component.SOL_LOOP) C.sol = 0; }
+    if (this.riVisible !== false) { C.ri += dt; if (C.ri >= Component.RI_LOOP) C.ri = 0; }
+    C.dev = (C.dev || 0) + dt;
+    if (C.dev >= 5.2) { C.dev = 0; this.advanceDevTab(); }
+    this.updatePillTone();
+    C.head = (C.head || 0) + dt;
+    if (C.head >= 8.8) C.head = 0;
+    if (this.kriVisible === true) { C.kri += dt; if (C.kri >= Component.KRI_LOOP) C.kri = 0; }
+    this.setState({ probT: C.prob, solT: C.sol, kriT: C.kri, riT: C.ri, headT: C.head });
+  };
+
+  startProb() { this.ensureClock(); }
+
+  stopProb() {}
+
+  agentIcon(key, color, size) {
+    const h = React.createElement;
+    const sz = size || 17;
+    const svg = (children) => h('svg', { width: sz, height: sz, viewBox: '0 0 24 24', fill: 'none', stroke: color, strokeWidth: 1.6, strokeLinecap: 'round', style: { display: 'block' } }, children);
+    if (key === 'Claude') return svg([
+      h('line', { key: 'a', x1: 12, y1: 4, x2: 12, y2: 20 }),
+      h('line', { key: 'b', x1: 4, y1: 12, x2: 20, y2: 12 }),
+      h('line', { key: 'c', x1: 6.3, y1: 6.3, x2: 17.7, y2: 17.7 }),
+      h('line', { key: 'd', x1: 17.7, y1: 6.3, x2: 6.3, y2: 17.7 }),
+    ]);
+    if (key === 'Cursor') return svg([
+      h('path', { key: 'a', d: 'M12 3.5 20 8v8l-8 4.5L4 16V8z' }),
+      h('path', { key: 'b', d: 'M4 8l8 4.5 8-4.5' }),
+      h('line', { key: 'c', x1: 12, y1: 12.5, x2: 12, y2: 20.5 }),
+    ]);
+    if (key === 'Codex') return svg([
+      h('rect', { key: 'a', x: 3.5, y: 4.5, width: 17, height: 15, rx: 2 }),
+      h('path', { key: 'b', d: 'M8 10l2.6 2.4L8 14.8' }),
+      h('line', { key: 'c', x1: 12.8, y1: 15, x2: 16.5, y2: 15 }),
+    ]);
+    return svg([
+      h('path', { key: 'a', d: 'M12 3.5v12' }),
+      h('path', { key: 'b', d: 'M12 4.2c4.2 1.9 6.4 5.1 6.8 9.3H12z' }),
+      h('path', { key: 'c', d: 'M4 19.2c1.8-1.4 3.3-1.4 5 0 1.7 1.4 3.3 1.4 5 0 1.7-1.4 3.2-1.4 5 0' }),
+    ]);
+  }
+
+  installVals() {
+    const agents = [
+      { name: 'Claude Code', key: 'Claude' },
+      { name: 'Cursor', key: 'Cursor' },
+      { name: 'Codex', key: 'Codex' },
+      { name: 'Windsurf', key: 'Windsurf' },
+    ];
+    const sel = this.state.agent;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const copied = this.state.copied;
+    const copy = (key) => {
+      const text = Component.PROMPTS[key] || Component.BASE_PROMPT;
+      try {
+        if (navigator.clipboard) navigator.clipboard.writeText(text);
+        else {
+          const ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove();
+        }
+      } catch (e) {}
+      this.setState({ copied: true, agent: key });
+      clearTimeout(this._copyTimer);
+      this._copyTimer = setTimeout(() => this.setState({ copied: false }), 1700);
+    };
+    const mkLogo = (key) => {
+      const hov = this.state.hoverAgent === key;
+      const on = key === sel;
+      const hidden = this.state.narrow && key === 'Windsurf';
+      return {
+        select: (e) => { if (e && e.stopPropagation) e.stopPropagation(); copy(key); },
+        hoverOn: () => this.setState({ hoverAgent: key }),
+        hoverOff: () => this.setState((st) => (st.hoverAgent === key ? { hoverAgent: null } : null)),
+        logoStyle: {
+          width: '22px', height: '22px', display: 'block',
+          color: 'var(--hm-verification)',
+          opacity: hov ? 1 : (on ? 0.95 : 0.7),
+          filter: (!this._pillDark && key !== 'Claude') ? 'invert(1)' : 'none',
+          transition: 'opacity 140ms ' + ez,
+        },
+        style: {
+          position: 'relative', flex: '0 0 auto',
+          width: '22px', height: '22px',
+          display: hidden ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer',
+        },
+        capStyle: {
+          position: 'absolute', bottom: 'calc(100% + 10px)', left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '5px 9px', borderRadius: '999px',
+          background: 'var(--hm-authority)',
+          fontFamily: 'var(--font-mono)', fontSize: '9.5px',
+          letterSpacing: '0.05em', textTransform: 'uppercase', fontWeight: 700,
+          color: '#FFFFFF', whiteSpace: 'nowrap',
+          opacity: hov ? 1 : 0,
+          transition: 'opacity 120ms ' + ez,
+          pointerEvents: 'none',
+        },
+      };
+    };
+    return {
+      pillWrapStyle: {
+        position: 'fixed', left: 0, right: 0, bottom: '36px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
+        pointerEvents: 'none', zIndex: 60,
+      },
+      pillTipStyle: {
+        position: 'relative',
+        padding: '6px 12px',
+        borderRadius: '999px',
+        background: 'var(--hm-verification)',
+        boxShadow: '0 8px 20px -14px rgba(75,73,202,0.5)',
+        fontSize: '11px',
+        color: '#FFFFFF',
+        whiteSpace: 'nowrap',
+        opacity: this.state.tip ? 1 : 0,
+        transform: this.state.tip ? 'translateY(0)' : 'translateY(4px)',
+        transition: 'opacity 120ms ' + ez + ', transform 120ms ' + ez,
+      },
+      pillStyle: {
+        pointerEvents: 'auto',
+        display: 'flex', alignItems: 'center', gap: '14px',
+        height: '44px', padding: '0 10px 0 18px',
+        borderRadius: '999px', cursor: 'pointer',
+        background: this._pillDark ? '#FFFFFF' : 'var(--hm-authority)',
+        border: '2px solid var(--hm-verification)',
+        boxShadow: '0 2px 4px rgba(17,17,17,0.10), 0 18px 40px -16px rgba(75,73,202,0.45)',
+        transition: 'background 180ms ' + ez,
+      },
+      pillText: copied ? 'Setup prompt copied ✓' : "Click to know your AI agent's Risk Score in seconds",
+      pillTextStyle: {
+        fontSize: '15px', fontWeight: 700, whiteSpace: 'nowrap',
+        color: this._pillDark ? 'var(--hm-authority)' : '#F4F3EF',
+        transition: 'color 180ms ' + ez,
+      },
+      tipOn: () => this.setState({ tip: true }),
+      tipOff: () => this.setState({ tip: false }),
+      copyPrompt: () => copy(sel),
+      pillSparkStyle: {
+        fontSize: '11px', color: 'rgba(75,73,202,0.45)', lineHeight: 1, flex: '0 0 auto',
+      },
+      logoClaude: mkLogo('Claude'),
+      logoCursor: mkLogo('Cursor'),
+      logoCodex: mkLogo('Codex'),
+      logoWindsurf: mkLogo('Windsurf'),
+    };
+  }
+
+  updateNarrow = () => {
+    const n = window.innerWidth < 720;
+    if (n !== this.state.narrow) this.setState({ narrow: n });
+  };
+
+  updateProgress = () => {
+    const vh = window.innerHeight;
+    const updates = {};
+    if (this.sectionEl) {
+      const rect = this.sectionEl.getBoundingClientRect();
+      const total = rect.height - vh;
+      const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+      if (p !== this.state.progress) updates.progress = p;
+    }
+    if (this.section2El) {
+      const rect2 = this.section2El.getBoundingClientRect();
+      const total2 = rect2.height - vh;
+      const p2v = total2 > 0 ? Math.min(1, Math.max(0, -rect2.top / total2)) : 0;
+      if (p2v !== this.state.progress2) updates.progress2 = p2v;
+    }
+    if (Object.keys(updates).length) this.setState(updates);
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.updateProgress, { passive: true });
+    window.addEventListener('resize', this.updateProgress);
+    window.addEventListener('resize', this.updateNarrow);
+    window.addEventListener('resize', this.forceUpdate.bind(this, undefined));
+    window.addEventListener('scroll', this.updatePillTone, { passive: true });
+    window.addEventListener('resize', this.updatePillTone);
+    this.updateProgress();
+    this.updatePillTone();
+    this.enfTimer = setInterval(() => this.setState(s => ({ enfTick: s.enfTick + 1 })), 60);
+    this.ensureClock();
+  }
+
+  updatePillTone = () => {
+    if (typeof document === 'undefined' || !document.elementsFromPoint) return;
+    const y = window.innerHeight - 58;
+    const x = Math.round(window.innerWidth / 2);
+    let stack = [];
+    try { stack = document.elementsFromPoint(x, y) || []; } catch (e) { return; }
+    let dark = false;
+    for (let i = 0; i < stack.length; i++) {
+      const el = stack[i];
+      if (el.closest && el.closest('[data-pill]')) continue;
+      const bg = window.getComputedStyle(el).backgroundColor;
+      const m = bg && bg.match(/rgba?\(([^)]+)\)/);
+      if (!m) continue;
+      const p = m[1].split(',').map(function (v) { return parseFloat(v); });
+      if (p.length > 3 && p[3] < 0.6) continue;
+      const lum = (0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]) / 255;
+      dark = lum < 0.5;
+      break;
+    }
+    this._pillDark = dark;
+    this.paintPillTone(dark);
+  };
+
+  setPillRef = (el) => {
+    this.pillEl = el || null;
+    if (el) this.paintPillTone(this._pillDark);
+  };
+
+  paintPillTone(dark) {
+    const el = this.pillEl;
+    if (!el) return;
+    el.style.background = dark ? '#FFFFFF' : '#111111';
+    const txt = el.firstElementChild;
+    if (txt) txt.style.color = dark ? '#111111' : '#F4F3EF';
+    const imgs = el.querySelectorAll('img');
+    for (let i = 0; i < imgs.length; i++) {
+      const isClaude = (imgs[i].getAttribute('alt') || '').indexOf('Claude') === 0;
+      imgs[i].style.filter = (!dark && !isClaude) ? 'invert(1)' : 'none';
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.updatePillTone);
+    window.removeEventListener('resize', this.updatePillTone);
+    window.removeEventListener('scroll', this.updateProgress);
+    window.removeEventListener('resize', this.updateProgress);
+    window.removeEventListener('resize', this.updateNarrow);
+    clearInterval(this.enfTimer);
+    this.stopProb();
+    if (this.probObs) this.probObs.disconnect();
+    if (this.solObs) this.solObs.disconnect();
+    if (this.riObs) this.riObs.disconnect();
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+
+  enforceCardStyle() {
+    const t = this.stageT2(0.06, 0.14);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', bottom: '24px', left: '24px', width: '270px',
+      background: '#FFFFFF', border: '1px solid var(--hm-authority)', borderRadius: 8, padding: '20px',
+      opacity: t * (1 - ex), transform: `translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  enforcementVals() {
+    const CYCLE = 7200;
+    const elapsed = Date.now() % CYCLE;
+    const phaseBlocked = elapsed < 3600;
+    const local = phaseBlocked ? elapsed : elapsed - 3600;
+    const clamp01 = x => Math.min(1, Math.max(0, x));
+    const lerp = (a, b) => clamp01((local - a) / (b - a));
+    const rejection = '#F3797E', verified = '#4B49CA', dimBorder = '#C9C4B7';
+    const dark = '#111111';
+    const overallFade = 1 - lerp(3200, 3600);
+    const decided = local >= 900;
+
+    const pulse1T = lerp(0, 900);
+    const pulse2T = lerp(1000, 1900);
+
+    const enfLine1DotOpacity = (phaseBlocked ? 1 : (local < 1000 ? 1 : 0)) * overallFade;
+    const enfLine2DotOpacity = (!phaseBlocked && local >= 1000 && local < 1900 ? 1 : 0) * overallFade;
+
+    const enfBoxColor = (decided && !phaseBlocked) ? this.mixColor(overallFade, dimBorder, verified) : dimBorder;
+    const enfAllowColor = (!phaseBlocked && decided) ? this.mixColor(overallFade, dark, verified) : dark;
+    const enfBlockColor = (phaseBlocked && decided) ? this.mixColor(overallFade, dark, rejection) : dark;
+    const enfTargetDotColor = (!phaseBlocked && local >= 1900) ? this.mixColor(overallFade, dimBorder, verified) : dimBorder;
+
+    return {
+      enfLine1DotTop: 24 + Math.min(pulse1T, 1) * 34 - 3.5,
+      enfLine1DotOpacity,
+      enfLine2DotTop: 118 + pulse2T * 34 - 3.5,
+      enfLine2DotOpacity,
+      enfConnector2Color: (!phaseBlocked && decided) ? this.mixColor(overallFade, dimBorder, verified) : dimBorder,
+      enfBoxColor,
+      enfAllowColor,
+      enfBlockColor,
+      enfTargetDotColor,
+    };
+  }
+
+  p2() {
+    return Math.min(1, Math.max(0, (this.state.progress - 0.20) / (1 - 0.20)));
+  }
+
+  layerAStyle() {
+    const t = 1 - Math.min(1, Math.max(0, (this.state.progress - 0.10) / (0.20 - 0.10)));
+    return {
+      position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '0 var(--sp-7)', opacity: t, transition: 'opacity 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  layerBStyle() {
+    const t = Math.min(1, Math.max(0, (this.state.progress - 0.10) / (0.20 - 0.10)));
+    return {
+      position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      padding: '0 var(--sp-7)', opacity: t, transition: 'opacity 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  stageT(start, end) {
+    const p = this.p2();
+    return end > start ? Math.min(1, Math.max(0, (p - start) / (end - start))) : (p >= start ? 1 : 0);
+  }
+
+  cardStyle(start, end, width, maxHeight, minHeight) {
+    const t = this.stageT(start, end);
+    return {
+      background: '#161514',
+      border: '1px solid var(--hm-line-strong)',
+      borderRadius: 8,
+      padding: '16px 16px',
+      flex: '0 0 auto',
+      width: width || 210,
+      minHeight: minHeight || 'min(300px, 38vh)',
+      maxHeight: maxHeight || '42vh',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      boxShadow: '0 16px 40px -14px rgba(0,0,0,0.7)',
+      opacity: t,
+      transform: `translate(${(1 - t) * -28}px, ${(1 - t) * 16}px)`,
+      transition: 'opacity 260ms cubic-bezier(0.2,0,0,1), transform 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  rowWrapperStyle() {
+    const t = 1 - this.stageT(0.32, 0.46);
+    return {
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-7)', width: '100%',
+      maxHeight: `${t * 220}px`,
+      overflow: 'hidden',
+      opacity: t,
+      transition: 'opacity 280ms cubic-bezier(0.2,0,0,1), max-height 280ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  messageStyle() {
+    const t = this.stageT(0.54, 0.66);
+    return {
+      marginTop: 'var(--sp-7)',
+      maxHeight: `${t * 200}px`,
+      overflow: 'hidden',
+      opacity: t,
+      transform: `translateY(${(1 - t) * 12}px)`,
+      transition: 'opacity 300ms cubic-bezier(0.2,0,0,1), transform 300ms cubic-bezier(0.2,0,0,1), max-height 300ms cubic-bezier(0.2,0,0,1)',
+      textAlign: 'center',
+    };
+  }
+
+  moduleStyle() {
+    const t = this.stageT(0.00, 0.14);
+    return {
+      textAlign: 'center',
+      background: '#161514',
+      border: '1px solid var(--hm-line-strong)',
+      borderRadius: 8,
+      padding: '10px 16px',
+      flex: '0 0 40%',
+      maxWidth: 300,
+      boxShadow: '0 12px 28px -12px rgba(0,0,0,0.5)',
+      opacity: t,
+      transform: `translateY(${(1 - t) * 12}px)`,
+      transition: 'opacity 260ms cubic-bezier(0.2,0,0,1), transform 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  introStyle() {
+    const t = this.stageT(0.00, 0.14);
+    return {
+      flex: '0 0 56%',
+      maxWidth: 380,
+      textAlign: 'left',
+      opacity: t,
+      transform: `translateY(${(1 - t) * 12}px)`,
+      transition: 'opacity 260ms cubic-bezier(0.2,0,0,1), transform 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  connectorStyle() {
+    const p = this.p2();
+    const t = Math.min(1, Math.max(0, (p - 0.62) / (0.76 - 0.62)));
+    return { opacity: t * 0.6, transition: 'opacity 300ms cubic-bezier(0.2,0,0,1)' };
+  }
+
+  resolvedT() {
+    return this.stageT(0.76, 0.98);
+  }
+
+  stageT2(start, end) {
+    // extra scroll headroom (~1.5s) is appended to section2's height as a hold;
+    // rescale raw progress so existing animation timing is unaffected and only the tail holds longer.
+    const p = Math.min(1, this.state.progress2 * (305 / 175));
+    return end > start ? Math.min(1, Math.max(0, (p - start) / (end - start))) : (p >= start ? 1 : 0);
+  }
+
+  pinStyle2() {
+    const base = { left: 0, right: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' };
+    if (this.state.progress2 <= 0) return { ...base, position: 'absolute', top: 0 };
+    if (this.state.progress2 >= 1) return { ...base, position: 'absolute', bottom: 0 };
+    return { ...base, position: 'fixed', top: 0 };
+  }
+
+  boxScale() {
+    const vh = window.innerHeight || 900;
+    return Math.min(1, (vh * 0.88) / 820);
+  }
+
+  section2WrapStyle() {
+    return { position: 'relative', height: '305vh', background: '#F4F3EF' };
+  }
+
+  statementColor() {
+    return '#111111';
+  }
+
+  statementFadeStyle() {
+    const t = this.stageT2(0.10, 0.22);
+    return { opacity: t, transition: 'opacity 320ms cubic-bezier(0.2,0,0,1)' };
+  }
+
+  guardrailVals() {
+    const BLOCK_LEN = 4500, ALLOW_LEN = 9000;
+    const CYCLE = BLOCK_LEN + ALLOW_LEN;
+    const elapsed = (this.state.enfTick * 60) % CYCLE;
+    const blockedPhase = elapsed < BLOCK_LEN;
+    const phaseLen = blockedPhase ? BLOCK_LEN : ALLOW_LEN;
+    const local = blockedPhase ? elapsed : elapsed - BLOCK_LEN;
+    const clamp01 = x => Math.min(1, Math.max(0, x));
+    const lerp = (a, b) => clamp01((local - a) / (b - a));
+    const rejection = '#F3797E', verified = '#4B49CA';
+    const overallFade = 1 - lerp(phaseLen - 400, phaseLen);
+
+    const labels = ['AI Identity', 'Organization', 'Delegated Authority', 'Human Authorization', 'Runtime Policy'];
+    const starts = [700, 1000, 1300, 1600, 1900];
+    const guardrails = labels.map((label, i) => {
+      const t = lerp(starts[i], starts[i] + 200);
+      const bad = i === 4 && blockedPhase;
+      return { label, opacity: t * overallFade, tick: t >= 1 ? (bad ? '✕' : '✓') : '', color: bad ? rejection : verified };
+    });
+
+    const decisionT = lerp(2300, 2600);
+    return {
+      guardrails,
+      guardrailDecisionOpacity: decisionT * overallFade,
+      guardrailDecisionColor: blockedPhase ? rejection : verified,
+      guardrailDecisionText: decisionT > 0 ? (blockedPhase ? 'BLOCK' : 'ALLOW') : '',
+      guardrailTargetOpacity: (!blockedPhase && local >= 3000 ? 1 : 0) * overallFade,
+    };
+  }
+
+  moduleBase() {
+    return {
+      background: '#FFFFFF',
+      border: '1px solid var(--hm-line)',
+      borderRadius: 8,
+      padding: '14px 16px',
+      boxShadow: '0 1px 0 var(--hm-line), 0 1px 2px rgba(17,17,17,0.06)',
+    };
+  }
+
+  moduleFade(start, end, extra) {
+    const t = this.stageT2(start, end);
+    const baseTransform = extra.transform ? extra.transform + ' ' : '';
+    return {
+      ...this.moduleBase(),
+      position: 'absolute',
+      ...extra,
+      opacity: t,
+      transform: `${baseTransform}translateY(${(1 - t) * 14}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  exitT() {
+    // fade grid/cards out only right at the very end of the section's actual scroll,
+    // not tied to the (rescaled) content-animation progress — so they persist through the hold.
+    const p = this.state.progress2;
+    return Math.min(1, Math.max(0, (p - 0.97) / (1 - 0.97)));
+  }
+
+  gridBgStyle() {
+    const ex = this.exitT();
+    return {
+      position: 'absolute', inset: 0,
+      backgroundImage: 'linear-gradient(var(--hm-line) 1px, transparent 1px), linear-gradient(90deg, var(--hm-line) 1px, transparent 1px)',
+      backgroundSize: '60px 60px', backgroundPosition: 'center',
+      opacity: 1 - ex, transform: `translateY(${-ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  panelCodeStyle() {
+    const t = this.stageT2(0.10, 0.20);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', top: '50px', left: '50px', width: '360px', transformOrigin: 'top left',
+      background: '#FFFFFF', border: '1px solid var(--hm-authority)', borderRadius: 8, padding: '16px 20px',
+      opacity: t * (1 - ex), transform: `scale(0.78) translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  checklistItems2() {
+    const rows = [
+      { label: 'Verified AI Identity', rejected: false },
+      { label: 'Trusted Organization', rejected: false },
+      { label: 'Delegated Authority', rejected: false },
+      { label: 'Valid Human Authorization', rejected: true },
+      { label: 'Runtime Policy', rejected: false },
+    ];
+    const verified = '#4B49CA';
+    const rejection = '#F3797E';
+    const humanResolveT = this.stageT2(0.76, 0.90);
+    return rows.map((row, i) => {
+      const start = 0.14 + i * 0.05;
+      const t = this.stageT2(start, start + 0.05);
+      if (row.rejected) {
+        const color = t >= 1 ? this.mixColor(humanResolveT, rejection, verified) : this.mixColor(t, '#8F8D85', rejection);
+        const tick = t >= 1 ? (humanResolveT >= 1 ? '✓' : '✕') : '';
+        return { label: row.label, boxColor: color, tick };
+      }
+      return { label: row.label, boxColor: this.mixColor(t, '#8F8D85', verified), tick: t >= 1 ? '✓' : '' };
+    });
+  }
+
+  riskIntelStyle() {
+    const t = this.stageT2(0.44, 0.54);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', bottom: '24px', right: '24px', width: '486px',
+      background: 'linear-gradient(135deg, #38369E, #4B49CA)', border: '1px solid rgba(244,243,239,0.15)', borderRadius: 8, padding: '20px 26px',
+      opacity: t * (1 - ex), transform: `translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  riskIntelVals() {
+    const labels = ['Identity', 'Authorization', 'Policy', 'Execution'];
+    const riskSignals = labels.map((label, i) => {
+      const start = 0.46 + i * 0.02;
+      return { label, opacity: this.stageT2(start, start + 0.02) };
+    });
+    return { riskSignals, riskOutputOpacity: this.stageT2(0.52, 0.56) };
+  }
+
+  panelHumanAuthStyle() {
+    const t = this.stageT2(0.30, 0.40);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', top: '90px', right: '60px', width: '300px',
+      background: '#FFFFFF', border: '1px solid var(--hm-authority)', borderRadius: 8, padding: '18px 20px',
+      opacity: t * (1 - ex), transform: `translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  connectorLineStyle() {
+    const t = this.stageT2(0.32, 0.40);
+    return { opacity: t * 0.6, transition: 'opacity 320ms cubic-bezier(0.2,0,0,1)' };
+  }
+
+  humanAuthVals() {
+    const humanResolveT = this.stageT2(0.76, 0.90);
+    const rejection = '#F3797E';
+    const verified = '#4B49CA';
+    return {
+      humanAuthColor: this.mixColor(humanResolveT, rejection, verified),
+      humanAuthGlyph: humanResolveT >= 1 ? '✓' : '✕',
+      requestingOpacity: 1 - humanResolveT,
+      humanAuthCollectedOpacity: humanResolveT,
+      humanAuthButtonLabel: humanResolveT >= 1 ? 'AUTHORIZED' : 'WAITING',
+    };
+  }
+  riskSignalVals() {
+    const CYCLE = 18000;
+    const elapsed = (this.state.enfTick * 60) % CYCLE;
+    const idx = Math.floor(elapsed / 6000);
+    const local = elapsed % 3000;
+    const t = Math.min(1, local / 260);
+
+    const states = [
+      { s: 'INSURER', c: 'RISK WITHIN INSURED ENVELOPE', r: [['SCOPE COMPLIANCE', '100%'], ['UNAUTHORIZED EXECUTIONS', '0'], ['ENVELOPE UTILIZATION', '62%'], ['CHAIN INTEGRITY', 'VERIFIED']] },
+      { s: 'COMPLIANCE', c: 'RUNTIME POLICY COMPLIED WITH', r: [['AUTHORIZATION VALID', 'YES'], ['POLICY CHECKS PASSED', '100%'], ['COMPLIANCE STATUS', 'VERIFIED']] },
+      { s: 'AUDITOR', c: 'EXECUTION INDEPENDENTLY VERIFIED', r: [['IDENTITY TRACEABLE', 'YES'], ['AUTHORIZATION TRACEABLE', 'YES'], ['EXECUTION INTEGRITY', 'VERIFIED']] },
+    ];
+    const st = states[idx] || states[0];
+    return {
+      riSignalStakeholder: st.s,
+      riSignalConclusion: st.c,
+      riSignalRow1Label: st.r[0][0], riSignalRow1Value: st.r[0][1],
+      riSignalRow2Label: st.r[1][0], riSignalRow2Value: st.r[1][1],
+      riSignalRow3Label: st.r[2][0], riSignalRow3Value: st.r[2][1],
+      riSignalRow4Label: st.r[3] ? st.r[3][0] : null, riSignalRow4Value: st.r[3] ? st.r[3][1] : null,
+      riSignalOpacity: t,
+      riSignalTransform: `translateY(${(1 - t) * 6}px)`,
+    };
+  }
+
+  panelProofStyle() { return this.moduleFade(0.55, 0.68, { top: '500px', left: '50%', width: '300px', transform: 'translateX(-50%)' }); }
+  panelPolicyStyle() { return this.moduleFade(0.62, 0.72, { top: '640px', left: '60px', width: '300px' }); }
+  panelScoreStyle() { return this.moduleFade(0.68, 0.80, { top: '640px', right: '60px', width: '260px' }); }
+
+  static DEV_TABS = [
+    { key: 'score', label: 'Score risk' },
+    { key: 'intel', label: 'Get intelligence' },
+    { key: 'guard', label: 'Guardrails' },
+    { key: 'enforce', label: 'Enforce' },
+  ];
+
+  static DEV_CODE = {
+    score: {
+      call: 'SDK · track event',
+      req: ['humanos.risk.track({', '  agent: "Treasury-01",', '  event: "payment",', '  amount: 250000', '})'],
+      res: ['{', '  "risk_score": 38,', '  "trend": "increasing"', '}'],
+    },
+    intel: {
+      call: 'GET /v1/risk/agents/treasury-01',
+      req: ['// no request body'],
+      res: ['{', '  "risk_score": 38,', '  "trend": "increasing",', '  "authority_risk": "moderate",', '  "control_effectiveness": 88,', '  "residual_exposure": "elevated",', '  "evidence": "verified"', '}'],
+    },
+    guard: {
+      call: 'POST /v1/guardrails · free',
+      req: ['{', '  "policy": "transaction_limit",', '  "limit": 100000,', '  "currency": "EUR",', '  "above_limit": "require_authorization"', '}'],
+      res: ['// active guardrail', '{', '  "status": "ACTIVE",', '  "scope": "Treasury-01"', '}', '', '// Identity · Authority · Authorization ·', '// Runtime policies · Transaction limits', '// Already have guardrails? Humanos ingests their events.'],
+    },
+    enforce: {
+      call: 'POST /v1/actions/evaluate',
+      req: ['{', '  "agent": "Treasury-01",', '  "action": "transfer",', '  "amount": 250000', '}'],
+      res: ['// guardrail: transaction_limit = 100000 EUR', '{', '  "decision": "DENY",', '  "reason": "transaction_limit_exceeded",', '  "risk_score": 52', '}'],
+    },
+  };
+
+  setDevTab = (key) => {
+    this.devTabAt = Date.now();
+    this.devTabHold = Date.now();
+    this.setState({ devTab: key });
+  };
+
+  advanceDevTab() {
+    const now = Date.now();
+    if (this.devTabHold && now - this.devTabHold < 12000) return;
+    const keys = Component.DEV_TABS.map((t) => t.key);
+    const cur = this.state.devTab || 'score';
+    const nextKey = keys[(keys.indexOf(cur) + 1) % keys.length];
+    this.devTabAt = now;
+    this.setState({ devTab: nextKey });
+  }
+
+  devApiVals() {
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const active = this.state.devTab || 'score';
+    const code = Component.DEV_CODE[active];
+    const since = this.devTabAt ? Date.now() - this.devTabAt : 9999;
+    const mkLine = (text) => ({
+      text: text,
+      style: {
+        whiteSpace: 'pre-wrap', paddingLeft: '14px', textIndent: '-14px',
+        color: text.indexOf('//') === 0 ? 'var(--hm-ink-4)'
+          : (/"(DENY|increasing|elevated)"/.test(text) ? 'var(--hm-rejection)'
+          : (/: ("|\d)/.test(text) ? '#B9B7F2' : 'var(--hm-clarity)')),
+      },
+    });
+    return {
+      devLiveStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase',
+        color: 'var(--hm-verification)',
+      },
+      devOutputs: [
+        { label: 'Risk score' },
+        { label: 'Identity / KYA' },
+        { label: 'Authorization' },
+        { label: 'Controls' },
+        { label: 'Risk intelligence' },
+        { label: 'Insurance' },
+      ],
+      devTabs: Component.DEV_TABS.map((t) => {
+        const on = t.key === active;
+        return {
+          label: t.label,
+          onClick: () => this.setDevTab(t.key),
+          style: {
+            flex: '1 1 auto', minWidth: 0, textAlign: 'center', cursor: 'pointer',
+            padding: '10px 6px', boxSizing: 'border-box',
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.05em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+            color: on ? '#B9B7F2' : 'var(--hm-ink-4)',
+            borderBottom: '2px solid ' + (on ? '#8B89E8' : 'transparent'),
+            transition: 'color 180ms ' + ez + ', border-color 180ms ' + ez,
+          },
+        };
+      }),
+      devBodyStyle: {
+        opacity: since < 90 ? 0 : 1,
+        transform: since < 90 ? 'translateY(4px)' : 'translateY(0)',
+        transition: 'opacity 220ms ' + ez + ', transform 220ms ' + ez,
+      },
+      devCall: code.call,
+      devReqLines: code.req.map(mkLine),
+      devResLines: code.res.map(mkLine),
+    };
+  }
+
+  mixColor(t, from, to) {
+    const f = [parseInt(from.slice(1,3),16), parseInt(from.slice(3,5),16), parseInt(from.slice(5,7),16)];
+    const g = [parseInt(to.slice(1,3),16), parseInt(to.slice(3,5),16), parseInt(to.slice(5,7),16)];
+    const r = f.map((v,i) => Math.round(v + (g[i]-v)*t));
+    return `rgb(${r[0]},${r[1]},${r[2]})`;
+  }
+
+  mix(t, from, to) {
+    return from + (to - from) * t;
+  }
+
+  connectorPath(cardEl) {
+    if (!this.containerEl || !this.moduleEl || !cardEl) return '';
+    const c = this.containerEl.getBoundingClientRect();
+    const m = this.moduleEl.getBoundingClientRect();
+    const k = cardEl.getBoundingClientRect();
+    const x1 = m.left + m.width / 2 - c.left;
+    const y1 = m.bottom - c.top;
+    const x2 = k.left + k.width / 2 - c.left;
+    const y2 = k.top - c.top;
+    const midY = (y1 + y2) / 2;
+    return `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+  }
+
+  pinStyle() {
+    const base = {
+      left: 0, right: 0, height: '100vh', overflow: 'hidden',
+    };
+    const sectionHeight = this.sectionEl ? this.sectionEl.getBoundingClientRect().height : 0;
+    if (this.state.progress <= 0) return { ...base, position: 'absolute', top: 0 };
+    if (this.state.progress >= 1) return { ...base, position: 'absolute', bottom: 0 };
+    return { ...base, position: 'fixed', top: 0 };
+  }
+
+  resolvedVals() {
+    const t = this.resolvedT();
+    const rejection = '#F3797E';
+    const verified = '#4B49CA';
+    const riskScore = Math.round(this.mix(t, 78, 13));
+    const premium = Math.round(this.mix(t, 5647, 421));
+    const reviews = Math.round(this.mix(t, 184, 0));
+    const rate = this.mix(t, 71, 99.6).toFixed(1);
+    return {
+      finalUnderlineColor: this.mixColor(t, rejection, verified),
+      signalColor: this.mixColor(t, rejection, verified),
+      signalGlyph: t < 0.5 ? '?' : '✓',
+      card1RiskArrow: t < 0.5 ? '↑' : '↓',
+      card1RiskScore: riskScore,
+      card1PremiumArrow: t < 0.5 ? '↑' : '↓',
+      card1Premium: premium.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      card2Status: t < 0.5 ? 'Unknown' : 'Verified',
+      card2ReviewsArrow: t < 0.5 ? '↑' : '↓',
+      card2Reviews: reviews,
+      card3Decision: t < 0.5 ? 'Unknown' : 'Approved',
+      card3RateArrow: t < 0.5 ? '↓' : '↑',
+      card3Rate: rate,
+    };
+  }
+
+  renderVals() {
+    return {
+      ...this.installVals(),
+      setProbRef: this.setProbRef,
+      setSolRef: this.setSolRef,
+      ...this.solVals(),
+      ...this.kriVals(),
+      ...this.riVals(),
+      ...this.askVals(),
+      ...this.probVals(),
+      activityVolume: this.props.activityVolume ?? '$2.4B',
+      setSectionRef: (el) => { this.sectionEl = el; },
+      openSolutions: () => this.setState({ solutionsOpen: true }),
+      closeSolutions: () => this.setState({ solutionsOpen: false }),
+      solutionsOpacity: this.state.solutionsOpen ? 1 : 0,
+      solutionsPointerEvents: this.state.solutionsOpen ? 'auto' : 'none',
+      setCarouselRef: (el) => { this.carouselEl = el; },
+      storyIdx: this.state.storyIdx,
+      carouselPrev: () => this.setState(s => ({ storyIdx: Math.max(0, s.storyIdx - 1) })),
+      carouselNext: () => this.setState(s => ({ storyIdx: Math.min(2, s.storyIdx + 1) })),
+      storyDots: [0, 1, 2].map(i => ({
+        color: i === this.state.storyIdx ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+        goTo: () => this.setState({ storyIdx: i }),
+      })),
+      setContainerRef: (el) => { this.containerEl = el; },
+      setModuleRef: (el) => { this.moduleEl = el; },
+      setCard1Ref: (el) => { this.card1El = el; },
+      setCard2Ref: (el) => { this.card2El = el; },
+      setCard3Ref: (el) => { this.card3El = el; },
+      setSection2Ref: (el) => { this.section2El = el; },
+      boxScaleTransform: `scale(${this.boxScale()})`,
+      section2WrapStyle: this.section2WrapStyle(),
+      pinStyle2: this.pinStyle2(),
+      statementColor: this.statementColor(),
+      statementFadeStyle: this.statementFadeStyle(),
+      gridBgStyle: this.gridBgStyle(),
+      ...this.guardrailVals(),
+      panelCodeStyle: this.panelCodeStyle(),
+      checklistItems2: this.checklistItems2(),
+      enforceCardStyle: this.enforceCardStyle(),
+      ...this.enforcementVals(),
+      riskIntelStyle: this.riskIntelStyle(),
+      ...this.riskIntelVals(),
+      panelHumanAuthStyle: this.panelHumanAuthStyle(),
+      connectorLineStyle: this.connectorLineStyle(),
+      ...this.humanAuthVals(),
+      ...this.riskSignalVals(),
+      ...this.devApiVals(),
+      panelProofStyle: this.panelProofStyle(),
+      panelPolicyStyle: this.panelPolicyStyle(),
+      panelScoreStyle: this.panelScoreStyle(),
+      pinStyle: this.pinStyle(),
+      moduleStyle: this.moduleStyle(),
+      introStyle: this.introStyle(),
+      connectorStyle: this.connectorStyle(),
+      connectorPath1: this.connectorPath(this.card1El),
+      connectorPath2: this.connectorPath(this.card2El),
+      connectorPath3: this.connectorPath(this.card3El),
+      layerAStyle: this.layerAStyle(),
+      layerBStyle: this.layerBStyle(),
+      rowWrapperStyle: this.rowWrapperStyle(),
+      messageStyle: this.messageStyle(),
+      card1Style: this.cardStyle(0.06, 0.20, 210, '42vh', 'min(300px, 38vh)'),
+      card2Style: this.cardStyle(0.10, 0.24),
+      card3Style: this.cardStyle(0.14, 0.28),
+      ...this.resolvedVals(),
+    };
+  }
+}
+</script>
+</body>
+</html>

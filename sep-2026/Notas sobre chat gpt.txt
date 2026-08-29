@@ -1,0 +1,14 @@
+Projeto Humanos no chat gpt
+
+https://chatgpt.com/g/g-p-67eef03142448191ae609cb9d16c19ad-humanos/project
+
+Conversa no chat gpt sobre o website
+
+https://chatgpt.com/g/g-p-67eef03142448191ae609cb9d16c19ad-humanos/shared/c/6a8dc2cf-cc54-83eb-94f2-05396a628d10?owner_user_id=user-yKNGQ66CoYlLcmuW48pdw9v5
+
+
+
+
+Como pedir alterações
+
+descreve o que queres, adiciona printscreens comparativos se necessario. pede sempre a text prompt para o claude corrigir. copia a text prompt e coloca no claude design.
