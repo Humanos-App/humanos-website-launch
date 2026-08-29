@@ -186,6 +186,24 @@ function assembleComponents(html, page) {
   return { html, count: used.size };
 }
 
+/**
+ * Remove the design's own top navigation, matching the outermost <nav> and its
+ * close by depth so nested markup inside it is not miscounted.
+ */
+function stripDesignNav(html) {
+  const open = html.search(/<nav\b/i);
+  if (open === -1) return html;
+  const tag = /<nav\b|<\/nav>/gi;
+  tag.lastIndex = open;
+  let depth = 0;
+  let m;
+  while ((m = tag.exec(html))) {
+    depth += m[0][1] === "/" ? -1 : 1;
+    if (depth === 0) return html.slice(0, open) + html.slice(m.index + m[0].length);
+  }
+  return html;
+}
+
 function buildPage(page) {
   const src = join(SRC, page.dir, page.file);
   if (!existsSync(src)) throw new Error(`Page not found: ${page.dir}/${page.file}`);
@@ -227,6 +245,14 @@ function buildPage(page) {
   if (assembled.count) componentCounts.set(page.slug, assembled.count);
   mkdirSync(dirname(dest), { recursive: true });
   writeFileSync(dest, html);
+
+  // Also emit the body on its own, for the Next route at /v2/<slug> to render
+  // inside the real site chrome. The design's own <nav> is dropped there — the
+  // v1 navbar takes its place. Everything else is kept verbatim, <helmet>
+  // included, because support.js loads those assets itself once it boots.
+  const body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  if (body) writeFileSync(join(OUT, page.slug, "body.html"), stripDesignNav(body[1]));
+  else warnings.push(`no <body> in ${page.slug}; body fragment not written`);
   return rewritten;
 }
 
