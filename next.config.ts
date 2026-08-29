@@ -2,6 +2,19 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        // The /v2 rebrand previews are static Claude Design exports generated
+        // into public/v2/<slug>/index.html by `npm run sync:v2`. Next serves
+        // public/ files at their literal path only, so map the clean URL onto
+        // the index.html. Runs after the filesystem check, so real assets under
+        // /v2/_shared/ are served directly and never hit this rule.
+        source: "/v2/:slug",
+        destination: "/v2/:slug/index.html",
+      },
+    ];
+  },
   async redirects() {
     return [
       {

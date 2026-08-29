@@ -37,3 +37,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# /v2 rebrand previews — generated from sep-2026/ by scripts/sync-v2.mjs
+# (runs automatically on `npm run dev` and before `npm run build`)
+/public/v2/
