@@ -8,10 +8,9 @@
     </div>
 
     <div style="position:relative; margin-top:var(--sp-6); overflow:hidden;">
-      <div ref="{{ setCarouselRef }}" style="display:flex; gap:20px; transform:translateX(calc(-{{ storyIdx }} * (85% + 20px))); transition:transform 460ms cubic-bezier(0.2,0,0,1); padding-left:max(var(--sp-7), calc((100vw - 1200px) / 2 + var(--sp-7))); padding-right:20px;">
+      <div ref="{{ setCarouselRef }}" style="display:flex; gap:20px; transform:translateX(calc(-{{ storyIdx }} * (min(85%, 1080px) + 20px))); transition:transform 460ms cubic-bezier(0.2,0,0,1); padding-left:max(var(--sp-7), calc((100vw - 1200px) / 2 + var(--sp-7))); padding-right:20px;">
 
-        <div style="flex:0 0 85%; max-width:1080px; position:relative; height:500px; border-radius:12px; overflow:hidden;">
-          <image-slot id="story-numo" shape="rect" placeholder="Treasury / institutional finance operations environment" style="position:absolute; inset:0;"></image-slot>
+        <div style="flex:0 0 min(85%, 1080px); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[FINANCE]</span>
@@ -22,8 +21,7 @@
           </div>
         </div>
 
-        <div style="flex:0 0 85%; max-width:1080px; position:relative; height:500px; border-radius:12px; overflow:hidden;">
-          <image-slot id="story-arcrisk" shape="rect" placeholder="Commercial underwriting / insurance operations environment" style="position:absolute; inset:0;"></image-slot>
+        <div style="flex:0 0 min(85%, 1080px); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[INSURANCE]</span>
@@ -34,8 +32,7 @@
           </div>
         </div>
 
-        <div style="flex:0 0 85%; max-width:1080px; position:relative; height:500px; border-radius:12px; overflow:hidden;">
-          <image-slot id="story-lusiadas" shape="rect" placeholder="Hospital corridor / clinical operations environment" style="position:absolute; inset:0;"></image-slot>
+        <div style="flex:0 0 min(85%, 1080px); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[HEALTHCARE]</span>

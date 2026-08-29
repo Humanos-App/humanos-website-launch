@@ -54,6 +54,10 @@
     }
     a { color: var(--hm-verification); text-decoration: none; }
     a:hover { color: var(--hm-authority); }
+    /* --hm-authority is the dark tone itself, so on a dark component the
+       default hover turns a link the colour of the page behind it. Lift it
+       instead of darkening it there. */
+    [data-tone="dark"] a:hover { color: #FFFFFF; }
     div.sc-host[data-sc-name="Homepage"] { font-size: 0; }
 
     /* ── customer marquee ──────────────────────────────────────
