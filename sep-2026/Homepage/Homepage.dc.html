@@ -13,7 +13,19 @@
   <script src="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/_ds_bundle.js"></script>
   <script src="./image-slot.js"></script>
   <script src="./globe.js"></script>
+  <script src="./scroll-tone.js"></script>
   <style>
+    /* ── page tone ────────────────────────────────────────────
+       One background for the whole page, crossfading to whatever tone the
+       section under the viewport's middle asks for. <body> is what paints it
+       (scroll-tone.js sets the colour inline there); sections are transparent
+       so it shows through. */
+    body {
+      transition: background-color 420ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body { transition: none; }
+    }
     a { color: var(--hm-verification); text-decoration: none; }
     a:hover { color: var(--hm-authority); }
     div.sc-host[data-sc-name="Homepage"] { font-size: 0; }
@@ -156,7 +168,7 @@
   </style>
 </helmet>
 
-<div style="background:var(--hm-clarity); min-height:100vh; display:flex; flex-direction:column;">
+<div style="min-height:100vh; display:flex; flex-direction:column;">
 
   <nav style="display:flex; align-items:center; justify-content:space-between; padding:0 var(--sp-5); height:72px; border-bottom:1px solid var(--hm-line); position:sticky; top:0; background:var(--hm-clarity); z-index:10; gap:var(--sp-3);">
     <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
@@ -238,7 +250,7 @@
 
   </main>
 
-  <div style="border-bottom:1px solid var(--hm-line); padding:var(--sp-6) 0; background:var(--hm-clarity);">
+  <div style="border-bottom:1px solid var(--hm-line); padding:var(--sp-6) 0;">
     <div style="max-width:1200px; margin:0 auto; padding:0 var(--sp-7); display:flex; flex-direction:column; align-items:center; gap:var(--sp-4);">
       <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-4)">Deployed in 350+ hospitals, insurers, and fintech players</span>
     </div>
@@ -276,7 +288,7 @@
     </div>
   </div>
 
-  <div ref="{{ setProbRef }}" style="position:relative; background:#14122E; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-5);">
+  <div data-tone="dark" ref="{{ setProbRef }}" style="position:relative; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-5);">
 
     <div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
       <h2 style="font-size:32px; font-weight:600; letter-spacing:-0.02em; line-height:1.18; color:#F4F3EF; max-width:40ch;"><span style="color:#FF9A8B;">AI risk changes every time AI acts.</span> The old ways of measuring and controlling risk <span style="color:#FF9A8B;">no longer work</span>.</h2>
@@ -324,13 +336,13 @@
     <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#F4F3EF; font-weight:700; text-align:center;">Risk continuously changes as AI acts</span>
   </div>
 
-  <div ref="{{ setSolRef }}" style="position:relative; background:var(--hm-clarity); border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-6);">
+  <div ref="{{ setSolRef }}" style="position:relative; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-6);">
 
     <p style="max-width: 860px; text-align: center; font-size: 50px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.22; color: var(--hm-authority); text-wrap: pretty">Humanos makes <span style="color:var(--hm-rejection);">dynamic AI risk</span> <span style="color:var(--hm-verification);">understandable</span>, <span style="color:var(--hm-verification);">manageable</span>, and <span style="color:var(--hm-verification);">provable</span> across a <span style="color:var(--hm-verification);">shared network</span>.</p>
 
   </div>
 
-  <div ref="{{ setKriRef }}" style="background:var(--hm-clarity); background-image:linear-gradient(to right, rgba(17,17,17,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,17,0.045) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+  <div ref="{{ setKriRef }}" style="background-image:linear-gradient(to right, rgba(17,17,17,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,17,0.045) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
@@ -531,7 +543,7 @@
 
   </div>
 
-  <div ref="{{ setRiRef }}" style="background:#14122E; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line-dark); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+  <div data-tone="dark" ref="{{ setRiRef }}" style="background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line-dark); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
@@ -660,7 +672,7 @@
     </div>
   </div>
 
-  <div style="background:var(--hm-clarity); border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7);">
+  <div style="border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7);">
     <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-8); align-items:center;">
 
       <div style="display:flex; flex-direction:column; gap:var(--sp-5); max-width:540px;">
@@ -734,7 +746,7 @@
     </div>
   </div>
 
-  <div style="padding:var(--sp-10) var(--sp-7); display:flex; align-items:center; justify-content:center; background:#14122E; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px;">
+  <div data-tone="dark" style="padding:var(--sp-10) var(--sp-7); display:flex; align-items:center; justify-content:center; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px;">
     <div style="max-width:800px; margin:0 auto; text-align:center;">
       <p style="font-size: 30px; font-weight: 500; font-style: italic; color: #F4F3EF; line-height: 1.5; letter-spacing: -0.01em">"Your execution receipts solve the hardest problem in underwriting AI liability, establishing the triggering event and the scope of authority at the moment of execution. <span style="font-weight:700;">That is what makes this class of risk insurable at all.</span>"</p>
       <div style="margin-top: var(--sp-3); font-size: 20px; color: #C7C5E8; font-style: italic">Mehdi Chaabi, CEO of <a href="https://insurenow.eu/" target="_blank">InsureNow</a></div>
@@ -800,7 +812,7 @@
 
   </div>
 
-  <div style="padding:var(--sp-10) var(--sp-7); background:var(--hm-clarity); border-top:1px solid var(--hm-line);">
+  <div style="padding:var(--sp-10) var(--sp-7); border-top:1px solid var(--hm-line);">
     <div style="max-width:1320px; margin:0 auto; display:flex; align-items:stretch; gap:var(--sp-5); flex-wrap:wrap;">
 
       <div style="flex:1 1 220px; min-width:200px; display:flex; flex-direction:column; gap:14px; justify-content:center;">
@@ -891,7 +903,7 @@
     </div>
   </div>
 
-  <div style="background:#14122E; position:relative; overflow:hidden; padding:var(--sp-9) var(--sp-7) 0;">
+  <div data-tone="dark" style="position:relative; overflow:hidden; padding:var(--sp-9) var(--sp-7) 0;">
 
     <svg style="position:absolute; top:-40px; left:-60px; width:340px; height:340px; opacity:0.5;" viewBox="0 0 340 340" fill="none">
       <circle cx="170" cy="170" r="2.5" fill="#8B89E8"></circle>
@@ -1861,6 +1873,20 @@ class Component extends DCLogic {
     }));
   }
 
+  /* The page background follows the section being read. Mounted against the
+     document rather than through a ref: refs fire bottom-up as React attaches
+     nodes, so a ref on the outer wrapper races the helmet script that defines
+     the module. Scoping to <body> sidesteps the ordering entirely. */
+  mountScrollTone() {
+    if (this.toneHandle || typeof window === 'undefined') return;
+    if (!window.HumanosScrollTone) {
+      /* helmet scripts can still be loading; try again on the next tick */
+      if ((this._toneTries = (this._toneTries || 0) + 1) <= 40) setTimeout(() => this.mountScrollTone(), 50);
+      return;
+    }
+    this.toneHandle = window.HumanosScrollTone.mount(document.body);
+  }
+
   /* The globe owns its own frame loop and observers inside globe.js; this
      just hands it the canvas React gave us and tears the old one down if
      React ever hands us a different node. */
@@ -2100,6 +2126,7 @@ class Component extends DCLogic {
     this.updateProgress();
     this.updatePillTone();
     this.enfTimer = setInterval(() => this.setState(s => ({ enfTick: s.enfTick + 1 })), 60);
+    this.mountScrollTone();
     this.ensureClock();
   }
 
@@ -2156,6 +2183,7 @@ class Component extends DCLogic {
     if (this.solObs) this.solObs.disconnect();
     if (this.riObs) this.riObs.disconnect();
     if (this.globeHandle) { this.globeHandle.destroy(); this.globeHandle = null; }
+    if (this.toneHandle) { this.toneHandle.destroy(); this.toneHandle = null; }
     if (this._timer) clearInterval(this._timer);
     if (this._raf) cancelAnimationFrame(this._raf);
   }
