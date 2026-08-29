@@ -32,6 +32,24 @@
        space, and cross-fade as the step changes. Before the first update no
        panel carries data-active, so panel 0 is shown by default rather than
        the section starting blank. */
+    /* The problem diagram is drawn entirely from the design system's
+       light-surface tokens — dark ink, hairline rules, a white card. Rather
+       than rewrite forty inline styles and the panel logic that generates the
+       rest, the tokens are re-pointed for this component alone, so the same
+       markup renders on a dark card. Values are v1's dark-section scale
+       (--rk-text / -2 / -3 and --rk-rule from its Risk section). */
+    [data-stage="problem"] {
+      --hm-authority: #F4F3EF;
+      --hm-ink-2: #B6B4AE;
+      --hm-ink-3: #B6B4AE;
+      --hm-ink-4: #8C8B89;
+      --hm-line: rgba(244, 243, 239, 0.12);
+      --hm-line-strong: rgba(244, 243, 239, 0.22);
+      /* indigo and red both lift for legibility on the dark card */
+      --hm-verification: #A9A6F5;
+      --hm-rejection: #E25750;
+    }
+
     [data-step-panel] {
       grid-area: 1 / 1;
       opacity: 0;
