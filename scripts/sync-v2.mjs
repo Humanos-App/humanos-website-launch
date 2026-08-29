@@ -57,10 +57,12 @@ const EXTERNAL = /^(#|[a-z][a-z0-9+.-]*:|\/\/|\/)/i;
  * untouched and the page resolves the result against ASSET_BASE.
  */
 const BINDING = /\{\{|\}\}/;
+const TONE_COLORS = { light: "var(--hm-clarity)", dark: "#14122E" };
 const ASSET_BASE = `<meta name="v2-asset-base" content="${SHARED_URL}/">`;
 
 const sha = (buf) => createHash("sha256").update(buf).digest("hex");
 const warnings = [];
+const componentCounts = new Map();
 
 /** slug lookup for cross-page links, keyed by "<source dir>::<filename>" */
 const slugByFile = new Map(PAGES.map((p) => [`${p.dir}::${p.file}`, p.slug]));
@@ -125,12 +127,70 @@ function rewriteRef(ref, page) {
   return posix.join(SHARED_URL, clean.split("/").map(encodeURIComponent).join("/"));
 }
 
+/**
+ * Assemble `<!-- @component <id> -->` slots from a page's components/ folder.
+ *
+ * The homepage is authored as one file per component plus a components.json
+ * manifest that carries the order, the tone each component wants, and any
+ * group it belongs to. This wraps each component in its stage element so the
+ * markup files stay pure content — no scroll plumbing bleeding into them.
+ */
+function assembleComponents(html, page) {
+  const dir = join(SRC, page.dir, "components");
+  const manifestPath = join(dir, "components.json");
+  if (!existsSync(manifestPath)) return { html, count: 0 };
+
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  const byId = new Map(manifest.map((c) => [c.id, c]));
+  const used = new Set();
+
+  html = html.replace(/^[ \t]*<!--\s*@component\s+([\w-]+)\s*-->[ \t]*$/gm, (whole, id) => {
+    const c = byId.get(id);
+    if (!c) {
+      warnings.push(`${page.slug}: no manifest entry for component "${id}"`);
+      return whole;
+    }
+    const file = join(dir, c.file);
+    if (!existsSync(file)) {
+      warnings.push(`${page.slug}: missing component file ${c.file}`);
+      return whole;
+    }
+    used.add(id);
+    const tone = c.tone || "light";
+    const attrs = [
+      `data-stage="${c.id}"`,
+      `data-tone="${tone}"`,
+      c.group ? `data-group="${c.group}"` : null,
+    ]
+      .filter(Boolean)
+      .join(" ");
+    // Each component paints its own tone. The page background follows the
+    // active one as well, but a component must never depend on that to be
+    // readable — otherwise it renders light-on-light until the scroll
+    // position catches up.
+    const style = `display:flex; flex-direction:column; background-color:${TONE_COLORS[tone] || TONE_COLORS.light};`;
+    return (
+      `  <div ${attrs} style="${style}">\n` +
+      readFileSync(file, "utf8").replace(/\s*$/, "") +
+      `\n  </div>`
+    );
+  });
+
+  for (const c of manifest) {
+    if (!used.has(c.id)) warnings.push(`${page.slug}: component "${c.id}" has no slot`);
+  }
+  return { html, count: used.size };
+}
+
 function buildPage(page) {
   const src = join(SRC, page.dir, page.file);
   if (!existsSync(src)) throw new Error(`Page not found: ${page.dir}/${page.file}`);
 
   let html = readFileSync(src, "utf8");
   let rewritten = 0;
+
+  const assembled = assembleComponents(html, page);
+  html = assembled.html;
 
   for (const dir of page.assetDirs ?? []) {
     const from = join(SRC, page.dir, dir);
@@ -160,6 +220,7 @@ function buildPage(page) {
   }
 
   const dest = join(OUT, page.slug, "index.html");
+  if (assembled.count) componentCounts.set(page.slug, assembled.count);
   mkdirSync(dirname(dest), { recursive: true });
   writeFileSync(dest, html);
   return rewritten;
@@ -174,6 +235,7 @@ for (const page of PAGES) {
   console.log(`  /v2/${page.slug.padEnd(18)} <- ${page.dir}/${page.file}  (${n} refs rewritten)`);
 }
 
+for (const [slug, n] of componentCounts) console.log(`  ${" ".repeat(22)}   ${n} components assembled for /v2/${slug}`);
 console.log(`\n  shared assets: ${sharedOrigin.size} path(s) under /v2/_shared/`);
 if (warnings.length) {
   console.log(`\n  ${warnings.length} warning(s):`);
