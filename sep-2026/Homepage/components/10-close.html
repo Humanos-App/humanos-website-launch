@@ -1,36 +1,33 @@
-  <div style="position:relative; overflow:hidden; padding:var(--sp-10) var(--sp-7);">
+  <!--
+    v1's closing CTA, markup for markup: the same section/grid/wrap structure
+    and the same class names, so app/styles/sections/final.css and buttons.css
+    style it directly rather than it being re-approximated with inline styles.
+    Only the copy changes, onto the risk positioning.
 
-    <svg style="position:absolute; top:-40px; left:-60px; width:340px; height:340px; opacity:0.5;" viewBox="0 0 340 340" fill="none">
-      <circle cx="170" cy="170" r="2.5" fill="#8B89E8"></circle>
-      <circle cx="60" cy="90" r="2" fill="#5F5DA8"></circle>
-      <circle cx="260" cy="60" r="2" fill="#5F5DA8"></circle>
-      <circle cx="40" cy="230" r="2" fill="#5F5DA8"></circle>
-      <line x1="170" y1="170" x2="60" y2="90" stroke="#5F5DA8" stroke-width="1"></line>
-      <line x1="170" y1="170" x2="260" y2="60" stroke="#5F5DA8" stroke-width="1"></line>
-      <line x1="170" y1="170" x2="40" y2="230" stroke="#5F5DA8" stroke-width="1"></line>
-    </svg>
-    <svg style="position:absolute; bottom:-30px; right:-50px; width:300px; height:300px; opacity:0.5;" viewBox="0 0 300 300" fill="none">
-      <circle cx="150" cy="150" r="2.5" fill="#8B89E8"></circle>
-      <circle cx="250" cy="90" r="2" fill="#5F5DA8"></circle>
-      <circle cx="230" cy="230" r="2" fill="#5F5DA8"></circle>
-      <circle cx="70" cy="200" r="2" fill="#5F5DA8"></circle>
-      <line x1="150" y1="150" x2="250" y2="90" stroke="#5F5DA8" stroke-width="1"></line>
-      <line x1="150" y1="150" x2="230" y2="230" stroke="#5F5DA8" stroke-width="1"></line>
-      <line x1="150" y1="150" x2="70" y2="200" stroke="#5F5DA8" stroke-width="1"></line>
-    </svg>
-
-    <div style="position:relative; max-width:900px; margin:0 auto; text-align:center;">
-      <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:#A9A6F5;">Measure risk as AI acts</div>
-
-      <h2 style="margin-top:var(--sp-4); font-size:64px; font-weight:600; letter-spacing:-0.03em; line-height:1.05; color:#F4F3EF;">AI risk.<br><span style="color:#A9A6F5;">Under control.</span></h2>
-
-      <p style="margin-top:var(--sp-4); font-size:19px; line-height:1.55; color:#C7C5E8; max-width:640px; margin-left:auto; margin-right:auto;">Risk measured continuously. Reputation proven on demand. Exposure reduced with free controls, and insured for whatever remains.</p>
-
-      <div style="margin-top:var(--sp-6); display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
-        <a href="https://app.humanos.tech" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; height:52px; padding:0 30px; box-sizing:border-box; border-radius:6px; font-size:15px; font-weight:600; text-decoration:none; background:#F4F3EF; color:#111111;">Get API key <span aria-hidden="true">&#8594;</span></a>
-        <a href="https://calendly.com/wgomeshumanos/30min" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; height:52px; padding:0 30px; box-sizing:border-box; border-radius:6px; font-size:15px; font-weight:600; text-decoration:none; background:transparent; color:#F4F3EF; border:1px solid rgba(244,243,239,0.28);">Talk to us <span aria-hidden="true">&#8594;</span></a>
+    One departure: v1 wraps its second CTA in the TalkWithUs dialog, which is a
+    React component the design cannot mount. It is the same button markup as an
+    anchor to the same Calendly link the dialog books.
+  -->
+  <section class="final">
+    <div class="final__grid-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="final__eyebrow">Measure risk as AI acts</div>
+      <h2 class="final__title">
+        Before AI acts, know what it puts <span class="accent">at risk</span>.
+      </h2>
+      <p class="final__sub">
+        Risk measured continuously. Reputation proven on demand. Exposure reduced, then insured.
+      </p>
+      <div class="final__ctas">
+        <a class="btn btn--primary" href="https://app.humanos.tech" target="_blank" rel="noopener noreferrer">
+          Get API key <span class="arrow">&#8594;</span>
+        </a>
+        <a class="btn btn--secondary" href="https://calendly.com/wgomeshumanos/30min" target="_blank" rel="noopener noreferrer">
+          Talk to us <span class="arrow">&#8594;</span>
+        </a>
       </div>
-
-      <p style="margin-top:var(--sp-6); font-size:14px; line-height:1.6; color:#7A78AE; max-width:620px; margin-left:auto; margin-right:auto;">Built for agents, payments, ERP, workflows, and any system whose actions carry real risk.</p>
+      <p class="final__fineprint">
+        Built for agents, payments, ERP, workflows, and any system whose actions carry real risk.
+      </p>
     </div>
-  </div>
+  </section>
