@@ -156,10 +156,15 @@ function assembleComponents(html, page) {
     }
     used.add(id);
     const tone = c.tone || "light";
+    // A component only fades where the tone changes, since that is the only
+    // place the page has something to hand over. `fadeOut` / `fadeIn` opt a
+    // component into fading at a boundary its neighbour shares a tone with.
     const attrs = [
       `data-stage="${c.id}"`,
       `data-tone="${tone}"`,
       c.group ? `data-group="${c.group}"` : null,
+      c.fadeOut ? "data-fade-out" : null,
+      c.fadeIn ? "data-fade-in" : null,
     ]
       .filter(Boolean)
       .join(" ");

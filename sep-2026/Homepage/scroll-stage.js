@@ -215,7 +215,12 @@
       for (i = 0; i < stages.length - 1; i++) {
         var from = toneOf(stages[i]);
         var to = toneOf(stages[i + 1]);
-        if (from === to) continue;
+        /* A tone change always hands over. Where the tones match there is
+           nothing to hand over, so a component only fades if it asked to. */
+        var toneChanges = from !== to;
+        var fadesOut = toneChanges || stages[i].hasAttribute("data-fade-out");
+        var fadesIn = toneChanges || stages[i + 1].hasAttribute("data-fade-in");
+        if (!fadesOut && !fadesIn) continue;
 
         var bTop = stages[i + 1].getBoundingClientRect().top;
         if (bTop > vh) continue;
@@ -238,10 +243,10 @@
 
         /* Several handovers can be live at once around a short component;
            each only ever darkens its own pair, so the strictest wins. */
-        opacity[i] = Math.min(opacity[i], 1 - outT);
-        opacity[i + 1] = Math.min(opacity[i + 1], inT);
+        if (fadesOut) opacity[i] = Math.min(opacity[i], 1 - outT);
+        if (fadesIn) opacity[i + 1] = Math.min(opacity[i + 1], inT);
 
-        if (bTop >= 0) {
+        if (toneChanges && bTop >= 0) {
           var dist = Math.abs(bTop - vh / 2);
           if (dist < leadDist) {
             leadDist = dist;

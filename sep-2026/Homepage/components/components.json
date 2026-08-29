@@ -12,7 +12,8 @@
   {
     "id": "what-humanos-is",
     "file": "03-what-humanos-is.html",
-    "tone": "light"
+    "tone": "light",
+    "fadeOut": true
   },
   {
     "id": "risk-management",
