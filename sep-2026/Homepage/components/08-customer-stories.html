@@ -1,4 +1,4 @@
-  <div style="padding:var(--sp-10) 0;">
+  <div style="padding:var(--sp-10) 0; overflow:hidden;">
     <div style="max-width:1200px; margin:0 auto; padding:0 var(--sp-7); display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-6); flex-wrap:wrap;">
       <div>
         <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--hm-ink-3); font-weight:600;">CUSTOMER STORIES</span>
@@ -7,8 +7,9 @@
       <span style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--hm-verification); cursor:pointer; white-space:nowrap;">View all customer stories →</span>
     </div>
 
-    <div style="position:relative; margin-top:var(--sp-6); overflow:hidden;">
-      <div ref="{{ setCarouselRef }}" style="--card:min(1080px, 85vw); display:flex; gap:20px; transform:translateX(calc(-{{ storyIdx }} * (var(--card) + 20px))); transition:transform 460ms cubic-bezier(0.2,0,0,1); padding-left:calc(max(0px, (100% - 1200px) / 2) + var(--sp-7)); padding-right:20px;">
+    <div style="max-width:1200px; margin:var(--sp-6) auto 0; padding:0 var(--sp-7);">
+      <div style="position:relative; overflow:hidden; margin-right:-100vw;">
+        <div ref="{{ setCarouselRef }}" style="--card:min(1080px, 85vw); display:flex; gap:20px; transform:translateX(calc(-{{ storyIdx }} * (var(--card) + 20px))); transition:transform 460ms cubic-bezier(0.2,0,0,1); padding-right:20px;">
 
         <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
@@ -43,6 +44,7 @@
           </div>
         </div>
 
+        </div>
       </div>
     </div>
 
