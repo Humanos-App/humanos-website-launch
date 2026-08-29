@@ -26,7 +26,7 @@
 
   var TONES = {
     light: [244, 243, 239] /* --hm-clarity */,
-    dark: [20, 18, 46] /* #14122E */,
+    dark: [17, 17, 17] /* --hm-authority — the floating bar's own background */,
   };
 
   /* The handover is staged rather than simultaneous, as three windows over
@@ -39,10 +39,25 @@
        3. the incoming component fades in.
 
      They run back to back with a hair of overlap at each seam, which keeps
-     the sequence readable without it feeling like three separate events. */
-  var PHASE_OUT = [0.1, 0.42];
-  var PHASE_BG = [0.4, 0.58];
-  var PHASE_IN = [0.56, 0.88];
+     the sequence readable without it feeling like three separate events.
+
+     The windows start in order — out, then background, then in — but they
+     overlap rather than running end to end. That overlap is what buys a
+     component its time at full opacity: a component shorter than the viewport
+     has both of its boundaries on screen at once, so the fade-in of one and
+     the fade-out of the other are live together. Pushed apart far enough,
+     they meet and the component never reaches full opacity at all.
+
+     The span a component holds solid works out as
+
+         (PHASE_OUT[0] + height / viewport - PHASE_IN[1]) * viewport
+
+     which for the 792px problem section on a 900px screen is about 378px of
+     scrolling. Ending the fade-in earlier, or starting the fade-out later,
+     both widen it. */
+  var PHASE_OUT = [0.2, 0.5];
+  var PHASE_BG = [0.32, 0.68];
+  var PHASE_IN = [0.4, 0.66];
 
   function clamp01(v) {
     return v < 0 ? 0 : v > 1 ? 1 : v;

@@ -57,7 +57,6 @@ const EXTERNAL = /^(#|[a-z][a-z0-9+.-]*:|\/\/|\/)/i;
  * untouched and the page resolves the result against ASSET_BASE.
  */
 const BINDING = /\{\{|\}\}/;
-const TONE_COLORS = { light: "var(--hm-clarity)", dark: "#14122E" };
 const ASSET_BASE = `<meta name="v2-asset-base" content="${SHARED_URL}/">`;
 
 const sha = (buf) => createHash("sha256").update(buf).digest("hex");
