@@ -34,7 +34,11 @@ const SHARED_URL = "/v2/_shared";
  * Nothing is lost — the duplicate folders contain no unique file.
  */
 const PAGES = [
-  { slug: "homepage", dir: "Homepage", file: "Homepage.dc.html" },
+  // `assetDirs` are trees the HTML never names in a src/href literal because the
+  // paths are produced at runtime by a template binding. Nothing would claim
+  // them, so they are copied wholesale and the page resolves them against the
+  // asset base injected below.
+  { slug: "homepage", dir: "Homepage", file: "Homepage.dc.html", assetDirs: ["logos/customers"] },
   { slug: "pricing", dir: "Pricing", file: "Pricing.dc.html" },
   { slug: "prove", dir: "Prove Risk", file: "Prove Your AI.dc.html" },
   { slug: "control", dir: "Control Risk", file: "Control.dc.html" },
@@ -46,6 +50,14 @@ const PAGES = [
 
 const NOINDEX = '<meta name="robots" content="noindex, nofollow">';
 const EXTERNAL = /^(#|[a-z][a-z0-9+.-]*:|\/\/|\/)/i;
+
+/**
+ * A ref holding a template binding is not a path — it is a hole the page fills
+ * at runtime. Rewriting it would corrupt the binding, so these pass through
+ * untouched and the page resolves the result against ASSET_BASE.
+ */
+const BINDING = /\{\{|\}\}/;
+const ASSET_BASE = `<meta name="v2-asset-base" content="${SHARED_URL}/">`;
 
 const sha = (buf) => createHash("sha256").update(buf).digest("hex");
 const warnings = [];
@@ -95,7 +107,7 @@ function claimShared(relPath, pageDir) {
 
 /** Map one relative ref from the export onto its served URL. */
 function rewriteRef(ref, page) {
-  if (EXTERNAL.test(ref)) return null;
+  if (EXTERNAL.test(ref) || BINDING.test(ref)) return null;
 
   const clean = decodeURIComponent(ref.replace(/^\.\//, "")).split("#")[0].split("?")[0];
   if (!clean) return null;
@@ -120,6 +132,18 @@ function buildPage(page) {
   let html = readFileSync(src, "utf8");
   let rewritten = 0;
 
+  for (const dir of page.assetDirs ?? []) {
+    const from = join(SRC, page.dir, dir);
+    if (!existsSync(from)) {
+      warnings.push(`missing assetDir: ${page.dir}/${dir}`);
+      continue;
+    }
+    if (!sharedOrigin.has(dir)) {
+      sharedOrigin.set(dir, page.dir);
+      cpSync(from, join(OUT, "_shared", dir), { recursive: true });
+    }
+  }
+
   html = html.replace(/(\b(?:src|href)=")([^"]+)(")/g, (whole, pre, ref, post) => {
     const next = rewriteRef(ref, page);
     if (!next) return whole;
@@ -127,9 +151,10 @@ function buildPage(page) {
     return `${pre}${next}${post}`;
   });
 
-  // Keep these previews out of search results even if /v2 reaches production.
+  // Keep these previews out of search results even if /v2 reaches production,
+  // and tell the page where its runtime-resolved assets were published.
   if (/<head[^>]*>/i.test(html)) {
-    html = html.replace(/<head[^>]*>/i, (h) => `${h}\n  ${NOINDEX}`);
+    html = html.replace(/<head[^>]*>/i, (h) => `${h}\n  ${NOINDEX}\n  ${ASSET_BASE}`);
   } else {
     warnings.push(`no <head> in ${page.slug}; noindex not injected`);
   }

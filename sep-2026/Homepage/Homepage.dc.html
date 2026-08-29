@@ -12,10 +12,140 @@
   <link rel="stylesheet" href="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/styles.css">
   <script src="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/_ds_bundle.js"></script>
   <script src="./image-slot.js"></script>
+  <script src="./globe.js"></script>
   <style>
     a { color: var(--hm-verification); text-decoration: none; }
     a:hover { color: var(--hm-authority); }
     div.sc-host[data-sc-name="Homepage"] { font-size: 0; }
+
+    /* ── customer marquee ──────────────────────────────────────
+       Cloned from the live site's Logos section. Two identical groups
+       scroll as one track; the animation translates by -50%, so the
+       second group is exactly where the first began and the seam is
+       never visible. */
+    .hmc-marquee {
+      position: relative;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+    .hmc-track {
+      display: flex;
+      width: max-content;
+      align-items: stretch;
+      animation: hmcScroll 70s linear infinite;
+      will-change: transform;
+    }
+    .hmc-marquee:hover .hmc-track { animation-play-state: paused; }
+    @keyframes hmcScroll {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+    .hmc-group { display: flex; flex: 0 0 auto; }
+    .hmc-cell {
+      flex: 0 0 auto;
+      width: 260px;
+      padding: 24px 28px;
+      box-sizing: border-box;
+      /* Fixed 3-row grid keeps the tag, brand and description slots on the
+         same baselines across every cell, whether the brand renders as an
+         image or as text. */
+      display: grid;
+      grid-template-rows: 16px 40px 32px;
+      row-gap: 12px;
+      justify-items: start;
+      align-content: center;
+      align-items: center;
+      border-right: 1px solid var(--hm-line);
+      text-decoration: none;
+      color: inherit;
+    }
+    .hmc-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--hm-ink-4);
+      font-weight: 500;
+      align-self: center;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    /* grayscale + brightness(0) collapses every logo to pure black; multiply
+       then dissolves white logo backgrounds into the cream page. */
+    .hmc-img {
+      display: block;
+      max-height: 40px;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      align-self: center;
+      object-fit: contain;
+      object-position: left center;
+      filter: grayscale(1) brightness(0);
+      mix-blend-mode: multiply;
+      opacity: 0.7;
+      transition: opacity 160ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    a.hmc-cell:hover .hmc-img { opacity: 1; }
+    .hmc-name {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--hm-authority);
+      transition: color 160ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    a.hmc-cell:hover .hmc-name { color: var(--hm-verification); }
+    .hmc-desc {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      line-height: 1.4;
+      letter-spacing: 0.005em;
+      color: var(--hm-ink-2);
+      max-width: 100%;
+      align-self: start;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hmc-track { animation: none; }
+    }
+
+    /* ── hero globe ───────────────────────────────────────────
+       The canvas is square and centred; the panel it sits in is not, so
+       the wrapper does the centring and the canvas takes the smaller of
+       the two axes. */
+    .hmc-globe-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      /* a size container, so the canvas can ask for the smaller of the two
+         axes (cqmin) and stay square in a panel that is not */
+      container-type: size;
+    }
+    .hmc-globe {
+      width: 100cqmin;
+      height: 100cqmin;
+      display: block;
+    }
+    /* No container-query support: fall back to the panel's height, which is
+       the constrained axis in the hero's side-by-side layout. */
+    @supports not (container-type: size) {
+      .hmc-globe { width: auto; height: 100%; aspect-ratio: 1 / 1; }
+    }
     @keyframes kriPanelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
       @keyframes eiPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.65; } }
     @keyframes eiFloat { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-3px) rotate(var(--r, 0deg)); } }
@@ -67,10 +197,10 @@
     </div>
   </nav>
 
-  <main style="flex:1; display:flex; flex-direction:column; padding:var(--sp-8) var(--sp-7) var(--sp-6); max-width:1200px; width:100%; margin:0 auto; position:relative; box-sizing:border-box;">
-   <div style="display:flex; align-items:stretch; gap:var(--sp-8); min-height:600px;">
+  <main style="flex:1; display:flex; flex-direction:column; padding:var(--sp-4) var(--sp-7) var(--sp-5); max-width:1200px; width:100%; margin:0 auto; position:relative; box-sizing:border-box;">
+   <div style="display:flex; align-items:stretch; gap:var(--sp-8); min-height:480px;">
 
-    <div style="flex:0 1 53%; min-width:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:var(--sp-4); text-align:left; padding:var(--sp-6) 0;">
+    <div style="flex:0 1 53%; min-width:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:var(--sp-4); text-align:left; padding:var(--sp-4) 0;">
       <span style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-3); font-weight: 600; padding: 8px 16px; border: 1px solid var(--hm-line); border-radius: 999px"><span style="width:7px; height:7px; border-radius:50%; background:var(--hm-verification); box-shadow:0 0 0 3px rgba(75,73,202,0.2); animation:eiPulse 1.8s ease-in-out infinite;"></span>The Risk Network for AI</span>
 
       <h1 style="font-size: clamp(44px, 5.4vw, 68px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.04; color: var(--hm-authority); max-width: 14ch;">
@@ -99,23 +229,49 @@
       </div>
     </div>
 
-    <div style="flex:1 1 47%; min-width:0; align-self:stretch; border:1px solid var(--hm-line); border-radius:2px; display:flex; align-items:center; justify-content:center;">
-      <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700;">Risk Network</span>
+    <div style="flex:1 1 47%; min-width:0; align-self:stretch; position:relative;">
+      <div class="hmc-globe-wrap">
+        <canvas class="hmc-globe" ref="{{ setGlobeRef }}" aria-hidden="true"></canvas>
+      </div>
     </div>
    </div>
 
   </main>
 
-  <div style="border-bottom:1px solid var(--hm-line); padding:var(--sp-6) var(--sp-7); background:var(--hm-clarity);">
-    <div style="max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:var(--sp-4);">
-      <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-4)">Live in 350+ fintechs, hospitals, and insurers.</span>
-      <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:var(--sp-7); width:100%;">
-        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Meridian Re</span>
-        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Northstar Audit</span>
-        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Vaultline</span>
-        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Cascade Bank</span>
-        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Arcform</span>
-        <span style="font-size:17px; font-weight:600; color:var(--hm-ink-2); letter-spacing:-0.01em;">Ledgerpoint</span>
+  <div style="border-bottom:1px solid var(--hm-line); padding:var(--sp-6) 0; background:var(--hm-clarity);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 var(--sp-7); display:flex; flex-direction:column; align-items:center; gap:var(--sp-4);">
+      <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-4)">Deployed in 350+ hospitals, insurers, and fintech players</span>
+    </div>
+    <div class="hmc-marquee" role="group" aria-label="Customers" style="margin-top:var(--sp-4);">
+      <div class="hmc-track">
+        <div class="hmc-group">
+          <sc-for list="{{ customers }}" as="c" hint-placeholder-count="6">
+            <a class="hmc-cell" href="{{ c.href }}" target="_blank" rel="noopener noreferrer">
+              <span class="hmc-tag">{{ c.tag }}</span>
+              <sc-if value="{{ c.src }}">
+                <img class="hmc-img" src="{{ c.src }}" alt="{{ c.name }}" loading="lazy">
+              </sc-if>
+              <sc-if value="{{ c.textOnly }}">
+                <span class="hmc-name">{{ c.name }}</span>
+              </sc-if>
+              <span class="hmc-desc">{{ c.desc }}</span>
+            </a>
+          </sc-for>
+        </div>
+        <div class="hmc-group" aria-hidden="true">
+          <sc-for list="{{ customers }}" as="c" hint-placeholder-count="6">
+            <a class="hmc-cell" href="{{ c.href }}" target="_blank" rel="noopener noreferrer" tabindex="-1">
+              <span class="hmc-tag">{{ c.tag }}</span>
+              <sc-if value="{{ c.src }}">
+                <img class="hmc-img" src="{{ c.src }}" alt="" loading="lazy">
+              </sc-if>
+              <sc-if value="{{ c.textOnly }}">
+                <span class="hmc-name">{{ c.name }}</span>
+              </sc-if>
+              <span class="hmc-desc">{{ c.desc }}</span>
+            </a>
+          </sc-for>
+        </div>
       </div>
     </div>
   </div>
@@ -1665,6 +1821,58 @@ class Component extends DCLogic {
     this.solObs.observe(this.solEl);
   };
 
+  /* Customers, cloned from the live site's Logos section. `src` is relative so
+     the page still resolves them when opened straight from the export; the
+     one entry without a logo falls back to its name via `textOnly`. */
+  static CUSTOMERS = [
+    { tag: 'Agentic governance', name: 'Coalex', src: 'logos/customers/coalex.png', desc: 'AI governance & oversight', href: 'https://coalex.ai' },
+    { tag: 'Insurance', name: 'Fidelidade', src: 'logos/customers/fidelidade.png', desc: '7M customers · 14 geos', href: 'https://www.fidelidade.pt/en' },
+    { tag: 'Healthcare', name: 'Lusíadas', src: 'logos/customers/lusiadas.png.webp', desc: '60+ hospitals and clinics', href: 'https://www.lusiadas.pt/en' },
+    { tag: 'Healthcare', name: 'Joaquim Chaves', src: 'logos/customers/joaquim_chaves.svg', desc: '300+ clinics', href: 'https://jcs.pt/en' },
+    { tag: 'Banking', name: 'numo', src: 'logos/customers/numo.png', desc: 'Agentic Treasury Management', href: 'https://usenumo.com/' },
+    { tag: 'Healthtech', name: 'Bloodflow', src: 'logos/customers/bloodflow.png', desc: 'Clinical Intelligence Layer', href: 'https://www.bloodflow.eu/' },
+    { tag: 'Healthtech', name: 'medify', src: 'logos/customers/medify.png', desc: '+30 hospitals', href: 'https://medify.eu/' },
+    { tag: 'Software House', name: 'Critical Software', src: null, desc: 'Defense · Finance · Insurance', href: 'http://criticalsoftware.com/en' },
+    { tag: 'EHR', name: 'Ciberbit', src: 'logos/customers/ciberbit.png', desc: '100+ hospitals and clinics', href: 'https://ciberbit.pt' },
+    { tag: 'ERP Automation', name: 'Extraflow', src: 'logos/customers/extraflow.svg', desc: 'ERP Automation', href: 'https://extraflow.ai/en' },
+    { tag: 'Agentic Payments', name: 'Ralio', src: 'logos/customers/ralio.webp', desc: 'B2B Agentic Payments', href: 'https://ralio.co' },
+    { tag: 'Agentic Payments', name: 'Paymove', src: 'logos/customers/paymove.png', desc: '500K+ users across Europe', href: 'https://www.paymove.io' },
+    { tag: 'Agent Orchestrator', name: 'DataWhisper', src: 'logos/customers/data_whisper.webp', desc: 'Multi-Agent AI System', href: 'https://www.datawhisper.co.uk' },
+  ];
+
+  /* Assets named by a binding rather than a literal src cannot be rewritten
+     when the export is published, so the publisher leaves a base here and we
+     resolve against it. Absent (opened straight from the export), the paths
+     stay relative and resolve as they always did. */
+  static assetBase() {
+    if (typeof document === 'undefined') return '';
+    const m = document.querySelector('meta[name="v2-asset-base"]');
+    return (m && m.getAttribute('content')) || '';
+  }
+
+  customerCells() {
+    const base = Component.assetBase();
+    /* sc-if has no else, so the image and the text fallback are two
+       independent conditions and exactly one is truthy per row. */
+    return Component.CUSTOMERS.map((c) => ({
+      ...c,
+      src: c.src ? base + c.src : null,
+      textOnly: !c.src,
+    }));
+  }
+
+  /* The globe owns its own frame loop and observers inside globe.js; this
+     just hands it the canvas React gave us and tears the old one down if
+     React ever hands us a different node. */
+  setGlobeRef = (el) => {
+    if (el === this.globeEl) return;
+    if (this.globeHandle) { this.globeHandle.destroy(); this.globeHandle = null; }
+    this.globeEl = el;
+    if (el && typeof window !== 'undefined' && window.HumanosGlobe) {
+      this.globeHandle = window.HumanosGlobe.mount(el);
+    }
+  };
+
   setProbRef = (el) => {
     if (!el || el === this.probEl) return;
     this.probEl = el;
@@ -1837,13 +2045,12 @@ class Component extends DCLogic {
         height: '44px', padding: '0 10px 0 18px',
         borderRadius: '999px', cursor: 'pointer',
         background: this._pillDark ? '#FFFFFF' : 'var(--hm-authority)',
-        border: '2px solid var(--hm-verification)',
         boxShadow: '0 2px 4px rgba(17,17,17,0.10), 0 18px 40px -16px rgba(75,73,202,0.45)',
         transition: 'background 180ms ' + ez,
       },
       pillText: copied ? 'Setup prompt copied ✓' : "Click to know your AI agent's Risk Score in seconds",
       pillTextStyle: {
-        fontSize: '15px', fontWeight: 700, whiteSpace: 'nowrap',
+        fontSize: '15px', fontWeight: 400, whiteSpace: 'nowrap',
         color: this._pillDark ? 'var(--hm-authority)' : '#F4F3EF',
         transition: 'color 180ms ' + ez,
       },
@@ -1948,6 +2155,7 @@ class Component extends DCLogic {
     if (this.probObs) this.probObs.disconnect();
     if (this.solObs) this.solObs.disconnect();
     if (this.riObs) this.riObs.disconnect();
+    if (this.globeHandle) { this.globeHandle.destroy(); this.globeHandle = null; }
     if (this._timer) clearInterval(this._timer);
     if (this._raf) cancelAnimationFrame(this._raf);
   }
@@ -2486,6 +2694,8 @@ class Component extends DCLogic {
   renderVals() {
     return {
       ...this.installVals(),
+      customers: this.customerCells(),
+      setGlobeRef: this.setGlobeRef,
       setProbRef: this.setProbRef,
       setSolRef: this.setSolRef,
       ...this.solVals(),
