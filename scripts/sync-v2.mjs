@@ -168,11 +168,17 @@ function assembleComponents(html, page) {
     ]
       .filter(Boolean)
       .join(" ");
-    // Components are transparent: the page as a whole owns the background, and
-    // it crossfades between tones as you scroll across a boundary (see
-    // scroll-stage.js). A component painting its own tone would cut a hard
-    // edge straight through that fade.
-    const style = `display:flex; flex-direction:column;`;
+    // Components are transparent by default: the page as a whole owns the
+    // background and crossfades between tones across a boundary (see
+    // scroll-stage.js), and a component painting its own tone would cut a hard
+    // edge through that fade.
+    //
+    // `background` opts one out of that entirely — it paints itself and leaves
+    // the page alone. Such a component keeps its neighbours' `tone`, so no
+    // handover is triggered at either of its edges and it never fades.
+    const style =
+      `display:flex; flex-direction:column;` +
+      (c.background ? ` background:${c.background};` : "");
     return (
       `  <div ${attrs} style="${style}">\n` +
       readFileSync(file, "utf8").replace(/\s*$/, "") +

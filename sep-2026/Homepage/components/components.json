@@ -36,7 +36,8 @@
   {
     "id": "quotes",
     "file": "07-quotes.html",
-    "tone": "dark"
+    "tone": "light",
+    "background": "#111111"
   },
   {
     "id": "customer-stories",
