@@ -13,9 +13,8 @@
  *
  * Progress is measured from where the boundary sits in the viewport: at the
  * bottom edge nothing has happened yet, at the top edge the handover is done.
- * The fade itself is squeezed into the middle of that travel (see EASE_IN /
- * EASE_OUT) — stretching it over the whole viewport leaves both components
- * washed out for most of a screen, which reads as broken rather than smooth.
+ * The three parts are staged across that travel rather than run together —
+ * out, then background, then in (see PHASE_OUT / PHASE_BG / PHASE_IN).
  *
  * Boundaries between components of the *same* tone are left alone entirely:
  * there is nothing to hand over, so both stay fully opaque.
@@ -30,11 +29,20 @@
     dark: [20, 18, 46] /* #14122E */,
   };
 
-  /* Fraction of the boundary's travel across the viewport over which the
-     crossfade runs. Before EASE_IN and after EASE_OUT the components sit at
-     full opacity, so only the middle third is ever mid-fade. */
-  var EASE_IN = 0.3;
-  var EASE_OUT = 0.7;
+  /* The handover is staged rather than simultaneous, as three windows over
+     the boundary's travel (0 = boundary at the bottom of the screen, 1 = at
+     the top):
+
+       1. the outgoing component fades out,
+       2. the background switches — deliberately the narrowest window, so the
+          page turns over quickly instead of sitting in a grey middle,
+       3. the incoming component fades in.
+
+     They run back to back with a hair of overlap at each seam, which keeps
+     the sequence readable without it feeling like three separate events. */
+  var PHASE_OUT = [0.1, 0.42];
+  var PHASE_BG = [0.4, 0.58];
+  var PHASE_IN = [0.56, 0.88];
 
   function clamp01(v) {
     return v < 0 ? 0 : v > 1 ? 1 : v;
@@ -43,6 +51,11 @@
   /* smoothstep — eases both ends so the fade has no hard start or stop */
   function smooth(t) {
     return t * t * (3 - 2 * t);
+  }
+
+  /* progress of `t` through one phase window, eased and clamped either side */
+  function phase(t, win) {
+    return smooth(clamp01((t - win[0]) / (win[1] - win[0])));
   }
 
   function mix(a, b, t) {
@@ -178,6 +191,12 @@
       var opacity = [];
       for (i = 0; i < stages.length; i++) opacity[i] = 1;
 
+      /* The boundary nearest the middle of the screen is the one the reader
+         is actually crossing; it drives the background so the switch can be
+         timed against the same travel as the two fades. */
+      var lead = null;
+      var leadDist = Infinity;
+
       for (i = 0; i < stages.length - 1; i++) {
         var from = toneOf(stages[i]);
         var to = toneOf(stages[i + 1]);
@@ -195,14 +214,35 @@
         var travel =
           end > start ? clamp01((window.scrollY - start) / (end - start)) : 1;
 
-        var t = smooth(clamp01((travel - EASE_IN) / (EASE_OUT - EASE_IN)));
-        if (reduced) t = travel < 0.5 ? 0 : 1;
+        var outT = phase(travel, PHASE_OUT);
+        var inT = phase(travel, PHASE_IN);
+        if (reduced) {
+          outT = travel < 0.5 ? 0 : 1;
+          inT = outT;
+        }
 
         /* Several handovers can be live at once around a short component;
            each only ever darkens its own pair, so the strictest wins. */
-        opacity[i] = Math.min(opacity[i], 1 - t);
-        opacity[i + 1] = Math.min(opacity[i + 1], t);
+        opacity[i] = Math.min(opacity[i], 1 - outT);
+        opacity[i + 1] = Math.min(opacity[i + 1], inT);
+
+        if (bTop >= 0) {
+          var dist = Math.abs(bTop - vh / 2);
+          if (dist < leadDist) {
+            leadDist = dist;
+            lead = {
+              from: TONES[from] || TONES[fallback],
+              to: TONES[to] || TONES[fallback],
+              t: reduced ? (travel < 0.5 ? 0 : 1) : phase(travel, PHASE_BG),
+            };
+          }
+        }
       }
+
+      /* While a handover is on screen the background follows it directly, so
+         its window alone decides when the page turns over. The coverage blend
+         stays as the resting value for everything else. */
+      if (lead) color = mix(lead.from, lead.to, lead.t);
 
       for (i = 0; i < stages.length; i++) {
         var o =
