@@ -350,7 +350,10 @@ class Component extends DCLogic {
     for (let i = 0; i < evs.length; i++) pts.push({ risk: evs[i].risk, label: evs[i].label, ok: evs[i].ok, t: (i + 1) * step });
 
     const idx = Math.min(evs.length, Math.floor(T / step));
-    const frac = ease((T - idx * step) / step);
+    /* Linear, deliberately: easing each step makes the head lunge then
+       crawl, which reads as stepping between points rather than a live
+       feed moving at a steady rate. */
+    const frac = Math.min(1, Math.max(0, (T - idx * step) / step));
     const cur = idx === 0 ? 18 : pts[idx].risk;
     const nxt = idx < evs.length ? pts[idx + 1].risk : cur;
     const live = Math.round(cur + (nxt - cur) * frac);
@@ -359,31 +362,47 @@ class Component extends DCLogic {
     const W = 100, H = 100, n = evs.length + 1;
     const xAt = (i) => (i / (n - 1)) * W;
     const yAt = (r) => H - (Math.min(100, r) / 100) * H;
-    const path = [];
-    for (let i = 0; i <= idx; i++) path.push([xAt(i), yAt(pts[i].risk)]);
-    if (idx < evs.length) {
-      const x = xAt(idx) + (xAt(idx + 1) - xAt(idx)) * frac;
-      path.push([x, yAt(live)]);
-    }
-    /* Catmull-Rom through the points, converted to cubic Béziers, so the
-       series reads as a curve rather than a polyline. Control points are
+
+    /* Every point in the series, not only those reached so far. A point's
+       curve depends on its neighbours, so if the ones ahead are unknown the
+       whole line reshapes itself each time the head passes an anchor. */
+    const anchors = [];
+    for (let i = 0; i < n; i++) anchors.push([xAt(i), yAt(pts[i].risk)]);
+
+    /* Catmull-Rom segment i -> i+1 as a cubic Bézier. Control points are
        clamped to the plot box: the spline can otherwise overshoot past a
        sharp peak and draw outside the chart. */
-    const d = (() => {
-      if (path.length < 2) return path.length ? 'M' + path[0][0].toFixed(2) + ' ' + path[0][1].toFixed(2) : '';
-      const cy = (v) => Math.max(0, Math.min(H, v));
-      let out = 'M' + path[0][0].toFixed(2) + ' ' + path[0][1].toFixed(2);
-      for (let i = 0; i < path.length - 1; i++) {
-        const p0 = path[i - 1] || path[i], p1 = path[i];
-        const p2 = path[i + 1], p3 = path[i + 2] || p2;
-        const c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = cy(p1[1] + (p2[1] - p0[1]) / 6);
-        const c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = cy(p2[1] - (p3[1] - p1[1]) / 6);
-        out += ' C' + c1x.toFixed(2) + ' ' + c1y.toFixed(2) + ',' + c2x.toFixed(2) + ' ' +
-               c2y.toFixed(2) + ',' + p2[0].toFixed(2) + ' ' + p2[1].toFixed(2);
-      }
-      return out;
-    })();
-    const area = d + ' L' + path[path.length - 1][0].toFixed(2) + ' ' + H + ' L' + path[0][0].toFixed(2) + ' ' + H + ' Z';
+    const cyc = (v) => Math.max(0, Math.min(H, v));
+    const segAt = (i) => {
+      const p0 = anchors[i - 1] || anchors[i], p1 = anchors[i];
+      const p2 = anchors[i + 1], p3 = anchors[i + 2] || anchors[i + 1];
+      return [
+        p1,
+        [p1[0] + (p2[0] - p0[0]) / 6, cyc(p1[1] + (p2[1] - p0[1]) / 6)],
+        [p2[0] - (p3[0] - p1[0]) / 6, cyc(p2[1] - (p3[1] - p1[1]) / 6)],
+        p2,
+      ];
+    };
+    /* De Casteljau — the exact piece of a cubic from its start up to t, so
+       the drawn line ends on the curve itself. Interpolating straight between
+       two anchors instead puts the head off the curve and turns a corner at
+       every point; this way position and direction stay continuous. */
+    const upTo = (b, t) => {
+      const at = (u, v) => [u[0] + (v[0] - u[0]) * t, u[1] + (v[1] - u[1]) * t];
+      const ab = at(b[0], b[1]), bc = at(b[1], b[2]), cd = at(b[2], b[3]);
+      const abc = at(ab, bc), bcd = at(bc, cd);
+      return [b[0], ab, abc, at(abc, bcd)];
+    };
+    const cTo = (b) =>
+      ' C' + b[1][0].toFixed(2) + ' ' + b[1][1].toFixed(2) + ',' +
+      b[2][0].toFixed(2) + ' ' + b[2][1].toFixed(2) + ',' +
+      b[3][0].toFixed(2) + ' ' + b[3][1].toFixed(2);
+
+    let d = 'M' + anchors[0][0].toFixed(2) + ' ' + anchors[0][1].toFixed(2);
+    let head = anchors[0];
+    for (let i = 0; i < idx; i++) { const b = segAt(i); d += cTo(b); head = b[3]; }
+    if (idx < n - 1 && frac > 0) { const b = upTo(segAt(idx), frac); d += cTo(b); head = b[3]; }
+
     const h = React.createElement;
     const chart = h('svg', {
       viewBox: '0 0 100 100', preserveAspectRatio: 'none',
@@ -391,17 +410,17 @@ class Component extends DCLogic {
     }, [
       ...[20, 40, 60, 80].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
       h('line', {
-        key: 'now', x1: path[path.length - 1][0], y1: 0, x2: path[path.length - 1][0], y2: H,
+        key: 'now', x1: head[0], y1: 0, x2: head[0], y2: H,
         stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke',
       }),
       h('path', { key: 'p', d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 2.4, strokeLinejoin: 'round', strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
-      ...path.slice(0, -1).flatMap((p, i) => [
+      ...anchors.slice(0, idx + 1).flatMap((p, i) => [
         h('path', { key: 'mo' + i, d: 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-verification)', strokeWidth: 6, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
         h('path', { key: 'mi' + i, d: 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-surface, #FFFFFF)', strokeWidth: 3.4, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
       ]),
       h('path', {
         key: 'cur',
-        d: 'M' + path[path.length - 1][0].toFixed(2) + ' ' + path[path.length - 1][1].toFixed(2) + 'l0 0',
+        d: 'M' + head[0].toFixed(2) + ' ' + head[1].toFixed(2) + 'l0 0',
         stroke: 'var(--hm-verification)', strokeWidth: 8, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke',
       }),
     ]);
