@@ -903,7 +903,9 @@ class Component extends DCLogic {
     const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
     const span = Component.KRI_SPAN;
 
-    const held = this.kriHold && Date.now() - this.kriHold < 20000;
+    /* Pinned means the reader is driving the steps by scrolling, so the
+       auto-advance must stay out of the way however long they linger. */
+    const held = this.kriPinned || (this.kriHold && Date.now() - this.kriHold < 20000);
     const auto = Math.floor(T / span) % 4;
     const active = held ? (this.state.kriStep || 0) : auto;
     const p = held ? Math.min(span, (Date.now() - this.kriHold) / 1000) : (T - Math.floor(T / span) * span);
@@ -1097,6 +1099,30 @@ class Component extends DCLogic {
     this.kriHold = Date.now();
     this.setState({ kriStep: n });
   }
+
+  /* While the risk section is pinned, the step is chosen by how far you have
+     scrolled through its runway rather than by the auto-advance timer. The
+     hold is re-stamped only when the step actually changes, so each panel's
+     own animation still plays from the top instead of being reset every
+     frame. */
+  updateKriScroll = () => {
+    const runway = this.kriEl && this.kriEl.closest('[data-sticky-steps]');
+    if (!runway) return;
+
+    const steps = parseInt(runway.getAttribute('data-sticky-steps'), 10) || 1;
+    const r = runway.getBoundingClientRect();
+    const travel = r.height - window.innerHeight;
+    if (travel <= 0) return;
+
+    const p = Math.min(1, Math.max(0, -r.top / travel));
+    this.kriPinned = r.top <= 0 && r.bottom >= window.innerHeight;
+    /* The last step needs the same share of the runway as the others, so the
+       final stretch is not a single scroll position. */
+    const step = Math.min(steps - 1, Math.floor(p * steps));
+    if (step === this._kriScrollStep) return;
+    this._kriScrollStep = step;
+    this.setKriStep(step);
+  };
 
   setKriRef = (el) => {
     if (!el || el === this.kriEl) return;
@@ -1420,6 +1446,9 @@ class Component extends DCLogic {
     this.updatePillTone();
     this.enfTimer = setInterval(() => this.setState(s => ({ enfTick: s.enfTick + 1 })), 60);
     this.mountScrollTone();
+    window.addEventListener('scroll', this.updateKriScroll, { passive: true });
+    window.addEventListener('resize', this.updateKriScroll);
+    this.updateKriScroll();
     this.ensureClock();
   }
 
@@ -1470,6 +1499,8 @@ class Component extends DCLogic {
     window.removeEventListener('scroll', this.updateProgress);
     window.removeEventListener('resize', this.updateProgress);
     window.removeEventListener('resize', this.updateNarrow);
+    window.removeEventListener('scroll', this.updateKriScroll);
+    window.removeEventListener('resize', this.updateKriScroll);
     clearInterval(this.enfTimer);
     this.stopProb();
     if (this.probObs) this.probObs.disconnect();

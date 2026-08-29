@@ -246,7 +246,13 @@
         if (fadesOut) opacity[i] = Math.min(opacity[i], 1 - outT);
         if (fadesIn) opacity[i + 1] = Math.min(opacity[i + 1], inT);
 
-        if (toneChanges && bTop >= 0) {
+        /* Boundaries already above the screen still count: their travel is
+           pinned at 1, which is simply the incoming tone. Excluding them used
+           to drop the background onto the coverage blend instead, and that
+           blend reaches a pure tone at a different rate than the fade — so
+           light-to-dark and dark-to-light ran at visibly different speeds
+           depending on which one happened to be driving. */
+        if (toneChanges) {
           var dist = Math.abs(bTop - vh / 2);
           if (dist < leadDist) {
             leadDist = dist;

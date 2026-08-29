@@ -12,14 +12,14 @@
   {
     "id": "what-humanos-is",
     "file": "03-what-humanos-is.html",
-    "tone": "light",
-    "fadeOut": true
+    "tone": "light"
   },
   {
     "id": "risk-management",
     "file": "04-risk-management.html",
     "tone": "light",
-    "group": "risk"
+    "group": "risk",
+    "stickySteps": 4
   },
   {
     "id": "risk-intelligence",
