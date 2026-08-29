@@ -333,8 +333,10 @@ class Component extends DCLogic {
     { label: 'Scope narrowed ✔', risk: 21, ok: true },
     { label: '+$180K payment', risk: 45, ok: false },
   ];
-  static PROB_STEP = 1.35;
-  static PROB_LOOP = 1.35 * 11;
+  /* Seconds per runtime event. The loop is the eleven steps that carry the
+     series across the chart, so both halve together to keep the cycle whole. */
+  static PROB_STEP = 0.675;
+  static PROB_LOOP = 0.675 * 11;
 
   probVals() {
     this.ensureClock();
