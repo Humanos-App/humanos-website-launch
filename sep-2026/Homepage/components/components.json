@@ -45,11 +45,6 @@
     "tone": "light"
   },
   {
-    "id": "for-developers",
-    "file": "09-for-developers.html",
-    "tone": "light"
-  },
-  {
     "id": "close",
     "file": "10-close.html",
     "tone": "dark"

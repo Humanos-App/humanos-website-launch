@@ -103,6 +103,9 @@ export default async function V2Preview({
 
   return (
     <>
+      {/* The designs carry their own floating CTA, so the site's developer
+          bar would sit on top of it. Hidden only while a preview is on screen. */}
+      <style>{".rtbar{display:none !important}"}</style>
       <div dangerouslySetInnerHTML={{ __html: body }} />
       <Script src={`${SHARED_BASE}/support.js`} strategy="afterInteractive" />
     </>
