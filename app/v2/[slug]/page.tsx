@@ -29,6 +29,9 @@ import Script from "next/script";
  *    identical to v1 on a /v2 route.
  */
 
+/** Where sync-v2 publishes the shared design assets. */
+const SHARED_BASE = "/v2/_shared";
+
 const PAGES: { slug: string; title: string }[] = [
   { slug: "homepage", title: "Homepage" },
   { slug: "pricing", title: "Pricing" },
@@ -57,6 +60,11 @@ export async function generateMetadata({
     title: page ? `${page.title} · v2 preview` : "v2 preview",
     // Internal previews: never index them, even if /v2 reaches production.
     robots: { index: false, follow: false },
+    // Assets the design names through a template binding rather than a literal
+    // src — the customer logos — are resolved against this at runtime. The
+    // standalone page carries it in its own <head>; body.html is the body
+    // alone, so without this the logos would resolve relative to /v2/<slug>.
+    other: { "v2-asset-base": `${SHARED_BASE}/` },
   };
 }
 
@@ -96,7 +104,7 @@ export default async function V2Preview({
   return (
     <>
       <div dangerouslySetInnerHTML={{ __html: body }} />
-      <Script src="/v2/_shared/support.js" strategy="afterInteractive" />
+      <Script src={`${SHARED_BASE}/support.js`} strategy="afterInteractive" />
     </>
   );
 }
