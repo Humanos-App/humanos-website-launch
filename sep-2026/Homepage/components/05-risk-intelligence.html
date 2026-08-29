@@ -1,4 +1,7 @@
-  <div ref="{{ setRiRef }}" style="background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line-dark); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+  <div data-sticky-steps="2" style="position:relative; height:200vh;">
+    <div ref="{{ setRiRef }}" style="position:sticky; top:0; min-height:100vh; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+      <div style="display:grid; width:100%; max-width:1200px; align-items:center;">
+      <div data-step-panel="0" style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-7); width:100%;">
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
@@ -64,6 +67,8 @@
       </div>
     </div>
 
+      </div>
+      <div data-step-panel="1" style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-7); width:100%;">
     <div style="width:100%; max-width:1200px; display:flex; flex-direction:column; gap:8px; padding-top:var(--sp-7);">
       <h3 style="font-size:34px; font-weight:600; letter-spacing:-0.025em; line-height:1.15; color:#F4F3EF;">Ask your <span style="color:#FF9A8B;">risk</span> and get the answer you need.</h3>
       <span style="font-size:15px; color:#C7C5E8; line-height:1.55;">Turn continuous AI activity into answers you can act on.</span>
@@ -123,6 +128,9 @@
 
           <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4); margin-top:auto; padding-top:14px;">Based on continuous runtime evidence</span>
         </div>
+      </div>
+    </div>
+      </div>
       </div>
     </div>
   </div>

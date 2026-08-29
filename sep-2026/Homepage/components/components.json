@@ -25,7 +25,8 @@
     "id": "risk-intelligence",
     "file": "05-risk-intelligence.html",
     "tone": "dark",
-    "group": "risk"
+    "group": "risk",
+    "stickySteps": 2
   },
   {
     "id": "risk-network",
