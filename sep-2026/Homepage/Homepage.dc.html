@@ -13,18 +13,29 @@
   <script src="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/_ds_bundle.js"></script>
   <script src="./image-slot.js"></script>
   <script src="./globe.js"></script>
-  <script src="./scroll-tone.js"></script>
+  <script src="./scroll-stage.js"></script>
   <style>
-    /* ── page tone ────────────────────────────────────────────
-       One background for the whole page, crossfading to whatever tone the
-       section under the viewport's middle asks for. <body> is what paints it
-       (scroll-tone.js sets the colour inline there); sections are transparent
-       so it shows through. */
+    /* ── scroll stage ─────────────────────────────────────────
+       One component is active at a time: it is shown, the rest are hidden,
+       and <body> takes the active component's tone. Because visibility and
+       background are driven by the same flag, a component is only ever
+       visible on its own background. See scroll-stage.js. */
     body {
-      transition: background-color 420ms cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background-color 520ms cubic-bezier(0.4, 0, 0.2, 1);
     }
+    [data-stage] {
+      opacity: 1;
+      transition: opacity 520ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-stage][data-stage-active="false"] {
+      opacity: 0;
+      pointer-events: none;
+    }
+    /* Before the first measurement no component carries the flag, so nothing
+       matches the rule above and the page renders whole — a safer starting
+       point than hiding everything and waiting for script. */
     @media (prefers-reduced-motion: reduce) {
-      body { transition: none; }
+      body, [data-stage] { transition: none; }
     }
     a { color: var(--hm-verification); text-decoration: none; }
     a:hover { color: var(--hm-authority); }
@@ -209,6 +220,7 @@
     </div>
   </nav>
 
+  <div data-stage data-tone="light" style="display:flex; flex-direction:column;">
   <main style="flex:1; display:flex; flex-direction:column; padding:var(--sp-8) var(--sp-7) var(--sp-7); max-width:1200px; width:100%; margin:0 auto; position:relative; box-sizing:border-box;">
    <div style="display:flex; align-items:stretch; gap:var(--sp-8); min-height:480px;">
 
@@ -250,7 +262,7 @@
 
   </main>
 
-  <div style="border-bottom:1px solid var(--hm-line); padding:var(--sp-6) 0;">
+  <div style="padding:var(--sp-6) 0;">
     <div style="max-width:1200px; margin:0 auto; padding:0 var(--sp-7); display:flex; flex-direction:column; align-items:center; gap:var(--sp-4);">
       <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-ink-4)">Deployed in 350+ hospitals, insurers, and fintech players</span>
     </div>
@@ -287,8 +299,10 @@
       </div>
     </div>
   </div>
+  </div>
 
-  <div data-tone="dark" ref="{{ setProbRef }}" style="position:relative; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-5);">
+  <div data-stage data-tone="dark" style="display:flex; flex-direction:column;">
+  <div ref="{{ setProbRef }}" style="position:relative; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-5);">
 
     <div style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
       <h2 style="font-size:32px; font-weight:600; letter-spacing:-0.02em; line-height:1.18; color:#F4F3EF; max-width:40ch;"><span style="color:#FF9A8B;">AI risk changes every time AI acts.</span> The old ways of measuring and controlling risk <span style="color:#FF9A8B;">no longer work</span>.</h2>
@@ -335,7 +349,9 @@
 
     <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#F4F3EF; font-weight:700; text-align:center;">Risk continuously changes as AI acts</span>
   </div>
+  </div>
 
+  <div data-stage data-tone="light" style="display:flex; flex-direction:column;">
   <div ref="{{ setSolRef }}" style="position:relative; border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-6);">
 
     <p style="max-width: 860px; text-align: center; font-size: 50px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.22; color: var(--hm-authority); text-wrap: pretty">Humanos makes <span style="color:var(--hm-rejection);">dynamic AI risk</span> <span style="color:var(--hm-verification);">understandable</span>, <span style="color:var(--hm-verification);">manageable</span>, and <span style="color:var(--hm-verification);">provable</span> across a <span style="color:var(--hm-verification);">shared network</span>.</p>
@@ -542,8 +558,10 @@
     </div>
 
   </div>
+  </div>
 
-  <div data-tone="dark" ref="{{ setRiRef }}" style="background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line-dark); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+  <div data-stage data-tone="dark" style="display:flex; flex-direction:column;">
+  <div ref="{{ setRiRef }}" style="background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; border-top:1px solid var(--hm-line-dark); padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
@@ -671,7 +689,9 @@
       </div>
     </div>
   </div>
+  </div>
 
+  <div data-stage data-tone="light" style="display:flex; flex-direction:column;">
   <div style="border-top:1px solid var(--hm-line); padding:var(--sp-10) var(--sp-7);">
     <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-8); align-items:center;">
 
@@ -745,14 +765,18 @@
 
     </div>
   </div>
+  </div>
 
-  <div data-tone="dark" style="padding:var(--sp-10) var(--sp-7); display:flex; align-items:center; justify-content:center; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px;">
+  <div data-stage data-tone="dark" style="display:flex; flex-direction:column;">
+  <div style="padding:var(--sp-10) var(--sp-7); display:flex; align-items:center; justify-content:center; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px;">
     <div style="max-width:800px; margin:0 auto; text-align:center;">
       <p style="font-size: 30px; font-weight: 500; font-style: italic; color: #F4F3EF; line-height: 1.5; letter-spacing: -0.01em">"Your execution receipts solve the hardest problem in underwriting AI liability, establishing the triggering event and the scope of authority at the moment of execution. <span style="font-weight:700;">That is what makes this class of risk insurable at all.</span>"</p>
       <div style="margin-top: var(--sp-3); font-size: 20px; color: #C7C5E8; font-style: italic">Mehdi Chaabi, CEO of <a href="https://insurenow.eu/" target="_blank">InsureNow</a></div>
     </div>
   </div>
+  </div>
 
+  <div data-stage data-tone="light" style="display:flex; flex-direction:column;">
   <div style="padding:var(--sp-10) 0;">
     <div style="max-width:1200px; margin:0 auto; padding:0 var(--sp-7); display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-6); flex-wrap:wrap;">
       <div>
@@ -902,8 +926,10 @@
 
     </div>
   </div>
+  </div>
 
-  <div data-tone="dark" style="position:relative; overflow:hidden; padding:var(--sp-9) var(--sp-7) 0;">
+  <div data-stage data-tone="dark" style="display:flex; flex-direction:column;">
+  <div style="position:relative; overflow:hidden; padding:var(--sp-9) var(--sp-7) 0;">
 
     <svg style="position:absolute; top:-40px; left:-60px; width:340px; height:340px; opacity:0.5;" viewBox="0 0 340 340" fill="none">
       <circle cx="170" cy="170" r="2.5" fill="#8B89E8"></circle>
@@ -941,7 +967,9 @@
       </div>
       <span style="font-size:12px; color:#7A78AE;">© Humanos 2026</span>
     </div>
+  </div>
 
+  </div>
   <div data-pill="1" style="{{ pillWrapStyle }}">
     <div style="{{ pillTipStyle }}">
       Click to copy a setup prompt for your AI coding tool
@@ -972,7 +1000,6 @@
       </div>
   </div>
 
-</div>
 </div></x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
@@ -1879,12 +1906,12 @@ class Component extends DCLogic {
      the module. Scoping to <body> sidesteps the ordering entirely. */
   mountScrollTone() {
     if (this.toneHandle || typeof window === 'undefined') return;
-    if (!window.HumanosScrollTone) {
+    if (!window.HumanosScrollStage) {
       /* helmet scripts can still be loading; try again on the next tick */
       if ((this._toneTries = (this._toneTries || 0) + 1) <= 40) setTimeout(() => this.mountScrollTone(), 50);
       return;
     }
-    this.toneHandle = window.HumanosScrollTone.mount(document.body);
+    this.toneHandle = window.HumanosScrollStage.mount(document.body);
   }
 
   /* The globe owns its own frame loop and observers inside globe.js; this
