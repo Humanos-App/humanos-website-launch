@@ -387,8 +387,7 @@ class Component extends DCLogic {
       viewBox: '0 0 100 100', preserveAspectRatio: 'none',
       style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
     }, [
-      ...[25, 50, 75].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
-      h('line', { key: 'gb', x1: 0, y1: yAt(18), x2: 100, y2: yAt(18), stroke: 'var(--hm-line-strong)', strokeWidth: 1, strokeDasharray: '3 3', vectorEffect: 'non-scaling-stroke' }),
+      ...[20, 40, 60, 80].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
       h('line', {
         key: 'now', x1: path[path.length - 1][0], y1: 0, x2: path[path.length - 1][0], y2: H,
         stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke',
