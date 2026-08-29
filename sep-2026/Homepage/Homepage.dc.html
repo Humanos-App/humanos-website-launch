@@ -16,15 +16,13 @@
   <script src="./scroll-stage.js"></script>
   <style>
     /* ── scroll stage ─────────────────────────────────────────
-       Every component paints its own tone (the publisher writes it from
-       components.json), so the page is readable at any scroll position on
-       its own. <body> follows the active component too, which only shows in
-       the overscroll margins above and below the document. */
+       Components are transparent; the page as a whole carries the background
+       and crossfades between tones at a boundary. scroll-stage.js writes both
+       the body colour and the component opacities every frame, so there is
+       deliberately no CSS transition here — one would lag behind the scroll
+       instead of tracking it. */
     body {
-      transition: background-color 520ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      body { transition: none; }
+      background-color: var(--hm-clarity);
     }
     a { color: var(--hm-verification); text-decoration: none; }
     a:hover { color: var(--hm-authority); }

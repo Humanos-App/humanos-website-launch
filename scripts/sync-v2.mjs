@@ -164,11 +164,11 @@ function assembleComponents(html, page) {
     ]
       .filter(Boolean)
       .join(" ");
-    // Each component paints its own tone. The page background follows the
-    // active one as well, but a component must never depend on that to be
-    // readable — otherwise it renders light-on-light until the scroll
-    // position catches up.
-    const style = `display:flex; flex-direction:column; background-color:${TONE_COLORS[tone] || TONE_COLORS.light};`;
+    // Components are transparent: the page as a whole owns the background, and
+    // it crossfades between tones as you scroll across a boundary (see
+    // scroll-stage.js). A component painting its own tone would cut a hard
+    // edge straight through that fade.
+    const style = `display:flex; flex-direction:column;`;
     return (
       `  <div ${attrs} style="${style}">\n` +
       readFileSync(file, "utf8").replace(/\s*$/, "") +
