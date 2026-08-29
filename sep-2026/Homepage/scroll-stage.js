@@ -62,8 +62,24 @@
     opts = opts || {};
 
     var selector = opts.selector || "[data-stage]";
-    var target = opts.target || document.body;
     var fallback = opts.fallback || "light";
+
+    /* The tone is painted on a fixed, full-viewport layer rather than on
+       <body>. This page's body box is zero-high — the design system's host
+       lets the content escape it — so a background there only ever covered
+       the first screen. A fixed layer covers the viewport at every scroll
+       position no matter how the document is laid out. It sits at z-index -1:
+       above the root background, below all content. */
+    var target = opts.target || null;
+    if (!target) {
+      target = document.querySelector("[data-page-backdrop]");
+      if (!target) {
+        target = document.createElement("div");
+        target.setAttribute("data-page-backdrop", "");
+        target.setAttribute("aria-hidden", "true");
+        document.body.insertBefore(target, document.body.firstChild);
+      }
+    }
 
     var stages = [];
     var raf = null;
@@ -257,6 +273,7 @@
         if (mo) mo.disconnect();
         for (var i = 0; i < stages.length; i++) stages[i].style.opacity = "";
         target.style.removeProperty("background-color");
+        if (target.hasAttribute("data-page-backdrop") && target.parentNode) target.parentNode.removeChild(target);
       },
     };
   }

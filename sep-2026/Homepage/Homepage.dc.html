@@ -21,8 +21,18 @@
        the body colour and the component opacities every frame, so there is
        deliberately no CSS transition here — one would lag behind the scroll
        instead of tracking it. */
-    body {
-      background-color: var(--hm-clarity);
+    /* The tone rides on a fixed backdrop, not on <body>: this page's body box
+       is zero-high (the design-system host lets content escape it), so a
+       background there only reached the first screen. html keeps the base
+       colour so overscroll never flashes white; body must stay transparent or
+       it would paint over the backdrop beneath it. */
+    html { background-color: var(--hm-clarity); }
+    body { background-color: transparent; }
+    [data-page-backdrop] {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
     }
     a { color: var(--hm-verification); text-decoration: none; }
     a:hover { color: var(--hm-authority); }
