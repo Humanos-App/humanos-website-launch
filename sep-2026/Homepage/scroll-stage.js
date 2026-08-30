@@ -229,8 +229,18 @@
            the page cannot bring all the way to the top still completes: the
            range ends at whichever comes first, the top edge or the last
            scrollable pixel. */
-        var start = bTop + window.scrollY - vh;
-        var end = Math.min(bTop + window.scrollY, maxY);
+        var bDoc = bTop + window.scrollY;
+        var start = bDoc - vh;
+        var end = Math.min(bDoc, maxY);
+
+        /* A pinned component is measured across the stretch where it is stuck
+           and perfectly still instead. Handing over while it travels up the
+           screen makes it read as arriving from below; handing over once it
+           has settled makes it appear where it already is. */
+        if (stages[i + 1].hasAttribute("data-pin")) {
+          start = bDoc;
+          end = Math.min(bDoc + vh, maxY);
+        }
         var travel =
           end > start ? clamp01((window.scrollY - start) / (end - start)) : 1;
 

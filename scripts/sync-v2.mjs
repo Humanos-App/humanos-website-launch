@@ -163,6 +163,7 @@ function assembleComponents(html, page) {
       `data-stage="${c.id}"`,
       `data-tone="${tone}"`,
       c.group ? `data-group="${c.group}"` : null,
+      c.pin ? "data-pin" : null,
       c.fadeOut ? "data-fade-out" : null,
       c.fadeIn ? "data-fade-in" : null,
     ]
