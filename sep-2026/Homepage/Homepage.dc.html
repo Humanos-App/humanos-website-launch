@@ -59,6 +59,10 @@
     @media (min-width: 1000px) {
       [data-stage="hero"] {
         min-height: calc(100vh - var(--site-chrome-h, 0px));
+        /* Room at the foot for the floating bar, which is fixed and would
+           otherwise sit over the customer strip pinned to the bottom edge. */
+        padding-bottom: 104px;
+        box-sizing: border-box;
       }
     }
 
@@ -1470,7 +1474,7 @@ class Component extends DCLogic {
     };
     return {
       pillWrapStyle: {
-        position: 'fixed', left: 0, right: 0, bottom: '36px',
+        position: 'fixed', left: 0, right: 0, bottom: '20px',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
         pointerEvents: 'none', zIndex: 60,
       },
