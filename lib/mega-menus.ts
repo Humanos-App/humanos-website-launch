@@ -73,6 +73,36 @@ export const PLATFORM_MENU: MegaMenu = {
   ],
 };
 
+/**
+ * Solutions — the three product pages of the rebrand. One flat column, so it
+ * opens the same way Developers does rather than as a wide grid.
+ */
+export const SOLUTIONS_MENU: MegaMenu = {
+  key: "solutions",
+  columns: [
+    {
+      label: "Solutions",
+      items: [
+        {
+          title: "Monitor",
+          sub: "Know your AI risk, and prove it",
+          href: "/v2/monitor-v3",
+        },
+        {
+          title: "Control",
+          sub: "Control what AI can do",
+          href: "/v2/control",
+        },
+        {
+          title: "Risk Intelligence",
+          sub: "Get the risk answers you need",
+          href: "/v2/risk-intelligence",
+        },
+      ],
+    },
+  ],
+};
+
 export const DEVELOPERS_MENU: MegaMenu = {
   key: "developers",
   columns: [

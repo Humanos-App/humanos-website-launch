@@ -1,12 +1,12 @@
 import { ROUTES } from "./routes";
-import { DEVELOPERS_MENU, type MegaMenu } from "./mega-menus";
+import { DEVELOPERS_MENU, SOLUTIONS_MENU, type MegaMenu } from "./mega-menus";
 
 export type NavLink =
   | { kind: "mega"; label: string; menu: MegaMenu }
   | { kind: "link"; label: string; href: string; external?: boolean };
 
 export const NAV_LINKS: NavLink[] = [
-  { kind: "link", label: "Platform", href: ROUTES.platform },
+  { kind: "mega", label: "Solutions", menu: SOLUTIONS_MENU },
   { kind: "mega", label: "Developers", menu: DEVELOPERS_MENU },
   { kind: "link", label: "Use Cases", href: ROUTES.useCases },
   { kind: "link", label: "Customers", href: ROUTES.customers },
