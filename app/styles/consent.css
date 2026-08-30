@@ -66,7 +66,7 @@
   left: 16px;
   right: 16px;
   bottom: 16px;
-  /* Above the floating API bar (.rtbar @ 9000) and the navbar.
+  /* Above the floating CTA (.riskbar) and the navbar.
      Anything site-chrome must render below the consent stack — the
      user can't read the page until they've made a choice. */
   z-index: 10000;

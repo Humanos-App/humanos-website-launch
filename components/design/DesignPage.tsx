@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Script from "next/script";
+import { DesignBoot } from "./DesignBoot";
 
 /**
  * Renders one page of the sep-2026 design inside the site chrome.
@@ -51,10 +52,8 @@ export function DesignPage({ slug }: { slug: string }) {
 
   return (
     <>
-      {/* The designs carry their own floating CTA, so the site's developer bar
-          would sit on top of it. */}
-      <style>{".rtbar{display:none !important}"}</style>
       <div dangerouslySetInnerHTML={{ __html: body }} />
+      <DesignBoot slug={slug} />
       {/* The site chrome is sticky, so the space a design gets is the viewport
           less its height. The announcement bar has no fixed height — it is
           padding-driven and its copy can wrap — so it is measured rather than

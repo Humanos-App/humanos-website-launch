@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 import { Footer } from "@/components/chrome/Footer";
-import { FloatingApiBar } from "@/components/chrome/FloatingApiBar";
+import { FloatingRiskBar } from "@/components/chrome/FloatingRiskBar";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { ConsentSettingsDialog } from "@/components/consent/ConsentSettingsDialog";
@@ -32,7 +32,7 @@ import "./globals.css";
 import "./styles/buttons.css";
 import "./styles/navbar.css";
 import "./styles/footer.css";
-import "./styles/rtbar.css";
+import "./styles/riskbar.css";
 import "./styles/dialog.css";
 import "./styles/pricing.css";
 import "./styles/case-study.css";
@@ -117,7 +117,7 @@ export default function RootLayout({
             <Navbar />
           </div>
           {children}
-          <FloatingApiBar />
+          <FloatingRiskBar />
           <Footer />
           <ConsentBanner />
           <ConsentSettingsDialog />
