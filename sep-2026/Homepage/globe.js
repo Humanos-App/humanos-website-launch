@@ -21,13 +21,14 @@
   var GOLDEN = Math.PI * (3 - Math.sqrt(5));
   var TILT = 0.34;
 
-  /* Steady-state population is life divided by interval, so these read as
-     roughly six lit points and two or three arcs at any moment. */
-  var HOT_EVERY = [450, 950]; /* ms between new points */
-  var ARC_EVERY = [700, 1500]; /* ms between new arcs */
-  var HOT_LIFE = [3200, 5200]; /* how long a point stays lit */
-  var ARC_LIFE = [2000, 3400];
-  var MAX_HOT = 16;
+  /* Links are transient and nodes are not, so only the link figures balance
+     out to a steady state — two or three arcs live at any moment. */
+  var ARC_EVERY = [700, 1500]; /* ms between new links */
+  var ARC_LIFE = [2000, 3400]; /* a link is an event; it comes and goes */
+  var NODE_FADE = 700; /* how long a node takes to come up, once */
+  /* Nodes are permanent, so this is the size the network settles at. Past it
+     new links join nodes that are already on the globe. */
+  var MAX_NODES = 50;
   var MAX_ARC = 5;
   var RED_SHARE = 0.22; /* mirrors the diagram's block rate */
   var ARC_SAMPLES = 34;
@@ -98,9 +99,10 @@
       proj = new Float32Array(n * 3);
     }
 
-    var hot = []; /* { i, red, age, life } */
-    var arcs = []; /* { a, b, red, age, life } — a and b are hot entries */
-    var hotIn = 0;
+    /* Nodes light up and stay lit: the globe accumulates a network rather
+       than twinkling. `age` only drives the one fade-in. */
+    var nodes = []; /* { i, red, age } */
+    var arcs = []; /* { a, b, red, age, life } — a and b are node entries */
     var arcIn = 0;
     var spin = 0;
     var cssSize = 0;
@@ -121,37 +123,44 @@
       return pair[0] + rng() * (pair[1] - pair[0]);
     }
 
-    function spawnHot() {
-      if (hot.length >= MAX_HOT) return;
-      hot.push({
-        i: Math.floor(rng() * cloud.length),
-        red: rng() < RED_SHARE,
-        age: 0,
-        life: span(HOT_LIFE),
-      });
+    function addNode() {
+      var i = 0;
+      /* Two nodes landing on the same dot would draw as one brighter dot
+         joined by a link with no length, so try a few times for a free one. */
+      for (var attempt = 0; attempt < 8; attempt++) {
+        i = Math.floor(rng() * cloud.length);
+        var taken = false;
+        for (var k = 0; k < nodes.length; k++) {
+          if (nodes[k].i === i) { taken = true; break; }
+        }
+        if (!taken) break;
+      }
+      var n = { i: i, red: rng() < RED_SHARE, age: 0 };
+      nodes.push(n);
+      return n;
     }
 
+    /* Every link is also how nodes arrive: a new one is lit and joined to the
+       network, so nothing ever appears unconnected. Once the network is full
+       the link runs between nodes already on the globe instead. */
     function spawnArc() {
-      if (arcs.length >= MAX_ARC || hot.length < 2) return;
+      if (arcs.length >= MAX_ARC) return;
 
-      /* Only points with life left to give. Pairing off the whole set meant
-         most arcs were capped down to nothing by an end already on its way
-         out, and were thrown away. */
-      var pool = hot.filter(function (h) {
-        return h.life - h.age > 1400;
-      });
-      if (pool.length < 2) return;
+      var a, b;
+      if (nodes.length < 2) {
+        a = addNode();
+        b = addNode();
+      } else if (nodes.length < MAX_NODES) {
+        a = nodes[Math.floor(rng() * nodes.length)];
+        b = addNode();
+      } else {
+        a = nodes[Math.floor(rng() * nodes.length)];
+        b = nodes[Math.floor(rng() * nodes.length)];
+        if (a === b) b = nodes[(nodes.indexOf(a) + 1) % nodes.length];
+        if (a === b) return;
+      }
 
-      var a = pool[Math.floor(rng() * pool.length)];
-      var b = pool[Math.floor(rng() * pool.length)];
-      if (a === b) b = pool[(pool.indexOf(a) + 1) % pool.length];
-      if (a === b) return;
-
-      /* Hold the points themselves, not their positions. A link must never
-         outlive either end, or it is left reaching for a dot that is no
-         longer lit, so its life is capped by whichever end goes first. */
-      var life = Math.min(span(ARC_LIFE), a.life - a.age, b.life - b.age);
-      arcs.push({ a: a, b: b, red: a.red && b.red, age: 0, life: life });
+      arcs.push({ a: a, b: b, red: a.red && b.red, age: 0, life: span(ARC_LIFE) });
     }
 
     function resize() {
@@ -182,11 +191,6 @@
       spin += dt * 0.00017;
 
       if (!reduced) {
-        hotIn -= dt;
-        if (hotIn <= 0) {
-          spawnHot();
-          hotIn = span(HOT_EVERY);
-        }
         arcIn -= dt;
         if (arcIn <= 0) {
           spawnArc();
@@ -194,21 +198,15 @@
         }
       }
 
-      for (var i = hot.length - 1; i >= 0; i--) {
-        hot[i].age += dt;
-        if (hot[i].age >= hot[i].life) hot.splice(i, 1);
+      /* Nodes are never removed — only aged, so their fade-in completes. */
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].age < NODE_FADE) nodes[i].age += dt;
       }
-      /* after the points, so an end that died this frame is already gone */
+      /* Links still expire. Their ends outlive them now, so there is no
+         longer any need to check that both are still lit. */
       for (var j = arcs.length - 1; j >= 0; j--) {
-        var arc = arcs[j];
-        arc.age += dt;
-        if (
-          arc.age >= arc.life ||
-          hot.indexOf(arc.a) === -1 ||
-          hot.indexOf(arc.b) === -1
-        ) {
-          arcs.splice(j, 1);
-        }
+        arcs[j].age += dt;
+        if (arcs[j].age >= arcs[j].life) arcs.splice(j, 1);
       }
 
       var cx = cssSize / 2;
@@ -293,10 +291,12 @@
       ctx.setLineDash([]);
 
       /* lit points on top */
-      for (var h = 0; h < hot.length; h++) {
-        var pnt = hot[h];
+      for (var h = 0; h < nodes.length; h++) {
+        var pnt = nodes[h];
         var hz = proj[pnt.i * 3 + 2];
-        var ha = envelope(pnt.age / pnt.life) * (0.3 + 0.7 * ((hz + 1) / 2));
+        /* Fades up once and then holds; only depth dims it after that. */
+        var ha =
+          Math.min(1, pnt.age / NODE_FADE) * (0.3 + 0.7 * ((hz + 1) / 2));
         if (ha <= 0) continue;
         var hx = cx + proj[pnt.i * 3] * R;
         var hy = cy - proj[pnt.i * 3 + 1] * R;
@@ -403,7 +403,7 @@
             reduceQuery.removeListener(onReduceChange);
           }
         }
-        hot.length = 0;
+        nodes.length = 0;
         arcs.length = 0;
       },
     };
