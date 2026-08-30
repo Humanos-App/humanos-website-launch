@@ -265,3 +265,205 @@
     object-fit: contain;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Risk Network rewrite — the sections the thesis needs that the
+   authorization-era page did not. Same vocabulary as above: mono
+   labels, thin borders, generous whitespace, purple only as accent.
+   ────────────────────────────────────────────────────────────── */
+
+/* Static vs AI risk, side by side. Two flows, read top to bottom. */
+.company-page .contrast {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 56px;
+}
+.company-page .contrast__col {
+  border: 1px solid var(--hm-line-dark);
+  padding: 28px 26px;
+}
+.company-page .contrast__col--live {
+  border-color: rgba(75, 73, 202, 0.5);
+  background: linear-gradient(180deg, rgba(75, 73, 202, 0.06), transparent 60%);
+}
+.company-page .contrast__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hm-chalk-2);
+}
+.company-page .contrast__col--live .contrast__label { color: var(--hm-verification); }
+.company-page .contrast__step {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--hm-chalk-0);
+  margin-top: 14px;
+}
+.company-page .contrast__arrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--hm-execution);
+  margin-top: 10px;
+}
+
+/* The three-line creed. Deliberately the loudest type on the page. */
+.company-page .creed {
+  margin-top: 56px;
+  border-top: 1px solid var(--hm-line);
+  padding-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.company-page .creed span {
+  font-size: 40px;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
+  font-weight: 600;
+  color: var(--hm-ink-0);
+}
+.company-page .creed span:last-child { color: var(--hm-verification); }
+
+/* Who sees what today — the fragmented signals, before the network. */
+.company-page .signals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0;
+  margin-top: 48px;
+  border-top: 1px solid var(--hm-line);
+}
+.company-page .signals__row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px 18px 0;
+  border-bottom: 1px solid var(--hm-line);
+}
+.company-page .signals__who {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hm-ink-3);
+}
+.company-page .signals__what { font-size: 15px; color: var(--hm-ink-1); }
+
+/* The network map. An SVG so the edges are real lines, not borders. */
+.company-page .netmap { margin-top: 56px; }
+.company-page .netmap svg { width: 100%; height: auto; display: block; }
+.company-page .netmap__note {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hm-line);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--hm-ink-1);
+  max-width: 62ch;
+}
+.company-page .netmap__note .hl { color: var(--hm-ink-0); font-weight: 500; }
+
+/* Reuse pairs: what happens at one node, and where it lands. */
+.company-page .reuse {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 52px;
+}
+.company-page .reuse__pair {
+  border: 1px solid var(--hm-line);
+  padding: 24px 24px 22px;
+  background: var(--hm-surface-raised);
+}
+.company-page .reuse__node {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hm-ink-3);
+}
+.company-page .reuse__pair .reuse__node--to { color: var(--hm-verification); }
+.company-page .reuse__line {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--hm-ink-1);
+  margin-top: 8px;
+}
+.company-page .reuse__arrow {
+  font-family: var(--font-mono);
+  color: var(--hm-execution);
+  margin: 14px 0 12px;
+}
+.company-page .reuse__claim {
+  margin-top: 40px;
+  font-size: 26px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--hm-ink-0);
+  text-wrap: balance;
+}
+
+/* The flywheel, as a closed loop of steps. */
+.company-page .flywheel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 52px;
+}
+.company-page .flywheel__step {
+  flex: 1 1 150px;
+  border: 1px solid var(--hm-line-dark);
+  padding: 20px 18px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--hm-chalk-0);
+}
+.company-page .flywheel__step--gain {
+  border-color: rgba(75, 73, 202, 0.5);
+  color: var(--hm-verification);
+}
+.company-page .flywheel__turn {
+  align-self: center;
+  font-family: var(--font-mono);
+  color: var(--hm-execution);
+}
+
+/* The four products, listed under the closing line. */
+.company-page .closing__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin: 32px 0 8px;
+  text-align: left;
+}
+.company-page .closing__list div {
+  border-top: 1px solid var(--hm-line-dark);
+  padding-top: 14px;
+}
+.company-page .closing__list b {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--hm-verification);
+}
+.company-page .closing__list span {
+  display: block;
+  margin-top: 6px;
+  font-size: 15.5px;
+  color: var(--hm-chalk-0);
+}
+
+@media (max-width: 900px) {
+  .company-page .contrast { grid-template-columns: 1fr; }
+  .company-page .creed span { font-size: 30px; }
+  .company-page .reuse__claim { font-size: 21px; }
+}
