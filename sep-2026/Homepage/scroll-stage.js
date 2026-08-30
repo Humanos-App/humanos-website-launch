@@ -59,6 +59,14 @@
   var PHASE_BG = [0.32, 0.68];
   var PHASE_IN = [0.4, 0.66];
 
+  /* A pinned component gets its own windows over a shorter stretch. The
+     staged lead-in exists so the outgoing component can clear the screen
+     first — but a pinned one only begins once the previous has already
+     scrolled away, so waiting there is just an empty screen. */
+  var PIN_BG = [0, 0.5];
+  var PIN_IN = [0.06, 0.52];
+  var PIN_RUN = 0.55; /* fraction of a viewport the handover runs across */
+
   function clamp01(v) {
     return v < 0 ? 0 : v > 1 ? 1 : v;
   }
@@ -237,15 +245,16 @@
            and perfectly still instead. Handing over while it travels up the
            screen makes it read as arriving from below; handing over once it
            has settled makes it appear where it already is. */
-        if (stages[i + 1].hasAttribute("data-pin")) {
+        var pinned = stages[i + 1].hasAttribute("data-pin");
+        if (pinned) {
           start = bDoc;
-          end = Math.min(bDoc + vh, maxY);
+          end = Math.min(bDoc + vh * PIN_RUN, maxY);
         }
         var travel =
           end > start ? clamp01((window.scrollY - start) / (end - start)) : 1;
 
         var outT = phase(travel, PHASE_OUT);
-        var inT = phase(travel, PHASE_IN);
+        var inT = phase(travel, pinned ? PIN_IN : PHASE_IN);
         if (reduced) {
           outT = travel < 0.5 ? 0 : 1;
           inT = outT;
