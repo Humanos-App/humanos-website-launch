@@ -269,7 +269,7 @@
             lead = {
               from: TONES[from] || TONES[fallback],
               to: TONES[to] || TONES[fallback],
-              t: reduced ? (travel < 0.5 ? 0 : 1) : phase(travel, PHASE_BG),
+              t: reduced ? (travel < 0.5 ? 0 : 1) : phase(travel, pinned ? PIN_BG : PHASE_BG),
             };
           }
         }
