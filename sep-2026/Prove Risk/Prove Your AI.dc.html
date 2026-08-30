@@ -569,28 +569,20 @@
     </div>
   </div>
 
-  <div id="get-score" style="background:#111111;">
-    <div style="max-width:1200px; margin:0 auto; padding:120px 48px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:end;">
-      <h2 style="font-size:52px; font-weight:600; line-height:1.06; letter-spacing:-0.025em; color:#F4F3EF;">Give your AI<br>a risk reputation.</h2>
-      <div>
-        <p style="font-size:18px; line-height:1.5; color:#CFCDC6;">Get a continuously verified Risk Score you can use to prove your AI's risk posture wherever trust matters.</p>
-        <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="#get-score" style="font-size:12px; font-weight:500; letter-spacing:0.07em; text-transform:uppercase; color:#111111; background:#F4F3EF; padding:14px 22px; border-radius:4px;">Get your risk score</a>
-        </div>
-        <div style="margin-top:22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#8F8D85;">Risk scoring is free.</div>
+  <!-- v1's closing CTA structure (app/styles/sections/final.css), so every
+       page ends the same way the homepage does. Copy and buttons are the
+       page's own; only the arrangement is shared. -->
+  <section class="final" style="border-top:1px solid var(--hm-line);">
+    <div class="final__grid-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2 class="final__title">Give your AI a <span class="accent">risk reputation</span>.</h2>
+      <p class="final__sub">Get a continuously verified Risk Score you can use to prove your AI's risk posture wherever trust matters.</p>
+      <div class="final__ctas">
+        <a class="btn btn--primary" href="#get-score">Get your risk score <span class="arrow">&#8594;</span></a>
       </div>
+      <p class="final__fineprint">Risk scoring is free.</p>
     </div>
-  </div>
-
-  <div style="background:#111111; border-top:1px solid #2A2A28;">
-    <div style="max-width:1200px; margin:0 auto; padding:28px 48px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-      <div style="display:flex; align-items:center; gap:10px;">
-        <x-import component-from-global-scope="HumanosDesignSystem_d139d6.Mark" size="12" color="#8F8D85" hint-size="12px,12px"></x-import>
-        <span style="font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#8F8D85;">Humanos · The risk network for AI</span>
-      </div>
-      <span style="font-family:var(--font-mono); font-size:10.5px; color:#8F8D85;">Risk Scores are independent, continuous evidence of an AI's risk posture — not a guarantee of outcomes.</span>
-    </div>
-  </div>
+  </section>
 
 </div>
 </x-dc>

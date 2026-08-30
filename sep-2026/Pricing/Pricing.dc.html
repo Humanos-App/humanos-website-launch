@@ -127,16 +127,20 @@
     </div>
   </section>
 
-  <footer style="margin-top:80px;background:{{ footerBg }};color:#F4F3EF">
-    <div style="max-width:1200px;margin:0 auto;padding:80px 48px;display:flex;flex-direction:column;gap:28px;align-items:flex-start">
-      <h2 style="margin:0;font-size:72px;font-weight:600;letter-spacing:-0.035em;line-height:1;color:#F4F3EF">Derisk AI.</h2>
-      <p style="margin:0;font-size:18px;line-height:1.55;color:#CFCDC6;max-width:50ch">Manage AI risk for free. Buy the Risk Intelligence you need. Insure what remains.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px">
-        <button type="button" style="height:48px;padding:0 24px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:0.08em;line-height:1.2;border:1px solid transparent;border-radius:2px;cursor:pointer;background:#F4F3EF;color:#111111;transition:background 180ms" style-hover="{background:'#FFFFFF'}">GET API KEY</button>
-        <button type="button" style="height:48px;padding:0 24px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:0.08em;line-height:1.2;border:1px solid rgba(244,243,239,0.35);border-radius:2px;cursor:pointer;background:transparent;color:#F4F3EF;transition:background 180ms,color 180ms" style-hover="{background:'#F4F3EF',color:'#111111'}">TALK TO US</button>
+  <!-- v1's closing CTA structure (app/styles/sections/final.css), so every
+       page ends the same way the homepage does. Copy and buttons are the
+       page's own; only the arrangement is shared. -->
+  <section class="final" style="border-top:1px solid var(--hm-line);">
+    <div class="final__grid-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2 class="final__title">Derisk <span class="accent">AI</span>.</h2>
+      <p class="final__sub">Manage AI risk for free. Buy the Risk Intelligence you need. Insure what remains.</p>
+      <div class="final__ctas">
+        <a class="btn btn--primary" href="https://app.humanos.tech" target="_blank" rel="noopener noreferrer">Get API key <span class="arrow">&#8594;</span></a>
+        <a class="btn btn--secondary" href="https://calendly.com/wgomeshumanos/30min" target="_blank" rel="noopener noreferrer">Talk to us <span class="arrow">&#8594;</span></a>
       </div>
     </div>
-  </footer>
+  </section>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;footerTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;indigo&quot;,&quot;ink&quot;],&quot;default&quot;:&quot;indigo&quot;,&quot;tsType&quot;:&quot;\&quot;indigo\&quot; | \&quot;ink\&quot;&quot;}}">

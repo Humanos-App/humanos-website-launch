@@ -471,17 +471,17 @@
     </div>
   </section>
 
-  <section id="cta" style="margin-top:120px;background:#111111">
-    <div style="max-width:1200px;margin:0 auto;padding:140px 48px">
-      <h2 style="margin:0;font-size:48px;font-weight:600;line-height:1.08;letter-spacing:-0.025em;color:#F4F3EF;max-width:820px">Whatever the risk decision,<br>get the intelligence you need.</h2>
-      <div style="margin-top:28px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.09em;color:var(--hm-chalk-2)">CONTINUOUS · STANDARDIZED · VERIFIABLE</div>
-      <div style="margin-top:48px;display:flex;gap:12px;flex-wrap:wrap">
-        <a href="#cta" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;background:#F4F3EF;color:#111111;padding:14px 20px;border-radius:2px" style-hover="background:#FFFFFF">TALK TO OUR TEAM</a>
-        <a href="#api" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;border:1px solid var(--hm-line-dark);color:#F4F3EF;padding:13px 20px;border-radius:2px" style-hover="border-color:#F4F3EF">READ DOCS</a>
-      </div>
-      <div style="margin-top:100px;padding-top:24px;border-top:1px solid var(--hm-line-dark);display:flex;align-items:center;justify-content:space-between;gap:24px">
-        <img src="assets/logo-wordmark-white.svg" alt="Humanos" style="height:16px;display:block">
-        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-chalk-2)">THE RISK NETWORK FOR AI</span>
+  <!-- v1's closing CTA structure (app/styles/sections/final.css), so every
+       page ends the same way the homepage does. Copy and buttons are the
+       page's own; only the arrangement is shared. -->
+  <section class="final" style="border-top:1px solid var(--hm-line);">
+    <div class="final__grid-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="final__eyebrow">Continuous · Standardized · Verifiable</div>
+      <h2 class="final__title">Whatever the risk decision, get the <span class="accent">intelligence you need</span>.</h2>
+      <div class="final__ctas">
+        <a class="btn btn--primary" href="#cta">Talk to our team <span class="arrow">&#8594;</span></a>
+        <a class="btn btn--secondary" href="#api">Read docs <span class="arrow">&#8594;</span></a>
       </div>
     </div>
   </section>
