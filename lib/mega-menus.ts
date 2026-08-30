@@ -86,17 +86,17 @@ export const SOLUTIONS_MENU: MegaMenu = {
         {
           title: "Monitor",
           sub: "Know your AI risk, and prove it",
-          href: "/v2/monitor-v3",
+          href: "/monitor",
         },
         {
           title: "Control",
           sub: "Control what AI can do",
-          href: "/v2/control",
+          href: "/control",
         },
         {
           title: "Risk Intelligence",
           sub: "Get the risk answers you need",
-          href: "/v2/risk-intelligence",
+          href: "/intelligence",
         },
       ],
     },

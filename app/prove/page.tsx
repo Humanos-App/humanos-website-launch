@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 
 export const metadata: Metadata = {
-  title: "Pricing",
+  title: "Prove your AI",
   description:
-    "Manage AI risk for free. Buy the Risk Intelligence you need. Insure what remains.",
-  alternates: { canonical: "/pricing" },
+    "Give your AI a risk reputation — a continuously verified Risk Score you can use wherever trust matters.",
+  alternates: { canonical: "/prove" },
   other: designMetaOther,
 };
 
 export default function Page() {
-  return <DesignPage slug="pricing" />;
+  return <DesignPage slug="prove" />;
 }

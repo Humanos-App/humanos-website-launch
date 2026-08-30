@@ -1,0 +1,561 @@
+
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="/designs/_shared/_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/colors_and_type.css">
+<link rel="stylesheet" href="/designs/_shared/_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/styles.css">
+<script src="/designs/_shared/_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; background: #F4F3EF; }
+  a { color: #111111; text-decoration: none; }
+  a:hover { color: #4B49CA; }
+  @keyframes hm-pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.25 } }
+</style>
+</helmet>
+
+<div style="background:#F4F3EF;color:#111111;font-family:var(--font-sans)">
+
+  
+
+  <section id="control" style="max-width:1200px;margin:0 auto;padding:104px 48px 0;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[CONTROL]</span>
+        <span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.1em;color:#111111;border:1px solid #111111;border-radius:2px;padding:3px 8px">FREE</span>
+      </div>
+      <h1 style="margin:28px 0 0;font-size:60px;font-weight:600;line-height:1.02;letter-spacing:-0.03em">Control what<br>AI <span style="color:var(--hm-verification)">can do</span>.</h1>
+      <p style="margin:28px 0 0;font-size:19px;line-height:1.5;color:#111111;max-width:520px">Verify who is acting, who they act for, what they're allowed to do, and enforce those limits before execution.</p>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:var(--hm-ink-2);max-width:500px">Identity, authorization, guardrails and enforcement for AI systems.</p>
+      <div style="margin-top:40px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#developers" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;background:#111111;color:#F4F3EF;padding:14px 20px;border-radius:2px" style-hover="background:#282828">START CONTROLLING AI</a>
+        <a href="#developers" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;border:1px solid #111111;color:#111111;padding:13px 20px;border-radius:2px" style-hover="background:#111111;color:#F4F3EF">READ DOCS</a>
+      </div>
+      <div style="margin-top:56px;padding-top:20px;border-top:1px solid var(--hm-line);display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-ink-3)">
+        <span>IDENTITY</span><span style="color:var(--hm-verification)">→</span>
+        <span>AUTHORITY</span><span style="color:var(--hm-verification)">→</span>
+        <span>GUARDRAILS</span><span style="color:var(--hm-verification)">→</span>
+        <span style="color:#111111">ENFORCEMENT</span>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--hm-line)">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-ink-2)">RUNTIME CONTROL</span>
+        <span style="display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-verification)">
+          <span style="width:6px;height:6px;border-radius:999px;background:#4B49CA;animation:hm-pulse 1.8s var(--ease-standard) infinite"></span>LIVE
+        </span>
+      </div>
+      <div style="padding:4px 20px 0">
+        <div style="display:flex;justify-content:space-between;gap:24px;padding:13px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">AGENT</span><span style="font-family:var(--font-mono);font-size:13px">Treasury-01 <span style="color:var(--hm-verification)">✔ Verified</span></span></div>
+        <div style="display:flex;justify-content:space-between;gap:24px;padding:13px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">ACTING FOR</span><span style="font-family:var(--font-mono);font-size:13px">Acme Corp <span style="color:var(--hm-verification)">✔ Verified</span></span></div>
+        <div style="display:flex;justify-content:space-between;gap:24px;padding:13px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">AUTHORITY</span><span style="font-family:var(--font-mono);font-size:13px">Treasury operations <span style="color:var(--hm-verification)">✔ Valid</span></span></div>
+        <div style="display:flex;justify-content:space-between;gap:24px;padding:13px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">ACTION</span><span style="font-family:var(--font-mono);font-size:13px">Transfer €250,000</span></div>
+      </div>
+      <div style="padding:20px 20px 8px">
+        <div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">GUARDRAILS</div>
+        <div style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;gap:24px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13.5px;color:var(--hm-ink-2)">Transaction limit</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-rejection)">€100,000 ✖</span></div>
+          <div style="display:flex;justify-content:space-between;gap:24px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13.5px;color:var(--hm-ink-2)">Approved destinations</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">Only ✔</span></div>
+          <div style="display:flex;justify-content:space-between;gap:24px;padding:11px 0"><span style="font-size:13.5px;color:var(--hm-ink-2)">Human approval</span><span style="font-family:var(--font-mono);font-size:13px">Required above €100K</span></div>
+        </div>
+      </div>
+      <div style="margin:12px 20px 20px;border:1px solid var(--hm-rejection);background:rgba(243,121,126,0.08);border-radius:2px;padding:18px 20px">
+        <div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">RESULT</div>
+        <div style="margin-top:10px;font-family:var(--font-mono);font-size:24px;letter-spacing:0.04em;color:var(--hm-rejection)">BLOCKED</div>
+        <div style="margin-top:8px;font-size:13.5px;color:#111111">Human approval required.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[THE CONTROL LAYER]</div>
+    <h2 style="margin:24px 0 0;font-size:44px;font-weight:600;line-height:1.08;letter-spacing:-0.025em;max-width:720px">Know who's acting.<br>Know what they're allowed to do.</h2>
+    <p style="margin:24px 0 0;font-size:17.5px;line-height:1.6;color:var(--hm-ink-2);max-width:700px">AI doesn't act alone. Agents operate on behalf of humans and organizations, and increasingly delegate work to other agents. Humanos creates a verified control layer between these actors.</p>
+
+    <div style="margin-top:72px;overflow-x:auto">
+      <div style="position:relative;width:1104px;height:520px;margin:0 auto">
+        <svg width="1104" height="520" viewBox="0 0 1104 520" style="position:absolute;left:0;top:0">
+          <line x1="230" y1="80" x2="874" y2="80" stroke="#4B49CA" stroke-width="1"></line>
+          <line x1="200" y1="120" x2="500" y2="400" stroke="#4B49CA" stroke-width="1"></line>
+          <line x1="904" y1="120" x2="604" y2="400" stroke="#4B49CA" stroke-width="1"></line>
+          <path d="M 604 440 C 700 500 404 500 500 440" fill="none" stroke="#4B49CA" stroke-width="1"></path>
+          <text x="552" y="70" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.8" fill="#4B49CA">HUMAN → ORGANIZATION · APPROVAL AUTHORITY</text>
+          <text x="552" y="98" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.8" fill="#76746D">ORGANIZATION → HUMAN · ROLE AUTHORITY</text>
+          <text x="238" y="258" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.8" fill="#4B49CA" transform="rotate(43 238 258)">HUMAN → AGENT · DELEGATED AUTHORITY</text>
+          <text x="866" y="258" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.8" fill="#4B49CA" transform="rotate(-43 866 258)">ORG → AGENT · OPERATIONAL MANDATE</text>
+          <text x="552" y="502" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.8" fill="#4B49CA">AGENT → AGENT · DELEGATED TASK</text>
+        </svg>
+        <div style="position:absolute;left:40px;top:52px;width:190px;height:56px;box-sizing:border-box;border:1px solid #111111;background:#FFFFFF;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+          <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.09em">HUMAN</span>
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;color:var(--hm-verification)">✔ VERIFIED IDENTITY</span>
+        </div>
+        <div style="position:absolute;left:874px;top:52px;width:190px;height:56px;box-sizing:border-box;border:1px solid #111111;background:#FFFFFF;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+          <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.09em">ORGANIZATION</span>
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;color:var(--hm-verification)">✔ VERIFIED IDENTITY</span>
+        </div>
+        <div style="position:absolute;left:457px;top:400px;width:190px;height:56px;box-sizing:border-box;border:1px solid #111111;background:#111111;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+          <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.09em;color:#F4F3EF">AI AGENT</span>
+          <span style="font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.08em;color:var(--hm-chalk-2)">✔ KYA VERIFIED</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:1px solid var(--hm-line-strong);padding-top:28px">
+      <div><div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-verification)">IDENTITY</div><div style="margin-top:12px;font-size:16px;line-height:1.5">Identity tells you who they are.</div></div>
+      <div><div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-verification)">AUTHORITY</div><div style="margin-top:12px;font-size:16px;line-height:1.5">Authority tells you who they can act for.</div></div>
+      <div><div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-verification)">GUARDRAILS</div><div style="margin-top:12px;font-size:16px;line-height:1.5">Guardrails define what they can do.</div></div>
+      <div><div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-verification)">ENFORCEMENT</div><div style="margin-top:12px;font-size:16px;line-height:1.5">Enforcement makes those limits real.</div></div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[IDENTITY]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Every actor starts with a verified identity.</h2>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+      <div style="background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--hm-line);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.09em">HUMANS</span>
+          <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--hm-ink-4)">01</span>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:16.5px;line-height:1.5;color:#111111">Verify the person behind an authorization.</div>
+          <div style="margin-top:20px;display:flex;flex-direction:column;gap:9px;font-family:var(--font-mono);font-size:12px;color:var(--hm-ink-2)">
+            <span>Identity verification</span><span>KYC</span><span>Contact verification</span><span>Signatures</span><span>Consent</span><span>Human approvals</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--hm-line);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.09em">AI AGENTS</span>
+          <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--hm-ink-4)">02</span>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:16.5px;line-height:1.5;color:#111111">Know which agent is actually acting.</div>
+          <div style="margin-top:20px;display:flex;flex-direction:column;gap:9px;font-family:var(--font-mono);font-size:12px;color:var(--hm-ink-2)">
+            <span>KYA — Know Your Agent</span><span>Agent identity</span><span>Agent ownership</span><span>Agent credentials</span><span>Agent provenance</span><span>Agent status</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--hm-line);display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.09em">ORGANIZATIONS</span>
+          <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--hm-ink-4)">03</span>
+        </div>
+        <div style="padding:20px">
+          <div style="font-size:16.5px;line-height:1.5;color:#111111">Know which organization stands behind the action.</div>
+          <div style="margin-top:20px;display:flex;flex-direction:column;gap:9px;font-family:var(--font-mono);font-size:12px;color:var(--hm-ink-2)">
+            <span>Organization identity</span><span>KYB</span><span>Organizational authority</span><span>Roles</span><span>Enterprise relationships</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.07em;color:var(--hm-ink-3)">
+      <span>HUMAN + AGENT + ORGANIZATION</span>
+      <span style="color:var(--hm-verification)">=</span>
+      <span style="color:#111111">THE IDENTITY GRAPH BEHIND AI ACTIVITY</span>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[AUTHORIZATION]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Define who can act for whom.</h2>
+    <p style="margin:24px 0 0;font-size:17.5px;line-height:1.6;color:var(--hm-ink-2);max-width:700px">Humanos turns permissions, approvals and delegated authority into portable, machine-verifiable mandates.</p>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:1fr 400px 1fr;gap:32px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="border-top:1px solid var(--hm-line);padding-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-verification)">HUMAN → AGENT</div>
+        <div style="border-top:1px solid var(--hm-line);padding-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-verification)">ORGANIZATION → AGENT</div>
+        <div style="border-top:1px solid var(--hm-line);padding-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-verification)">AGENT → AGENT</div>
+        <div style="border-top:1px solid var(--hm-line);padding-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-verification)">HUMAN → ORGANIZATION</div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #111111;border-radius:2px">
+        <div style="padding:14px 20px;border-bottom:1px solid var(--hm-line);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.09em">MANDATE</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-3)">0xA13F…</span>
+        </div>
+        <div style="padding:4px 20px 10px">
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Principal</span><span style="font-family:var(--font-mono);font-size:13px">Acme Corp</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Agent</span><span style="font-family:var(--font-mono);font-size:13px">Treasury-01</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Scope</span><span style="font-family:var(--font-mono);font-size:13px">treasury.payments</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Limit</span><span style="font-family:var(--font-mono);font-size:13px">€100,000/day</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Destinations</span><span style="font-family:var(--font-mono);font-size:13px">Approved vendors</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Valid until</span><span style="font-family:var(--font-mono);font-size:13px">2026-12-31</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0"><span style="font-size:13px;color:var(--hm-ink-3)">Delegation</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">Allowed ✔</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">Human authorization</span>
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">Delegated authority</span>
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">A2A authorization</span>
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">Organization authority</span>
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">Scoped mandates</span>
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">Revocation</span>
+        <span style="border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-2)">Expiration</span>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+      <div style="font-size:32px;font-weight:600;line-height:1.2;letter-spacing:-0.02em">Authorize once. <span style="color:var(--hm-verification)">Verify everywhere.</span></div>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:var(--hm-ink-2);max-width:460px">A mandate is verifiable by every system the agent touches — instead of rebuilding permissions inside every application.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[GUARDRAILS]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Define what AI is allowed to do.</h2>
+    <p style="margin:24px 0 0;font-size:17.5px;line-height:1.6;color:var(--hm-ink-2);max-width:700px">Turn business rules, permissions and risk limits into deterministic runtime controls.</p>
+
+    <div style="margin-top:56px;background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--hm-line);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-ink-2)">POLICY · treasury.v4</span>
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-verification)">8 CONSTRAINTS ACTIVE</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr)">
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-bottom:1px solid var(--hm-line);border-right:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">TRANSACTION LIMIT</span><span style="font-family:var(--font-mono);font-size:13.5px">≤ €100,000</span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-bottom:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">DESTINATION</span><span style="font-family:var(--font-mono);font-size:13.5px">Approved counterparties only</span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-bottom:1px solid var(--hm-line);border-right:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">TOOLS</span><span style="font-family:var(--font-mono);font-size:13.5px"><span style="color:var(--hm-verification)">Payments API ✔</span> · <span style="color:var(--hm-rejection)">Admin API ✖</span></span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-bottom:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">DATA ACCESS</span><span style="font-family:var(--font-mono);font-size:13.5px">Customer records: Read only</span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-bottom:1px solid var(--hm-line);border-right:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">HUMAN APPROVAL</span><span style="font-family:var(--font-mono);font-size:13.5px">Required above €50,000</span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-bottom:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">TIME</span><span style="font-family:var(--font-mono);font-size:13.5px">Business hours only</span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;border-right:1px solid var(--hm-line);align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">DELEGATION</span><span style="font-family:var(--font-mono);font-size:13.5px">Maximum depth: 2</span></div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 20px;align-items:baseline"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">RISK SCORE</span><span style="font-family:var(--font-mono);font-size:13.5px">Must remain &lt; 40</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[ENFORCEMENT]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Rules only matter if they can stop the action.</h2>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:100%;border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:14px 20px;text-align:center;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em">AI ACTION</div>
+        <div style="width:1px;height:26px;background:var(--hm-verification)"></div>
+        <div style="width:100%;border:1px solid #111111;background:#111111;border-radius:2px;padding:14px 20px;text-align:center;font-family:var(--font-mono);font-size:13px;color:#F4F3EF">humanos.verify()</div>
+        <div style="width:1px;height:26px;background:var(--hm-verification)"></div>
+        <div style="width:100%;background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px;padding:4px 20px 8px">
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">IDENTITY</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">✔ Verified</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">AUTHORITY</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">✔ Valid</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">AUTHORIZATION</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">✔ Within mandate</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:14px 0"><span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">GUARDRAILS</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-rejection)">✖ Limit exceeded</span></div>
+        </div>
+        <div style="width:1px;height:26px;background:var(--hm-rejection)"></div>
+        <div style="width:100%;border:1px solid var(--hm-rejection);background:rgba(243,121,126,0.08);border-radius:2px;padding:14px 20px;text-align:center;font-family:var(--font-mono);font-size:16px;letter-spacing:0.06em;color:var(--hm-rejection)">DENY</div>
+      </div>
+
+      <div>
+        <div style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">THREE POSSIBLE OUTCOMES</div>
+        <div style="margin-top:20px;border-top:1px solid var(--hm-line-strong)">
+          <div style="display:grid;grid-template-columns:190px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--hm-line);align-items:baseline">
+            <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.08em;color:var(--hm-verification)">ALLOW</span>
+            <span style="font-size:15.5px;color:#111111">Action executes.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:190px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--hm-line);align-items:baseline">
+            <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.08em;color:var(--hm-rejection)">DENY</span>
+            <span style="font-size:15.5px;color:#111111">Action is blocked.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:190px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--hm-line);align-items:baseline">
+            <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.08em;color:var(--hm-pending)">REQUEST AUTHORIZATION</span>
+            <span style="font-size:15.5px;color:#111111">Execution pauses while Humanos collects the missing authorization.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:190px 1fr;gap:24px;padding:22px 0;align-items:baseline">
+            <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.08em;color:var(--hm-verification)">→ RESUME EXECUTION</span>
+            <span style="font-size:15.5px;color:var(--hm-ink-2)">Once the authorization is verified.</span>
+          </div>
+        </div>
+        <div style="margin-top:40px;font-size:22px;font-weight:600;line-height:1.35;letter-spacing:-0.015em;max-width:440px">Verify before execution. Recover authorization when needed. Prove the decision afterwards.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[HUMAN IN THE LOOP]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Bring humans in only when they're needed.</h2>
+    <p style="margin:24px 0 0;font-size:17.5px;line-height:1.6;color:var(--hm-ink-2);max-width:700px">When an AI action exceeds its existing authority, Humanos can pause execution and collect the missing human authorization in real time.</p>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--hm-line-strong);border-radius:2px;background:#FFFFFF">
+      <div style="padding:22px 18px;border-right:1px solid var(--hm-line)">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;color:var(--hm-ink-3)">01 ATTEMPT</div>
+        <div style="margin-top:14px;font-family:var(--font-mono);font-size:14px">€250,000 transfer</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--hm-ink-3)">Existing limit €100,000</div>
+      </div>
+      <div style="padding:22px 18px;border-right:1px solid var(--hm-line)">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;color:var(--hm-ink-3)">02 STATE</div>
+        <div style="margin-top:14px;display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:14px;color:var(--hm-pending)">
+          <span style="width:6px;height:6px;border-radius:999px;background:#7DA0FA;animation:hm-pulse 1.8s var(--ease-standard) infinite"></span>PAUSED
+        </div>
+        <div style="margin-top:10px;font-size:13px;color:var(--hm-ink-3)">Nothing executes</div>
+      </div>
+      <div style="padding:22px 18px;border-right:1px solid var(--hm-line)">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;color:var(--hm-ink-3)">03 REQUEST</div>
+        <div style="margin-top:14px;font-family:var(--font-mono);font-size:14px">CFO authorization</div>
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;font-family:var(--font-mono);font-size:10.5px;color:var(--hm-ink-2)">
+          <span style="border:1px solid var(--hm-line);border-radius:2px;padding:3px 6px">SMS</span>
+          <span style="border:1px solid var(--hm-line);border-radius:2px;padding:3px 6px">WHATSAPP</span>
+          <span style="border:1px solid var(--hm-line);border-radius:2px;padding:3px 6px">EMAIL</span>
+          <span style="border:1px solid var(--hm-line);border-radius:2px;padding:3px 6px">EMBEDDED UI</span>
+        </div>
+      </div>
+      <div style="padding:22px 18px;border-right:1px solid var(--hm-line)">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;color:var(--hm-ink-3)">04 SIGNED</div>
+        <div style="margin-top:14px;font-family:var(--font-mono);font-size:14px;color:var(--hm-verification)">AUTHORIZED ✔</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--hm-ink-3)">2026-08-27T14:31:52Z</div>
+      </div>
+      <div style="padding:22px 18px;border-right:1px solid var(--hm-line)">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;color:var(--hm-ink-3)">05 MANDATE</div>
+        <div style="margin-top:14px;font-family:var(--font-mono);font-size:14px">Updated</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--hm-ink-3)">Limit raised for this action</div>
+      </div>
+      <div style="padding:22px 18px">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.09em;color:var(--hm-ink-3)">06 RUNTIME</div>
+        <div style="margin-top:14px;font-family:var(--font-mono);font-size:14px;color:var(--hm-verification)">EXECUTION RESUMES</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--hm-ink-3)">No restart required</div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start">
+      <div style="font-size:32px;font-weight:600;line-height:1.2;letter-spacing:-0.02em;max-width:560px">Human oversight <span style="color:var(--hm-verification)">without putting a human in every loop.</span></div>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:var(--hm-ink-2);max-width:420px">Humans define the boundaries. AI operates autonomously inside them. Humans return only when those boundaries need to change.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[PORTABLE CONTROL]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Set the rules once.<br>Enforce them everywhere.</h2>
+    <p style="margin:24px 0 0;font-size:17.5px;line-height:1.6;color:var(--hm-ink-2);max-width:700px">Identity, authority and authorization shouldn't disappear when an agent moves between systems. Humanos makes controls portable across the infrastructure an agent touches.</p>
+
+    <div style="margin-top:64px;overflow-x:auto">
+      <div style="position:relative;width:1104px;height:440px;margin:0 auto">
+        <svg width="1104" height="440" viewBox="0 0 1104 440" style="position:absolute;left:0;top:0">
+          <sc-for list="{{ spokes }}" as="s" hint-placeholder-count="8">
+            <line x1="552" y1="220" x2="{{ s.lx }}" y2="{{ s.ly }}" stroke="#4B49CA" stroke-width="1"></line>
+          </sc-for>
+        </svg>
+        <div style="position:absolute;left:432px;top:180px;width:240px;height:80px;box-sizing:border-box;border:1px solid #111111;background:#111111;border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+          <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.1em;color:#F4F3EF">CONTROL PROFILE</span>
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;color:var(--hm-chalk-2)">IDENTITY · AUTHORITY · POLICY</span>
+        </div>
+        <sc-for list="{{ spokes }}" as="s" hint-placeholder-count="8">
+          <div style="position:absolute;left:{{ s.left }};top:{{ s.top }};width:168px;box-sizing:border-box;border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:12px 14px">
+            <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em">{{ s.label }}</div>
+            <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;font-family:var(--font-mono);font-size:9.5px;color:var(--hm-verification)">
+              <span>✔ Identity verified</span>
+              <span>✔ Authority verified</span>
+              <span>✔ Policy enforced</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;display:flex;flex-wrap:wrap;gap:10px 24px;font-family:var(--font-mono);font-size:13.5px;letter-spacing:0.06em">
+      <span>ONE IDENTITY.</span>
+      <span>ONE AUTHORITY GRAPH.</span>
+      <span>ONE SET OF CONTROLS.</span>
+      <span style="color:var(--hm-verification)">VERIFIABLE ACROSS THE NETWORK.</span>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[PROOF]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Every control decision becomes evidence.</h2>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+      <div>
+        <p style="margin:0;font-size:17px;line-height:1.6;color:var(--hm-ink-2);max-width:460px">Every runtime decision generates verifiable evidence of:</p>
+        <div style="margin-top:24px;border-top:1px solid var(--hm-line-strong);display:flex;flex-direction:column">
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-size:15.5px">Who acted</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-size:15.5px">Who they acted for</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-size:15.5px">What authority existed</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-size:15.5px">Which guardrails applied</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-size:15.5px">What action was attempted</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-size:15.5px">Why it was allowed or denied</span>
+          <span style="padding:13px 0;font-size:15.5px">What authorization was collected</span>
+        </div>
+        <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--hm-line);display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-ink-3)">
+          <span>CONTROL EVENTS</span><span style="color:var(--hm-verification)">→</span>
+          <a href="/monitor" style="color:#111111">RISK SCORE</a>
+        </div>
+        <p style="margin:16px 0 0;font-size:14.5px;line-height:1.55;color:var(--hm-ink-3);max-width:440px">Every control decision also becomes a signal in your continuous Risk Score.</p>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #111111;border-radius:2px">
+        <div style="padding:14px 20px;border-bottom:1px solid var(--hm-line);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.09em">EXECUTION RECEIPT</span>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--hm-ink-3)">0xC7E1…</span>
+        </div>
+        <div style="padding:4px 20px 10px">
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Agent</span><span style="font-family:var(--font-mono);font-size:13px">Treasury-01</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Principal</span><span style="font-family:var(--font-mono);font-size:13px">Acme Corp</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Action</span><span style="font-family:var(--font-mono);font-size:13px">wire.transfer</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Amount</span><span style="font-family:var(--font-mono);font-size:13px">€42,000</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Authority</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">Verified ✔</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Policy</span><span style="font-family:var(--font-mono);font-size:13px">treasury.v4</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--hm-line)"><span style="font-size:13px;color:var(--hm-ink-3)">Timestamp</span><span style="font-family:var(--font-mono);font-size:13px">2026-08-27T14:32:04Z</span></div>
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:12px 0"><span style="font-size:13px;color:var(--hm-ink-3)">Evidence</span><span style="font-family:var(--font-mono);font-size:13px;color:var(--hm-verification)">Verifiable ✔</span></div>
+        </div>
+        <div style="padding:18px 20px;border-top:1px solid var(--hm-line);background:rgba(75,73,202,0.05);display:flex;align-items:center;justify-content:space-between;gap:16px">
+          <span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">DECISION</span>
+          <span style="font-family:var(--font-mono);font-size:18px;letter-spacing:0.06em;color:var(--hm-verification)">ALLOW</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[YOUR STACK]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">Keep the controls you already have.</h2>
+    <p style="margin:24px 0 0;font-size:17.5px;line-height:1.6;color:var(--hm-ink-2);max-width:700px">Connect existing systems and let Humanos consume their runtime events, or use Humanos controls where something is missing.</p>
+
+    <div style="margin-top:56px;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start">
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:100%;border:1px solid var(--hm-line-strong);background:#FFFFFF;border-radius:2px;padding:18px 20px">
+          <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.09em">YOUR EXISTING STACK</div>
+          <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px">
+            <span style="border:1px solid var(--hm-line);border-radius:2px;padding:6px 10px;font-size:12.5px;color:var(--hm-ink-2)">Browser governance</span>
+            <span style="border:1px solid var(--hm-line);border-radius:2px;padding:6px 10px;font-size:12.5px;color:var(--hm-ink-2)">Wallet policies</span>
+            <span style="border:1px solid var(--hm-line);border-radius:2px;padding:6px 10px;font-size:12.5px;color:var(--hm-ink-2)">IAM</span>
+            <span style="border:1px solid var(--hm-line);border-radius:2px;padding:6px 10px;font-size:12.5px;color:var(--hm-ink-2)">Payment controls</span>
+            <span style="border:1px solid var(--hm-line);border-radius:2px;padding:6px 10px;font-size:12.5px;color:var(--hm-ink-2)">Internal guardrails</span>
+            <span style="border:1px solid var(--hm-line);border-radius:2px;padding:6px 10px;font-size:12.5px;color:var(--hm-ink-2)">Agent frameworks</span>
+          </div>
+        </div>
+        <div style="width:1px;height:28px;background:var(--hm-verification)"></div>
+        <div style="width:100%;border:1px solid #111111;background:#111111;border-radius:2px;padding:14px 20px;text-align:center;font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.1em;color:#F4F3EF">HUMANOS</div>
+        <div style="width:1px;height:28px;background:var(--hm-verification)"></div>
+        <div style="width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div style="border:1px solid var(--hm-verification);background:rgba(75,73,202,0.06);border-radius:2px;padding:14px 10px;text-align:center;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.07em;color:var(--hm-verification)">STANDARDIZED CONTROL EVENTS</div>
+          <div style="border:1px solid var(--hm-verification);background:rgba(75,73,202,0.06);border-radius:2px;padding:14px 10px;text-align:center;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.07em;color:var(--hm-verification)">RISK SCORE</div>
+          <div style="border:1px solid var(--hm-verification);background:rgba(75,73,202,0.06);border-radius:2px;padding:14px 10px;text-align:center;font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.07em;color:var(--hm-verification)">VERIFIABLE EVIDENCE</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.09em;color:var(--hm-ink-3)">NEED CONTROLS?</div>
+        <div style="margin-top:16px;border-top:1px solid var(--hm-line-strong);display:flex;flex-direction:column">
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-family:var(--font-mono);font-size:12.5px">Identity</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-family:var(--font-mono);font-size:12.5px">KYA</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-family:var(--font-mono);font-size:12.5px">Authorization</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-family:var(--font-mono);font-size:12.5px">A2A authorization</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-family:var(--font-mono);font-size:12.5px">Guardrails</span>
+          <span style="padding:13px 0;border-bottom:1px solid var(--hm-line);font-family:var(--font-mono);font-size:12.5px">Enforcement</span>
+          <span style="padding:13px 0;font-family:var(--font-mono);font-size:12.5px">Human approval</span>
+        </div>
+        <div style="margin-top:32px;font-size:20px;font-weight:600;line-height:1.35;letter-spacing:-0.01em;max-width:380px">Use your controls or ours. Both feed the Humanos Risk Network.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="developers" style="max-width:1200px;margin:0 auto;padding:120px 48px 0">
+    <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[DEVELOPERS]</div>
+    <h2 style="margin:24px 0 0;font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-0.02em;max-width:720px">One call before execution.</h2>
+
+    <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+      <div style="background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+        <div style="padding:13px 20px;border-bottom:1px solid var(--hm-line);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">VERIFY</span>
+          <span style="font-family:var(--font-mono);font-size:11.5px;color:#111111">humanos-sdk</span>
+        </div>
+        <pre style="margin:0;padding:22px 20px;font-family:var(--font-mono);font-size:13px;line-height:1.7;color:var(--hm-ink-1);white-space:pre">const result = await humanos.verify({
+  agent: <span style="color:#4B49CA">"Treasury-01"</span>,
+  principal: <span style="color:#4B49CA">"Acme Corp"</span>,
+  action: <span style="color:#4B49CA">"transfer"</span>,
+  amount: <span style="color:#4B49CA">250000</span>,
+  currency: <span style="color:#4B49CA">"EUR"</span>
+})</pre>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid var(--hm-line-strong);border-radius:2px">
+        <div style="padding:13px 20px;border-bottom:1px solid var(--hm-line);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.09em;color:var(--hm-ink-3)">RESPONSE</span>
+          <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--hm-rejection)">DENY</span>
+        </div>
+        <pre style="margin:0;padding:22px 20px;font-family:var(--font-mono);font-size:13px;line-height:1.7;color:var(--hm-ink-1);white-space:pre">{
+  "decision": <span style="color:#F3797E">"DENY"</span>,
+  "reason": <span style="color:#F3797E">"transaction_limit_exceeded"</span>,
+  "authorization_required": <span style="color:#4B49CA">true</span>
+}</pre>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:var(--hm-ink-3)">
+        <span>SDK + API</span><span style="color:var(--hm-line-strong)">·</span>
+        <span>TYPESCRIPT</span><span style="color:var(--hm-line-strong)">·</span>
+        <span>PYTHON</span><span style="color:var(--hm-line-strong)">·</span>
+        <span>REST</span><span style="color:var(--hm-line-strong)">·</span>
+        <span>MCP</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#developers" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;background:#111111;color:#F4F3EF;padding:14px 20px;border-radius:2px" style-hover="background:#282828">GET API KEY</a>
+        <a href="#developers" style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;border:1px solid #111111;color:#111111;padding:13px 20px;border-radius:2px" style-hover="background:#111111;color:#F4F3EF">READ DOCS</a>
+      </div>
+    </div>
+
+    <div style="margin-top:88px;padding-top:40px;border-top:1px solid var(--hm-line-strong);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--hm-verification)">[PRICING]</div>
+        <h3 style="margin:20px 0 0;font-size:32px;font-weight:600;line-height:1.15;letter-spacing:-0.02em">Control AI for free.</h3>
+        <div style="margin-top:32px;font-family:var(--font-mono);font-size:72px;font-weight:500;letter-spacing:-0.04em;line-height:1">$0</div>
+        <a href="#developers" style="display:inline-block;margin-top:36px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;background:#111111;color:#F4F3EF;padding:14px 20px;border-radius:2px" style-hover="background:#282828">START CONTROLLING AI</a>
+      </div>
+      <div style="border-top:1px solid var(--hm-line);display:grid;grid-template-columns:1fr 1fr;gap:0 32px">
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">HUMAN IDENTITY</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">AI IDENTITY / KYA</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">ORGANIZATION IDENTITY</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">HUMAN AUTHORIZATION</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">DELEGATED AUTHORITY</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">A2A AUTHORIZATION</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">GUARDRAILS</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">RUNTIME ENFORCEMENT</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">AUTHORIZATION RECOVERY</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--hm-line)"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">EXECUTION RECEIPTS</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px 0"><span style="color:var(--hm-verification);font-family:var(--font-mono);font-size:12px">✔</span><span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.06em">SDK + API</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- v1's closing CTA structure (app/styles/sections/final.css), so every
+       page ends the same way the homepage does. Copy and buttons are the
+       page's own; only the arrangement is shared. -->
+  <section class="final" style="border-top:1px solid var(--hm-line);">
+    <div class="final__grid-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2 class="final__title">Control what <span class="accent">AI can do</span>.</h2>
+      <p class="final__sub">Verify identity. Enforce authority. Prove every decision.</p>
+      <div class="final__ctas">
+        <a class="btn btn--primary" href="#developers">Get API key <span class="arrow">&#8594;</span></a>
+        <a class="btn btn--secondary" href="#developers">Read docs <span class="arrow">&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+class Component extends DCLogic {
+  NODES = ['AI PLATFORM', 'WALLET', 'BANK', 'ERP', 'PAYMENT RAIL', 'API', 'AGENT', 'COUNTERPARTY'];
+
+  renderVals() {
+    const cx = 552, cy = 220, rx = 430, ry = 175, w = 168, h = 74;
+    const spokes = this.NODES.map((label, i) => {
+      const a = (-Math.PI / 2) + (i * 2 * Math.PI / this.NODES.length);
+      const nx = cx + rx * Math.cos(a);
+      const ny = cy + ry * Math.sin(a);
+      // line endpoint pulled toward node center
+      const lx = cx + (rx - 84) * Math.cos(a);
+      const ly = cy + (ry - 40) * Math.sin(a);
+      return {
+        label,
+        left: (nx - w / 2) + 'px',
+        top: (ny - h / 2) + 'px',
+        lx: lx, ly: ly
+      };
+    });
+    return { spokes };
+  }
+}
+
+</script>

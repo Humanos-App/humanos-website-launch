@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * sync-v2 — publish the sep-2026 rebrand designs at /v2/<slug>.
+ * sync-v2 — publish the sep-2026 designs as the site's pages.
  *
  * `sep-2026/` is the read-only source of truth (a Claude Design export).
- * This script derives the *served* copy into `public/v2/`:
+ * This script derives the served copy into `public/designs/`:
  *
- *   public/v2/_shared/...        design system, support.js, logos (one copy)
- *   public/v2/<slug>/index.html  the page, with refs rewritten to absolute
+ *   public/designs/_shared/...        design system, support.js, logos (one copy)
+ *   public/designs/<slug>/index.html  standalone page, refs rewritten absolute
+ *   public/designs/<slug>/body.html   the same minus its nav, for the route
  *
  * The export ships the design system, support.js and the logo assets
  * duplicated inside every page folder. Those copies are byte-identical, so we
@@ -23,8 +24,8 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = join(ROOT, "sep-2026");
-const OUT = join(ROOT, "public", "v2");
-const SHARED_URL = "/v2/_shared";
+const OUT = join(ROOT, "public", "designs");
+const SHARED_URL = "/designs/_shared";
 
 /**
  * The 8 unique pages in the export.
@@ -34,18 +35,31 @@ const SHARED_URL = "/v2/_shared";
  * Nothing is lost — the duplicate folders contain no unique file.
  */
 const PAGES = [
-  // `assetDirs` are trees the HTML never names in a src/href literal because the
-  // paths are produced at runtime by a template binding. Nothing would claim
-  // them, so they are copied wholesale and the page resolves them against the
-  // asset base injected below.
-  { slug: "homepage", dir: "Homepage", file: "Homepage.dc.html", assetDirs: ["logos/customers"] },
-  { slug: "pricing", dir: "Pricing", file: "Pricing.dc.html" },
-  { slug: "prove", dir: "Prove Risk", file: "Prove Your AI.dc.html" },
-  { slug: "control", dir: "Control Risk", file: "Control.dc.html" },
-  { slug: "monitor", dir: "Control Risk", file: "Monitor.dc.html" },
-  { slug: "monitor-v2", dir: "Control Risk", file: "Monitor v2.dc.html" },
-  { slug: "monitor-v3", dir: "Control Risk", file: "Monitor v3.dc.html" },
-  { slug: "risk-intelligence", dir: "Control Risk", file: "Risk Intelligence.dc.html" },
+  // `path` is the route the page is served at; `slug` is only where its build
+  // output lands. They differ for the homepage, and for the two pages the
+  // rebrand renamed.
+  //
+  // `assetDirs` are trees the HTML never names in a src/href literal because
+  // the paths are produced at runtime by a template binding. Nothing would
+  // claim them, so they are copied wholesale and the page resolves them
+  // against the asset base injected below.
+  {
+    slug: "home",
+    path: "/",
+    dir: "Homepage",
+    file: "Homepage.dc.html",
+    assetDirs: ["logos/customers"],
+  },
+  { slug: "pricing", path: "/pricing", dir: "Pricing", file: "Pricing.dc.html" },
+  { slug: "prove", path: "/prove", dir: "Prove Risk", file: "Prove Your AI.dc.html" },
+  { slug: "control", path: "/control", dir: "Control Risk", file: "Control.dc.html" },
+  { slug: "monitor", path: "/monitor", dir: "Control Risk", file: "Monitor v3.dc.html" },
+  {
+    slug: "intelligence",
+    path: "/intelligence",
+    dir: "Control Risk",
+    file: "Risk Intelligence.dc.html",
+  },
 ];
 
 const NOINDEX = '<meta name="robots" content="noindex, nofollow">';
@@ -64,7 +78,7 @@ const warnings = [];
 const componentCounts = new Map();
 
 /** slug lookup for cross-page links, keyed by "<source dir>::<filename>" */
-const slugByFile = new Map(PAGES.map((p) => [`${p.dir}::${p.file}`, p.slug]));
+const slugByFile = new Map(PAGES.map((p) => [`${p.dir}::${p.file}`, p.path]));
 
 /** relative path (as written in the HTML) -> the source dir we first copied it from */
 const sharedOrigin = new Map();
@@ -114,12 +128,12 @@ function rewriteRef(ref, page) {
   if (!clean) return null;
 
   if (clean.endsWith(".dc.html")) {
-    const slug = slugByFile.get(`${page.dir}::${clean}`);
-    if (!slug) {
+    const target = slugByFile.get(`${page.dir}::${clean}`);
+    if (!target) {
       warnings.push(`unmapped page link in ${page.slug}: "${ref}" — left as-is`);
       return null;
     }
-    return `/v2/${slug}`;
+    return target;
   }
 
   claimShared(clean, page.dir);
@@ -273,7 +287,7 @@ function buildPage(page) {
   mkdirSync(dirname(dest), { recursive: true });
   writeFileSync(dest, html);
 
-  // Also emit the body on its own, for the Next route at /v2/<slug> to render
+  // Also emit the body on its own, for the page route to render
   // inside the real site chrome. The design's own <nav> is dropped there — the
   // v1 navbar takes its place. Everything else is kept verbatim, <helmet>
   // included, because support.js loads those assets itself once it boots.
@@ -286,14 +300,14 @@ function buildPage(page) {
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
-console.log(`sync-v2: sep-2026/ -> public/v2/\n`);
+console.log(`sync-v2: sep-2026/ -> public/designs/\n`);
 for (const page of PAGES) {
   const n = buildPage(page);
-  console.log(`  /v2/${page.slug.padEnd(18)} <- ${page.dir}/${page.file}  (${n} refs rewritten)`);
+  console.log(`  ${page.path.padEnd(16)} <- ${page.dir}/${page.file}  (${n} refs rewritten)`);
 }
 
 for (const [slug, n] of componentCounts) console.log(`  ${" ".repeat(22)}   ${n} components assembled for /v2/${slug}`);
-console.log(`\n  shared assets: ${sharedOrigin.size} path(s) under /v2/_shared/`);
+console.log(`\n  shared assets: ${sharedOrigin.size} path(s) under /designs/_shared/`);
 if (warnings.length) {
   console.log(`\n  ${warnings.length} warning(s):`);
   for (const w of warnings) console.log(`    ! ${w}`);

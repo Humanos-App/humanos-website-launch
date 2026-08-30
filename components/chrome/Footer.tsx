@@ -27,7 +27,10 @@ const COLUMNS: FooterColumn[] = [
   {
     title: "Product",
     links: [
-      { label: "Platform", href: "/platform" },
+      { label: "Monitor", href: "/monitor" },
+      { label: "Control", href: "/control" },
+      { label: "Risk Intelligence", href: "/intelligence" },
+      { label: "Prove your AI", href: "/prove" },
       { label: "Pricing", href: "/pricing" },
       { label: "humanos.verify()", href: DOCS.verifyVp },
       { label: "Request approvals", href: DOCS.createRequest },
@@ -63,7 +66,6 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { label: "About", href: "/company" },
       { label: "Customers", href: "/case-studies" },
-      { label: "Trust", href: "/trust" },
       { label: "Status", href: "/status" },
       { label: "Talk with us", href: EXTERNAL_LINKS.calendly },
       { label: "Privacy", href: "/legal/privacy" },
