@@ -28,7 +28,7 @@
   var NODE_FADE = 700; /* how long a node takes to come up, once */
   /* Nodes are permanent, so this is the size the network settles at. Past it
      new links join nodes that are already on the globe. */
-  var MAX_NODES = 50;
+  var MAX_NODES = 30;
   var MAX_ARC = 5;
   var RED_SHARE = 0.22; /* mirrors the diagram's block rate */
   var ARC_SAMPLES = 34;
