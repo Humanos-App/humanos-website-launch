@@ -52,7 +52,10 @@ export function DesignPage({ slug }: { slug: string }) {
 
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: body }} />
+      {/* Tagged so DesignBoot can tell this route's fragment apart from the
+          previous page's, which can still be attached right after a
+          navigation. */}
+      <div data-design={slug} dangerouslySetInnerHTML={{ __html: body }} />
       <DesignBoot slug={slug} />
       {/* The site chrome is sticky, so the space a design gets is the viewport
           less its height. The announcement bar has no fixed height — it is

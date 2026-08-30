@@ -65,7 +65,17 @@ function MegaItemLink({
   );
 }
 
-function MegaPanel({ menu, open }: { menu: MegaMenu; open: boolean }) {
+function MegaPanel({
+  menu,
+  open,
+  onNavigate,
+}: {
+  menu: MegaMenu;
+  open: boolean;
+  /* Closes the dropdown when an item is chosen. Without it the panel stays
+     open over the page that was just navigated to. */
+  onNavigate: () => void;
+}) {
   return (
     <div className={`mega${open ? " is-open" : ""}`} data-mega-panel={menu.key}>
       <div
@@ -78,7 +88,7 @@ function MegaPanel({ menu, open }: { menu: MegaMenu; open: boolean }) {
           <div key={col.label}>
             <div className="mega__col-label">{col.label}</div>
             {col.items?.map((item) => (
-              <MegaItemLink key={item.title} item={item} />
+              <MegaItemLink key={item.title} item={item} onClick={onNavigate} />
             ))}
             {col.groups?.map((group, gi) => (
               <div key={group.label ?? gi} className="mega__group">
@@ -86,7 +96,11 @@ function MegaPanel({ menu, open }: { menu: MegaMenu; open: boolean }) {
                   <div className="mega__group-label">{group.label}</div>
                 )}
                 {group.items.map((item) => (
-                  <MegaItemLink key={item.title} item={item} />
+                  <MegaItemLink
+                    key={item.title}
+                    item={item}
+                    onClick={onNavigate}
+                  />
                 ))}
               </div>
             ))}
@@ -251,6 +265,7 @@ export function Navbar() {
               key={link.menu.key}
               menu={link.menu}
               open={openKey === link.menu.key}
+              onNavigate={() => setOpenKey(null)}
             />
           ) : null,
         )}
