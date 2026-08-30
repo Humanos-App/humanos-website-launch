@@ -126,6 +126,7 @@
     var timer = null;
     var destroyed = false;
     var stale = true;
+    var pageTone = null;
     var reduced =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -299,6 +300,17 @@
         if (stages[i].style.opacity !== o) stages[i].style.opacity = o;
       }
       target.style.setProperty("background-color", rgb(color));
+
+      /* Publish the tone the page is actually wearing. Anything that sits over
+         the backdrop — the floating bar — cannot work it out by sampling: the
+         components are transparent and the backdrop takes no pointer events,
+         so a hit test only ever reaches <html>, which never changes. */
+      var lum = (0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2]) / 255;
+      var tone = lum < 0.5 ? "dark" : "light";
+      if (tone !== pageTone) {
+        pageTone = tone;
+        document.documentElement.setAttribute("data-page-tone", tone);
+      }
     }
 
     /* Coalesce to one update per frame. rAF alone is not enough: a hidden or
@@ -362,6 +374,7 @@
         if (mo) mo.disconnect();
         for (var i = 0; i < stages.length; i++) stages[i].style.opacity = "";
         target.style.removeProperty("background-color");
+        document.documentElement.removeAttribute("data-page-tone");
         if (target.hasAttribute("data-page-backdrop") && target.parentNode) target.parentNode.removeChild(target);
       },
     };
