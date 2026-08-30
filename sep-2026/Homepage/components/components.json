@@ -7,8 +7,8 @@
   {
     "id": "problem",
     "file": "02-problem.html",
-    "tone": "dark",
-    "pin": true
+    "tone": "light",
+    "background": "#111111"
   },
   {
     "id": "what-humanos-is",
