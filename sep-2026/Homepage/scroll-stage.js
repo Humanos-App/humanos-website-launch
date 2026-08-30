@@ -59,13 +59,17 @@
   var PHASE_BG = [0.32, 0.68];
   var PHASE_IN = [0.4, 0.66];
 
-  /* A pinned component gets its own windows over a shorter stretch. The
-     staged lead-in exists so the outgoing component can clear the screen
-     first — but a pinned one only begins once the previous has already
-     scrolled away, so waiting there is just an empty screen. */
-  var PIN_BG = [0, 0.5];
-  var PIN_IN = [0.06, 0.52];
-  var PIN_RUN = 0.55; /* fraction of a viewport the handover runs across */
+  /* A pinned component's handover overlaps the previous component's exit.
+     Sticky only takes hold once the runway's top reaches the top of the
+     screen, so for the whole of that approach the runway is already on screen
+     with nothing drawn in it. Waiting for the pin means watching the outgoing
+     component leave and a blank screen take its place. Starting before it,
+     the incoming component fades up while the outgoing one is still clearing,
+     and lands just as it settles. */
+  var PIN_LEAD = 0.75; /* viewports before the pin that the handover starts */
+  var PIN_TAIL = 0.1; /* and how far past it the handover finishes */
+  var PIN_BG = [0.3, 0.8];
+  var PIN_IN = [0.35, 0.88];
 
   function clamp01(v) {
     return v < 0 ? 0 : v > 1 ? 1 : v;
@@ -247,8 +251,8 @@
            has settled makes it appear where it already is. */
         var pinned = stages[i + 1].hasAttribute("data-pin");
         if (pinned) {
-          start = bDoc;
-          end = Math.min(bDoc + vh * PIN_RUN, maxY);
+          start = bDoc - vh * PIN_LEAD;
+          end = Math.min(bDoc + vh * PIN_TAIL, maxY);
         }
         var travel =
           end > start ? clamp01((window.scrollY - start) / (end - start)) : 1;
