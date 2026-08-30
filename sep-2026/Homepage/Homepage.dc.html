@@ -51,6 +51,17 @@
       --hm-surface: #1F1F1D;
     }
 
+    /* The hero and the customer strip are one component, and on desktop they
+       fill the screen together: the hero grows, the strip sits at the bottom
+       edge. Measured against the sticky site chrome rather than the raw
+       viewport, or the strip would be pushed below the fold by its height.
+       Left alone on smaller screens, where the content needs its own room. */
+    @media (min-width: 1000px) {
+      [data-stage="hero"] {
+        min-height: calc(100vh - var(--site-chrome-h, 0px));
+      }
+    }
+
     [data-step-panel] {
       grid-area: 1 / 1;
       opacity: 0;

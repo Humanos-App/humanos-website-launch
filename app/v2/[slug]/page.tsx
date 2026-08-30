@@ -107,6 +107,24 @@ export default async function V2Preview({
           bar would sit on top of it. Hidden only while a preview is on screen. */}
       <style>{".rtbar{display:none !important}"}</style>
       <div dangerouslySetInnerHTML={{ __html: body }} />
+      {/* The site chrome is sticky, so the space a design actually gets is the
+          viewport less its height. The announcement bar has no fixed height —
+          it is padding-driven and its copy can wrap — so it is measured rather
+          than assumed, and republished whenever it changes. */}
+      <Script id="v2-chrome-height" strategy="afterInteractive">{`
+        (function () {
+          var el = document.querySelector('.site-chrome');
+          if (!el) return;
+          var set = function () {
+            document.documentElement.style.setProperty(
+              '--site-chrome-h', Math.round(el.getBoundingClientRect().height) + 'px'
+            );
+          };
+          set();
+          if (typeof ResizeObserver !== 'undefined') new ResizeObserver(set).observe(el);
+          window.addEventListener('resize', set);
+        })();
+      `}</Script>
       <Script src={`${SHARED_BASE}/support.js`} strategy="afterInteractive" />
     </>
   );
