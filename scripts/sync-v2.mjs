@@ -194,19 +194,39 @@ function assembleComponents(html, page) {
 }
 
 /**
- * Remove the design's own top navigation, matching the outermost <nav> and its
- * close by depth so nested markup inside it is not miscounted.
+ * Remove the design's own top navigation.
+ *
+ * The pages do not agree on what to call it: the homepage uses <nav>, most of
+ * the others <header>, and one just a <div>. What they share is a sticky
+ * 56px bar at the top, so that is matched too — narrowly enough not to catch
+ * the pinned panels, which are sticky but a full viewport tall.
+ *
+ * The element is closed by depth rather than by the next closing tag, so
+ * nested markup inside it is not miscounted.
  */
 function stripDesignNav(html) {
-  const open = html.search(/<nav\b/i);
-  if (open === -1) return html;
-  const tag = /<nav\b|<\/nav>/gi;
-  tag.lastIndex = open;
+  const candidates = [
+    { re: /<nav\b/i, tag: "nav" },
+    { re: /<header\b/i, tag: "header" },
+    { re: /<div\b[^>]*position:\s*sticky[^>]*height:\s*56px[^>]*>/i, tag: "div" },
+  ];
+
+  let best = null;
+  for (const c of candidates) {
+    const at = html.search(c.re);
+    if (at !== -1 && (!best || at < best.at)) best = { at, tag: c.tag };
+  }
+  if (!best) return html;
+
+  const tag = new RegExp(`<${best.tag}\\b|</${best.tag}>`, "gi");
+  tag.lastIndex = best.at;
   let depth = 0;
   let m;
   while ((m = tag.exec(html))) {
     depth += m[0][1] === "/" ? -1 : 1;
-    if (depth === 0) return html.slice(0, open) + html.slice(m.index + m[0].length);
+    if (depth === 0) {
+      return html.slice(0, best.at) + html.slice(m.index + m[0].length);
+    }
   }
   return html;
 }
