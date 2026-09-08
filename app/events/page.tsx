@@ -42,9 +42,7 @@ export default function Page() {
         width={1523}
         height={382}
       />
-      <div className="events__body">
-        <h1 className="events__title">The Risk Network for AI</h1>
-        <nav className="events__actions" aria-label="Event links">
+      <nav className="events__actions" aria-label="Event links">
           {ACTIONS.map((a) =>
             a.external ? (
               <a
@@ -68,8 +66,7 @@ export default function Page() {
               </Link>
             )
           )}
-        </nav>
-      </div>
+      </nav>
       <EventsGlobe />
     </main>
   );
