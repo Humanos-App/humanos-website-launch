@@ -34,6 +34,7 @@ export const BRAND = {
 /**
  * Every public, indexable route. Drives the sitemap so it can't drift
  * from the actual pages. Keep in sync when adding/removing routes.
+ * /events is deliberately absent — it's a noindex QR-code link hub.
  */
 export const ROUTES: string[] = [
   "/",

@@ -1,0 +1,136 @@
+/* ---------- /events — standalone event splash page ----------
+   Mobile-first. Renders without the site chrome (see RouteChrome), so the
+   page owns the full viewport: wordmark up top, glass buttons mid, and the
+   dot globe bleeding off the bottom-right corner behind them. */
+
+.events {
+  position: relative;
+  isolation: isolate; /* local stacking: buttons over globe, nothing above chrome-level UI */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: calc(clamp(48px, 10vh, 96px) + env(safe-area-inset-top)) 20px
+    calc(64px + env(safe-area-inset-bottom));
+  background: var(--bg-page);
+}
+
+.events__logo {
+  width: clamp(150px, 44vw, 180px);
+  height: auto;
+  animation: eventsRise 640ms var(--ease-standard) both;
+}
+
+/* auto margins center the buttons in the space left under the logo,
+   pulled up slightly so the bottom-right globe keeps breathing room */
+.events__actions {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: auto 0;
+  padding: 48px 0 12vh;
+}
+
+/* Glass over chalk: translucent so the globe reads through where they
+   overlap, blurred so the buttons stay legible on top of it. */
+.events__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 60px;
+  padding: 18px 20px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--fg-1);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition:
+    background var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+  animation: eventsRise 640ms var(--ease-standard) both;
+}
+.events__btn:nth-child(1) { animation-delay: 90ms; }
+.events__btn:nth-child(2) { animation-delay: 170ms; }
+.events__btn:nth-child(3) { animation-delay: 250ms; }
+.events__btn:nth-child(4) { animation-delay: 330ms; }
+
+.events__btn:hover {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(17, 17, 17, 0.32);
+}
+.events__btn:active {
+  background: rgba(255, 255, 255, 0.9);
+}
+.events__btn:focus-visible {
+  outline: 2px solid var(--hm-verification);
+  outline-offset: 2px;
+}
+
+.events__btn-glyph {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--fg-3);
+  transition:
+    transform var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard);
+}
+.events__btn:hover .events__btn-glyph {
+  color: var(--fg-1);
+  transform: translate(2px, 0);
+}
+
+/* Bottom-right corner, about a quarter of it bleeding off-screen. Fixed is
+   viewport-anchored, so the negative offsets never create scrollbars. */
+.events__globe {
+  --globe-size: min(78vw, 420px);
+  position: fixed;
+  z-index: 0;
+  right: calc(var(--globe-size) * -0.26);
+  bottom: calc(var(--globe-size) * -0.26);
+  width: var(--globe-size);
+  height: var(--globe-size);
+  pointer-events: none;
+  animation: eventsFade 900ms var(--ease-standard) 200ms both;
+}
+.events__globe-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes eventsRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes eventsFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .events__logo,
+  .events__btn,
+  .events__globe {
+    animation: none;
+  }
+  .events__btn,
+  .events__btn-glyph {
+    transition: none;
+  }
+}

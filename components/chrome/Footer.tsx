@@ -75,8 +75,8 @@ const COLUMNS: FooterColumn[] = [
   {
     title: "Socials",
     links: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/humanosai/" },
-      { label: "X", href: "https://x.com/humanosai" },
+      { label: "LinkedIn", href: EXTERNAL_LINKS.linkedin },
+      { label: "X", href: EXTERNAL_LINKS.x },
     ],
   },
 ];
