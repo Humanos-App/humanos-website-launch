@@ -42,31 +42,34 @@ export default function Page() {
         width={1523}
         height={382}
       />
-      <nav className="events__actions" aria-label="Event links">
-        {ACTIONS.map((a) =>
-          a.external ? (
-            <a
-              key={a.label}
-              className="events__btn"
-              href={a.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>{a.label}</span>
-              <span className="events__btn-glyph" aria-hidden="true">
-                ↗
-              </span>
-            </a>
-          ) : (
-            <Link key={a.label} className="events__btn" href={a.href}>
-              <span>{a.label}</span>
-              <span className="events__btn-glyph" aria-hidden="true">
-                →
-              </span>
-            </Link>
-          )
-        )}
-      </nav>
+      <div className="events__body">
+        <h1 className="events__title">The Risk Network for AI</h1>
+        <nav className="events__actions" aria-label="Event links">
+          {ACTIONS.map((a) =>
+            a.external ? (
+              <a
+                key={a.label}
+                className="events__btn"
+                href={a.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{a.label}</span>
+                <span className="events__btn-glyph" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            ) : (
+              <Link key={a.label} className="events__btn" href={a.href}>
+                <span>{a.label}</span>
+                <span className="events__btn-glyph" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            )
+          )}
+        </nav>
+      </div>
       <EventsGlobe />
     </main>
   );

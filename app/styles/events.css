@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: calc(clamp(48px, 10vh, 96px) + env(safe-area-inset-top)) 20px
+  padding: calc(28px + env(safe-area-inset-top)) 20px
     calc(64px + env(safe-area-inset-bottom));
   background: var(--bg-page);
 }
@@ -21,18 +21,35 @@
   animation: eventsRise 640ms var(--ease-standard) both;
 }
 
-/* auto margins center the buttons in the space left under the logo,
-   pulled up slightly so the bottom-right globe keeps breathing room */
-.events__actions {
+/* auto margins center the title + buttons in the space left under the
+   logo, pulled up slightly so the bottom-right globe keeps breathing room */
+.events__body {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 560px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 28px;
   margin: auto 0;
   padding: 48px 0 12vh;
+}
+
+.events__title {
+  font-size: clamp(38px, 11vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  color: var(--fg-1);
+  text-align: left;
+  animation: eventsRise 640ms var(--ease-standard) 90ms both;
+}
+
+.events__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* Glass over chalk: translucent so the globe reads through where they
@@ -59,10 +76,10 @@
     border-color var(--dur-fast) var(--ease-standard);
   animation: eventsRise 640ms var(--ease-standard) both;
 }
-.events__btn:nth-child(1) { animation-delay: 90ms; }
-.events__btn:nth-child(2) { animation-delay: 170ms; }
-.events__btn:nth-child(3) { animation-delay: 250ms; }
-.events__btn:nth-child(4) { animation-delay: 330ms; }
+.events__btn:nth-child(1) { animation-delay: 170ms; }
+.events__btn:nth-child(2) { animation-delay: 250ms; }
+.events__btn:nth-child(3) { animation-delay: 330ms; }
+.events__btn:nth-child(4) { animation-delay: 410ms; }
 
 .events__btn:hover {
   background: rgba(255, 255, 255, 0.75);
@@ -125,6 +142,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .events__logo,
+  .events__title,
   .events__btn,
   .events__globe {
     animation: none;

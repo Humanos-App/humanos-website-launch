@@ -124,7 +124,11 @@ export default function RootLayout({
             <FloatingRiskBar />
             <Footer />
           </RouteChrome>
-          <ConsentBanner />
+          {/* Chromeless routes skip the banner too: GA is default-deny, so
+              nothing tracks there — visitors get asked on the main site. */}
+          <RouteChrome>
+            <ConsentBanner />
+          </RouteChrome>
           <ConsentSettingsDialog />
           <GoogleAnalytics />
         </ConsentProvider>
