@@ -53,6 +53,12 @@
     return k < 0.2 ? k / 0.2 : k > 0.67 ? (1 - k) / 0.33 : 1;
   }
 
+  /* Smooth start and stop for the link's traveling ends. */
+  function easeIO(x) {
+    x = x < 0 ? 0 : x > 1 ? 1 : x;
+    return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  }
+
   /* Shortest path across the sphere, staying on the surface: slerp keeps
      every sample at radius one, so the link takes the globe's own curvature
      and never lifts off the soil. */
@@ -244,14 +250,19 @@
       ctx.setLineDash([1.6, 3.4]);
       for (var m = 0; m < arcs.length; m++) {
         var ar = arcs[m];
+        /* The link travels: the head draws a -> b over the first stretch of
+           its life, and at the end the tail leaves in the same direction,
+           chasing the head into b. In between the full arc holds. */
+        var t = ar.age / ar.life;
+        var head = easeIO(t / 0.35);
+        var tail = easeIO((t - 0.65) / 0.35);
+        if (head - tail <= 0.001) continue;
         /* never brighter than the dimmer of the two points it joins, so the
-           link fades out with them rather than hanging on alone */
-        var alpha =
-          envelope(ar.age / ar.life) *
-          Math.min(
-            envelope(ar.a.age / ar.a.life),
-            envelope(ar.b.age / ar.b.life)
-          );
+           link dims with them rather than hanging on alone */
+        var alpha = Math.min(
+          envelope(ar.a.age / ar.a.life),
+          envelope(ar.b.age / ar.b.life)
+        );
         if (alpha <= 0) continue;
         var pa = cloud[ar.a.i];
         var pb = cloud[ar.b.i];
@@ -264,7 +275,7 @@
         var drawing = false;
         var maxZ = -1;
         for (var k = 0; k <= ARC_SAMPLES; k++) {
-          slerp(pa, pb, k / ARC_SAMPLES, _s);
+          slerp(pa, pb, tail + (head - tail) * (k / ARC_SAMPLES), _s);
           var ax = _s[0] * cs + _s[2] * sn;
           var azr = _s[2] * cs - _s[0] * sn;
           var ay = _s[1] * ct - azr * st;

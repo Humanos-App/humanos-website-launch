@@ -24,6 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 import { Footer } from "@/components/chrome/Footer";
 import { FloatingRiskBar } from "@/components/chrome/FloatingRiskBar";
+import { ChromeScrollBehavior } from "@/components/chrome/ChromeScrollBehavior";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { ConsentSettingsDialog } from "@/components/consent/ConsentSettingsDialog";
@@ -33,7 +34,7 @@ import "./globals.css";
 import "./styles/buttons.css";
 import "./styles/navbar.css";
 import "./styles/footer.css";
-import "./styles/riskbar.css";
+import "./styles/closing-cta.css";
 import "./styles/dialog.css";
 import "./styles/pricing.css";
 import "./styles/case-study.css";
@@ -118,6 +119,7 @@ export default function RootLayout({
               <AnnouncementBanner />
               <Navbar />
             </div>
+            <ChromeScrollBehavior />
           </RouteChrome>
           {children}
           <RouteChrome>

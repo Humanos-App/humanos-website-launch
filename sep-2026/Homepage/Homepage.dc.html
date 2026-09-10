@@ -127,7 +127,7 @@
          same baselines across every cell, whether the brand renders as an
          image or as text. */
       display: grid;
-      grid-template-rows: 16px 40px 32px;
+      grid-template-rows: 16px 30px 32px;
       row-gap: 12px;
       justify-items: start;
       align-content: center;
@@ -154,7 +154,7 @@
        then dissolves white logo backgrounds into the cream page. */
     .hmc-img {
       display: block;
-      max-height: 40px;
+      max-height: 30px;
       max-width: 100%;
       width: auto;
       height: auto;
@@ -172,7 +172,7 @@
       align-items: center;
       height: 100%;
       font-family: var(--font-sans);
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1;
@@ -349,8 +349,8 @@ class Component extends DCLogic {
   ];
   /* Seconds per runtime event. The loop is the eleven steps that carry the
      series across the chart, so both halve together to keep the cycle whole. */
-  static PROB_STEP = 0.675;
-  static PROB_LOOP = 0.675 * 11;
+  static PROB_STEP = 0.965;
+  static PROB_LOOP = 0.965 * 11;
 
   probVals() {
     this.ensureClock();
@@ -949,10 +949,10 @@ class Component extends DCLogic {
   static KRI_LOOP = 28.0;
   static KRI_SPAN = 7.0;
   static KRI_STEPS = [
-    { num: '01 — Know', title: 'Know your risk.', desc: 'See what is creating risk and how it changes as your AI acts.' },
-    { num: '02 — Prove', title: 'Prove your risk.', desc: 'Give customers and partners verified evidence of how safely your AI operates.' },
-    { num: '03 — Control', title: 'Control your risk.', desc: 'See what is driving exposure and apply controls to bring it down.' },
-    { num: '04 — Insure', title: 'Insure what remains.', desc: "Put verified risk in front of insurers and transfer the exposure you can't eliminate." },
+    { num: '01 — Know', title: 'Know your risk.', desc: 'Continuously measure how your agents operate and what creates risk.' },
+    { num: '02 — Prove', title: 'Prove your risk.', desc: 'Build a verifiable risk history backed by signed runtime activity.' },
+    { num: '03 — Control', title: 'Control your risk.', desc: 'Set permissions, limits and approvals to reduce risk in real time.' },
+    { num: '04 — Unlock', title: 'Unlock with your risk.', desc: 'Use your verified risk reputation to access credit, insurance, yield and more.' },
   ];
   static KRI_CONTROLS = [
     { t: 1.0, label: 'Human authorization', delta: '−6' },
@@ -961,29 +961,63 @@ class Component extends DCLogic {
     { t: 2.5, label: 'Runtime policy', delta: '−6' },
   ];
   static KRI_OFFERS = [
-    { t: 1.2, name: 'Insurer A', price: '$8,400 / mo' },
-    { t: 1.9, name: 'Insurer B', price: '$7,200 / mo' },
-    { t: 2.6, name: 'Insurer C', price: '$6,750 / mo', best: true },
+    { t: 0, name: 'Credit', detail: '$250K available', price: '8.2% APR', action: 'View offer' },
+    { t: 0.9, name: 'Insurance', detail: '$5M coverage', price: '$6,750 / mo', action: 'View offer' },
+    { t: 1.7, name: 'Yield', detail: 'Up to $500K', price: '6.4% APY', action: 'View offer' },
+    { t: 2.4, name: 'More', detail: 'New risk-based products', price: '', action: 'Explore' },
   ];
   static KRI_TRACK = [22, 19, 26, 21, 17, 24, 18, 15, 20, 16, 13];
 
   kriChart(prog) {
+    /* Same treatment as the problem section's chart: the full series is
+       splined once (Catmull-Rom, clamped to the box), and the reveal cuts
+       the final segment with De Casteljau so the head stays on the curve. */
     const pts = Component.KRI_TRACK;
-    const W = 420, H = 120, pad = 10;
     const n = pts.length;
-    const live = Math.max(1, Math.min(n, Math.round(1 + (n - 1) * prog)));
-    const xAt = (i) => pad + (i / (n - 1)) * (W - pad * 2);
-    const yAt = (v) => pad + (1 - (v - 8) / 26) * (H - pad * 2);
-    let d = '';
-    for (let i = 0; i < live; i++) d += (i ? ' L' : 'M') + xAt(i).toFixed(1) + ' ' + yAt(pts[i]).toFixed(1);
-    const cx = xAt(live - 1), cy = yAt(pts[live - 1]);
+    const W = 100, H = 100;
+    const xAt = (i) => (i / (n - 1)) * W;
+    const yAt = (v) => (1 - (v - 8) / 26) * H;
+    const anchors = [];
+    for (let i = 0; i < n; i++) anchors.push([xAt(i), yAt(pts[i])]);
+    const cyc = (v) => Math.max(0, Math.min(H, v));
+    const segAt = (i) => {
+      const p0 = anchors[i - 1] || anchors[i], p1 = anchors[i];
+      const p2 = anchors[i + 1], p3 = anchors[i + 2] || anchors[i + 1];
+      return [
+        p1,
+        [p1[0] + (p2[0] - p0[0]) / 6, cyc(p1[1] + (p2[1] - p0[1]) / 6)],
+        [p2[0] - (p3[0] - p1[0]) / 6, cyc(p2[1] - (p3[1] - p1[1]) / 6)],
+        p2,
+      ];
+    };
+    const upTo = (b, t) => {
+      const at = (u, v) => [u[0] + (v[0] - u[0]) * t, u[1] + (v[1] - u[1]) * t];
+      const ab = at(b[0], b[1]), bc = at(b[1], b[2]), cd = at(b[2], b[3]);
+      const abc = at(ab, bc), bcd = at(bc, cd);
+      return [b[0], ab, abc, at(abc, bcd)];
+    };
+    const cTo = (b) =>
+      ' C' + b[1][0].toFixed(2) + ' ' + b[1][1].toFixed(2) + ',' +
+      b[2][0].toFixed(2) + ' ' + b[2][1].toFixed(2) + ',' +
+      b[3][0].toFixed(2) + ' ' + b[3][1].toFixed(2);
+
+    const t = Math.max(0, Math.min(1, prog)) * (n - 1);
+    const idx = Math.floor(t);
+    const frac = t - idx;
+    let d = 'M' + anchors[0][0].toFixed(2) + ' ' + anchors[0][1].toFixed(2);
+    let head = anchors[0];
+    for (let i = 0; i < idx; i++) { const b = segAt(i); d += cTo(b); head = b[3]; }
+    if (idx < n - 1 && frac > 0) { const b = upTo(segAt(idx), frac); d += cTo(b); head = b[3]; }
+
     const el = React.createElement;
-    return el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', height: '100%', preserveAspectRatio: 'none', key: 'kc' }, [
-      el('line', { key: 'g1', x1: pad, x2: W - pad, y1: yAt(26), y2: yAt(26), stroke: 'var(--hm-line)', strokeWidth: 1 }),
-      el('line', { key: 'g2', x1: pad, x2: W - pad, y1: yAt(17), y2: yAt(17), stroke: 'var(--hm-line)', strokeWidth: 1 }),
-      el('path', { key: 'p', d: d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 1.6, strokeLinejoin: 'round' }),
-      el('line', { key: 'v', x1: cx, x2: cx, y1: pad, y2: H - pad, stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 4', opacity: 0.5 }),
-      el('circle', { key: 'c', cx: cx, cy: cy, r: 4, fill: 'var(--hm-verification)' }),
+    return el('svg', {
+      viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', key: 'kc',
+      style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
+    }, [
+      ...[26, 17].map((v) => el('line', { key: 'g' + v, x1: 0, x2: W, y1: yAt(v), y2: yAt(v), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
+      el('line', { key: 'v', x1: head[0], x2: head[0], y1: 0, y2: H, stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke' }),
+      el('path', { key: 'p', d: d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 2.4, strokeLinejoin: 'round', strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      el('path', { key: 'c', d: 'M' + head[0].toFixed(2) + ' ' + head[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-verification)', strokeWidth: 8, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
     ]);
   }
 
@@ -995,17 +1029,17 @@ class Component extends DCLogic {
     const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
     const span = Component.KRI_SPAN;
 
-    /* Pinned means the reader is driving the steps by scrolling, so the
-       auto-advance must stay out of the way however long they linger. */
-    const held = this.kriPinned || (this.kriHold && Date.now() - this.kriHold < 20000);
-    const auto = Math.floor(T / span) % 4;
-    const active = held ? (this.state.kriStep || 0) : auto;
-    const p = held ? Math.min(span, (Date.now() - this.kriHold) / 1000) : (T - Math.floor(T / span) * span);
+    /* The reader drives the steps with the buttons alone: the panel plays
+       its build once when selected (or when the section is first seen) and
+       then holds — no scroll choreography, no auto-advance. */
+    const active = this.state.kriStep || 0;
+    const p = this.kriHold
+      ? Math.min(span, (Date.now() - this.kriHold) / 1000)
+      : Math.min(span, T);
 
     const knowProg = clamp(p / 4.2);
     const knowScore = Component.KRI_TRACK[Math.max(0, Math.min(Component.KRI_TRACK.length - 1, Math.round((Component.KRI_TRACK.length - 1) * knowProg)))];
     const reduceScore = Math.round(38 - 25 * ease((p - 2.8) / 1.6));
-    const decided = p >= 3.4;
 
     const panel = (idx) => ({
       display: active === idx ? 'flex' : 'none',
@@ -1021,17 +1055,6 @@ class Component extends DCLogic {
     return {
       setKriRef: this.setKriRef,
       kriStepLabel: Component.KRI_STEPS[active].num,
-      kriCtaLabel: active === 3 ? 'Coming soon' : 'Learn more →',
-      kriCtaStyle: {
-        display: 'inline-flex', alignItems: 'center', gap: '10px', boxSizing: 'border-box',
-        height: '56px', padding: '0 26px', borderRadius: '3px',
-        fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
-        letterSpacing: '0.07em', textTransform: 'uppercase',
-        border: '1px solid ' + (active === 3 ? 'var(--hm-line-strong)' : 'var(--hm-verification)'),
-        background: active === 3 ? '#E7E4DC' : 'var(--hm-verification)',
-        color: active === 3 ? 'var(--hm-authority)' : '#F4F3EF',
-        transition: 'background 260ms ' + ez + ', color 260ms ' + ez + ', border-color 260ms ' + ez,
-      },
       kriVerb: verbs[vIdx],
       kriVerbStyle: {
         color: 'var(--hm-verification)', display: 'inline-block',
@@ -1152,28 +1175,24 @@ class Component extends DCLogic {
 
       insurePanelStyle: panel(3),
       insureOffers: Component.KRI_OFFERS.map((o, i) => {
-        const win = o.best && decided;
         return {
-          name: o.name, price: o.price,
+          name: o.name, detail: o.detail, price: o.price, action: o.action,
           tagStyle: {
             fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
             letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'right',
-            color: 'var(--hm-verification)', opacity: win ? 1 : 0,
-            transition: 'opacity 320ms ' + ez,
+            color: 'var(--hm-verification)',
           },
           style: {
-            display: 'grid', gridTemplateColumns: '1fr auto 52px', alignItems: 'center', gap: '14px',
+            display: 'grid', gridTemplateColumns: '92px 1fr auto 76px', alignItems: 'center', gap: '14px',
             padding: '12px 14px', marginBottom: '6px', borderRadius: '3px',
-            border: '1px solid ' + (win ? 'var(--hm-verification)' : 'var(--hm-line)'),
-            background: win ? 'rgba(75,73,202,0.05)' : 'transparent',
-            opacity: p >= o.t ? (decided && !o.best ? 0.45 : 1) : 0,
+            border: '1px solid var(--hm-line)',
+            opacity: p >= o.t ? 1 : 0,
             transform: p >= o.t ? 'translateY(0)' : 'translateY(6px)',
-            transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez + ', border-color 320ms ' + ez + ', background 320ms ' + ez,
+            transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez,
           },
           priceStyle: {
-            fontFamily: 'var(--font-mono)', fontSize: '14px', fontWeight: 700,
-            color: win ? 'var(--hm-verification)' : 'var(--hm-authority)',
-            transition: 'color 320ms ' + ez,
+            fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
+            color: 'var(--hm-verification)',
           },
         };
       }),
@@ -1500,7 +1519,7 @@ class Component extends DCLogic {
         boxShadow: '0 2px 4px rgba(17,17,17,0.10), 0 18px 40px -16px rgba(75,73,202,0.45)',
         transition: 'background 180ms ' + ez,
       },
-      pillText: copied ? 'Setup prompt copied ✓' : "Click to know your AI agent's Risk Score in seconds",
+      pillText: copied ? 'Setup prompt copied ✓' : "Click to know your agent's Risk Score in seconds",
       pillTextStyle: {
         fontSize: '15px', fontWeight: 400, whiteSpace: 'nowrap',
         color: this._pillDark ? 'var(--hm-authority)' : '#F4F3EF',

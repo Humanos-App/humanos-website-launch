@@ -110,29 +110,30 @@ export const DEVELOPERS_MENU: MegaMenu = {
       label: "Start",
       items: [
         {
-          title: "Get API keys",
-          sub: "Create production credentials",
-          href: "https://app.humanos.tech",
-        },
-        {
           title: "Quickstart",
           sub: "5-minute integration",
           href: "https://docs.humanos.tech/essentials/quick-start",
         },
         {
-          title: "Dashboard",
-          sub: "Manage mandates & receipts",
+          title: "Get API key",
+          sub: "Create production credentials",
           href: "https://app.humanos.tech",
         },
         {
           title: "API reference",
-          sub: "All endpoints & types",
+          sub: "Guardrails and enforcement",
           href: "https://docs.humanos.tech",
+        },
+        {
+          title: "Agent SDK",
+          tag: "Coming soon",
+          sub: "Agent risk monitoring",
+          href: "#",
         },
         {
           title: "VIA",
           tag: "Coming soon",
-          sub: "Open verification protocol",
+          sub: "Open source protocol",
           href: "#",
         },
       ],
@@ -154,29 +155,6 @@ export const DEVELOPERS_MENU: MegaMenu = {
           title: "C#",
           sub: "dotnet add Humanos",
           href: "https://www.nuget.org/packages/Humanos",
-        },
-      ],
-    },
-    {
-      label: "Orchestration",
-      items: [
-        {
-          title: "n8n",
-          tag: "Coming soon",
-          sub: "Drop verify() into low-code workflows",
-          href: "#",
-        },
-        {
-          title: "Zapier",
-          tag: "Coming soon",
-          sub: "Trigger-based agent automation",
-          href: "#",
-        },
-        {
-          title: "Skills",
-          tag: "Coming soon",
-          sub: "Reusable verify() modules for LLM agents",
-          href: "#",
         },
       ],
     },

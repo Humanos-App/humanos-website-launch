@@ -229,7 +229,7 @@ export function Navbar() {
                 type="button"
                 className="btn btn--ghost btn--sm nav__cta nav__cta--talk"
               >
-                Talk with us
+                Talk to us
               </button>
             </TalkWithUs>
             <a
@@ -375,7 +375,7 @@ export function Navbar() {
               className="btn btn--secondary"
               onClick={closeMobile}
             >
-              Talk with us
+              Talk to us
             </button>
           </TalkWithUs>
           <a

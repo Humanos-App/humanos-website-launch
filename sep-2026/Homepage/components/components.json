@@ -18,16 +18,13 @@
   {
     "id": "risk-management",
     "file": "04-risk-management.html",
-    "tone": "light",
-    "group": "risk",
-    "stickySteps": 4
+    "tone": "light"
   },
   {
     "id": "risk-intelligence",
     "file": "05-risk-intelligence.html",
-    "tone": "dark",
-    "group": "risk",
-    "stickySteps": 2
+    "tone": "light",
+    "background": "#111111"
   },
   {
     "id": "risk-network",
@@ -43,11 +40,6 @@
   {
     "id": "customer-stories",
     "file": "08-customer-stories.html",
-    "tone": "light"
-  },
-  {
-    "id": "close",
-    "file": "10-close.html",
     "tone": "light"
   }
 ]

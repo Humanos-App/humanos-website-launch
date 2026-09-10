@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
-import { EXTERNAL_LINKS } from "@/lib/external-links";
 import {
   StoriesGrid,
   type Story,
@@ -413,37 +411,6 @@ export default function CustomerStoriesPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta" data-screen-label="04 CTA">
-        <div className="wrap wrap--narrow">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            Get started
-          </span>
-          <h2>
-            Put your AI on the <span className="accent">Risk Network.</span>
-          </h2>
-          <p className="cta__sub">
-            Start with a continuous Risk Score, use Humanos controls, or connect
-            the infrastructure you already have.
-          </p>
-          <div className="cta__ctas">
-            <a
-              className="btn btn--primary"
-              href={EXTERNAL_LINKS.app}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Start risk scoring <span className="arrow">→</span>
-            </a>
-            <TalkWithUs>
-              <button className="btn btn--secondary" type="button">
-                Talk to our team <span className="arrow">→</span>
-              </button>
-            </TalkWithUs>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

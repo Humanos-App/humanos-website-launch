@@ -19,7 +19,7 @@
 .company-page .eyebrow--dark { color: var(--hm-chalk-2); }
 
 .company-page .h-lead {
-  font-size: 56px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 600;
+  font-size: 60px; line-height: 1.04; letter-spacing: -0.032em; font-weight: 600;
   color: var(--hm-ink-0); margin: 0; text-wrap: balance;
 }
 .company-page .h-section {
@@ -36,7 +36,8 @@
 /* SECTION 01 — INTRO */
 .company-page .intro {
   position: relative;
-  padding: 130px 0 110px;
+  /* 96px top aligns the eyebrow row with Customers and Pricing. */
+  padding: 96px 0 110px;
   /* No bottom border — the team photo section sits flush against the
      intro and the hairline between them was reading as an unwanted
      separator. */
@@ -57,6 +58,9 @@
   pointer-events: none;
 }
 .company-page .intro__inner { position: relative; max-width: 1000px; }
+/* The hero description matches the Customers page (19px); section body copy
+   further down stays at the page's 18px. */
+.company-page .intro .body-lg { font-size: 19px; max-width: 620px; }
 .company-page .intro h1 { margin: 28px 0 0; }
 .company-page .intro__body { margin-top: 36px; max-width: 720px; }
 .company-page .intro__ledger { margin: 48px 0 0; max-width: 760px; }

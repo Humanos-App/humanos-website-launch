@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
-import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 export const metadata: Metadata = {
   title: "Company",
@@ -479,46 +476,6 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* CLOSING */}
-      <section className="closing" data-screen-label="09 Closing">
-        <div className="wrap wrap--narrow">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            The Risk Network for AI
-          </span>
-          <h2 className="closing__line">
-            Derisk <span className="accent">AI.</span>
-          </h2>
-          <div className="closing__list">
-            <div>
-              <b>Monitor</b>
-              <span>Risk, continuously.</span>
-            </div>
-            <div>
-              <b>Control</b>
-              <span>What AI can do.</span>
-            </div>
-            <div>
-              <b>Understand</b>
-              <span>The risk behind it.</span>
-            </div>
-            <div>
-              <b>Insure</b>
-              <span>What remains.</span>
-            </div>
-          </div>
-          <div className="closing__ctas">
-            <Link className="btn btn--primary" href={EXTERNAL_LINKS.app}>
-              Start risk scoring <span className="arrow">→</span>
-            </Link>
-            <TalkWithUs>
-              <button className="btn btn--secondary" type="button">
-                Talk to our team <span className="arrow">→</span>
-              </button>
-            </TalkWithUs>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

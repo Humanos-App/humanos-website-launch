@@ -1,3 +1,5 @@
+<style>x-dc{display:none!important}</style>
+<script>try{history.scrollRestoration="manual"}catch(e){}</script>
 
 <x-dc>
 <helmet>
@@ -120,7 +122,7 @@
          same baselines across every cell, whether the brand renders as an
          image or as text. */
       display: grid;
-      grid-template-rows: 16px 40px 32px;
+      grid-template-rows: 16px 30px 32px;
       row-gap: 12px;
       justify-items: start;
       align-content: center;
@@ -147,7 +149,7 @@
        then dissolves white logo backgrounds into the cream page. */
     .hmc-img {
       display: block;
-      max-height: 40px;
+      max-height: 30px;
       max-width: 100%;
       width: auto;
       height: auto;
@@ -165,7 +167,7 @@
       align-items: center;
       height: 100%;
       font-family: var(--font-sans);
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1;
@@ -240,10 +242,15 @@
         <span style="color: var(--hm-verification);">AI risk.</span><br>Under control.
       </h1>
 
-      <p style="font-size:19px; color:var(--hm-ink-2); max-width:560px; line-height:1.55; font-weight:400;">Continuously measure AI risk, build a verified risk reputation, reduce it with free controls, and insure what remains.</p>
+      <p style="font-size:19px; color:var(--hm-ink-2); max-width:560px; line-height:1.55; font-weight:400;">Continuously measure and reduce AI risk, build a verified risk reputation, and use it to unlock credit, insurance, yield and more.</p>
 
-      <div style="margin-top:var(--sp-4); padding-top:var(--sp-4); border-top:1px solid var(--hm-line); width:100%; max-width:600px; display:flex; align-items:center; gap:8px 12px; flex-wrap:wrap;">
-      <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:600;">Compatible with</span>
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn--primary" href="https://docs.humanos.tech" target="_blank" rel="noopener noreferrer">Read Docs <span class="arrow">&rarr;</span></a>
+        <a class="btn btn--secondary" href="https://calendly.com/wgomeshumanos/30min" data-talk-to-us>Talk to us <span class="arrow">&rarr;</span></a>
+      </div>
+
+      <div style="margin-top:var(--sp-4); padding-top:var(--sp-4); width:100%; max-width:600px; display:flex; align-items:center; gap:8px 12px; flex-wrap:wrap;">
+      <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:600;">Works across the agentic stack</span>
       <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:3px; background:#1A1F71; color:#fff; font-size:7px; font-weight:700; display:flex; align-items:center; justify-content:center;">VISA</span>Visa Intelligent Commerce Connect</span>
       <span style="color:var(--hm-ink-4);">·</span>
       <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--hm-ink-2);"><span style="width:18px; height:18px; border-radius:3px; background:#1652F0; color:#fff; font-size:8px; font-weight:700; display:flex; align-items:center; justify-content:center;">x4</span>x402</span>
@@ -368,15 +375,15 @@
   </div>
   </div>
 
-  <div data-stage="risk-management" data-tone="light" data-group="risk" style="display:flex; flex-direction:column;">
-  <div data-sticky-steps="4" style="position:relative; height:400vh;">
-    <div ref="{{ setKriRef }}" style="position:sticky; top:0; min-height:100vh; justify-content:center; background-image:linear-gradient(to right, rgba(17,17,17,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,17,0.045) 1px, transparent 1px); background-size:56px 56px; padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+  <div data-stage="risk-management" data-tone="light" style="display:flex; flex-direction:column;">
+  <div style="position:relative;">
+    <div ref="{{ setKriRef }}" style="min-height:100vh; justify-content:center; background-image:linear-gradient(to right, rgba(17,17,17,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(17,17,17,0.045) 1px, transparent 1px); background-size:56px 56px; padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
         <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-3);">Risk Management</span>
         <h2 style="font-size:44px; font-weight:600; letter-spacing:-0.025em; line-height:1.12; color:var(--hm-authority); display:flex; align-items:center; gap:14px; flex-wrap:wrap;"><span>Manage AI risk from <span style="color:var(--hm-verification);">end to end</span>.</span><span style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #FFFFFF; background: var(--hm-verification); padding: 6px 12px; border-radius: 999px; white-space: nowrap">Free</span></h2>
-        <p style="font-size:17px; color:var(--hm-ink-2); line-height:1.6; max-width:600px;">Continuously score the risk behind your agents, prove it with runtime evidence, reduce it with free controls, and insure what remains.</p>
+        <p style="font-size:17px; color:var(--hm-ink-2); line-height:1.6; max-width:600px;">Continuously measure AI risk, prove it with verifiable runtime evidence, reduce it with controls, and use your risk reputation to unlock financial opportunities.</p>
       </div>
     </div>
 
@@ -463,7 +470,7 @@
                   </div>
                 </sc-for>
               </div>
-              <div style="margin-top:auto; height:56px;">{{ proveChart }}</div>
+              <div style="margin-top:auto; height:100px;">{{ proveChart }}</div>
             </div>
 
             <div style="display:flex; flex-direction:column; min-width:0; padding-left:24px; border-left:1px solid var(--hm-line);">
@@ -540,32 +547,29 @@
           </div>
 
           <div style="flex:1; min-height:0; display:flex; flex-direction:column; padding-top:16px;">
-            <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">3 insurers competing for your risk</span>
+            <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:var(--hm-authority);">Opportunities available for your agent</span>
             <div style="display:flex; flex-direction:column; margin-top:8px;">
-              <sc-for list="{{ insureOffers }}" as="o" hint-placeholder-count="3">
+              <sc-for list="{{ insureOffers }}" as="o" hint-placeholder-count="4">
                 <div style="{{ o.style }}">
-                  <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--hm-authority);">{{ o.name }}</span>
+                  <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--hm-authority);">{{ o.name }}</span>
+                  <span style="font-size:13px; color:var(--hm-ink-2);">{{ o.detail }}</span>
                   <span style="{{ o.priceStyle }}">{{ o.price }}</span>
-                  <span style="{{ o.tagStyle }}">Best</span>
+                  <span style="{{ o.tagStyle }}">{{ o.action }}</span>
                 </div>
               </sc-for>
             </div>
 
             <div style="{{ insureBestStyle }}">
               <div style="display:flex; flex-direction:column; gap:6px;">
-                <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#C7C5E8;">Best available coverage</span>
-                <span style="font-family:var(--font-mono); font-size:30px; font-weight:700; line-height:1.05; letter-spacing:-0.025em; color:#FFFFFF;">$6,750 / mo</span>
-                <span style="font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.04em; color:#DEDDF4;">$5M coverage · Insurer C</span>
+                <span style="font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#C7C5E8;">Your risk reputation is working for you</span>
+                <span style="font-family:var(--font-mono); font-size:30px; font-weight:700; line-height:1.05; letter-spacing:-0.025em; color:#FFFFFF;">Risk opportunities unlocked</span>
+                <span style="font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.04em; color:#DEDDF4;">Credit &middot; Insurance &middot; Yield &middot; More</span>
               </div>
-              <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; font-weight:700; color:#FFFFFF; align-self:flex-end;">Residual risk transferred ✓</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div style="display:flex; justify-content:center;">
-        <a href="#" style="{{ kriCtaStyle }}">{{ kriCtaLabel }}</a>
-      </div>
       </div>
     </div>
 
@@ -573,11 +577,11 @@
   </div>
   </div>
 
-  <div data-stage="risk-intelligence" data-tone="dark" data-group="risk" style="display:flex; flex-direction:column;">
-  <div data-sticky-steps="2" style="position:relative; height:200vh;">
-    <div ref="{{ setRiRef }}" style="position:sticky; top:0; min-height:100vh; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
-      <div style="display:grid; width:100%; max-width:1200px; align-items:center;">
-      <div data-step-panel="0" style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-7); width:100%;">
+  <div data-stage="risk-intelligence" data-tone="light" style="display:flex; flex-direction:column; background:#111111;">
+  <div style="position:relative;">
+    <div ref="{{ setRiRef }}" style="min-height:100vh; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px; padding:var(--sp-10) var(--sp-7); box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-7);">
+      <div style="display:flex; flex-direction:column; width:100%; max-width:1200px; gap:var(--sp-9);">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-7); width:100%;">
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-5); flex-wrap:wrap;">
       <div style="display:flex; flex-direction:column; gap:10px; max-width:660px;">
@@ -644,7 +648,7 @@
     </div>
 
       </div>
-      <div data-step-panel="1" style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-7); width:100%;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-7); width:100%;">
     <div style="width:100%; max-width:1200px; display:flex; flex-direction:column; gap:8px; padding-top:var(--sp-7);">
       <h3 style="font-size:34px; font-weight:600; letter-spacing:-0.025em; line-height:1.15; color:#F4F3EF;">Ask your <span style="color:#FF9A8B;">risk</span> and get the answer you need.</h3>
       <span style="font-size:15px; color:#C7C5E8; line-height:1.55;">Turn continuous AI activity into answers you can act on.</span>
@@ -792,7 +796,15 @@
   <div style="padding:var(--sp-10) var(--sp-7); display:flex; align-items:center; justify-content:center; background-image:linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px); background-size:56px 56px;">
     <div style="max-width:800px; margin:0 auto; text-align:center;">
       <p style="font-size: 30px; font-weight: 500; font-style: italic; color: #F4F3EF; line-height: 1.5; letter-spacing: -0.01em"><span style="color:#A9A6F5; font-style:normal; font-size:1.4em; line-height:0; vertical-align:-0.08em;">“</span>Your execution receipts solve the hardest problem in underwriting AI liability, establishing the triggering event and the scope of authority at the moment of execution. <span style="font-weight:700;">That is what makes this class of risk insurable at all.</span><span style="color:#A9A6F5; font-style:normal; font-size:1.4em; line-height:0; vertical-align:-0.08em;">”</span></p>
-      <div style="margin-top: var(--sp-3); font-size: 20px; color: #C7C5E8">Mehdi Chaabi, CEO of <a href="https://insurenow.eu/" target="_blank">InsureNow</a></div>
+      <!-- Photo slot: drop the CEO photo in as
+           <img src="/designs/_shared/%E2%80%A6" alt="Mehdi Chaabi" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;">
+           replacing the MC initials span. -->
+      <div style="margin-top: var(--sp-3); display:flex; align-items:center; justify-content:center; gap:22px; font-size: 20px; color: #C7C5E8">
+        <div style="width:50px; height:50px; flex:0 0 auto; border-radius:50%; overflow:hidden; border:1px solid rgba(244,243,239,0.3); background:rgba(255,255,255,0.07); display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:var(--font-mono); font-size:16px; font-weight:700; letter-spacing:0.04em; color:#C7C5E8;">MC</span>
+        </div>
+        <span>Mehdi Chaabi, CEO of <a href="https://insurenow.eu/" target="_blank" style="color:#A9A6F5;" style-hover="{color:'#FFFFFF'}">InsureNow</a></span>
+      </div>
     </div>
   </div>
   </div>
@@ -861,41 +873,7 @@
   </div>
 
 
-  <div data-stage="close" data-tone="light" style="display:flex; flex-direction:column;">
-  <!--
-    v1's closing CTA, markup for markup: the same section/grid/wrap structure
-    and the same class names, so app/styles/sections/final.css and buttons.css
-    style it directly rather than it being re-approximated with inline styles.
-    Only the copy changes, onto the risk positioning.
-
-    One departure: v1 wraps its second CTA in the TalkWithUs dialog, which is a
-    React component the design cannot mount. It is the same button markup as an
-    anchor to the same Calendly link the dialog books.
-  -->
-  <section class="final" style="border-top:1px solid var(--hm-line);">
-    <div class="final__grid-bg" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="final__eyebrow">Measure risk as AI acts</div>
-      <h2 class="final__title">
-        Before AI acts, know what it puts <span class="accent">at risk</span>.
-      </h2>
-      <p class="final__sub">
-        Risk measured continuously. Reputation proven on demand. Exposure reduced, then insured.
-      </p>
-      <div class="final__ctas">
-        <a class="btn btn--primary" href="https://app.humanos.tech" target="_blank" rel="noopener noreferrer">
-          Get API key <span class="arrow">&#8594;</span>
-        </a>
-        <a class="btn btn--secondary" href="https://calendly.com/wgomeshumanos/30min" target="_blank" rel="noopener noreferrer">
-          Talk to us <span class="arrow">&#8594;</span>
-        </a>
-      </div>
-      <p class="final__fineprint">
-        Built for agents, payments, ERP, workflows, and any system whose actions carry real risk.
-      </p>
-    </div>
-  </section>
-  </div>
+  <!-- @component close -->
   <div data-pill="1" style="{{ pillWrapStyle }}">
     <div style="{{ pillTipStyle }}">
       Click to copy a setup prompt for your AI coding tool
@@ -954,8 +932,8 @@ class Component extends DCLogic {
   ];
   /* Seconds per runtime event. The loop is the eleven steps that carry the
      series across the chart, so both halve together to keep the cycle whole. */
-  static PROB_STEP = 0.675;
-  static PROB_LOOP = 0.675 * 11;
+  static PROB_STEP = 0.965;
+  static PROB_LOOP = 0.965 * 11;
 
   probVals() {
     this.ensureClock();
@@ -1554,10 +1532,10 @@ class Component extends DCLogic {
   static KRI_LOOP = 28.0;
   static KRI_SPAN = 7.0;
   static KRI_STEPS = [
-    { num: '01 — Know', title: 'Know your risk.', desc: 'See what is creating risk and how it changes as your AI acts.' },
-    { num: '02 — Prove', title: 'Prove your risk.', desc: 'Give customers and partners verified evidence of how safely your AI operates.' },
-    { num: '03 — Control', title: 'Control your risk.', desc: 'See what is driving exposure and apply controls to bring it down.' },
-    { num: '04 — Insure', title: 'Insure what remains.', desc: "Put verified risk in front of insurers and transfer the exposure you can't eliminate." },
+    { num: '01 — Know', title: 'Know your risk.', desc: 'Continuously measure how your agents operate and what creates risk.' },
+    { num: '02 — Prove', title: 'Prove your risk.', desc: 'Build a verifiable risk history backed by signed runtime activity.' },
+    { num: '03 — Control', title: 'Control your risk.', desc: 'Set permissions, limits and approvals to reduce risk in real time.' },
+    { num: '04 — Unlock', title: 'Unlock with your risk.', desc: 'Use your verified risk reputation to access credit, insurance, yield and more.' },
   ];
   static KRI_CONTROLS = [
     { t: 1.0, label: 'Human authorization', delta: '−6' },
@@ -1566,29 +1544,63 @@ class Component extends DCLogic {
     { t: 2.5, label: 'Runtime policy', delta: '−6' },
   ];
   static KRI_OFFERS = [
-    { t: 1.2, name: 'Insurer A', price: '$8,400 / mo' },
-    { t: 1.9, name: 'Insurer B', price: '$7,200 / mo' },
-    { t: 2.6, name: 'Insurer C', price: '$6,750 / mo', best: true },
+    { t: 0, name: 'Credit', detail: '$250K available', price: '8.2% APR', action: 'View offer' },
+    { t: 0.9, name: 'Insurance', detail: '$5M coverage', price: '$6,750 / mo', action: 'View offer' },
+    { t: 1.7, name: 'Yield', detail: 'Up to $500K', price: '6.4% APY', action: 'View offer' },
+    { t: 2.4, name: 'More', detail: 'New risk-based products', price: '', action: 'Explore' },
   ];
   static KRI_TRACK = [22, 19, 26, 21, 17, 24, 18, 15, 20, 16, 13];
 
   kriChart(prog) {
+    /* Same treatment as the problem section's chart: the full series is
+       splined once (Catmull-Rom, clamped to the box), and the reveal cuts
+       the final segment with De Casteljau so the head stays on the curve. */
     const pts = Component.KRI_TRACK;
-    const W = 420, H = 120, pad = 10;
     const n = pts.length;
-    const live = Math.max(1, Math.min(n, Math.round(1 + (n - 1) * prog)));
-    const xAt = (i) => pad + (i / (n - 1)) * (W - pad * 2);
-    const yAt = (v) => pad + (1 - (v - 8) / 26) * (H - pad * 2);
-    let d = '';
-    for (let i = 0; i < live; i++) d += (i ? ' L' : 'M') + xAt(i).toFixed(1) + ' ' + yAt(pts[i]).toFixed(1);
-    const cx = xAt(live - 1), cy = yAt(pts[live - 1]);
+    const W = 100, H = 100;
+    const xAt = (i) => (i / (n - 1)) * W;
+    const yAt = (v) => (1 - (v - 8) / 26) * H;
+    const anchors = [];
+    for (let i = 0; i < n; i++) anchors.push([xAt(i), yAt(pts[i])]);
+    const cyc = (v) => Math.max(0, Math.min(H, v));
+    const segAt = (i) => {
+      const p0 = anchors[i - 1] || anchors[i], p1 = anchors[i];
+      const p2 = anchors[i + 1], p3 = anchors[i + 2] || anchors[i + 1];
+      return [
+        p1,
+        [p1[0] + (p2[0] - p0[0]) / 6, cyc(p1[1] + (p2[1] - p0[1]) / 6)],
+        [p2[0] - (p3[0] - p1[0]) / 6, cyc(p2[1] - (p3[1] - p1[1]) / 6)],
+        p2,
+      ];
+    };
+    const upTo = (b, t) => {
+      const at = (u, v) => [u[0] + (v[0] - u[0]) * t, u[1] + (v[1] - u[1]) * t];
+      const ab = at(b[0], b[1]), bc = at(b[1], b[2]), cd = at(b[2], b[3]);
+      const abc = at(ab, bc), bcd = at(bc, cd);
+      return [b[0], ab, abc, at(abc, bcd)];
+    };
+    const cTo = (b) =>
+      ' C' + b[1][0].toFixed(2) + ' ' + b[1][1].toFixed(2) + ',' +
+      b[2][0].toFixed(2) + ' ' + b[2][1].toFixed(2) + ',' +
+      b[3][0].toFixed(2) + ' ' + b[3][1].toFixed(2);
+
+    const t = Math.max(0, Math.min(1, prog)) * (n - 1);
+    const idx = Math.floor(t);
+    const frac = t - idx;
+    let d = 'M' + anchors[0][0].toFixed(2) + ' ' + anchors[0][1].toFixed(2);
+    let head = anchors[0];
+    for (let i = 0; i < idx; i++) { const b = segAt(i); d += cTo(b); head = b[3]; }
+    if (idx < n - 1 && frac > 0) { const b = upTo(segAt(idx), frac); d += cTo(b); head = b[3]; }
+
     const el = React.createElement;
-    return el('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', height: '100%', preserveAspectRatio: 'none', key: 'kc' }, [
-      el('line', { key: 'g1', x1: pad, x2: W - pad, y1: yAt(26), y2: yAt(26), stroke: 'var(--hm-line)', strokeWidth: 1 }),
-      el('line', { key: 'g2', x1: pad, x2: W - pad, y1: yAt(17), y2: yAt(17), stroke: 'var(--hm-line)', strokeWidth: 1 }),
-      el('path', { key: 'p', d: d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 1.6, strokeLinejoin: 'round' }),
-      el('line', { key: 'v', x1: cx, x2: cx, y1: pad, y2: H - pad, stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 4', opacity: 0.5 }),
-      el('circle', { key: 'c', cx: cx, cy: cy, r: 4, fill: 'var(--hm-verification)' }),
+    return el('svg', {
+      viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', key: 'kc',
+      style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
+    }, [
+      ...[26, 17].map((v) => el('line', { key: 'g' + v, x1: 0, x2: W, y1: yAt(v), y2: yAt(v), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
+      el('line', { key: 'v', x1: head[0], x2: head[0], y1: 0, y2: H, stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke' }),
+      el('path', { key: 'p', d: d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 2.4, strokeLinejoin: 'round', strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      el('path', { key: 'c', d: 'M' + head[0].toFixed(2) + ' ' + head[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-verification)', strokeWidth: 8, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
     ]);
   }
 
@@ -1600,17 +1612,17 @@ class Component extends DCLogic {
     const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
     const span = Component.KRI_SPAN;
 
-    /* Pinned means the reader is driving the steps by scrolling, so the
-       auto-advance must stay out of the way however long they linger. */
-    const held = this.kriPinned || (this.kriHold && Date.now() - this.kriHold < 20000);
-    const auto = Math.floor(T / span) % 4;
-    const active = held ? (this.state.kriStep || 0) : auto;
-    const p = held ? Math.min(span, (Date.now() - this.kriHold) / 1000) : (T - Math.floor(T / span) * span);
+    /* The reader drives the steps with the buttons alone: the panel plays
+       its build once when selected (or when the section is first seen) and
+       then holds — no scroll choreography, no auto-advance. */
+    const active = this.state.kriStep || 0;
+    const p = this.kriHold
+      ? Math.min(span, (Date.now() - this.kriHold) / 1000)
+      : Math.min(span, T);
 
     const knowProg = clamp(p / 4.2);
     const knowScore = Component.KRI_TRACK[Math.max(0, Math.min(Component.KRI_TRACK.length - 1, Math.round((Component.KRI_TRACK.length - 1) * knowProg)))];
     const reduceScore = Math.round(38 - 25 * ease((p - 2.8) / 1.6));
-    const decided = p >= 3.4;
 
     const panel = (idx) => ({
       display: active === idx ? 'flex' : 'none',
@@ -1626,17 +1638,6 @@ class Component extends DCLogic {
     return {
       setKriRef: this.setKriRef,
       kriStepLabel: Component.KRI_STEPS[active].num,
-      kriCtaLabel: active === 3 ? 'Coming soon' : 'Learn more →',
-      kriCtaStyle: {
-        display: 'inline-flex', alignItems: 'center', gap: '10px', boxSizing: 'border-box',
-        height: '56px', padding: '0 26px', borderRadius: '3px',
-        fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
-        letterSpacing: '0.07em', textTransform: 'uppercase',
-        border: '1px solid ' + (active === 3 ? 'var(--hm-line-strong)' : 'var(--hm-verification)'),
-        background: active === 3 ? '#E7E4DC' : 'var(--hm-verification)',
-        color: active === 3 ? 'var(--hm-authority)' : '#F4F3EF',
-        transition: 'background 260ms ' + ez + ', color 260ms ' + ez + ', border-color 260ms ' + ez,
-      },
       kriVerb: verbs[vIdx],
       kriVerbStyle: {
         color: 'var(--hm-verification)', display: 'inline-block',
@@ -1757,28 +1758,24 @@ class Component extends DCLogic {
 
       insurePanelStyle: panel(3),
       insureOffers: Component.KRI_OFFERS.map((o, i) => {
-        const win = o.best && decided;
         return {
-          name: o.name, price: o.price,
+          name: o.name, detail: o.detail, price: o.price, action: o.action,
           tagStyle: {
             fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
             letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'right',
-            color: 'var(--hm-verification)', opacity: win ? 1 : 0,
-            transition: 'opacity 320ms ' + ez,
+            color: 'var(--hm-verification)',
           },
           style: {
-            display: 'grid', gridTemplateColumns: '1fr auto 52px', alignItems: 'center', gap: '14px',
+            display: 'grid', gridTemplateColumns: '92px 1fr auto 76px', alignItems: 'center', gap: '14px',
             padding: '12px 14px', marginBottom: '6px', borderRadius: '3px',
-            border: '1px solid ' + (win ? 'var(--hm-verification)' : 'var(--hm-line)'),
-            background: win ? 'rgba(75,73,202,0.05)' : 'transparent',
-            opacity: p >= o.t ? (decided && !o.best ? 0.45 : 1) : 0,
+            border: '1px solid var(--hm-line)',
+            opacity: p >= o.t ? 1 : 0,
             transform: p >= o.t ? 'translateY(0)' : 'translateY(6px)',
-            transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez + ', border-color 320ms ' + ez + ', background 320ms ' + ez,
+            transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez,
           },
           priceStyle: {
-            fontFamily: 'var(--font-mono)', fontSize: '14px', fontWeight: 700,
-            color: win ? 'var(--hm-verification)' : 'var(--hm-authority)',
-            transition: 'color 320ms ' + ez,
+            fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
+            color: 'var(--hm-verification)',
           },
         };
       }),
@@ -2105,7 +2102,7 @@ class Component extends DCLogic {
         boxShadow: '0 2px 4px rgba(17,17,17,0.10), 0 18px 40px -16px rgba(75,73,202,0.45)',
         transition: 'background 180ms ' + ez,
       },
-      pillText: copied ? 'Setup prompt copied ✓' : "Click to know your AI agent's Risk Score in seconds",
+      pillText: copied ? 'Setup prompt copied ✓' : "Click to know your agent's Risk Score in seconds",
       pillTextStyle: {
         fontSize: '15px', fontWeight: 400, whiteSpace: 'nowrap',
         color: this._pillDark ? 'var(--hm-authority)' : '#F4F3EF',

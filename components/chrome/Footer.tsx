@@ -1,4 +1,5 @@
 import { EXTERNAL_LINKS } from "@/lib/external-links";
+import { ClosingCta } from "./ClosingCta";
 
 type FooterLink = { label: string; href: string };
 type FooterColumn = {
@@ -46,7 +47,7 @@ const COLUMNS: FooterColumn[] = [
       { label: "TypeScript SDK", href: SDKS.ts },
       { label: "Python SDK", href: SDKS.py },
       { label: "C# SDK", href: SDKS.cs },
-      { label: "Get API keys", href: EXTERNAL_LINKS.app },
+      { label: "Read Docs", href: DOCS.root },
       { label: "Changelog", href: "/changelog" },
     ],
   },
@@ -67,7 +68,7 @@ const COLUMNS: FooterColumn[] = [
       { label: "About", href: "/company" },
       { label: "Customers", href: "/case-studies" },
       { label: "Status", href: "/status" },
-      { label: "Talk with us", href: EXTERNAL_LINKS.calendly },
+      { label: "Talk to us", href: EXTERNAL_LINKS.calendly },
       { label: "Privacy", href: "/legal/privacy" },
       { label: "Terms", href: "/legal/terms" },
     ],
@@ -87,6 +88,8 @@ function isExternal(href: string) {
 
 export function Footer() {
   return (
+    <>
+    <ClosingCta />
     <footer className="footer">
       <div className="wrap">
         <div className="footer__grid">
@@ -150,5 +153,6 @@ export function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
