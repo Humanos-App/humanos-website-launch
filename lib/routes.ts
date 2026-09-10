@@ -6,7 +6,6 @@ export const ROUTES = {
   control: "/control",
   intelligence: "/intelligence",
   prove: "/prove",
-  useCases: "/use-cases",
   pricing: "/pricing",
   company: "/company",
   customers: "/case-studies",

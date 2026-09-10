@@ -43,7 +43,6 @@ export const ROUTES: string[] = [
   "/intelligence",
   "/prove",
   "/pricing",
-  "/use-cases",
   "/case-studies",
   "/case-studies/numo",
   "/case-studies/ralio",

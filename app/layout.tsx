@@ -40,7 +40,6 @@ import "./styles/pricing.css";
 import "./styles/case-study.css";
 import "./styles/company.css";
 import "./styles/customers.css";
-import "./styles/use-cases.css";
 import "./styles/consent.css";
 import "./styles/legal.css";
 import "./styles/mobile-simplify.css";
