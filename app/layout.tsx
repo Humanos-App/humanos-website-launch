@@ -44,6 +44,7 @@ import "./styles/consent.css";
 import "./styles/legal.css";
 import "./styles/mobile-simplify.css";
 import "./styles/design-mobile.css";
+import "./styles/design-home.css";
 import "./styles/sections/hero.css";
 import "./styles/sections/rt.css";
 import "./styles/sections/why.css";

@@ -1,0 +1,130 @@
+/* ---------- Homepage design overrides (sep-2026 export) ----------
+   Scoped by the home-only [data-stage] markers, since the export's
+   sc-name is the generic "Root". Like design-mobile.css these are
+   app-level rules over read-only, inline-styled markup; the design
+   runtime normalizes inline styles, so attribute hooks use the spaced
+   form ("flex: 1 1 280px"). */
+
+/* The problem chart's anchor markers — the dots the line leaves behind
+   as it advances — are zero-length round-cap strokes (6px ring, 3.4px
+   core). Removed at every width; the 8px moving head dot stays. */
+[data-stage="problem"] svg path[stroke-width="6"],
+[data-stage="problem"] svg path[stroke-width="3.4"] {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  /* ── hero: one column ─────────────────────────────────────── */
+  [data-stage="hero"] main > div > div:first-of-type {
+    flex: 1 1 100% !important;
+  }
+  [data-stage="hero"] main > div > div:last-of-type {
+    display: none; /* the globe panel */
+  }
+  /* the badge pill reads on a single line */
+  [data-stage="hero"] span[style*="border-radius: 999px"] {
+    font-size: 11px !important;
+    padding: 6px 12px !important;
+    white-space: nowrap;
+  }
+
+  /* ── problem ──────────────────────────────────────────────── */
+  [data-stage="problem"] h2 {
+    font-size: 25px !important;
+  }
+  /* runtime-events feed: only the most recent row (rows carry an inline
+     display:flex, hence the !important) */
+  [data-stage="problem"] div[style*="margin-top: auto"] > div:not(:last-of-type) {
+    display: none !important;
+  }
+
+  /* ── what-humanos-is ──────────────────────────────────────── */
+  [data-stage="what-humanos-is"] p {
+    font-size: 27px !important;
+  }
+
+  /* ── risk management: horizontal tabs ─────────────────────────
+     The step list is already tap-driven (the runtime holds the active
+     step); here the vertical list becomes a row of title pills. The
+     active step — detectable by its indigo border-left — takes the
+     full row and reveals its description; the demo panel below is the
+     "animation" that follows the same tap. */
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 8px !important;
+  }
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div {
+    flex: 0 0 auto;
+    padding: 0 !important;
+    border-left: none !important;
+    gap: 0 !important;
+  }
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:first-of-type {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
+    border-radius: 4px;
+  }
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:nth-of-type(2) {
+    display: none;
+  }
+  [data-stage="risk-management"]
+    div[style*="flex: 1 1 280px"]
+    > div[style*="border-left: 2px solid var(--hm-verification)"] {
+    flex: 1 1 100%;
+  }
+  [data-stage="risk-management"]
+    div[style*="flex: 1 1 280px"]
+    > div[style*="border-left: 2px solid var(--hm-verification)"]
+    > span:nth-of-type(2) {
+    display: block;
+    font-size: 13.5px !important;
+    margin-top: 8px;
+    max-width: none !important;
+  }
+  /* the demo card's giant scores, scaled for a phone-width card */
+  [data-stage="risk-management"] span[style*="font-size: 62px"] {
+    font-size: 40px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 52px"] {
+    font-size: 36px !important;
+  }
+
+  /* ── quote ────────────────────────────────────────────────── */
+  [data-stage="quotes"] p {
+    font-size: 17px !important;
+  }
+  [data-stage="quotes"] p + div {
+    font-size: 14px !important;
+    gap: 12px !important;
+  }
+  [data-stage="quotes"] div[style*="width: 50px"] {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  [data-stage="quotes"] div[style*="width: 50px"] span {
+    font-size: 13px !important;
+  }
+
+  /* ── customer stories: native swipe ───────────────────────────
+     The desktop carousel moves a translateX track from arrow clicks;
+     on phones the track scrolls natively with snap points instead,
+     and the arrows disappear. */
+  [data-stage="customer-stories"] div[style*="--card"] {
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+  [data-stage="customer-stories"] div[style*="--card"]::-webkit-scrollbar {
+    display: none;
+  }
+  [data-stage="customer-stories"] div[style*="--card"] > div {
+    scroll-snap-align: start;
+  }
+  [data-stage="customer-stories"] div[style*="justify-content: center"][style*="gap: 8px"] {
+    display: none !important;
+  }
+}
