@@ -14,6 +14,7 @@
       <div style="flex:1 1 280px; min-width:260px; display:flex; flex-direction:column; justify-content:center; gap:var(--sp-4);">
         <sc-for list="{{ kriSteps }}" as="s" hint-placeholder-count="4">
           <div onClick="{{ s.select }}" style="{{ s.style }}">
+            <span data-tab-short style="display:none;">{{ s.short }}</span>
             <span style="{{ s.titleStyle }}">{{ s.title }}</span>
             <span style="{{ s.descStyle }}">{{ s.desc }}</span>
           </div>

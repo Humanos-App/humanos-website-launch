@@ -949,10 +949,10 @@ class Component extends DCLogic {
   static KRI_LOOP = 28.0;
   static KRI_SPAN = 7.0;
   static KRI_STEPS = [
-    { num: '01 — Know', title: 'Know your risk.', desc: 'Continuously measure how your agents operate and what creates risk.' },
-    { num: '02 — Prove', title: 'Prove your risk.', desc: 'Build a verifiable risk history backed by signed runtime activity.' },
-    { num: '03 — Control', title: 'Control your risk.', desc: 'Set permissions, limits and approvals to reduce risk in real time.' },
-    { num: '04 — Unlock', title: 'Unlock with your risk.', desc: 'Use your verified risk reputation to access credit, insurance, yield and more.' },
+    { num: '01 — Know', short: 'Know', title: 'Know your risk.', desc: 'Continuously measure how your agents operate and what creates risk.' },
+    { num: '02 — Prove', short: 'Prove', title: 'Prove your risk.', desc: 'Build a verifiable risk history backed by signed runtime activity.' },
+    { num: '03 — Control', short: 'Control', title: 'Control your risk.', desc: 'Set permissions, limits and approvals to reduce risk in real time.' },
+    { num: '04 — Unlock', short: 'Unlock', title: 'Unlock with your risk.', desc: 'Use your verified risk reputation to access credit, insurance, yield and more.' },
   ];
   static KRI_CONTROLS = [
     { t: 1.0, label: 'Human authorization', delta: '−6' },
@@ -1065,7 +1065,7 @@ class Component extends DCLogic {
       kriSteps: Component.KRI_STEPS.map((s, i) => {
         const on = i === active;
         return {
-          num: s.num, title: s.title, desc: s.desc,
+          num: s.num, short: s.short, title: s.title, desc: s.desc,
           select: () => this.setKriStep(i),
           style: {
             display: 'flex', flexDirection: 'column', gap: '7px', cursor: 'pointer',

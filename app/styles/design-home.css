@@ -13,6 +13,15 @@
   display: none;
 }
 
+/* The chart draws in the section's own background ink (#111111) rather
+   than indigo — the risk line, its moving head, and the dashed
+   now-marker. Every width. */
+[data-stage="problem"] svg path[stroke-width="2.4"],
+[data-stage="problem"] svg path[stroke-width="8"],
+[data-stage="problem"] svg line[stroke-dasharray] {
+  stroke: #111111;
+}
+
 @media (max-width: 720px) {
   /* ── hero: one column ─────────────────────────────────────── */
   [data-stage="hero"] main > div > div:first-of-type {
@@ -27,6 +36,10 @@
     padding: 6px 12px !important;
     white-space: nowrap;
   }
+  /* exactly two lines: "AI risk." / "Under control." */
+  [data-stage="hero"] h1 {
+    font-size: 40px !important;
+  }
 
   /* ── problem ──────────────────────────────────────────────── */
   [data-stage="problem"] h2 {
@@ -37,49 +50,80 @@
   [data-stage="problem"] div[style*="margin-top: auto"] > div:not(:last-of-type) {
     display: none !important;
   }
+  /* no head dot on the advancing line on phones */
+  [data-stage="problem"] svg path[stroke-width="8"] {
+    display: none;
+  }
 
   /* ── what-humanos-is ──────────────────────────────────────── */
   [data-stage="what-humanos-is"] p {
     font-size: 27px !important;
   }
 
-  /* ── risk management: horizontal tabs ─────────────────────────
+  /* ── risk management: horizontal tab selector ─────────────────
      The step list is already tap-driven (the runtime holds the active
-     step); here the vertical list becomes a row of title pills. The
-     active step — detectable by its indigo border-left — takes the
-     full row and reveals its description; the demo panel below is the
-     "animation" that follows the same tap. */
+     step). On phones it becomes a classic tab bar: four short labels
+     (the data-tab-short spans added in the sep-2026 source), and the
+     active tab — detectable by its indigo border-left — lays its full
+     title and description below the bar, above the demo panel.
+     display:contents lifts each step's spans into the shared flex row
+     so the bar and the content zone come from one container. */
   [data-stage="risk-management"] div[style*="flex: 1 1 280px"] {
     flex-direction: row !important;
     flex-wrap: wrap;
-    gap: 8px !important;
-  }
-  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div {
-    flex: 0 0 auto;
-    padding: 0 !important;
-    border-left: none !important;
     gap: 0 !important;
   }
-  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:first-of-type {
-    font-size: 14px !important;
-    padding: 8px 12px !important;
-    border-radius: 4px;
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div {
+    display: contents;
   }
-  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:nth-of-type(2) {
-    display: none;
+  [data-stage="risk-management"] [data-tab-short] {
+    display: block !important;
+    order: 0;
+    flex: 1 1 0;
+    text-align: center;
+    padding: 10px 2px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hm-ink-3);
+    border-bottom: 2px solid var(--hm-line);
+    cursor: pointer;
   }
   [data-stage="risk-management"]
-    div[style*="flex: 1 1 280px"]
-    > div[style*="border-left: 2px solid var(--hm-verification)"] {
-    flex: 1 1 100%;
+    div[style*="border-left: 2px solid var(--hm-verification)"]
+    > [data-tab-short] {
+    color: var(--hm-verification);
+    border-bottom-color: var(--hm-verification);
+  }
+  /* full title + description: hidden unless the step is active */
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:nth-of-type(2),
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:nth-of-type(3) {
+    display: none !important;
   }
   [data-stage="risk-management"]
     div[style*="flex: 1 1 280px"]
     > div[style*="border-left: 2px solid var(--hm-verification)"]
     > span:nth-of-type(2) {
-    display: block;
-    font-size: 13.5px !important;
-    margin-top: 8px;
+    display: inline-block !important;
+    order: 1;
+    flex: 1 1 100%;
+    margin-top: 16px;
+    font-size: 20px !important;
+    padding: 0 !important;
+    background: none !important;
+    color: var(--hm-authority) !important;
+  }
+  [data-stage="risk-management"]
+    div[style*="flex: 1 1 280px"]
+    > div[style*="border-left: 2px solid var(--hm-verification)"]
+    > span:nth-of-type(3) {
+    display: block !important;
+    order: 2;
+    flex: 1 1 100%;
+    margin-top: 6px;
+    font-size: 14px !important;
     max-width: none !important;
   }
   /* the demo card's giant scores, scaled for a phone-width card */
@@ -88,6 +132,22 @@
   }
   [data-stage="risk-management"] span[style*="font-size: 52px"] {
     font-size: 36px !important;
+  }
+
+  /* ── risk intelligence: phone type scale ──────────────────────
+     Layout already fits (generic containment); only the display type
+     is desktop-sized. Animations untouched. */
+  [data-stage="risk-intelligence"] h2[style*="font-size: 44px"] {
+    font-size: 26px !important;
+  }
+  [data-stage="risk-intelligence"] span[style*="font-size: 44px"] {
+    font-size: 30px !important;
+  }
+  [data-stage="risk-intelligence"] [style*="font-size: 34px"] {
+    font-size: 24px !important;
+  }
+  [data-stage="risk-intelligence"] [style*="font-size: 38px"] {
+    font-size: 28px !important;
   }
 
   /* ── quote ────────────────────────────────────────────────── */
