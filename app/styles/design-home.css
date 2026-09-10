@@ -73,8 +73,11 @@
     flex-wrap: wrap;
     gap: 0 !important;
   }
+  /* !important: each step carries an inline display:flex; contents must
+     win or the spans never join the shared row (and the steps paint
+     their inline border-left as stray vertical lines). */
   [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div {
-    display: contents;
+    display: contents !important;
   }
   [data-stage="risk-management"] [data-tab-short] {
     display: block !important;
