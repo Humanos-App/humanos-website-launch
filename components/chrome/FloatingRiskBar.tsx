@@ -138,8 +138,10 @@ export function FloatingRiskBar() {
 
   // Deliberately NOT tagged [data-pill] — that marker means "a design ships
   // its own pill", and this component hides itself on it.
+  // mobile-hide: the pill is a desktop object; phones don't show it at all
+  // (the design pages' own [data-pill] copy is hidden in design-mobile.css).
   return (
-    <div style={wrap}>
+    <div style={wrap} className="mobile-hide">
       <div style={tipStyle}>
         Click to copy a setup prompt for your AI coding tool
         <span

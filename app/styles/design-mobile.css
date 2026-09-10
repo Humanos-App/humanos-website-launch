@@ -43,6 +43,12 @@
     max-width: calc(100vw - 24px);
   }
 
+  /* Phones don't show the floating pill at all — this hides the design
+     pages' own copy; the chrome's FloatingRiskBar carries .mobile-hide. */
+  [data-pill] {
+    display: none !important;
+  }
+
   /* Inline fixed widths (mock-UI demo cards and the like) may not exceed
      their column. max-width constrains width regardless of where width
      was declared, so no !important is needed. */
