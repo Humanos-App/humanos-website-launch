@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Script from "next/script";
 import { DesignBoot } from "./DesignBoot";
+import { TalkToUsBridge } from "./TalkToUsBridge";
 
 /**
  * Renders one page of the sep-2026 design inside the site chrome.
@@ -55,8 +56,15 @@ export function DesignPage({ slug }: { slug: string }) {
       {/* Tagged so DesignBoot can tell this route's fragment apart from the
           previous page's, which can still be attached right after a
           navigation. */}
-      <div data-design={slug} dangerouslySetInnerHTML={{ __html: body }} />
+      {/* min-height keeps the footer out of the viewport during the gap
+          between first paint and the design runtime's render. */}
+      <div
+        data-design={slug}
+        style={{ minHeight: "100vh" }}
+        dangerouslySetInnerHTML={{ __html: body }}
+      />
       <DesignBoot slug={slug} />
+      <TalkToUsBridge />
       {/* The site chrome is sticky, so the space a design gets is the viewport
           less its height. The announcement bar has no fixed height — it is
           padding-driven and its copy can wrap — so it is measured rather than

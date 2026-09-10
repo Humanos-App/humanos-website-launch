@@ -292,7 +292,18 @@ function buildPage(page) {
   // v1 navbar takes its place. Everything else is kept verbatim, <helmet>
   // included, because support.js loads those assets itself once it boots.
   const body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-  if (body) writeFileSync(join(OUT, page.slug, "body.html"), stripDesignNav(body[1]));
+  // The raw <x-dc> template must never paint: support.js injects this same
+  // rule, but it loads afterInteractive — on a full reload the template (with
+  // its {{ holes }}) flashes before the script runs. Shipping the rule inside
+  // the fragment closes that window.
+  // scrollRestoration: the browser's native restore fires while the design is
+  // still a placeholder and clamps the position to its bottom (the
+  // jump-to-end-on-reload bug). DesignBoot saves and restores the position
+  // itself once the design has real height.
+  const HIDE_RAW =
+    "<style>x-dc{display:none!important}</style>\n" +
+    '<script>try{history.scrollRestoration="manual"}catch(e){}</script>\n';
+  if (body) writeFileSync(join(OUT, page.slug, "body.html"), HIDE_RAW + stripDesignNav(body[1]));
   else warnings.push(`no <body> in ${page.slug}; body fragment not written`);
   return rewritten;
 }

@@ -135,6 +135,15 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* The design runtime (support.js) injects `html,body{height:100%}` at boot
+   for its standalone full-page exports. Inside the app the window is the
+   scroller, and a body pinned to one viewport is exactly one parent-height
+   of position:sticky — the site chrome unsticks after 100vh. Overridden with
+   !important because the injected style lands after every stylesheet. */
+html, body {
+  height: auto !important;
+}
+
 html, body {
   margin: 0;
   padding: 0;
