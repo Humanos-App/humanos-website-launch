@@ -144,6 +144,13 @@ html, body {
   height: auto !important;
 }
 
+/* No layout may widen the page: clip, not hidden, so no scroll container
+   is created and the sticky chrome keeps working. Components that need to
+   scroll sideways do it in their own overflow-x:auto box. */
+html, body {
+  overflow-x: clip;
+}
+
 html, body {
   margin: 0;
   padding: 0;
