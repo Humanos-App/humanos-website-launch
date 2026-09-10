@@ -13,12 +13,17 @@
   display: none;
 }
 
-/* The chart draws in the section's own background ink (#111111) rather
-   than indigo — the risk line, its moving head, and the dashed
-   now-marker. Every width. */
+/* The demo-card charts draw in ink (#111111) rather than indigo — the
+   risk line, its moving head, and the dashed now-marker. This covers
+   both instances of the TREASURY-01 card: the problem section's chart
+   and the risk-management panel's (kriChart — same builder, same
+   stroke widths). Every width. */
 [data-stage="problem"] svg path[stroke-width="2.4"],
 [data-stage="problem"] svg path[stroke-width="8"],
-[data-stage="problem"] svg line[stroke-dasharray] {
+[data-stage="problem"] svg line[stroke-dasharray],
+[data-stage="risk-management"] svg path[stroke-width="2.4"],
+[data-stage="risk-management"] svg path[stroke-width="8"],
+[data-stage="risk-management"] svg line[stroke-dasharray] {
   stroke: #111111;
 }
 
@@ -36,9 +41,14 @@
     padding: 6px 12px !important;
     white-space: nowrap;
   }
-  /* exactly two lines: "AI risk." / "Under control." */
+  /* exactly two lines: "AI risk." / "Under control.". nowrap kills soft
+     wrapping (the <br> still breaks), the clamp keeps "Under control."
+     inside any phone width regardless of font metrics, and the inline
+     max-width:14ch — right at the wrap boundary on iOS — is lifted. */
   [data-stage="hero"] h1 {
-    font-size: 40px !important;
+    font-size: clamp(31px, 10.5vw, 40px) !important;
+    max-width: none !important;
+    white-space: nowrap;
   }
 
   /* ── problem ──────────────────────────────────────────────── */
@@ -50,8 +60,10 @@
   [data-stage="problem"] div[style*="margin-top: auto"] > div:not(:last-of-type) {
     display: none !important;
   }
-  /* no head dot on the advancing line on phones */
-  [data-stage="problem"] svg path[stroke-width="8"] {
+  /* no head dot on the advancing lines on phones — the problem card
+     and the risk-management panel's chart alike */
+  [data-stage="problem"] svg path[stroke-width="8"],
+  [data-stage="risk-management"] svg path[stroke-width="8"] {
     display: none;
   }
 
