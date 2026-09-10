@@ -64,6 +64,13 @@
     grid-template-columns: 1fr !important;
   }
 
+  /* Pricing plan cards run nearly full width on phones: the plans section
+     carries inline "padding: 0px 32px", so the override needs !important. */
+  .sc-host[data-sc-name="pricing"] section[style*="padding: 0px 32px"] {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
   /* The export's spacing scale, compressed a notch for phones. Section
      paddings and large gaps both ride these tokens, so the whole page
      tightens together without touching any one component. */

@@ -480,3 +480,13 @@
   color: var(--hm-ink-0);
   font-weight: 600;
 }
+
+/* ============================================================
+   /pricing design page (sep-2026 export) — app-level overrides
+   ============================================================ */
+/* Air between the plan table and the closing section: the export's last
+   section ends flush against it (its inline padding has no bottom). The
+   chalk wrapper has no inline padding of its own, so no !important. */
+.sc-host[data-sc-name="pricing"] [style*="min-height: 100vh"] {
+  padding-bottom: clamp(64px, 9vw, 120px);
+}
