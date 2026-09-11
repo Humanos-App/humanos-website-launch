@@ -12,7 +12,7 @@
            sides, so the previous card shows in the left gutter and the next
            bleeds off the right. The section root clips both at the page edge. -->
       <div style="position:relative;">
-        <div ref="{{ setCarouselRef }}" style="--card:min(1080px, 85vw); display:flex; gap:20px; transform:translateX(calc(-1 * ({{ storyIdx }} + 3) * (var(--card) + 20px))); transition:transform 460ms cubic-bezier(0.2,0,0,1); padding-right:20px;">
+        <div ref="{{ setCarouselRef }}" data-cs-track style="--card:min(1080px, 85vw); display:flex; gap:20px; transform:translateX(calc(-1 * ({{ storyIdx }} + 3) * (var(--card) + 20px))); transition:{{ storyTrans }}; padding-right:20px;">
 
         <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
@@ -104,8 +104,8 @@
     </div>
 
     <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:var(--sp-5);">
-      <div onclick="{{ carouselPrev }}" style="width:36px; height:36px; border:1px solid var(--hm-line-strong); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--hm-authority);">←</div>
-      <div onclick="{{ carouselNext }}" style="width:36px; height:36px; border:1px solid var(--hm-line-strong); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--hm-authority);">→</div>
+      <div onclick="{{ carouselPrev }}" data-cs-prev style="width:36px; height:36px; border:1px solid var(--hm-line-strong); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--hm-authority);">←</div>
+      <div onclick="{{ carouselNext }}" data-cs-next style="width:36px; height:36px; border:1px solid var(--hm-line-strong); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--hm-authority);">→</div>
     </div>
 
 
