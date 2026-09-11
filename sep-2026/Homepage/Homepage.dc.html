@@ -2200,8 +2200,9 @@ class Component extends DCLogic {
       solutionsPointerEvents: this.state.solutionsOpen ? 'auto' : 'none',
       setCarouselRef: (el) => { this.carouselEl = el; },
       storyIdx: this.state.storyIdx,
-      carouselPrev: () => this.setState(s => ({ storyIdx: Math.max(0, s.storyIdx - 1) })),
-      carouselNext: () => this.setState(s => ({ storyIdx: Math.min(2, s.storyIdx + 1) })),
+      /* wrap instead of clamp: the strip never hits an end */
+      carouselPrev: () => this.setState(s => ({ storyIdx: (s.storyIdx + 2) % 3 })),
+      carouselNext: () => this.setState(s => ({ storyIdx: (s.storyIdx + 1) % 3 })),
       storyDots: [0, 1, 2].map(i => ({
         color: i === this.state.storyIdx ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
         goTo: () => this.setState({ storyIdx: i }),
