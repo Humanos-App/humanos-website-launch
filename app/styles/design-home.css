@@ -186,6 +186,37 @@
     grid-row: 2;
   }
 
+  /* panel content trimmed for phones:
+     Know and Control lose their footer notes (both share the
+     border-top + indigo border-left signature; the step tabs have no
+     border-top, so they are safe) */
+  [data-stage="risk-management"] div[style*="border-left: 2px solid var(--hm-verification)"][style*="border-top: 1px solid"] {
+    display: none !important;
+  }
+  /* Prove: no mini chart, no share-audience list */
+  [data-stage="risk-management"] div[style*="height: 100px"] {
+    display: none !important;
+  }
+  [data-stage="risk-management"] div[style*="border-left: 1px solid"]:has(> a[style*="height: 44px"]) > div {
+    display: none !important;
+  }
+  /* Control: no Delegated authority row, no footnote sentence, and no
+     divider above its scores column */
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 0.9fr"] > div:first-child > div > div:nth-child(3) {
+    display: none !important;
+  }
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 0.9fr"] > div:first-child > span:nth-of-type(2) {
+    display: none !important;
+  }
+  [data-stage="risk-management"] div[style*="border-left: 1px solid"]:has(span[style*="font-size: 64px"]) {
+    border-top: none;
+    padding-top: 0;
+  }
+  /* Unlock: the More offer sits out */
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"]:nth-child(4) {
+    display: none !important;
+  }
+
   /* the demo card's giant scores, scaled for a phone-width card */
   [data-stage="risk-management"] span[style*="font-size: 62px"] {
     font-size: 40px !important;
@@ -359,6 +390,9 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 8px;
+    /* the inline padding-right shrinks the content box the cards'
+       flex-basis resolves against — with it gone, 100% is truly 100% */
+    padding-right: 0 !important;
   }
   [data-cs-track]::-webkit-scrollbar {
     display: none;
