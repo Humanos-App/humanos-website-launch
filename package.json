@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/sync-v2.mjs && next dev",
+    "prebuild": "node scripts/sync-v2.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sync:v2": "node scripts/sync-v2.mjs"
   },
   "dependencies": {
     "next": "^15.1.6",

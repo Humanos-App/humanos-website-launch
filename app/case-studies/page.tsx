@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
-import { EXTERNAL_LINKS } from "@/lib/external-links";
 import {
   StoriesGrid,
   type Story,
@@ -8,9 +6,9 @@ import {
 } from "./_components/StoriesGrid";
 
 export const metadata: Metadata = {
-  title: "Customer stories",
+  title: "Customers",
   description:
-    "Real stories from systems that verify before they act. Hospitals, insurers, fintechs, payment processors, and AI platforms running Humanos in their execution path.",
+    "Real systems. Real risk. Humanos in production — across workflows where identity, authorization, controls and verifiable evidence matter.",
   alternates: { canonical: "/case-studies" },
 };
 
@@ -299,38 +297,15 @@ export default function CustomerStoriesPage() {
           <div className="hero__inner">
             <span className="eyebrow">
               <span className="dot" aria-hidden="true" />
-              Customer stories
+              Customers
             </span>
             <h1>
-              Real stories from systems that <em>verify before they act.</em>
+              Real systems. Real risk. <em>Humanos in production.</em>
             </h1>
             <p className="hero__sub">
-              See how hospitals, insurers, fintechs, payment processors, and AI
-              platforms use Humanos to verify actions before execution, recover
-              missing authorization in real time, and generate independently
-              verifiable proof afterwards.
+              See how companies use Humanos across real-world workflows where
+              identity, authorization, controls and verifiable evidence matter.
             </p>
-
-            <div className="hero__stats">
-              <div className="hero__stat">
-                <div className="hero__stat-num">
-                  100<span className="unit">%</span>
-                </div>
-                <div className="hero__stat-lab">
-                  Actions verified pre-execution
-                </div>
-              </div>
-              <div className="hero__stat">
-                <div className="hero__stat-num">
-                  184<span className="unit">ms</span>
-                </div>
-                <div className="hero__stat-lab">Median verify latency</div>
-              </div>
-              <div className="hero__stat">
-                <div className="hero__stat-num">0</div>
-                <div className="hero__stat-lab">Unprovable transactions</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -342,13 +317,14 @@ export default function CustomerStoriesPage() {
             <div>
               <span className="eyebrow">
                 <span className="dot" aria-hidden="true" />
-                Customer stories
+                In production
               </span>
-              <h2>Wherever autonomous systems act.</h2>
+              <h2>Built for consequential workflows.</h2>
             </div>
             <p className="sub">
-              Filter by domain. Every deployment runs the same model: verify
-              before execution, recover what&rsquo;s missing, prove after.
+              From financial transactions to healthcare and enterprise
+              operations, Humanos is deployed where AI and software actions need
+              clear authority, enforceable controls and verifiable evidence.
             </p>
           </div>
 
@@ -356,89 +332,85 @@ export default function CustomerStoriesPage() {
         </div>
       </section>
 
-      {/* PROOF BAND */}
-      <section className="proof" data-screen-label="03 Proof">
+      {/* ONE INFRASTRUCTURE — replaces the aggregate metrics band. Those
+          figures still appear inside the individual case studies, where they
+          describe an actual deployment rather than the company. */}
+      <section className="proof" data-screen-label="03 One infrastructure">
         <div className="proof__glow" aria-hidden="true" />
         <div className="wrap">
           <div className="proof__inner">
             <span className="eyebrow eyebrow--chalk">
               <span className="dot" aria-hidden="true" />
-              Across deployments
+              One infrastructure
             </span>
-            <h2>The same guarantee, whatever the system acts on.</h2>
-            <div className="proof__grid">
-              <div className="proof__item">
-                <div className="proof__num">
-                  184<span className="unit">ms</span>
-                </div>
-                <div className="proof__lab">
-                  Median verify latency
-                  <br />
-                  on the execution path
-                </div>
+            <h2>Different workflows. The same foundation.</h2>
+            <p className="proof__sub">
+              Identity, authority, controls and runtime evidence create the
+              foundation for understanding how consequential systems actually
+              operate. As Humanos expands into continuous Risk Scores and Risk
+              Intelligence, that same infrastructure becomes part of a broader
+              Risk Network for AI.
+            </p>
+
+            <div className="foundation">
+              <div className="foundation__row">
+                <span className="foundation__part">Identity</span>
+                <span className="foundation__plus">+</span>
+                <span className="foundation__part">Authority</span>
+                <span className="foundation__plus">+</span>
+                <span className="foundation__part">Controls</span>
+                <span className="foundation__plus">+</span>
+                <span className="foundation__part">Runtime evidence</span>
               </div>
-              <div className="proof__item">
-                <div className="proof__num">
-                  100<span className="unit">%</span>
-                </div>
-                <div className="proof__lab">
-                  Of agent actions verified
-                  <br />
-                  before they run
-                </div>
-              </div>
-              <div className="proof__item">
-                <div className="proof__num">3</div>
-                <div className="proof__lab">
-                  Deterministic outcomes:
-                  <br />
-                  authorize · recover · reject
-                </div>
-              </div>
-              <div className="proof__item">
-                <div className="proof__num">∞</div>
-                <div className="proof__lab">
-                  Independently verifiable
-                  <br />
-                  execution receipts
-                </div>
-              </div>
+              <div className="foundation__down">↓</div>
+              <div className="foundation__sum">Humanos Risk Network</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta" data-screen-label="04 CTA">
-        <div className="wrap wrap--narrow">
-          <span className="eyebrow">
-            <span className="dot" aria-hidden="true" />
-            Your turn
-          </span>
-          <h2>
-            Become the next <span className="accent">story.</span>
-          </h2>
-          <p className="cta__sub">
-            Put authorization in your execution path. We&rsquo;ll review your
-            flows and propose a mandate model.
-          </p>
-          <div className="cta__ctas">
-            <TalkWithUs>
-              <button className="btn btn--primary" type="button">
-                Talk with us <span className="arrow">→</span>
-              </button>
-            </TalkWithUs>
-            <a
-              className="btn btn--secondary"
-              href={EXTERNAL_LINKS.docs}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read the docs <span className="arrow">→</span>
-            </a>
+      {/* THE RISK NETWORK — the bridge from what is deployed today to where
+          Humanos is going. Deliberately short, and careful not to imply the
+          case studies above already use all four. */}
+      <section className="section" data-screen-label="04 The Risk Network">
+        <div className="wrap">
+          <div className="section__head">
+            <div>
+              <span className="eyebrow">
+                <span className="dot" aria-hidden="true" />
+                The Risk Network
+              </span>
+              <h2>Every action creates evidence.</h2>
+            </div>
+            <p className="sub">
+              The identity, authorization, control and execution evidence
+              generated across Humanos deployments can become signals for
+              continuously understanding AI risk. That is the foundation of the
+              Humanos Risk Network.
+            </p>
+          </div>
+
+          <div className="bridge__grid">
+            <div className="bridge__item">
+              <div className="bridge__name">Monitor</div>
+              <div className="bridge__line">Know the risk.</div>
+            </div>
+            <div className="bridge__item">
+              <div className="bridge__name">Control</div>
+              <div className="bridge__line">Reduce the risk.</div>
+            </div>
+            <div className="bridge__item">
+              <div className="bridge__name">Understand</div>
+              <div className="bridge__line">Get the answers you need.</div>
+            </div>
+            <div className="bridge__item">
+              <div className="bridge__name">Insure</div>
+              <div className="bridge__line">Transfer what remains.</div>
+            </div>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

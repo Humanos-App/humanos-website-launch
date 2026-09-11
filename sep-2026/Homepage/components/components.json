@@ -1,0 +1,45 @@
+[
+  {
+    "id": "hero",
+    "file": "01-hero.html",
+    "tone": "light"
+  },
+  {
+    "id": "problem",
+    "file": "02-problem.html",
+    "tone": "light",
+    "background": "#111111"
+  },
+  {
+    "id": "what-humanos-is",
+    "file": "03-what-humanos-is.html",
+    "tone": "light"
+  },
+  {
+    "id": "risk-management",
+    "file": "04-risk-management.html",
+    "tone": "light"
+  },
+  {
+    "id": "risk-intelligence",
+    "file": "05-risk-intelligence.html",
+    "tone": "light",
+    "background": "#111111"
+  },
+  {
+    "id": "risk-network",
+    "file": "06-risk-network.html",
+    "tone": "light"
+  },
+  {
+    "id": "quotes",
+    "file": "07-quotes.html",
+    "tone": "light",
+    "background": "#111111"
+  },
+  {
+    "id": "customer-stories",
+    "file": "08-customer-stories.html",
+    "tone": "light"
+  }
+]

@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/styles.css">
+  <script src="_ds/humanos-design-system-d139d61e-42c3-40a5-bbe8-86256f089249/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <script src="./globe.js"></script>
+  <script src="./scroll-stage.js"></script>
+  <style>
+    /* ── scroll stage ─────────────────────────────────────────
+       Components are transparent; the page as a whole carries the background
+       and crossfades between tones at a boundary. scroll-stage.js writes both
+       the body colour and the component opacities every frame, so there is
+       deliberately no CSS transition here — one would lag behind the scroll
+       instead of tracking it. */
+    /* The tone rides on a fixed backdrop, not on <body>: this page's body box
+       is zero-high (the design-system host lets content escape it), so a
+       background there only reached the first screen. html keeps the base
+       colour so overscroll never flashes white; body must stay transparent or
+       it would paint over the backdrop beneath it. */
+    html { background-color: var(--hm-clarity); }
+    body { background-color: transparent; }
+    /* Panels of a pinned section share one grid cell so they occupy the same
+       space, and cross-fade as the step changes. Before the first update no
+       panel carries data-active, so panel 0 is shown by default rather than
+       the section starting blank. */
+    /* The problem diagram is drawn entirely from the design system's
+       light-surface tokens — dark ink, hairline rules, a white card. Rather
+       than rewrite forty inline styles and the panel logic that generates the
+       rest, the tokens are re-pointed for this component alone, so the same
+       markup renders on a dark card. Values are v1's dark-section scale
+       (--rk-text / -2 / -3 and --rk-rule from its Risk section). */
+    [data-stage="problem"] {
+      --hm-authority: #F4F3EF;
+      --hm-ink-2: #B6B4AE;
+      --hm-ink-3: #B6B4AE;
+      --hm-ink-4: #8C8B89;
+      --hm-line: rgba(244, 243, 239, 0.12);
+      --hm-line-strong: rgba(244, 243, 239, 0.22);
+      /* indigo and red both lift for legibility on the dark card */
+      --hm-verification: #A9A6F5;
+      --hm-rejection: #E25750;
+      --hm-surface: #1F1F1D;
+    }
+
+    /* The hero and the customer strip are one component, and on desktop they
+       fill the screen together: the hero grows, the strip sits at the bottom
+       edge. Measured against the sticky site chrome rather than the raw
+       viewport, or the strip would be pushed below the fold by its height.
+       Left alone on smaller screens, where the content needs its own room. */
+    @media (min-width: 1000px) {
+      [data-stage="hero"] {
+        min-height: calc(100vh - var(--site-chrome-h, 0px));
+        /* Room at the foot for the floating bar, which is fixed and would
+           otherwise sit over the customer strip pinned to the bottom edge. */
+        padding-bottom: 104px;
+        box-sizing: border-box;
+      }
+    }
+
+    [data-step-panel] {
+      grid-area: 1 / 1;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 420ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-step-panel][data-active],
+    [data-sticky-steps]:not([data-step]) [data-step-panel="0"] {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-step-panel] { transition: none; }
+    }
+    [data-page-backdrop] {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+    a { color: var(--hm-verification); text-decoration: none; }
+    a:hover { color: var(--hm-authority); }
+    /* --hm-authority is the dark tone itself, so on a dark component the
+       default hover turns a link the colour of the page behind it. Lift it
+       instead of darkening it there. */
+    [data-tone="dark"] a:hover { color: #FFFFFF; }
+    div.sc-host[data-sc-name="Homepage"] { font-size: 0; }
+
+    /* ── customer marquee ──────────────────────────────────────
+       Cloned from the live site's Logos section. Two identical groups
+       scroll as one track; the animation translates by -50%, so the
+       second group is exactly where the first began and the seam is
+       never visible. */
+    .hmc-marquee {
+      position: relative;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+    .hmc-track {
+      display: flex;
+      width: max-content;
+      align-items: stretch;
+      animation: hmcScroll 70s linear infinite;
+      will-change: transform;
+    }
+    .hmc-marquee:hover .hmc-track { animation-play-state: paused; }
+    @keyframes hmcScroll {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+    .hmc-group { display: flex; flex: 0 0 auto; }
+    .hmc-cell {
+      flex: 0 0 auto;
+      width: 260px;
+      padding: 24px 28px;
+      box-sizing: border-box;
+      /* Fixed 3-row grid keeps the tag, brand and description slots on the
+         same baselines across every cell, whether the brand renders as an
+         image or as text. */
+      display: grid;
+      grid-template-rows: 16px 30px 32px;
+      row-gap: 12px;
+      justify-items: start;
+      align-content: center;
+      align-items: center;
+      border-right: 1px solid var(--hm-line);
+      text-decoration: none;
+      color: inherit;
+    }
+    .hmc-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--hm-ink-4);
+      font-weight: 500;
+      align-self: center;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    /* grayscale + brightness(0) collapses every logo to pure black; multiply
+       then dissolves white logo backgrounds into the cream page. */
+    .hmc-img {
+      display: block;
+      max-height: 30px;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      align-self: center;
+      object-fit: contain;
+      object-position: left center;
+      filter: grayscale(1) brightness(0);
+      mix-blend-mode: multiply;
+      opacity: 0.7;
+      transition: opacity 160ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    a.hmc-cell:hover .hmc-img { opacity: 1; }
+    .hmc-name {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--hm-authority);
+      transition: color 160ms cubic-bezier(0.2, 0, 0, 1);
+    }
+    a.hmc-cell:hover .hmc-name { color: var(--hm-verification); }
+    .hmc-desc {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      line-height: 1.4;
+      letter-spacing: 0.005em;
+      color: var(--hm-ink-2);
+      max-width: 100%;
+      align-self: start;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hmc-track { animation: none; }
+    }
+
+    /* ── hero globe ───────────────────────────────────────────
+       The canvas is square and centred; the panel it sits in is not, so
+       the wrapper does the centring and the canvas takes the smaller of
+       the two axes. */
+    .hmc-globe-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      /* a size container, so the canvas can ask for the smaller of the two
+         axes (cqmin) and stay square in a panel that is not */
+      container-type: size;
+    }
+    .hmc-globe {
+      width: 100cqmin;
+      height: 100cqmin;
+      display: block;
+    }
+    /* No container-query support: fall back to the panel's height, which is
+       the constrained axis in the hero's side-by-side layout. */
+    @supports not (container-type: size) {
+      .hmc-globe { width: auto; height: 100%; aspect-ratio: 1 / 1; }
+    }
+    @keyframes kriPanelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+      @keyframes eiPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.65; } }
+    @keyframes eiFloat { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-3px) rotate(var(--r, 0deg)); } }
+    @keyframes eiShimmer { 0% { left: -40%; } 100% { left: 100%; } }
+    @keyframes askFlow { to { background-position-y: 8px; } }
+    @keyframes nvFlowIn { to { stroke-dashoffset: -24; } }
+    @keyframes nvFlowOut { to { stroke-dashoffset: 24; } }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; flex-direction:column;">
+
+  <nav style="display:flex; align-items:center; justify-content:space-between; padding:0 var(--sp-5); height:72px; border-bottom:1px solid var(--hm-line); position:sticky; top:0; background:var(--hm-clarity); z-index:10; gap:var(--sp-3);">
+    <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+      <x-import component-from-global-scope="HumanosDesignSystem_d139d6.Mark" size="20" color="var(--hm-authority)" hint-size="20px,20px"></x-import>
+      <span style="font-size:16px; font-weight:600; letter-spacing:-0.01em; color:var(--hm-authority); white-space:nowrap;">Humanos</span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:var(--sp-4); white-space:nowrap; flex:1;">
+        <div style="position:relative;" onmouseenter="{{ openSolutions }}" onmouseleave="{{ closeSolutions }}">
+          <span style="display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--hm-ink-2); white-space:nowrap; cursor:pointer;">Solutions <span style="font-size:9px;">▾</span></span>
+          <div style="position:absolute; top:100%; left:0; padding-top:12px; opacity:{{ solutionsOpacity }}; pointer-events:{{ solutionsPointerEvents }}; transition:opacity 140ms cubic-bezier(0.2,0,0,1);">
+            <div style="display:flex; gap:32px; background:#FFFFFF; border:1px solid var(--hm-line); border-radius:8px; padding:20px 24px; box-shadow:0 12px 32px -16px rgba(17,17,17,0.18);">
+              <div>
+                <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700;">SOLUTIONS</div>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Monitor</a>
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Control</a>
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Risk Intelligence</a>
+                  <span style="display:inline-flex; align-items:center; gap:8px; font-size:14px; color:var(--hm-ink-4); white-space:nowrap;">Marketplace <span style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.07em; text-transform:uppercase; font-weight:700; color:var(--hm-verification); border:1px solid var(--hm-verification); border-radius:2px; padding:2px 5px;">Coming soon</span></span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--hm-ink-4); font-weight:700;">INDUSTRIES</div>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">AI Builders</a>
+                  <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Insurance</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" style="font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Customers</a>
+        <a href="#" style="display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Company <span style="font-size:9px;">▾</span></a>
+        <a href="#" style="display:inline-flex; align-items:center; gap:4px; font-size:14px; color:var(--hm-ink-2); white-space:nowrap;">Developers <span style="font-size:9px;">▾</span></a>
+    </div>
+    <div style="display:flex; align-items:center; gap:var(--sp-3); white-space:nowrap; flex-shrink:0;">
+      <a href="#" style="font-size:14px; color:var(--hm-ink-2); padding:10px 4px; white-space:nowrap;">Sign in</a>
+      <x-import component-from-global-scope="HumanosDesignSystem_d139d6.Button" variant="primary" style="padding:9px 14px; font-size:14px;" hint-size="auto,38px">Get API access</x-import>
+    </div>
+  </nav>
+
+  <!-- @component hero -->
+
+  <!-- @component problem -->
+
+  <!-- @component what-humanos-is -->
+
+  <!-- @component risk-management -->
+
+  <!-- @component risk-intelligence -->
+
+  <!-- @component risk-network -->
+
+  <!-- @component quotes -->
+
+  <!-- @component customer-stories -->
+
+
+  <!-- @component close -->
+  <div data-pill="1" style="{{ pillWrapStyle }}">
+    <div style="{{ pillTipStyle }}">
+      Click to copy a setup prompt for your AI coding tool
+      <span style="position:absolute; bottom:-5px; left:50%; margin-left:-5px; width:10px; height:10px; background:var(--hm-verification); transform:rotate(45deg);"></span>
+    </div>
+
+      <div ref="{{ setPillRef }}" onClick="{{ copyPrompt }}" onMouseOver="{{ tipOn }}" onMouseOut="{{ tipOff }}" style="{{ pillStyle }}">
+        <span style="{{ pillTextStyle }}">{{ pillText }}</span>
+        <span style="{{ pillSparkStyle }}">✦</span>
+        <div style="display:flex; align-items:center; gap:9px;">
+          <div onClick="{{ logoClaude.select }}" onMouseOver="{{ logoClaude.hoverOn }}" onMouseOut="{{ logoClaude.hoverOff }}" style="{{ logoClaude.style }}">
+            <div style="{{ logoClaude.capStyle }}">Claude Code</div>
+            <img src="logos/claude-symbol.webp" alt="Claude Code" style="{{ logoClaude.logoStyle }}">
+          </div>
+          <div onClick="{{ logoCursor.select }}" onMouseOver="{{ logoCursor.hoverOn }}" onMouseOut="{{ logoCursor.hoverOff }}" style="{{ logoCursor.style }}">
+            <div style="{{ logoCursor.capStyle }}">Cursor</div>
+            <img src="logos/cursor.png" alt="Cursor" style="{{ logoCursor.logoStyle }}">
+          </div>
+          <div onClick="{{ logoCodex.select }}" onMouseOver="{{ logoCodex.hoverOn }}" onMouseOut="{{ logoCodex.hoverOff }}" style="{{ logoCodex.style }}">
+            <div style="{{ logoCodex.capStyle }}">Codex</div>
+            <img src="logos/codex.png" alt="Codex" style="{{ logoCodex.logoStyle }}">
+          </div>
+          <div onClick="{{ logoWindsurf.select }}" onMouseOver="{{ logoWindsurf.hoverOn }}" onMouseOut="{{ logoWindsurf.hoverOff }}" style="{{ logoWindsurf.style }}">
+            <div style="{{ logoWindsurf.capStyle }}">Windsurf</div>
+            <img src="logos/windsurf.webp" alt="Windsurf" style="{{ logoWindsurf.logoStyle }}">
+          </div>
+        </div>
+      </div>
+  </div>
+
+</div></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static PROMPTS = {
+    Claude: "Install the Humanos SDK in this project and configure the Humanos Risk Score for its AI agents. Identify agent actions that create economic exposure and instrument them so Humanos can continuously risk-score their activity. Preserve existing agent behavior and controls, follow the official Humanos integration documentation, and verify that risk events are successfully reaching Humanos.",
+    Cursor: null,
+    Codex: null,
+    Windsurf: null,
+  };
+
+  static BASE_PROMPT = "Install the Humanos SDK in this project and configure the Humanos Risk Score for its AI agents. Identify agent actions that create economic exposure and instrument them so Humanos can continuously risk-score their activity. Preserve existing agent behavior and controls, follow the official Humanos integration documentation, and verify that risk events are successfully reaching Humanos.";
+
+  state = { progress: 0, progress2: 0, enfTick: 0, storyIdx: 0, solutionsOpen: false, agent: 'Claude', copied: false, tip: false, hoverAgent: null, pillClosed: false, narrow: typeof window !== 'undefined' && window.innerWidth < 720, probT: 0, solT: 0, kriStep: 0, kriT: 0, riWho: null, riT: 0, headT: 0 };
+
+  static PROB_EVENTS = [
+    { label: '+$50K payment', risk: 24, ok: false },
+    { label: 'New destination', risk: 41, ok: false },
+    { label: 'Human Authorization ✔', risk: 19, ok: true },
+    { label: 'Authority expanded', risk: 38, ok: false },
+    { label: 'Transaction limit enforced ✔', risk: 16, ok: true },
+    { label: 'Human Authorization missing', risk: 67, ok: false },
+    { label: 'Policy re-evaluated ✔', risk: 34, ok: true },
+    { label: 'New counterparty', risk: 52, ok: false },
+    { label: 'Scope narrowed ✔', risk: 21, ok: true },
+    { label: '+$180K payment', risk: 45, ok: false },
+  ];
+  /* Seconds per runtime event. The loop is the eleven steps that carry the
+     series across the chart, so both halve together to keep the cycle whole. */
+  static PROB_STEP = 0.965;
+  static PROB_LOOP = 0.965 * 11;
+
+  probVals() {
+    this.ensureClock();
+    const T = this.state.probT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const evs = Component.PROB_EVENTS;
+    const step = Component.PROB_STEP;
+    const ease = (x) => x < 0 ? 0 : x > 1 ? 1 : 1 - Math.pow(1 - x, 3);
+
+    const pts = [{ risk: 18 }];
+    for (let i = 0; i < evs.length; i++) pts.push({ risk: evs[i].risk, label: evs[i].label, ok: evs[i].ok, t: (i + 1) * step });
+
+    const idx = Math.min(evs.length, Math.floor(T / step));
+    /* Linear, deliberately: easing each step makes the head lunge then
+       crawl, which reads as stepping between points rather than a live
+       feed moving at a steady rate. */
+    const frac = Math.min(1, Math.max(0, (T - idx * step) / step));
+    const cur = idx === 0 ? 18 : pts[idx].risk;
+    const nxt = idx < evs.length ? pts[idx + 1].risk : cur;
+    const live = Math.round(cur + (nxt - cur) * frac);
+
+    // chart geometry
+    const W = 100, H = 100, n = evs.length + 1;
+    const xAt = (i) => (i / (n - 1)) * W;
+    const yAt = (r) => H - (Math.min(100, r) / 100) * H;
+
+    /* Every point in the series, not only those reached so far. A point's
+       curve depends on its neighbours, so if the ones ahead are unknown the
+       whole line reshapes itself each time the head passes an anchor. */
+    const anchors = [];
+    for (let i = 0; i < n; i++) anchors.push([xAt(i), yAt(pts[i].risk)]);
+
+    /* Catmull-Rom segment i -> i+1 as a cubic Bézier. Control points are
+       clamped to the plot box: the spline can otherwise overshoot past a
+       sharp peak and draw outside the chart. */
+    const cyc = (v) => Math.max(0, Math.min(H, v));
+    const segAt = (i) => {
+      const p0 = anchors[i - 1] || anchors[i], p1 = anchors[i];
+      const p2 = anchors[i + 1], p3 = anchors[i + 2] || anchors[i + 1];
+      return [
+        p1,
+        [p1[0] + (p2[0] - p0[0]) / 6, cyc(p1[1] + (p2[1] - p0[1]) / 6)],
+        [p2[0] - (p3[0] - p1[0]) / 6, cyc(p2[1] - (p3[1] - p1[1]) / 6)],
+        p2,
+      ];
+    };
+    /* De Casteljau — the exact piece of a cubic from its start up to t, so
+       the drawn line ends on the curve itself. Interpolating straight between
+       two anchors instead puts the head off the curve and turns a corner at
+       every point; this way position and direction stay continuous. */
+    const upTo = (b, t) => {
+      const at = (u, v) => [u[0] + (v[0] - u[0]) * t, u[1] + (v[1] - u[1]) * t];
+      const ab = at(b[0], b[1]), bc = at(b[1], b[2]), cd = at(b[2], b[3]);
+      const abc = at(ab, bc), bcd = at(bc, cd);
+      return [b[0], ab, abc, at(abc, bcd)];
+    };
+    const cTo = (b) =>
+      ' C' + b[1][0].toFixed(2) + ' ' + b[1][1].toFixed(2) + ',' +
+      b[2][0].toFixed(2) + ' ' + b[2][1].toFixed(2) + ',' +
+      b[3][0].toFixed(2) + ' ' + b[3][1].toFixed(2);
+
+    let d = 'M' + anchors[0][0].toFixed(2) + ' ' + anchors[0][1].toFixed(2);
+    let head = anchors[0];
+    for (let i = 0; i < idx; i++) { const b = segAt(i); d += cTo(b); head = b[3]; }
+    if (idx < n - 1 && frac > 0) { const b = upTo(segAt(idx), frac); d += cTo(b); head = b[3]; }
+
+    const h = React.createElement;
+    const chart = h('svg', {
+      viewBox: '0 0 100 100', preserveAspectRatio: 'none',
+      style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
+    }, [
+      ...[20, 40, 60, 80].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
+      h('line', {
+        key: 'now', x1: head[0], y1: 0, x2: head[0], y2: H,
+        stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke',
+      }),
+      h('path', { key: 'p', d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 2.4, strokeLinejoin: 'round', strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      ...anchors.slice(0, idx + 1).flatMap((p, i) => [
+        h('path', { key: 'mo' + i, d: 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-verification)', strokeWidth: 6, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+        h('path', { key: 'mi' + i, d: 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-surface, #FFFFFF)', strokeWidth: 3.4, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      ]),
+      h('path', {
+        key: 'cur',
+        d: 'M' + head[0].toFixed(2) + ' ' + head[1].toFixed(2) + 'l0 0',
+        stroke: 'var(--hm-verification)', strokeWidth: 8, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke',
+      }),
+    ]);
+
+    const startSec = 41 * 60 + 2;
+    const shown = [];
+    for (let i = Math.max(0, idx - 3); i < idx; i++) {
+      void 0;
+      const total = startSec + (i + 1) * 7;
+      const mm = String(Math.floor(total / 60)).padStart(2, '0');
+      const ss = String(total % 60).padStart(2, '0');
+      shown.push({
+        blank: false,
+        stamp: '10:' + mm + ':' + ss,
+        label: evs[i].label,
+        risk: 'RISK ' + evs[i].risk,
+        up: i === 0 ? false : evs[i].risk > evs[i - 1].risk,
+        ok: evs[i].ok,
+        fresh: i === idx - 1,
+      });
+    }
+    while (shown.length < 3) shown.unshift({ blank: true, stamp: '', label: '', risk: '', up: false, ok: false, fresh: false });
+
+    const probUp = idx === 0 ? false : nxt > cur || (idx >= evs.length && cur > (evs.length > 1 ? evs[evs.length - 2].risk : 18));
+    return {
+      probScore: String(live),
+      probScoreStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '48px', fontWeight: 700,
+        lineHeight: 1, letterSpacing: '-0.03em', fontVariantNumeric: 'tabular-nums',
+        color: probUp ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        transition: 'color 260ms ' + ez,
+      },
+      probChart: chart,
+      probDivergeText: '18 ≠ ' + live,
+      probDivergeStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+        letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+        color: 'var(--hm-verification)', border: '1px solid var(--hm-verification)',
+        borderRadius: '2px', padding: '3px 8px', marginLeft: 'auto',
+        opacity: idx >= 3 ? 1 : 0,
+        transition: 'opacity 300ms ' + ez,
+      },
+      probEvents: shown.map((e, i) => ({
+        stamp: e.stamp,
+        label: e.label,
+        risk: e.risk,
+        rowStyle: {
+          display: 'flex', alignItems: 'center', gap: '14px',
+          height: '25px', boxSizing: 'border-box', padding: '4px 0',
+          borderBottom: e.blank || i === shown.length - 1 ? 'none' : '1px solid var(--hm-line)',
+          opacity: e.blank ? 0 : (e.fresh ? Math.min(1, 0.35 + frac * 1.3) : 1),
+          transition: 'opacity 200ms linear',
+        },
+        riskStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+          marginLeft: 'auto', whiteSpace: 'nowrap',
+          color: e.up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        },
+      })),
+    };
+  }
+
+  static SOL_LOOP = 12.0;
+
+  solVals() {
+    this.ensureClock();
+    const T = this.state.solT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const seg = (a, b) => Math.min(1, Math.max(0, (T - a) / (b - a)));
+    const ease = (x) => 1 - Math.pow(1 - x, 3);
+    const fade = (at, dy) => ({
+      opacity: T >= at ? 1 : 0,
+      transform: T >= at ? 'translateY(0)' : 'translateY(' + (dy || 8) + 'px)',
+      transition: 'opacity 380ms ' + ez + ', transform 380ms ' + ez,
+    });
+    const wire = (a, b) => ({
+      position: 'relative', flex: '0 1 70px', minWidth: '24px', alignSelf: 'center', height: '1px',
+      background: T >= b ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+      transition: 'background 300ms ' + ez,
+    });
+    const dot = (a, b) => ({
+      position: 'absolute', top: '-3px', left: (seg(a, b) * 100) + '%',
+      width: '7px', height: '7px', marginLeft: '-3px', borderRadius: '50%',
+      background: 'var(--hm-verification)',
+      opacity: T >= a && T <= b + 0.15 ? 1 : 0,
+      transition: 'opacity 160ms linear',
+    });
+    const chip = (on, hero) => ({
+      fontFamily: 'var(--font-mono)', fontSize: '9.5px', fontWeight: 700,
+      letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+      padding: '5px 9px', borderRadius: '2px',
+      color: hero ? '#FFFFFF' : 'var(--hm-ink-2)',
+      background: hero ? 'var(--hm-verification)' : 'transparent',
+      border: '1px solid ' + (hero ? 'var(--hm-verification)' : 'var(--hm-line-strong)'),
+      opacity: on ? 1 : 0,
+      transform: on ? 'translateY(0)' : 'translateY(4px)',
+      transition: 'opacity 240ms ' + ez + ', transform 240ms ' + ez,
+    });
+
+    const rise = ease(seg(1.9, 2.7));
+    const drop = ease(seg(4.0, 4.9));
+    const score = Math.max(0, Math.round(38 * rise - 25 * drop));
+    const reduced = T >= 4.3;
+
+    const knowVals = [18, 24, 41, 19, 38, 26];
+    const knowIdx = Math.min(knowVals.length, Math.floor(seg(0.6, 5.6) * knowVals.length) + 1);
+
+    const redDrop = ease(seg(4.0, 4.9));
+    const redScore = Math.round(38 - 25 * redDrop);
+    const redCtrls = [
+      { t: 3.0, label: 'Human Authorization' },
+      { t: 3.5, label: 'Transaction Limit enforced' },
+      { t: 4.0, label: 'Runtime Policy applied' },
+    ];
+    const bidRows = [
+      { t: 6.4, name: 'Insurer A', terms: 'Bid received' },
+      { t: 7.0, name: 'Insurer B', terms: 'Bid received' },
+      { t: 7.6, name: 'Insurer C', terms: 'Bid received' },
+    ];
+
+    return {
+      solLeftStyle: { ...fade(0.3), flex: '0 1 210px', minWidth: 0, display: 'flex', flexDirection: 'column' },
+      solWire1Style: wire(1.0, 1.7),
+      solDot1Style: dot(1.0, 1.7),
+      solScoreStyle: {
+        ...fade(0.3), flex: '1.6 1 380px', minWidth: 0, boxSizing: 'border-box',
+        display: 'flex', flexDirection: 'column',
+        background: '#FFFFFF', borderRadius: '4px', padding: '20px 24px',
+        border: '1px solid var(--hm-verification)',
+        boxShadow: '0 14px 40px -20px rgba(75,73,202,0.55)',
+      },
+      solScore: String(score),
+      solBarStyle: {
+        position: 'absolute', left: 0, top: 0, bottom: 0, width: score + '%',
+        background: 'var(--hm-verification)', transition: 'width 160ms linear',
+      },
+      solReducedStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+        color: 'var(--hm-verification)', border: '1px solid var(--hm-verification)',
+        borderRadius: '2px', padding: '3px 7px',
+        opacity: reduced ? 1 : 0, transition: 'opacity 300ms ' + ez,
+      },
+      solCtrlStyle: {
+        ...fade(3.0, -6), boxSizing: 'border-box', width: '100%',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+        border: '1px solid ' + (reduced ? 'var(--hm-verification)' : 'var(--hm-line-strong)'),
+        background: reduced ? 'rgba(75,73,202,0.05)' : 'transparent',
+        borderRadius: '4px', padding: '12px 16px',
+        transition: 'opacity 380ms ' + ez + ', transform 380ms ' + ez + ', border-color 320ms ' + ez + ', background 320ms ' + ez,
+      },
+      solVertWireStyle: {
+        position: 'relative', width: '1px', height: '48px',
+        background: reduced ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+        opacity: T >= 3.3 ? 1 : 0,
+        transition: 'opacity 300ms ' + ez + ', background 300ms ' + ez,
+      },
+      solReduceLabelStyle: {
+        position: 'absolute', left: '12px', top: '2px', whiteSpace: 'nowrap',
+        fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--hm-verification)',
+        opacity: T >= 3.6 ? 1 : 0, transition: 'opacity 300ms ' + ez,
+      },
+      solVertDotStyle: {
+        position: 'absolute', left: '-3px', top: (seg(3.6, 4.2) * 100) + '%',
+        width: '7px', height: '7px', borderRadius: '50%', background: 'var(--hm-verification)',
+        opacity: T >= 3.6 && T <= 4.35 ? 1 : 0, transition: 'opacity 160ms linear',
+      },
+      solWire2Style: wire(5.4, 6.1),
+      solDot2Style: dot(5.4, 6.1),
+      solRightStyle: { ...fade(0.3), flex: '0 1 210px', minWidth: 0, display: 'flex', flexDirection: 'column' },
+
+    };
+  }
+
+  static RI_FEED = [
+    { label: 'AI identity verified', up: false, score: 27, field: 'Evidence', fv: 'Verifiable ✔' },
+    { label: '+$250K payment', up: true, score: 34, field: 'Residual exposure', fv: 'Moderate' },
+    { label: 'Delegated authority valid', up: false, score: 29, field: 'Authority risk', fv: 'Low' },
+    { label: 'New destination detected', up: true, score: 41, field: 'Residual exposure', fv: 'Elevated' },
+    { label: 'Human authorization missing', up: true, score: 47, field: 'Authority risk', fv: 'Elevated' },
+    { label: 'Human authorization collected', up: false, score: 26, field: 'Authority risk', fv: 'Low' },
+    { label: 'Transaction limit exceeded', up: true, score: 35, field: 'Runtime anomalies', fv: '2' },
+    { label: 'Runtime policy passed', up: false, score: 24, field: 'Control effectiveness', fv: '91%' },
+    { label: 'Scope denied: export PII', up: false, score: 18, field: 'Control effectiveness', fv: '94%' },
+    { label: 'Authority expanded', up: true, score: 27, field: 'Authority risk', fv: 'Moderate' },
+    { label: 'Transaction limit enforced', up: false, score: 21, field: 'Control effectiveness', fv: '96%' },
+    { label: 'New tool permission requested', up: true, score: 29, field: 'Residual exposure', fv: 'Moderate' },
+    { label: 'Anomalous execution detected', up: true, score: 38, field: 'Runtime anomalies', fv: '3' },
+    { label: 'Runtime policy passed', up: false, score: 27, field: 'Runtime anomalies', fv: '1' },
+  ];
+  static RI_STEP = 1.7;
+  static RI_WHO = [
+    { who: 'Insurer', rows: ['Risk trend', 'Residual exposure', 'Control effectiveness', 'Evidence'], decisions: ['Underwrite', 'Price', 'Monitor', 'Investigate claims'] },
+    { who: 'Bank', rows: ['Risk trend', 'Authority risk', 'Exposure vs limit', 'Runtime anomalies'], decisions: ['Approve agents', 'Set limits', 'Monitor exposure', 'Review incidents'] },
+    { who: 'Compliance', rows: ['Policy adherence', 'Control effectiveness', 'Exceptions', 'Evidence'], decisions: ['Verify policy adherence', 'Monitor controls', 'Investigate exceptions', 'Produce evidence'] },
+    { who: 'Auditor', rows: ['Evidence', 'Authorization trace', 'Control coverage', 'Runtime anomalies'], decisions: ['Verify what happened', 'Review controls', 'Trace authorization', 'Access evidence'] },
+  ];
+  static RI_LOOP = 1.7 * 20;
+
+  static ASK = [
+    {
+      num: '01', who: 'Insurer', q: 'Should I underwrite this risk?',
+      verdictLabel: 'Underwrite', verdict: 'Yes ✓', metricLabel: 'Risk', metric: '21 / 100',
+      rows: [
+        { k: 'Trend', v: '↓ 8 pts / 30 days' },
+        { k: 'Control effectiveness', v: '96%' },
+        { k: 'Evidence', v: 'Verified ✓' },
+        { k: 'Claim scope', v: 'Within authorized scope ✓' },
+      ],
+    },
+    {
+      num: '02', who: 'Bank', q: 'Should I approve this agent or action?',
+      verdictLabel: 'Approve', verdict: 'Yes ✓', metricLabel: 'Agent risk', metric: '12 / 100',
+      rows: [
+        { k: 'Identity', v: 'Verified ✓' },
+        { k: 'Authority', v: 'Verified ✓' },
+        { k: 'Transaction', v: '$18,000', neutral: true },
+        { k: 'Authorized limit', v: '$50,000', neutral: true },
+      ],
+    },
+    {
+      num: '03', who: 'Compliance', q: 'Is this activity within policy?',
+      verdictLabel: 'Compliant', verdict: 'Yes ✓', metricLabel: 'Policy adherence', metric: '99.7%',
+      rows: [
+        { k: 'Control effectiveness', v: '96%' },
+        { k: 'Exceptions', v: '1', neutral: true },
+        { k: 'Review required', v: '1 exception', neutral: true },
+        { k: 'Evidence', v: 'Verifiable ✓' },
+      ],
+    },
+    {
+      num: '04', who: 'Audit', q: 'Can I verify what actually happened?',
+      verdictLabel: 'Execution', verdict: 'Verified ✓', metricLabel: 'Action', metric: '+$18K',
+      rows: [
+        { k: 'Identity', v: 'Verified ✓' },
+        { k: 'Authority', v: 'Verified ✓' },
+        { k: 'Policy', v: 'Passed ✓' },
+        { k: 'Execution receipt', v: 'Available ✓' },
+      ],
+    },
+    {
+      num: '05', who: 'Enterprise risk', q: 'Where is our AI exposure increasing?',
+      verdictLabel: 'Highest increase', verdict: 'Treasury', metricLabel: 'Treasury agents', metric: '↑ 18%',
+      rows: [
+        { k: 'Primary driver', v: 'Payment actions', neutral: true },
+        { k: 'Agents requiring review', v: '3', neutral: true },
+        { k: 'Portfolio risk', v: '27 / 100 ↑', neutral: true },
+        { k: 'Evidence', v: 'Continuous ✓' },
+      ],
+    },
+  ];
+
+  setAskStep(n) {
+    if ((this.state.askStep || 0) === n) return;
+    this.setState({ askStep: n, askPulse: Date.now() });
+  }
+
+  askVals() {
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const active = this.state.askStep || 0;
+    const a = Component.ASK[active];
+    return {
+      askItems: Component.ASK.map((it, i) => {
+        const on = i === active;
+        return {
+          num: it.num, who: it.who, q: it.q,
+          select: () => this.setAskStep(i),
+          style: {
+            display: 'flex', gap: '16px', cursor: 'pointer', alignItems: 'flex-start',
+            padding: '16px 16px 16px 14px',
+            borderTop: '1px solid rgba(255,255,255,0.14)',
+            borderBottom: i === Component.ASK.length - 1 ? '1px solid rgba(255,255,255,0.14)' : 'none',
+            borderLeft: '2px solid ' + (on ? '#A9A6F5' : 'transparent'),
+            background: on ? 'rgba(169,166,245,0.12)' : 'transparent',
+            transition: 'background 220ms ' + ez + ', border-color 220ms ' + ez,
+          },
+          numStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.09em', paddingTop: '3px',
+            color: on ? '#A9A6F5' : '#7A78AE',
+          },
+          whoStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+            letterSpacing: '0.09em', textTransform: 'uppercase',
+            color: '#F4F3EF',
+          },
+          qStyle: {
+            fontSize: '15px', lineHeight: 1.45,
+            color: on ? '#F4F3EF' : '#C7C5E8',
+          },
+        };
+      }),
+      askQuery: a.q,
+      askVerdictLabel: a.verdictLabel,
+      askVerdict: a.verdict,
+      askMetricLabel: a.metricLabel,
+      askMetric: a.metric,
+      askRows: a.rows.map((r, i) => ({
+        k: r.k, v: r.v,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px',
+          padding: '13px 0', borderBottom: '1px solid var(--hm-line)',
+        },
+        vStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '12.5px', fontWeight: 700,
+          textAlign: 'right',
+          color: r.neutral ? 'var(--hm-authority)' : 'var(--hm-verification)',
+        },
+      })),
+      askBodyStyle: {
+        display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0,
+        animation: 'kriPanelIn 380ms ' + ez + ' both',
+        key: active,
+      },
+      askNodeStyle: {
+        width: '84px', height: '84px', borderRadius: '3px',
+        background: 'var(--hm-verification)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '8px', boxSizing: 'border-box',
+      },
+      askWireInStyle: {
+        width: '1px', flex: 1, minHeight: '40px',
+        backgroundImage: 'linear-gradient(to bottom, var(--hm-verification) 50%, transparent 50%)',
+        backgroundSize: '1px 8px',
+        animation: 'askFlow 1.4s linear infinite',
+      },
+      askWireOutStyle: {
+        width: '1px', flex: 1, minHeight: '40px',
+        backgroundImage: 'linear-gradient(to bottom, var(--hm-verification) 50%, transparent 50%)',
+        backgroundSize: '1px 8px',
+        animation: 'askFlow 1.4s linear infinite',
+      },
+    };
+  }
+
+  riVals() {
+    this.ensureClock();
+    const T = this.state.riT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+    const feed = Component.RI_FEED;
+    const N = feed.length;
+    const step = Component.RI_STEP;
+    const i = Math.floor(T / step);
+    const frac = (T - i * step) / step;
+    const cur = feed[((i % N) + N) % N];
+    const prevE = feed[(((i - 1) % N) + N) % N];
+
+    const score = Math.round(prevE.score + (cur.score - prevE.score) * ease(frac / 0.45));
+    const up = cur.up;
+    const fresh = frac < 0.28;
+
+    const rows = [];
+    for (let k = 0; k < 6; k++) {
+      const ev = feed[(((i - k) % N) + N) % N];
+      const total = 38400 + (i - k) * 4;
+      const mm = Math.floor(total / 60) % 60;
+      const ss = total % 60;
+      const hh = Math.floor(total / 3600) % 24;
+      rows.push({ e: ev, k, stamp: String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0') });
+    }
+
+    const base = {
+      'Risk trend': up ? 'Elevating' : 'Improving',
+      'Authority risk': 'Moderate',
+      'Control effectiveness': '88%',
+      'Residual exposure': 'Moderate',
+      'Runtime anomalies': '1',
+      'Evidence': 'Verifiable ✔',
+    };
+    for (let k = rows.length - 1; k >= 0; k--) {
+      const ev = rows[k].e;
+      if (ev.field) base[ev.field] = ev.fv;
+    }
+    base['Risk trend'] = up ? 'Elevating' : 'Improving';
+    base['Exposure vs limit'] = '62% of limit';
+    base['Policy adherence'] = '100%';
+    base['Exceptions'] = base['Runtime anomalies'];
+    base['Authorization trace'] = 'Complete ✔';
+    base['Control coverage'] = base['Control effectiveness'];
+
+    const autoIdx = Math.floor(T / 4.2) % Component.RI_WHO.length;
+    const whoIdx = this.state.riWho == null ? autoIdx : this.state.riWho;
+    const who = Component.RI_WHO[whoIdx];
+    const pulseP = Math.min(1, frac / 0.5);
+
+    return {
+      setRiRef: this.setRiRef,
+      riWhoLabel: who.who,
+      riStakeholders: Component.RI_WHO.map((p, idx) => {
+        const on = idx === whoIdx;
+        return {
+          who: p.who,
+          select: () => this.setState({ riWho: idx }),
+          style: {
+            fontFamily: 'var(--font-mono)', fontSize: '11.5px', fontWeight: 700,
+            letterSpacing: '0.09em', textTransform: 'uppercase', whiteSpace: 'nowrap', cursor: 'pointer',
+            padding: '8px 14px', borderRadius: '2px',
+            color: on ? '#FFFFFF' : '#C7C5E8',
+            background: on ? 'var(--hm-verification)' : 'transparent',
+            border: '1px solid ' + (on ? 'var(--hm-verification)' : 'rgba(255,255,255,0.22)'),
+            transition: 'color 240ms ' + ez + ', background 240ms ' + ez + ', border-color 240ms ' + ez,
+          },
+        };
+      }),
+      riDecisions: who.decisions.map((d) => ({
+        label: d,
+        style: {
+          fontFamily: 'var(--font-mono)', fontSize: '11.5px', fontWeight: 700,
+          letterSpacing: '0.04em', color: 'var(--hm-authority)',
+          borderLeft: '2px solid var(--hm-verification)', padding: '10px 0 10px 14px',
+        },
+      })),
+      riEvents: rows.map((r) => {
+        const isNew = r.k === 0;
+        return {
+          stamp: r.stamp,
+          label: r.e.label,
+          labelStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '11px',
+            fontWeight: isNew && frac < 0.3 ? 700 : 500,
+            color: r.e.up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+            minWidth: 0, flex: '1 1 auto',
+          },
+          style: {
+            display: 'flex', alignItems: 'center', gap: '10px', height: '36px',
+            boxSizing: 'border-box', padding: '6px 0',
+            borderBottom: '1px solid var(--hm-line)',
+            background: isNew && frac < 0.28 ? (r.e.up ? 'rgba(243,121,126,0.10)' : 'rgba(75,73,202,0.08)') : 'transparent',
+            transform: isNew && frac < 0.12 ? 'translateY(-4px)' : 'translateY(0)',
+            transition: 'background 320ms linear, transform 180ms ' + ez,
+          },
+        };
+      }),
+      riWireStyle: { position: 'relative', flex: '1 1 auto', minWidth: '14px', height: '1px', background: 'rgba(255,255,255,0.28)' },
+      riDotAStyle: {
+        position: 'absolute', top: '-3px', left: (pulseP * 100) + '%',
+        width: '7px', height: '7px', marginLeft: '-3px', borderRadius: '50%',
+        background: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        opacity: frac < 0.55 ? 1 : 0, transition: 'opacity 160ms linear',
+      },
+      riDotBStyle: { display: 'none' },
+      riWire2Style: { position: 'relative', flex: '1 1 auto', minWidth: '14px', height: '1px', background: 'var(--hm-verification)' },
+      riDotCStyle: {
+        position: 'absolute', top: '-3px', left: (Math.max(0, (frac - 0.35) / 0.45) * 100) + '%',
+        width: '7px', height: '7px', marginLeft: '-3px', borderRadius: '50%',
+        background: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        opacity: frac > 0.32 && frac < 0.85 ? 1 : 0, transition: 'opacity 160ms linear',
+      },
+      riCoreStyle: {
+        boxSizing: 'border-box', flex: '1 1 auto', minWidth: 0, maxWidth: '108px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+        background: 'var(--hm-verification)', borderRadius: '4px', padding: '14px 12px',
+        boxShadow: '0 10px 28px -18px rgba(75,73,202,0.7)',
+      },
+      riCardStyle: {
+        flex: '1.2 1 300px', minWidth: 0, boxSizing: 'border-box', height: '340px',
+        display: 'flex', flexDirection: 'column',
+        border: '1px solid var(--hm-verification)', borderRadius: '4px',
+        background: '#FFFFFF', padding: '22px 26px',
+        boxShadow: '0 0 0 ' + (fresh ? 3 : 1) + 'px rgba(75,73,202,' + (fresh ? 0.1 : 0.05) + '), 0 14px 40px -24px rgba(75,73,202,0.45)',
+        transition: 'box-shadow 400ms ' + ez,
+      },
+      riScore: String(score),
+      riScoreStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '44px', fontWeight: 700,
+        lineHeight: 1, letterSpacing: '-0.035em', fontVariantNumeric: 'tabular-nums',
+        color: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        transition: 'color 260ms ' + ez,
+      },
+      riArrow: up ? '↑' : '↓',
+      riArrowStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '18px', fontWeight: 700,
+        color: up ? 'var(--hm-rejection)' : 'var(--hm-verification)',
+        transition: 'color 260ms ' + ez,
+      },
+      riRows: who.rows.map((k, idx) => {
+        const hot = (k === cur.field || k === 'Risk trend') && frac < 0.6;
+        return {
+          k, v: base[k],
+          style: {
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            gap: '12px', height: '38px', boxSizing: 'border-box', padding: '7px 0',
+            borderBottom: idx < who.rows.length - 1 ? '1px solid var(--hm-line)' : 'none',
+          },
+          vStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+            color: hot ? (up ? 'var(--hm-rejection)' : 'var(--hm-verification)') : 'var(--hm-authority)',
+            transition: 'color 400ms ' + ez,
+          },
+        };
+      }),
+    };
+  }
+
+  setRiRef = (el) => {
+    if (!el || el === this.riEl) return;
+    this.riEl = el;
+    if (this.riObs) this.riObs.disconnect();
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (typeof IntersectionObserver === 'undefined') return;
+    this.riObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (e) this.riVisible = e.isIntersecting;
+    }, { threshold: [0, 0.15] });
+    this.riObs.observe(this.riEl);
+  };
+
+  static KRI_LOOP = 28.0;
+  static KRI_SPAN = 7.0;
+  static KRI_STEPS = [
+    { num: '01 — Know', short: 'Know', title: 'Know your risk.', desc: 'Continuously measure how your agents operate and what creates risk.' },
+    { num: '02 — Prove', short: 'Prove', title: 'Prove your risk.', desc: 'Build a verifiable risk history backed by signed runtime activity.' },
+    { num: '03 — Control', short: 'Control', title: 'Control your risk.', desc: 'Set permissions, limits and approvals to reduce risk in real time.' },
+    { num: '04 — Unlock', short: 'Unlock', title: 'Unlock with your risk.', desc: 'Use your verified risk reputation to access credit, insurance, yield and more.' },
+  ];
+  static KRI_CONTROLS = [
+    { t: 1.0, label: 'Human authorization', delta: '−6' },
+    { t: 1.5, label: 'Transaction limits', delta: '−8' },
+    { t: 2.0, label: 'Delegated authority', delta: '−5' },
+    { t: 2.5, label: 'Runtime policy', delta: '−6' },
+  ];
+  static KRI_OFFERS = [
+    { t: 0, name: 'Credit', detail: '$250K available', price: '8.2% APR', action: 'View offer' },
+    { t: 0.9, name: 'Insurance', detail: '$5M coverage', price: '$6,750 / mo', action: 'View offer' },
+    { t: 1.7, name: 'Yield', detail: 'Up to $500K', price: '6.4% APY', action: 'View offer' },
+    { t: 2.4, name: 'More', detail: 'New risk-based products', price: '', action: 'Explore' },
+  ];
+  static KRI_TRACK = [22, 19, 26, 21, 17, 24, 18, 15, 20, 16, 13];
+
+  /* One-card carousel step with an invisible wrap: while the slide runs
+     the index may sit one past the real set (-1 or 3 — the track carries
+     a clone card past each tip), and once it settles it re-anchors
+     modulo 3 with the transition suppressed for a single frame. */
+  storyStep(d) {
+    if (this.storyLock) return;
+    this.storyLock = true;
+    this.setState(s => ({ storyIdx: s.storyIdx + d }));
+    window.clearTimeout(this.storyTimer);
+    this.storyTimer = window.setTimeout(() => {
+      this.storyLock = false;
+      const v = this.state.storyIdx;
+      const n = ((v % 3) + 3) % 3;
+      if (n === v) return;
+      this.storySnap = true;
+      this.setState({ storyIdx: n }, () => {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+          this.storySnap = false;
+          this.forceUpdate();
+        }));
+      });
+    }, 480);
+  }
+
+  kriChart(prog) {
+    /* Same treatment as the problem section's chart: the full series is
+       splined once (Catmull-Rom, clamped to the box), and the reveal cuts
+       the final segment with De Casteljau so the head stays on the curve. */
+    const pts = Component.KRI_TRACK;
+    const n = pts.length;
+    const W = 100, H = 100;
+    const xAt = (i) => (i / (n - 1)) * W;
+    const yAt = (v) => (1 - (v - 8) / 26) * H;
+    const anchors = [];
+    for (let i = 0; i < n; i++) anchors.push([xAt(i), yAt(pts[i])]);
+    const cyc = (v) => Math.max(0, Math.min(H, v));
+    const segAt = (i) => {
+      const p0 = anchors[i - 1] || anchors[i], p1 = anchors[i];
+      const p2 = anchors[i + 1], p3 = anchors[i + 2] || anchors[i + 1];
+      return [
+        p1,
+        [p1[0] + (p2[0] - p0[0]) / 6, cyc(p1[1] + (p2[1] - p0[1]) / 6)],
+        [p2[0] - (p3[0] - p1[0]) / 6, cyc(p2[1] - (p3[1] - p1[1]) / 6)],
+        p2,
+      ];
+    };
+    const upTo = (b, t) => {
+      const at = (u, v) => [u[0] + (v[0] - u[0]) * t, u[1] + (v[1] - u[1]) * t];
+      const ab = at(b[0], b[1]), bc = at(b[1], b[2]), cd = at(b[2], b[3]);
+      const abc = at(ab, bc), bcd = at(bc, cd);
+      return [b[0], ab, abc, at(abc, bcd)];
+    };
+    const cTo = (b) =>
+      ' C' + b[1][0].toFixed(2) + ' ' + b[1][1].toFixed(2) + ',' +
+      b[2][0].toFixed(2) + ' ' + b[2][1].toFixed(2) + ',' +
+      b[3][0].toFixed(2) + ' ' + b[3][1].toFixed(2);
+
+    const t = Math.max(0, Math.min(1, prog)) * (n - 1);
+    const idx = Math.floor(t);
+    const frac = t - idx;
+    let d = 'M' + anchors[0][0].toFixed(2) + ' ' + anchors[0][1].toFixed(2);
+    let head = anchors[0];
+    for (let i = 0; i < idx; i++) { const b = segAt(i); d += cTo(b); head = b[3]; }
+    if (idx < n - 1 && frac > 0) { const b = upTo(segAt(idx), frac); d += cTo(b); head = b[3]; }
+
+    const el = React.createElement;
+    return el('svg', {
+      viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', key: 'kc',
+      style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
+    }, [
+      ...[26, 17].map((v) => el('line', { key: 'g' + v, x1: 0, x2: W, y1: yAt(v), y2: yAt(v), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
+      el('line', { key: 'v', x1: head[0], x2: head[0], y1: 0, y2: H, stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke' }),
+      el('path', { key: 'p', d: d, fill: 'none', stroke: 'var(--hm-verification)', strokeWidth: 2.4, strokeLinejoin: 'round', strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+      el('path', { key: 'c', d: 'M' + head[0].toFixed(2) + ' ' + head[1].toFixed(2) + 'l0 0', stroke: 'var(--hm-verification)', strokeWidth: 8, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke' }),
+    ]);
+  }
+
+  kriVals() {
+    this.ensureClock();
+    const T = this.state.kriT || 0;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const clamp = (x) => Math.min(1, Math.max(0, x));
+    const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+    const span = Component.KRI_SPAN;
+
+    /* The reader drives the steps with the buttons alone: the panel plays
+       its build once when selected (or when the section is first seen) and
+       then holds — no scroll choreography, no auto-advance. */
+    const active = this.state.kriStep || 0;
+    const p = this.kriHold
+      ? Math.min(span, (Date.now() - this.kriHold) / 1000)
+      : Math.min(span, T);
+
+    const knowProg = clamp(p / 4.2);
+    const knowScore = Component.KRI_TRACK[Math.max(0, Math.min(Component.KRI_TRACK.length - 1, Math.round((Component.KRI_TRACK.length - 1) * knowProg)))];
+    const reduceScore = Math.round(38 - 25 * ease((p - 2.8) / 1.6));
+
+    const panel = (idx) => ({
+      display: active === idx ? 'flex' : 'none',
+      flexDirection: 'column', flex: 1, minHeight: 0,
+      animation: 'kriPanelIn 420ms ' + ez + ' both',
+    });
+
+    const verbs = ['Know', 'Prove', 'Control', 'Insure'];
+    const hT = this.state.headT || 0;
+    const vIdx = Math.floor(hT / 2.2) % verbs.length;
+    const vFrac = (hT - Math.floor(hT / 2.2) * 2.2) / 2.2;
+
+    return {
+      setKriRef: this.setKriRef,
+      kriStepLabel: Component.KRI_STEPS[active].num,
+      kriVerb: verbs[vIdx],
+      kriVerbStyle: {
+        color: 'var(--hm-verification)', display: 'inline-block',
+        opacity: vFrac < 0.08 || vFrac > 0.94 ? 0 : 1,
+        transform: vFrac < 0.08 ? 'translateY(6px)' : 'translateY(0)',
+        transition: 'opacity 200ms ' + ez + ', transform 200ms ' + ez,
+      },
+      kriSteps: Component.KRI_STEPS.map((s, i) => {
+        const on = i === active;
+        return {
+          num: s.num, short: s.short, title: s.title, desc: s.desc,
+          select: () => this.setKriStep(i),
+          style: {
+            display: 'flex', flexDirection: 'column', gap: '7px', cursor: 'pointer',
+            padding: '18px 0 18px 22px',
+            borderLeft: '2px solid ' + (on ? 'var(--hm-verification)' : 'var(--hm-line)'),
+            alignItems: 'flex-start',
+            transition: 'border-color 260ms ' + ez,
+          },
+          numStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '10.5px', fontWeight: 700,
+            letterSpacing: '0.09em', textTransform: 'uppercase',
+            color: on ? 'var(--hm-verification)' : 'var(--hm-ink-4)',
+            transition: 'color 260ms ' + ez,
+          },
+          titleStyle: {
+            fontSize: '22px', fontWeight: 600, letterSpacing: '-0.018em',
+            display: 'inline-block',
+            color: '#F4F3EF',
+            background: on ? 'var(--hm-verification)' : 'var(--hm-authority)',
+            padding: '3px 10px',
+            transition: 'color 260ms ' + ez + ', background 260ms ' + ez,
+          },
+          descStyle: { fontSize: '14.5px', lineHeight: 1.55, color: on ? 'var(--hm-ink-2)' : 'var(--hm-ink-3)', maxWidth: '34ch' },
+        };
+      }),
+
+      knowPanelStyle: panel(0),
+      provePanelStyle: panel(1),
+      proveChart: this.kriChart(1),
+      knowScore: String(knowScore),
+      knowChart: this.kriChart(knowProg),
+      knowDrivers: [
+        { label: 'Identity & authority', val: 'Low' },
+        { label: 'Financial exposure', val: 'Medium' },
+        { label: 'Control effectiveness', val: 'Strong' },
+        { label: 'Runtime anomalies', val: 'None' },
+      ].map((d, i) => ({
+        label: d.label, val: d.val,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '12px 0', borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === 3 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= 0.5 + i * 0.3 ? 1 : 0,
+          transform: p >= 0.5 + i * 0.3 ? 'translateY(0)' : 'translateY(5px)',
+          transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez,
+        },
+        valStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700,
+          letterSpacing: '0.07em', textTransform: 'uppercase',
+          color: d.val === 'Medium' ? 'var(--hm-ink-3)' : 'var(--hm-verification)',
+        },
+      })),
+      proveRows: [
+        { label: 'Risk history', val: '184 days', authority: true },
+        { label: 'Identity', val: 'Verified ✓' },
+        { label: 'Authority', val: 'Verified ✓' },
+        { label: 'Controls', val: 'Verified ✓' },
+        { label: 'Runtime evidence', val: 'Continuous ✓' },
+      ].map((r, i) => ({
+        label: r.label, val: r.val,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '9px 0', borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === 4 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= 0.4 + i * 0.22 ? 1 : 0,
+          transition: 'opacity 300ms ' + ez,
+        },
+        valStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+          color: r.authority ? 'var(--hm-authority)' : 'var(--hm-verification)',
+        },
+      })),
+      proveAudience: ['Customers', 'Banks', 'Insurers', 'Partners'].map((label, i) => ({
+        label,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '11px 0', borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === 3 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= 1.0 + i * 0.3 ? 1 : 0.2,
+          transition: 'opacity 320ms ' + ez,
+        },
+      })),
+
+      reducePanelStyle: panel(2),
+      reduceScore: String(reduceScore),
+      reduceBadgeStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '10.5px', fontWeight: 700, marginTop: '10px',
+        letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--hm-verification)',
+        opacity: p >= 4.2 ? 1 : 0, transition: 'opacity 320ms ' + ez,
+      },
+      reduceControls: Component.KRI_CONTROLS.map((c, i) => ({
+        label: c.label, delta: c.delta,
+        style: {
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+          padding: '12px 0',
+          borderTop: '1px solid var(--hm-line)',
+          borderBottom: i === Component.KRI_CONTROLS.length - 1 ? '1px solid var(--hm-line)' : 'none',
+          opacity: p >= c.t ? 1 : 0.18,
+          transition: 'opacity 300ms ' + ez,
+        },
+        deltaStyle: {
+          fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+          color: 'var(--hm-verification)',
+          opacity: p >= c.t + 0.2 ? 1 : 0, transition: 'opacity 300ms ' + ez,
+        },
+      })),
+
+      insurePanelStyle: panel(3),
+      insureOffers: Component.KRI_OFFERS.map((o, i) => {
+        return {
+          name: o.name, detail: o.detail, price: o.price, action: o.action,
+          tagStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+            letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'right',
+            color: 'var(--hm-verification)',
+          },
+          style: {
+            display: 'grid', gridTemplateColumns: '92px 1fr auto 76px', alignItems: 'center', gap: '14px',
+            padding: '12px 14px', marginBottom: '6px', borderRadius: '3px',
+            border: '1px solid var(--hm-line)',
+            opacity: p >= o.t ? 1 : 0,
+            transform: p >= o.t ? 'translateY(0)' : 'translateY(6px)',
+            transition: 'opacity 320ms ' + ez + ', transform 320ms ' + ez,
+          },
+          priceStyle: {
+            fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700,
+            color: 'var(--hm-verification)',
+          },
+        };
+      }),
+      insureBestStyle: {
+        marginTop: 'auto', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap',
+        background: 'var(--hm-verification)', borderRadius: '4px', padding: '20px 22px',
+        opacity: p >= 3.8 ? 1 : 0,
+        transform: p >= 3.8 ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 380ms ' + ez + ', transform 380ms ' + ez,
+      },
+    };
+  }
+
+  setKriStep(n) {
+    this.kriHold = Date.now();
+    this.setState({ kriStep: n });
+  }
+
+  /* While a section is pinned, its step is chosen by how far you have
+     scrolled through its runway rather than by any timer. Every
+     [data-sticky-steps] runway is driven the same way; a runway holding
+     [data-step-panel] children cross-fades them, and the risk-management one
+     additionally feeds the React panel state it already had. */
+  updateStickySteps = () => {
+    const runways = document.querySelectorAll('[data-sticky-steps]');
+    for (const runway of runways) {
+      const steps = parseInt(runway.getAttribute('data-sticky-steps'), 10) || 1;
+      const r = runway.getBoundingClientRect();
+      const travel = r.height - window.innerHeight;
+      if (travel <= 0) continue;
+
+      const p = Math.min(1, Math.max(0, -r.top / travel));
+      /* The last step needs the same share of the runway as the others, so
+         the final stretch is not a single scroll position. */
+      const step = Math.min(steps - 1, Math.floor(p * steps));
+      const pinned = r.top <= 0 && r.bottom >= window.innerHeight;
+
+      if (runway.getAttribute('data-step') !== String(step)) {
+        runway.setAttribute('data-step', String(step));
+        const panels = runway.querySelectorAll('[data-step-panel]');
+        for (const panel of panels) {
+          const on = panel.getAttribute('data-step-panel') === String(step);
+          if (on) panel.setAttribute('data-active', '');
+          else panel.removeAttribute('data-active');
+        }
+      }
+
+      if (this.kriEl && runway.contains(this.kriEl)) {
+        this.kriPinned = pinned;
+        if (step !== this._kriScrollStep) {
+          this._kriScrollStep = step;
+          this.setKriStep(step);
+        }
+      }
+    }
+  };
+
+  setKriRef = (el) => {
+    if (!el || el === this.kriEl) return;
+    this.kriEl = el;
+    if (this.kriObs) this.kriObs.disconnect();
+    if (typeof IntersectionObserver === 'undefined') return;
+    this.kriObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (e) this.kriVisible = e.isIntersecting;
+    }, { threshold: [0, 0.2] });
+    this.kriObs.observe(this.kriEl);
+  };
+
+
+  setSolRef = (el) => {
+    if (!el || el === this.solEl) return;
+    this.solEl = el;
+    if (this.solObs) this.solObs.disconnect();
+    if (this.riObs) this.riObs.disconnect();
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (typeof IntersectionObserver === 'undefined') return;
+    this.solObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (e) this.solVisible = e.isIntersecting;
+    }, { threshold: [0, 0.2] });
+    this.solObs.observe(this.solEl);
+  };
+
+  /* Customers, cloned from the live site's Logos section. `src` is relative so
+     the page still resolves them when opened straight from the export; the
+     one entry without a logo falls back to its name via `textOnly`. */
+  static CUSTOMERS = [
+    { tag: 'Agentic governance', name: 'Coalex', src: 'logos/customers/coalex.png', desc: 'AI governance & oversight', href: 'https://coalex.ai' },
+    { tag: 'Insurance', name: 'Fidelidade', src: 'logos/customers/fidelidade.png', desc: '7M customers · 14 geos', href: 'https://www.fidelidade.pt/en' },
+    { tag: 'Healthcare', name: 'Lusíadas', src: 'logos/customers/lusiadas.png.webp', desc: '60+ hospitals and clinics', href: 'https://www.lusiadas.pt/en' },
+    { tag: 'Healthcare', name: 'Joaquim Chaves', src: 'logos/customers/joaquim_chaves.svg', desc: '300+ clinics', href: 'https://jcs.pt/en' },
+    { tag: 'Banking', name: 'numo', src: 'logos/customers/numo.png', desc: 'Agentic Treasury Management', href: 'https://usenumo.com/' },
+    { tag: 'Healthtech', name: 'Bloodflow', src: 'logos/customers/bloodflow.png', desc: 'Clinical Intelligence Layer', href: 'https://www.bloodflow.eu/' },
+    { tag: 'Healthtech', name: 'medify', src: 'logos/customers/medify.png', desc: '+30 hospitals', href: 'https://medify.eu/' },
+    { tag: 'Software House', name: 'Critical Software', src: null, desc: 'Defense · Finance · Insurance', href: 'http://criticalsoftware.com/en' },
+    { tag: 'EHR', name: 'Ciberbit', src: 'logos/customers/ciberbit.png', desc: '100+ hospitals and clinics', href: 'https://ciberbit.pt' },
+    { tag: 'ERP Automation', name: 'Extraflow', src: 'logos/customers/extraflow.svg', desc: 'ERP Automation', href: 'https://extraflow.ai/en' },
+    { tag: 'Agentic Payments', name: 'Ralio', src: 'logos/customers/ralio.webp', desc: 'B2B Agentic Payments', href: 'https://ralio.co' },
+    { tag: 'Agentic Payments', name: 'Paymove', src: 'logos/customers/paymove.png', desc: '500K+ users across Europe', href: 'https://www.paymove.io' },
+    { tag: 'Agent Orchestrator', name: 'DataWhisper', src: 'logos/customers/data_whisper.webp', desc: 'Multi-Agent AI System', href: 'https://www.datawhisper.co.uk' },
+  ];
+
+  /* Assets named by a binding rather than a literal src cannot be rewritten
+     when the export is published, so the publisher leaves a base here and we
+     resolve against it. Absent (opened straight from the export), the paths
+     stay relative and resolve as they always did. */
+  static assetBase() {
+    if (typeof document === 'undefined') return '';
+    const m = document.querySelector('meta[name="v2-asset-base"]');
+    return (m && m.getAttribute('content')) || '';
+  }
+
+  customerCells() {
+    const base = Component.assetBase();
+    /* sc-if has no else, so the image and the text fallback are two
+       independent conditions and exactly one is truthy per row. */
+    return Component.CUSTOMERS.map((c) => ({
+      ...c,
+      src: c.src ? base + c.src : null,
+      textOnly: !c.src,
+    }));
+  }
+
+  /* The page background follows the section being read. Mounted against the
+     document rather than through a ref: refs fire bottom-up as React attaches
+     nodes, so a ref on the outer wrapper races the helmet script that defines
+     the module. Scoping to <body> sidesteps the ordering entirely. */
+  mountScrollTone() {
+    if (this.toneHandle || typeof window === 'undefined') return;
+    if (!window.HumanosScrollStage) {
+      /* helmet scripts can still be loading; try again on the next tick */
+      if ((this._toneTries = (this._toneTries || 0) + 1) <= 40) setTimeout(() => this.mountScrollTone(), 50);
+      return;
+    }
+    this.toneHandle = window.HumanosScrollStage.mount(document.body);
+  }
+
+  /* The globe owns its own frame loop and observers inside globe.js; this
+     just hands it the canvas React gave us and tears the old one down if
+     React ever hands us a different node. */
+  setGlobeRef = (el) => {
+    if (el === this.globeEl) return;
+    if (this.globeHandle) { this.globeHandle.destroy(); this.globeHandle = null; }
+    this.globeEl = el;
+    if (el && typeof window !== 'undefined' && window.HumanosGlobe) {
+      this.globeHandle = window.HumanosGlobe.mount(el);
+    }
+  };
+
+  setProbRef = (el) => {
+    if (!el || el === this.probEl) return;
+    this.probEl = el;
+    this.observeProb();
+  };
+
+  observeProb() {
+    if (this.probObs) { this.probObs.disconnect(); this.probObs = null; }
+    if (!this.probEl || typeof IntersectionObserver === 'undefined') return;
+    this.probObs = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      if (!e) return;
+      this.probVisible = e.isIntersecting;
+    }, { threshold: [0, 0.2] });
+    this.probObs.observe(this.probEl);
+  }
+
+  ensureClock() {
+    this._clk = this._clk || { prob: 0, sol: 0, kri: 0, ri: 0, last: null, at: 0 };
+    // watchdog: re-arm if the scheduler was stranded (hot reload, cleared timers)
+    if (Date.now() - (this._clk.at || 0) > 300) this.armClock();
+  }
+
+  armClock() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    const self = this;
+    const frame = function () {
+      self._raf = requestAnimationFrame(frame);
+      self.clockTick();
+    };
+    this._raf = requestAnimationFrame(frame);
+    this._timer = setInterval(function () { self.clockTick(); }, 120);
+  }
+
+  clockTick = () => {
+    const C = this._clk;
+    if (!C) return;
+    const now = Date.now();
+    if (now - (C.at || 0) < 45) return;
+    C.at = now;
+    if (C.last == null) C.last = now;
+    const dt = Math.min(0.25, (now - C.last) / 1000);
+    C.last = now;
+    if (this.probVisible !== false) { C.prob += dt; if (C.prob >= Component.PROB_LOOP) C.prob = 0; }
+    if (this.solVisible !== false) { C.sol += dt; if (C.sol >= Component.SOL_LOOP) C.sol = 0; }
+    if (this.riVisible !== false) { C.ri += dt; if (C.ri >= Component.RI_LOOP) C.ri = 0; }
+    C.dev = (C.dev || 0) + dt;
+    if (C.dev >= 5.2) { C.dev = 0; this.advanceDevTab(); }
+    this.updatePillTone();
+    C.head = (C.head || 0) + dt;
+    if (C.head >= 8.8) C.head = 0;
+    if (this.kriVisible === true) { C.kri += dt; if (C.kri >= Component.KRI_LOOP) C.kri = 0; }
+    this.setState({ probT: C.prob, solT: C.sol, kriT: C.kri, riT: C.ri, headT: C.head });
+  };
+
+  startProb() { this.ensureClock(); }
+
+  stopProb() {}
+
+  agentIcon(key, color, size) {
+    const h = React.createElement;
+    const sz = size || 17;
+    const svg = (children) => h('svg', { width: sz, height: sz, viewBox: '0 0 24 24', fill: 'none', stroke: color, strokeWidth: 1.6, strokeLinecap: 'round', style: { display: 'block' } }, children);
+    if (key === 'Claude') return svg([
+      h('line', { key: 'a', x1: 12, y1: 4, x2: 12, y2: 20 }),
+      h('line', { key: 'b', x1: 4, y1: 12, x2: 20, y2: 12 }),
+      h('line', { key: 'c', x1: 6.3, y1: 6.3, x2: 17.7, y2: 17.7 }),
+      h('line', { key: 'd', x1: 17.7, y1: 6.3, x2: 6.3, y2: 17.7 }),
+    ]);
+    if (key === 'Cursor') return svg([
+      h('path', { key: 'a', d: 'M12 3.5 20 8v8l-8 4.5L4 16V8z' }),
+      h('path', { key: 'b', d: 'M4 8l8 4.5 8-4.5' }),
+      h('line', { key: 'c', x1: 12, y1: 12.5, x2: 12, y2: 20.5 }),
+    ]);
+    if (key === 'Codex') return svg([
+      h('rect', { key: 'a', x: 3.5, y: 4.5, width: 17, height: 15, rx: 2 }),
+      h('path', { key: 'b', d: 'M8 10l2.6 2.4L8 14.8' }),
+      h('line', { key: 'c', x1: 12.8, y1: 15, x2: 16.5, y2: 15 }),
+    ]);
+    return svg([
+      h('path', { key: 'a', d: 'M12 3.5v12' }),
+      h('path', { key: 'b', d: 'M12 4.2c4.2 1.9 6.4 5.1 6.8 9.3H12z' }),
+      h('path', { key: 'c', d: 'M4 19.2c1.8-1.4 3.3-1.4 5 0 1.7 1.4 3.3 1.4 5 0 1.7-1.4 3.2-1.4 5 0' }),
+    ]);
+  }
+
+  installVals() {
+    const agents = [
+      { name: 'Claude Code', key: 'Claude' },
+      { name: 'Cursor', key: 'Cursor' },
+      { name: 'Codex', key: 'Codex' },
+      { name: 'Windsurf', key: 'Windsurf' },
+    ];
+    const sel = this.state.agent;
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const copied = this.state.copied;
+    const copy = (key) => {
+      const text = Component.PROMPTS[key] || Component.BASE_PROMPT;
+      try {
+        if (navigator.clipboard) navigator.clipboard.writeText(text);
+        else {
+          const ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove();
+        }
+      } catch (e) {}
+      this.setState({ copied: true, agent: key });
+      clearTimeout(this._copyTimer);
+      this._copyTimer = setTimeout(() => this.setState({ copied: false }), 1700);
+    };
+    const mkLogo = (key) => {
+      const hov = this.state.hoverAgent === key;
+      const on = key === sel;
+      const hidden = this.state.narrow && key === 'Windsurf';
+      return {
+        select: (e) => { if (e && e.stopPropagation) e.stopPropagation(); copy(key); },
+        hoverOn: () => this.setState({ hoverAgent: key }),
+        hoverOff: () => this.setState((st) => (st.hoverAgent === key ? { hoverAgent: null } : null)),
+        logoStyle: {
+          width: '22px', height: '22px', display: 'block',
+          color: 'var(--hm-verification)',
+          opacity: hov ? 1 : (on ? 0.95 : 0.7),
+          filter: (!this._pillDark && key !== 'Claude') ? 'invert(1)' : 'none',
+          transition: 'opacity 140ms ' + ez,
+        },
+        style: {
+          position: 'relative', flex: '0 0 auto',
+          width: '22px', height: '22px',
+          display: hidden ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center',
+          cursor: 'pointer',
+        },
+        capStyle: {
+          position: 'absolute', bottom: 'calc(100% + 10px)', left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '5px 9px', borderRadius: '999px',
+          background: 'var(--hm-authority)',
+          fontFamily: 'var(--font-mono)', fontSize: '9.5px',
+          letterSpacing: '0.05em', textTransform: 'uppercase', fontWeight: 700,
+          color: '#FFFFFF', whiteSpace: 'nowrap',
+          opacity: hov ? 1 : 0,
+          transition: 'opacity 120ms ' + ez,
+          pointerEvents: 'none',
+        },
+      };
+    };
+    return {
+      pillWrapStyle: {
+        position: 'fixed', left: 0, right: 0, bottom: '20px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
+        pointerEvents: 'none', zIndex: 60,
+      },
+      pillTipStyle: {
+        position: 'relative',
+        padding: '6px 12px',
+        borderRadius: '999px',
+        background: 'var(--hm-verification)',
+        boxShadow: '0 8px 20px -14px rgba(75,73,202,0.5)',
+        fontSize: '11px',
+        color: '#FFFFFF',
+        whiteSpace: 'nowrap',
+        opacity: this.state.tip ? 1 : 0,
+        transform: this.state.tip ? 'translateY(0)' : 'translateY(4px)',
+        transition: 'opacity 120ms ' + ez + ', transform 120ms ' + ez,
+      },
+      pillStyle: {
+        pointerEvents: 'auto',
+        display: 'flex', alignItems: 'center', gap: '14px',
+        height: '44px', padding: '0 10px 0 18px',
+        borderRadius: '999px', cursor: 'pointer',
+        background: this._pillDark ? '#FFFFFF' : 'var(--hm-authority)',
+        boxShadow: '0 2px 4px rgba(17,17,17,0.10), 0 18px 40px -16px rgba(75,73,202,0.45)',
+        transition: 'background 180ms ' + ez,
+      },
+      pillText: copied ? 'Setup prompt copied ✓' : "Click to know your agent's Risk Score in seconds",
+      pillTextStyle: {
+        fontSize: '15px', fontWeight: 400, whiteSpace: 'nowrap',
+        color: this._pillDark ? 'var(--hm-authority)' : '#F4F3EF',
+        transition: 'color 180ms ' + ez,
+      },
+      tipOn: () => this.setState({ tip: true }),
+      tipOff: () => this.setState({ tip: false }),
+      copyPrompt: () => copy(sel),
+      pillSparkStyle: {
+        fontSize: '11px', color: 'rgba(75,73,202,0.45)', lineHeight: 1, flex: '0 0 auto',
+      },
+      logoClaude: mkLogo('Claude'),
+      logoCursor: mkLogo('Cursor'),
+      logoCodex: mkLogo('Codex'),
+      logoWindsurf: mkLogo('Windsurf'),
+    };
+  }
+
+  updateNarrow = () => {
+    const n = window.innerWidth < 720;
+    if (n !== this.state.narrow) this.setState({ narrow: n });
+  };
+
+  updateProgress = () => {
+    const vh = window.innerHeight;
+    const updates = {};
+    if (this.sectionEl) {
+      const rect = this.sectionEl.getBoundingClientRect();
+      const total = rect.height - vh;
+      const p = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+      if (p !== this.state.progress) updates.progress = p;
+    }
+    if (this.section2El) {
+      const rect2 = this.section2El.getBoundingClientRect();
+      const total2 = rect2.height - vh;
+      const p2v = total2 > 0 ? Math.min(1, Math.max(0, -rect2.top / total2)) : 0;
+      if (p2v !== this.state.progress2) updates.progress2 = p2v;
+    }
+    if (Object.keys(updates).length) this.setState(updates);
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.updateProgress, { passive: true });
+    window.addEventListener('resize', this.updateProgress);
+    window.addEventListener('resize', this.updateNarrow);
+    window.addEventListener('resize', this.forceUpdate.bind(this, undefined));
+    window.addEventListener('scroll', this.updatePillTone, { passive: true });
+    window.addEventListener('resize', this.updatePillTone);
+    this.updateProgress();
+    this.updatePillTone();
+    this.enfTimer = setInterval(() => this.setState(s => ({ enfTick: s.enfTick + 1 })), 60);
+    this.mountScrollTone();
+    window.addEventListener('scroll', this.updateStickySteps, { passive: true });
+    window.addEventListener('resize', this.updateStickySteps);
+    this.updateStickySteps();
+    this.ensureClock();
+  }
+
+  updatePillTone = () => {
+    if (typeof document === 'undefined' || !document.elementsFromPoint) return;
+    const y = window.innerHeight - 58;
+    const x = Math.round(window.innerWidth / 2);
+    let stack = [];
+    try { stack = document.elementsFromPoint(x, y) || []; } catch (e) { return; }
+    /* Sampling first, so a component that paints its own surface — the quote
+       block — still decides the tone under the bar. <html> and <body> are
+       skipped: they hold the base colour and never change, so reaching them
+       means nothing was painted here and the page's own tone is the answer.
+       The backdrop cannot be sampled at all, since it takes no pointer
+       events, which is why it publishes data-page-tone instead. */
+    let dark = null;
+    for (let i = 0; i < stack.length; i++) {
+      const el = stack[i];
+      if (el === document.documentElement || el === document.body) continue;
+      if (el.closest && el.closest('[data-pill]')) continue;
+      if (el.hasAttribute && el.hasAttribute('data-page-backdrop')) continue;
+      const bg = window.getComputedStyle(el).backgroundColor;
+      const m = bg && bg.match(/rgba?\(([^)]+)\)/);
+      if (!m) continue;
+      const p = m[1].split(',').map(function (v) { return parseFloat(v); });
+      if (p.length > 3 && p[3] < 0.6) continue;
+      const lum = (0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]) / 255;
+      dark = lum < 0.5;
+      break;
+    }
+    if (dark === null) {
+      dark = document.documentElement.getAttribute('data-page-tone') === 'dark';
+    }
+    this._pillDark = dark;
+    this.paintPillTone(dark);
+  };
+
+  setPillRef = (el) => {
+    this.pillEl = el || null;
+    if (el) this.paintPillTone(this._pillDark);
+  };
+
+  paintPillTone(dark) {
+    const el = this.pillEl;
+    if (!el) return;
+    el.style.background = dark ? '#FFFFFF' : '#111111';
+    const txt = el.firstElementChild;
+    if (txt) txt.style.color = dark ? '#111111' : '#F4F3EF';
+    const imgs = el.querySelectorAll('img');
+    for (let i = 0; i < imgs.length; i++) {
+      const isClaude = (imgs[i].getAttribute('alt') || '').indexOf('Claude') === 0;
+      imgs[i].style.filter = (!dark && !isClaude) ? 'invert(1)' : 'none';
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.updatePillTone);
+    window.removeEventListener('resize', this.updatePillTone);
+    window.removeEventListener('scroll', this.updateProgress);
+    window.removeEventListener('resize', this.updateProgress);
+    window.removeEventListener('resize', this.updateNarrow);
+    window.removeEventListener('scroll', this.updateStickySteps);
+    window.removeEventListener('resize', this.updateStickySteps);
+    clearInterval(this.enfTimer);
+    this.stopProb();
+    if (this.probObs) this.probObs.disconnect();
+    if (this.solObs) this.solObs.disconnect();
+    if (this.riObs) this.riObs.disconnect();
+    if (this.globeHandle) { this.globeHandle.destroy(); this.globeHandle = null; }
+    if (this.toneHandle) { this.toneHandle.destroy(); this.toneHandle = null; }
+    if (this._timer) clearInterval(this._timer);
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+
+  enforceCardStyle() {
+    const t = this.stageT2(0.06, 0.14);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', bottom: '24px', left: '24px', width: '270px',
+      background: '#FFFFFF', border: '1px solid var(--hm-authority)', borderRadius: 8, padding: '20px',
+      opacity: t * (1 - ex), transform: `translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  enforcementVals() {
+    const CYCLE = 7200;
+    const elapsed = Date.now() % CYCLE;
+    const phaseBlocked = elapsed < 3600;
+    const local = phaseBlocked ? elapsed : elapsed - 3600;
+    const clamp01 = x => Math.min(1, Math.max(0, x));
+    const lerp = (a, b) => clamp01((local - a) / (b - a));
+    const rejection = '#F3797E', verified = '#4B49CA', dimBorder = '#C9C4B7';
+    const dark = '#111111';
+    const overallFade = 1 - lerp(3200, 3600);
+    const decided = local >= 900;
+
+    const pulse1T = lerp(0, 900);
+    const pulse2T = lerp(1000, 1900);
+
+    const enfLine1DotOpacity = (phaseBlocked ? 1 : (local < 1000 ? 1 : 0)) * overallFade;
+    const enfLine2DotOpacity = (!phaseBlocked && local >= 1000 && local < 1900 ? 1 : 0) * overallFade;
+
+    const enfBoxColor = (decided && !phaseBlocked) ? this.mixColor(overallFade, dimBorder, verified) : dimBorder;
+    const enfAllowColor = (!phaseBlocked && decided) ? this.mixColor(overallFade, dark, verified) : dark;
+    const enfBlockColor = (phaseBlocked && decided) ? this.mixColor(overallFade, dark, rejection) : dark;
+    const enfTargetDotColor = (!phaseBlocked && local >= 1900) ? this.mixColor(overallFade, dimBorder, verified) : dimBorder;
+
+    return {
+      enfLine1DotTop: 24 + Math.min(pulse1T, 1) * 34 - 3.5,
+      enfLine1DotOpacity,
+      enfLine2DotTop: 118 + pulse2T * 34 - 3.5,
+      enfLine2DotOpacity,
+      enfConnector2Color: (!phaseBlocked && decided) ? this.mixColor(overallFade, dimBorder, verified) : dimBorder,
+      enfBoxColor,
+      enfAllowColor,
+      enfBlockColor,
+      enfTargetDotColor,
+    };
+  }
+
+  p2() {
+    return Math.min(1, Math.max(0, (this.state.progress - 0.20) / (1 - 0.20)));
+  }
+
+  layerAStyle() {
+    const t = 1 - Math.min(1, Math.max(0, (this.state.progress - 0.10) / (0.20 - 0.10)));
+    return {
+      position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '0 var(--sp-7)', opacity: t, transition: 'opacity 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  layerBStyle() {
+    const t = Math.min(1, Math.max(0, (this.state.progress - 0.10) / (0.20 - 0.10)));
+    return {
+      position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      padding: '0 var(--sp-7)', opacity: t, transition: 'opacity 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  stageT(start, end) {
+    const p = this.p2();
+    return end > start ? Math.min(1, Math.max(0, (p - start) / (end - start))) : (p >= start ? 1 : 0);
+  }
+
+  cardStyle(start, end, width, maxHeight, minHeight) {
+    const t = this.stageT(start, end);
+    return {
+      background: '#161514',
+      border: '1px solid var(--hm-line-strong)',
+      borderRadius: 8,
+      padding: '16px 16px',
+      flex: '0 0 auto',
+      width: width || 210,
+      minHeight: minHeight || 'min(300px, 38vh)',
+      maxHeight: maxHeight || '42vh',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      boxShadow: '0 16px 40px -14px rgba(0,0,0,0.7)',
+      opacity: t,
+      transform: `translate(${(1 - t) * -28}px, ${(1 - t) * 16}px)`,
+      transition: 'opacity 260ms cubic-bezier(0.2,0,0,1), transform 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  rowWrapperStyle() {
+    const t = 1 - this.stageT(0.32, 0.46);
+    return {
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--sp-7)', width: '100%',
+      maxHeight: `${t * 220}px`,
+      overflow: 'hidden',
+      opacity: t,
+      transition: 'opacity 280ms cubic-bezier(0.2,0,0,1), max-height 280ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  messageStyle() {
+    const t = this.stageT(0.54, 0.66);
+    return {
+      marginTop: 'var(--sp-7)',
+      maxHeight: `${t * 200}px`,
+      overflow: 'hidden',
+      opacity: t,
+      transform: `translateY(${(1 - t) * 12}px)`,
+      transition: 'opacity 300ms cubic-bezier(0.2,0,0,1), transform 300ms cubic-bezier(0.2,0,0,1), max-height 300ms cubic-bezier(0.2,0,0,1)',
+      textAlign: 'center',
+    };
+  }
+
+  moduleStyle() {
+    const t = this.stageT(0.00, 0.14);
+    return {
+      textAlign: 'center',
+      background: '#161514',
+      border: '1px solid var(--hm-line-strong)',
+      borderRadius: 8,
+      padding: '10px 16px',
+      flex: '0 0 40%',
+      maxWidth: 300,
+      boxShadow: '0 12px 28px -12px rgba(0,0,0,0.5)',
+      opacity: t,
+      transform: `translateY(${(1 - t) * 12}px)`,
+      transition: 'opacity 260ms cubic-bezier(0.2,0,0,1), transform 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  introStyle() {
+    const t = this.stageT(0.00, 0.14);
+    return {
+      flex: '0 0 56%',
+      maxWidth: 380,
+      textAlign: 'left',
+      opacity: t,
+      transform: `translateY(${(1 - t) * 12}px)`,
+      transition: 'opacity 260ms cubic-bezier(0.2,0,0,1), transform 260ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  connectorStyle() {
+    const p = this.p2();
+    const t = Math.min(1, Math.max(0, (p - 0.62) / (0.76 - 0.62)));
+    return { opacity: t * 0.6, transition: 'opacity 300ms cubic-bezier(0.2,0,0,1)' };
+  }
+
+  resolvedT() {
+    return this.stageT(0.76, 0.98);
+  }
+
+  stageT2(start, end) {
+    // extra scroll headroom (~1.5s) is appended to section2's height as a hold;
+    // rescale raw progress so existing animation timing is unaffected and only the tail holds longer.
+    const p = Math.min(1, this.state.progress2 * (305 / 175));
+    return end > start ? Math.min(1, Math.max(0, (p - start) / (end - start))) : (p >= start ? 1 : 0);
+  }
+
+  pinStyle2() {
+    const base = { left: 0, right: 0, height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' };
+    if (this.state.progress2 <= 0) return { ...base, position: 'absolute', top: 0 };
+    if (this.state.progress2 >= 1) return { ...base, position: 'absolute', bottom: 0 };
+    return { ...base, position: 'fixed', top: 0 };
+  }
+
+  boxScale() {
+    const vh = window.innerHeight || 900;
+    return Math.min(1, (vh * 0.88) / 820);
+  }
+
+  section2WrapStyle() {
+    return { position: 'relative', height: '305vh', background: '#F4F3EF' };
+  }
+
+  statementColor() {
+    return '#111111';
+  }
+
+  statementFadeStyle() {
+    const t = this.stageT2(0.10, 0.22);
+    return { opacity: t, transition: 'opacity 320ms cubic-bezier(0.2,0,0,1)' };
+  }
+
+  guardrailVals() {
+    const BLOCK_LEN = 4500, ALLOW_LEN = 9000;
+    const CYCLE = BLOCK_LEN + ALLOW_LEN;
+    const elapsed = (this.state.enfTick * 60) % CYCLE;
+    const blockedPhase = elapsed < BLOCK_LEN;
+    const phaseLen = blockedPhase ? BLOCK_LEN : ALLOW_LEN;
+    const local = blockedPhase ? elapsed : elapsed - BLOCK_LEN;
+    const clamp01 = x => Math.min(1, Math.max(0, x));
+    const lerp = (a, b) => clamp01((local - a) / (b - a));
+    const rejection = '#F3797E', verified = '#4B49CA';
+    const overallFade = 1 - lerp(phaseLen - 400, phaseLen);
+
+    const labels = ['AI Identity', 'Organization', 'Delegated Authority', 'Human Authorization', 'Runtime Policy'];
+    const starts = [700, 1000, 1300, 1600, 1900];
+    const guardrails = labels.map((label, i) => {
+      const t = lerp(starts[i], starts[i] + 200);
+      const bad = i === 4 && blockedPhase;
+      return { label, opacity: t * overallFade, tick: t >= 1 ? (bad ? '✕' : '✓') : '', color: bad ? rejection : verified };
+    });
+
+    const decisionT = lerp(2300, 2600);
+    return {
+      guardrails,
+      guardrailDecisionOpacity: decisionT * overallFade,
+      guardrailDecisionColor: blockedPhase ? rejection : verified,
+      guardrailDecisionText: decisionT > 0 ? (blockedPhase ? 'BLOCK' : 'ALLOW') : '',
+      guardrailTargetOpacity: (!blockedPhase && local >= 3000 ? 1 : 0) * overallFade,
+    };
+  }
+
+  moduleBase() {
+    return {
+      background: '#FFFFFF',
+      border: '1px solid var(--hm-line)',
+      borderRadius: 8,
+      padding: '14px 16px',
+      boxShadow: '0 1px 0 var(--hm-line), 0 1px 2px rgba(17,17,17,0.06)',
+    };
+  }
+
+  moduleFade(start, end, extra) {
+    const t = this.stageT2(start, end);
+    const baseTransform = extra.transform ? extra.transform + ' ' : '';
+    return {
+      ...this.moduleBase(),
+      position: 'absolute',
+      ...extra,
+      opacity: t,
+      transform: `${baseTransform}translateY(${(1 - t) * 14}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  exitT() {
+    // fade grid/cards out only right at the very end of the section's actual scroll,
+    // not tied to the (rescaled) content-animation progress — so they persist through the hold.
+    const p = this.state.progress2;
+    return Math.min(1, Math.max(0, (p - 0.97) / (1 - 0.97)));
+  }
+
+  gridBgStyle() {
+    const ex = this.exitT();
+    return {
+      position: 'absolute', inset: 0,
+      backgroundImage: 'linear-gradient(var(--hm-line) 1px, transparent 1px), linear-gradient(90deg, var(--hm-line) 1px, transparent 1px)',
+      backgroundSize: '60px 60px', backgroundPosition: 'center',
+      opacity: 1 - ex, transform: `translateY(${-ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  panelCodeStyle() {
+    const t = this.stageT2(0.10, 0.20);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', top: '50px', left: '50px', width: '360px', transformOrigin: 'top left',
+      background: '#FFFFFF', border: '1px solid var(--hm-authority)', borderRadius: 8, padding: '16px 20px',
+      opacity: t * (1 - ex), transform: `scale(0.78) translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  checklistItems2() {
+    const rows = [
+      { label: 'Verified AI Identity', rejected: false },
+      { label: 'Trusted Organization', rejected: false },
+      { label: 'Delegated Authority', rejected: false },
+      { label: 'Valid Human Authorization', rejected: true },
+      { label: 'Runtime Policy', rejected: false },
+    ];
+    const verified = '#4B49CA';
+    const rejection = '#F3797E';
+    const humanResolveT = this.stageT2(0.76, 0.90);
+    return rows.map((row, i) => {
+      const start = 0.14 + i * 0.05;
+      const t = this.stageT2(start, start + 0.05);
+      if (row.rejected) {
+        const color = t >= 1 ? this.mixColor(humanResolveT, rejection, verified) : this.mixColor(t, '#8F8D85', rejection);
+        const tick = t >= 1 ? (humanResolveT >= 1 ? '✓' : '✕') : '';
+        return { label: row.label, boxColor: color, tick };
+      }
+      return { label: row.label, boxColor: this.mixColor(t, '#8F8D85', verified), tick: t >= 1 ? '✓' : '' };
+    });
+  }
+
+  riskIntelStyle() {
+    const t = this.stageT2(0.44, 0.54);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', bottom: '24px', right: '24px', width: '486px',
+      background: 'linear-gradient(135deg, #38369E, #4B49CA)', border: '1px solid rgba(244,243,239,0.15)', borderRadius: 8, padding: '20px 26px',
+      opacity: t * (1 - ex), transform: `translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  riskIntelVals() {
+    const labels = ['Identity', 'Authorization', 'Policy', 'Execution'];
+    const riskSignals = labels.map((label, i) => {
+      const start = 0.46 + i * 0.02;
+      return { label, opacity: this.stageT2(start, start + 0.02) };
+    });
+    return { riskSignals, riskOutputOpacity: this.stageT2(0.52, 0.56) };
+  }
+
+  panelHumanAuthStyle() {
+    const t = this.stageT2(0.30, 0.40);
+    const ex = this.exitT();
+    return {
+      position: 'absolute', top: '90px', right: '60px', width: '300px',
+      background: '#FFFFFF', border: '1px solid var(--hm-authority)', borderRadius: 8, padding: '18px 20px',
+      opacity: t * (1 - ex), transform: `translateY(${(1 - t) * 14 - ex * 60}px)`,
+      transition: 'opacity 320ms cubic-bezier(0.2,0,0,1), transform 320ms cubic-bezier(0.2,0,0,1)',
+    };
+  }
+
+  connectorLineStyle() {
+    const t = this.stageT2(0.32, 0.40);
+    return { opacity: t * 0.6, transition: 'opacity 320ms cubic-bezier(0.2,0,0,1)' };
+  }
+
+  humanAuthVals() {
+    const humanResolveT = this.stageT2(0.76, 0.90);
+    const rejection = '#F3797E';
+    const verified = '#4B49CA';
+    return {
+      humanAuthColor: this.mixColor(humanResolveT, rejection, verified),
+      humanAuthGlyph: humanResolveT >= 1 ? '✓' : '✕',
+      requestingOpacity: 1 - humanResolveT,
+      humanAuthCollectedOpacity: humanResolveT,
+      humanAuthButtonLabel: humanResolveT >= 1 ? 'AUTHORIZED' : 'WAITING',
+    };
+  }
+  riskSignalVals() {
+    const CYCLE = 18000;
+    const elapsed = (this.state.enfTick * 60) % CYCLE;
+    const idx = Math.floor(elapsed / 6000);
+    const local = elapsed % 3000;
+    const t = Math.min(1, local / 260);
+
+    const states = [
+      { s: 'INSURER', c: 'RISK WITHIN INSURED ENVELOPE', r: [['SCOPE COMPLIANCE', '100%'], ['UNAUTHORIZED EXECUTIONS', '0'], ['ENVELOPE UTILIZATION', '62%'], ['CHAIN INTEGRITY', 'VERIFIED']] },
+      { s: 'COMPLIANCE', c: 'RUNTIME POLICY COMPLIED WITH', r: [['AUTHORIZATION VALID', 'YES'], ['POLICY CHECKS PASSED', '100%'], ['COMPLIANCE STATUS', 'VERIFIED']] },
+      { s: 'AUDITOR', c: 'EXECUTION INDEPENDENTLY VERIFIED', r: [['IDENTITY TRACEABLE', 'YES'], ['AUTHORIZATION TRACEABLE', 'YES'], ['EXECUTION INTEGRITY', 'VERIFIED']] },
+    ];
+    const st = states[idx] || states[0];
+    return {
+      riSignalStakeholder: st.s,
+      riSignalConclusion: st.c,
+      riSignalRow1Label: st.r[0][0], riSignalRow1Value: st.r[0][1],
+      riSignalRow2Label: st.r[1][0], riSignalRow2Value: st.r[1][1],
+      riSignalRow3Label: st.r[2][0], riSignalRow3Value: st.r[2][1],
+      riSignalRow4Label: st.r[3] ? st.r[3][0] : null, riSignalRow4Value: st.r[3] ? st.r[3][1] : null,
+      riSignalOpacity: t,
+      riSignalTransform: `translateY(${(1 - t) * 6}px)`,
+    };
+  }
+
+  panelProofStyle() { return this.moduleFade(0.55, 0.68, { top: '500px', left: '50%', width: '300px', transform: 'translateX(-50%)' }); }
+  panelPolicyStyle() { return this.moduleFade(0.62, 0.72, { top: '640px', left: '60px', width: '300px' }); }
+  panelScoreStyle() { return this.moduleFade(0.68, 0.80, { top: '640px', right: '60px', width: '260px' }); }
+
+  static DEV_TABS = [
+    { key: 'score', label: 'Score risk' },
+    { key: 'intel', label: 'Get intelligence' },
+    { key: 'guard', label: 'Guardrails' },
+    { key: 'enforce', label: 'Enforce' },
+  ];
+
+  static DEV_CODE = {
+    score: {
+      call: 'SDK · track event',
+      req: ['humanos.risk.track({', '  agent: "Treasury-01",', '  event: "payment",', '  amount: 250000', '})'],
+      res: ['{', '  "risk_score": 38,', '  "trend": "increasing"', '}'],
+    },
+    intel: {
+      call: 'GET /v1/risk/agents/treasury-01',
+      req: ['// no request body'],
+      res: ['{', '  "risk_score": 38,', '  "trend": "increasing",', '  "authority_risk": "moderate",', '  "control_effectiveness": 88,', '  "residual_exposure": "elevated",', '  "evidence": "verified"', '}'],
+    },
+    guard: {
+      call: 'POST /v1/guardrails · free',
+      req: ['{', '  "policy": "transaction_limit",', '  "limit": 100000,', '  "currency": "EUR",', '  "above_limit": "require_authorization"', '}'],
+      res: ['// active guardrail', '{', '  "status": "ACTIVE",', '  "scope": "Treasury-01"', '}', '', '// Identity · Authority · Authorization ·', '// Runtime policies · Transaction limits', '// Already have guardrails? Humanos ingests their events.'],
+    },
+    enforce: {
+      call: 'POST /v1/actions/evaluate',
+      req: ['{', '  "agent": "Treasury-01",', '  "action": "transfer",', '  "amount": 250000', '}'],
+      res: ['// guardrail: transaction_limit = 100000 EUR', '{', '  "decision": "DENY",', '  "reason": "transaction_limit_exceeded",', '  "risk_score": 52', '}'],
+    },
+  };
+
+  setDevTab = (key) => {
+    this.devTabAt = Date.now();
+    this.devTabHold = Date.now();
+    this.setState({ devTab: key });
+  };
+
+  advanceDevTab() {
+    const now = Date.now();
+    if (this.devTabHold && now - this.devTabHold < 12000) return;
+    const keys = Component.DEV_TABS.map((t) => t.key);
+    const cur = this.state.devTab || 'score';
+    const nextKey = keys[(keys.indexOf(cur) + 1) % keys.length];
+    this.devTabAt = now;
+    this.setState({ devTab: nextKey });
+  }
+
+  devApiVals() {
+    const ez = 'cubic-bezier(0.2,0,0,1)';
+    const active = this.state.devTab || 'score';
+    const code = Component.DEV_CODE[active];
+    const since = this.devTabAt ? Date.now() - this.devTabAt : 9999;
+    const mkLine = (text) => ({
+      text: text,
+      style: {
+        whiteSpace: 'pre-wrap', paddingLeft: '14px', textIndent: '-14px',
+        color: text.indexOf('//') === 0 ? 'var(--hm-ink-4)'
+          : (/"(DENY|increasing|elevated)"/.test(text) ? 'var(--hm-rejection)'
+          : (/: ("|\d)/.test(text) ? '#B9B7F2' : 'var(--hm-clarity)')),
+      },
+    });
+    return {
+      devLiveStyle: {
+        fontFamily: 'var(--font-mono)', fontSize: '9px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase',
+        color: 'var(--hm-verification)',
+      },
+      devOutputs: [
+        { label: 'Risk score' },
+        { label: 'Identity / KYA' },
+        { label: 'Authorization' },
+        { label: 'Controls' },
+        { label: 'Risk intelligence' },
+        { label: 'Insurance' },
+      ],
+      devTabs: Component.DEV_TABS.map((t) => {
+        const on = t.key === active;
+        return {
+          label: t.label,
+          onClick: () => this.setDevTab(t.key),
+          style: {
+            flex: '1 1 auto', minWidth: 0, textAlign: 'center', cursor: 'pointer',
+            padding: '10px 6px', boxSizing: 'border-box',
+            fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.05em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+            color: on ? '#B9B7F2' : 'var(--hm-ink-4)',
+            borderBottom: '2px solid ' + (on ? '#8B89E8' : 'transparent'),
+            transition: 'color 180ms ' + ez + ', border-color 180ms ' + ez,
+          },
+        };
+      }),
+      devBodyStyle: {
+        opacity: since < 90 ? 0 : 1,
+        transform: since < 90 ? 'translateY(4px)' : 'translateY(0)',
+        transition: 'opacity 220ms ' + ez + ', transform 220ms ' + ez,
+      },
+      devCall: code.call,
+      devReqLines: code.req.map(mkLine),
+      devResLines: code.res.map(mkLine),
+    };
+  }
+
+  mixColor(t, from, to) {
+    const f = [parseInt(from.slice(1,3),16), parseInt(from.slice(3,5),16), parseInt(from.slice(5,7),16)];
+    const g = [parseInt(to.slice(1,3),16), parseInt(to.slice(3,5),16), parseInt(to.slice(5,7),16)];
+    const r = f.map((v,i) => Math.round(v + (g[i]-v)*t));
+    return `rgb(${r[0]},${r[1]},${r[2]})`;
+  }
+
+  mix(t, from, to) {
+    return from + (to - from) * t;
+  }
+
+  connectorPath(cardEl) {
+    if (!this.containerEl || !this.moduleEl || !cardEl) return '';
+    const c = this.containerEl.getBoundingClientRect();
+    const m = this.moduleEl.getBoundingClientRect();
+    const k = cardEl.getBoundingClientRect();
+    const x1 = m.left + m.width / 2 - c.left;
+    const y1 = m.bottom - c.top;
+    const x2 = k.left + k.width / 2 - c.left;
+    const y2 = k.top - c.top;
+    const midY = (y1 + y2) / 2;
+    return `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+  }
+
+  pinStyle() {
+    const base = {
+      left: 0, right: 0, height: '100vh', overflow: 'hidden',
+    };
+    const sectionHeight = this.sectionEl ? this.sectionEl.getBoundingClientRect().height : 0;
+    if (this.state.progress <= 0) return { ...base, position: 'absolute', top: 0 };
+    if (this.state.progress >= 1) return { ...base, position: 'absolute', bottom: 0 };
+    return { ...base, position: 'fixed', top: 0 };
+  }
+
+  resolvedVals() {
+    const t = this.resolvedT();
+    const rejection = '#F3797E';
+    const verified = '#4B49CA';
+    const riskScore = Math.round(this.mix(t, 78, 13));
+    const premium = Math.round(this.mix(t, 5647, 421));
+    const reviews = Math.round(this.mix(t, 184, 0));
+    const rate = this.mix(t, 71, 99.6).toFixed(1);
+    return {
+      finalUnderlineColor: this.mixColor(t, rejection, verified),
+      signalColor: this.mixColor(t, rejection, verified),
+      signalGlyph: t < 0.5 ? '?' : '✓',
+      card1RiskArrow: t < 0.5 ? '↑' : '↓',
+      card1RiskScore: riskScore,
+      card1PremiumArrow: t < 0.5 ? '↑' : '↓',
+      card1Premium: premium.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      card2Status: t < 0.5 ? 'Unknown' : 'Verified',
+      card2ReviewsArrow: t < 0.5 ? '↑' : '↓',
+      card2Reviews: reviews,
+      card3Decision: t < 0.5 ? 'Unknown' : 'Approved',
+      card3RateArrow: t < 0.5 ? '↓' : '↑',
+      card3Rate: rate,
+    };
+  }
+
+  renderVals() {
+    return {
+      ...this.installVals(),
+      customers: this.customerCells(),
+      setGlobeRef: this.setGlobeRef,
+      setProbRef: this.setProbRef,
+      setSolRef: this.setSolRef,
+      ...this.solVals(),
+      ...this.kriVals(),
+      ...this.riVals(),
+      ...this.askVals(),
+      ...this.probVals(),
+      activityVolume: this.props.activityVolume ?? '$2.4B',
+      setSectionRef: (el) => { this.sectionEl = el; },
+      openSolutions: () => this.setState({ solutionsOpen: true }),
+      closeSolutions: () => this.setState({ solutionsOpen: false }),
+      solutionsOpacity: this.state.solutionsOpen ? 1 : 0,
+      solutionsPointerEvents: this.state.solutionsOpen ? 'auto' : 'none',
+      setCarouselRef: (el) => { this.carouselEl = el; },
+      storyIdx: this.state.storyIdx,
+      /* Seamless loop: each arrow moves exactly one card, stepping into
+         the clone zone at the tips (storyIdx may briefly be -1 or 3 —
+         the track carries one clone card past each tip), and after the
+         slide the index re-anchors onto the real set with the
+         transition off. Identical content, invisible snap. */
+      storyTrans: this.storySnap ? 'none' : 'transform 460ms cubic-bezier(0.2,0,0,1)',
+      carouselPrev: () => this.storyStep(-1),
+      carouselNext: () => this.storyStep(1),
+      storyDots: [0, 1, 2].map(i => ({
+        color: i === (((this.state.storyIdx % 3) + 3) % 3) ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+        goTo: () => this.setState({ storyIdx: i }),
+      })),
+      setContainerRef: (el) => { this.containerEl = el; },
+      setModuleRef: (el) => { this.moduleEl = el; },
+      setCard1Ref: (el) => { this.card1El = el; },
+      setCard2Ref: (el) => { this.card2El = el; },
+      setCard3Ref: (el) => { this.card3El = el; },
+      setSection2Ref: (el) => { this.section2El = el; },
+      boxScaleTransform: `scale(${this.boxScale()})`,
+      section2WrapStyle: this.section2WrapStyle(),
+      pinStyle2: this.pinStyle2(),
+      statementColor: this.statementColor(),
+      statementFadeStyle: this.statementFadeStyle(),
+      gridBgStyle: this.gridBgStyle(),
+      ...this.guardrailVals(),
+      panelCodeStyle: this.panelCodeStyle(),
+      checklistItems2: this.checklistItems2(),
+      enforceCardStyle: this.enforceCardStyle(),
+      ...this.enforcementVals(),
+      riskIntelStyle: this.riskIntelStyle(),
+      ...this.riskIntelVals(),
+      panelHumanAuthStyle: this.panelHumanAuthStyle(),
+      connectorLineStyle: this.connectorLineStyle(),
+      ...this.humanAuthVals(),
+      ...this.riskSignalVals(),
+      ...this.devApiVals(),
+      panelProofStyle: this.panelProofStyle(),
+      panelPolicyStyle: this.panelPolicyStyle(),
+      panelScoreStyle: this.panelScoreStyle(),
+      pinStyle: this.pinStyle(),
+      moduleStyle: this.moduleStyle(),
+      introStyle: this.introStyle(),
+      connectorStyle: this.connectorStyle(),
+      connectorPath1: this.connectorPath(this.card1El),
+      connectorPath2: this.connectorPath(this.card2El),
+      connectorPath3: this.connectorPath(this.card3El),
+      layerAStyle: this.layerAStyle(),
+      layerBStyle: this.layerBStyle(),
+      rowWrapperStyle: this.rowWrapperStyle(),
+      messageStyle: this.messageStyle(),
+      card1Style: this.cardStyle(0.06, 0.20, 210, '42vh', 'min(300px, 38vh)'),
+      card2Style: this.cardStyle(0.10, 0.24),
+      card3Style: this.cardStyle(0.14, 0.28),
+      ...this.resolvedVals(),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+/* ---------- Homepage design overrides (sep-2026 export) ----------
+   Scoped by the home-only [data-stage] markers, since the export's
+   sc-name is the generic "Root". Like design-mobile.css these are
+   app-level rules over read-only, inline-styled markup; the design
+   runtime normalizes inline styles, so attribute hooks use the spaced
+   form ("flex: 1 1 280px"). */
+
+/* The problem chart's anchor markers — the dots the line leaves behind
+   as it advances — are zero-length round-cap strokes (6px ring, 3.4px
+   core). Removed at every width; the 8px moving head dot stays. */
+[data-stage="problem"] svg path[stroke-width="6"],
+[data-stage="problem"] svg path[stroke-width="3.4"] {
+  display: none;
+}
+
+/* The problem section's TREASURY-01 card sits on the section's own
+   background: the full card paints #111111 (it carried an inline
+   var(--hm-surface) background, hence the !important). The chart line
+   keeps its indigo. Every width. */
+[data-stage="problem"] div[style*="var(--hm-surface"] {
+  background: #111111 !important;
+}
+
+/* The raw-events feed ends without a trailing rule, at every width. */
+[data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:first-child > div > div:last-child {
+  border-bottom: none !important;
+}
+
+@media (max-width: 720px) {
+  /* ── hero: one column ─────────────────────────────────────── */
+  [data-stage="hero"] main > div > div:first-of-type {
+    flex: 1 1 100% !important;
+  }
+  [data-stage="hero"] main > div > div:last-of-type {
+    display: none; /* the globe panel */
+  }
+  /* the badge pill reads on a single line */
+  [data-stage="hero"] span[style*="border-radius: 999px"] {
+    font-size: 11px !important;
+    padding: 6px 12px !important;
+    white-space: nowrap;
+  }
+  /* exactly two lines: "AI risk." / "Under control.". nowrap kills soft
+     wrapping (the <br> still breaks), the clamp keeps "Under control."
+     inside any phone width regardless of font metrics, and the inline
+     max-width:14ch — right at the wrap boundary on iOS — is lifted. */
+  [data-stage="hero"] h1 {
+    font-size: clamp(31px, 10.5vw, 40px) !important;
+    max-width: none !important;
+    white-space: nowrap;
+  }
+
+  /* ── problem ──────────────────────────────────────────────── */
+  [data-stage="problem"] h2 {
+    font-size: 25px !important;
+  }
+  /* runtime-events feed: only the most recent row (rows carry an inline
+     display:flex, hence the !important) */
+  [data-stage="problem"] div[style*="margin-top: auto"] > div:not(:last-of-type) {
+    display: none !important;
+  }
+  /* no head dot on the advancing lines on phones — the problem card
+     and the risk-management panel's chart alike */
+  [data-stage="problem"] svg path[stroke-width="8"],
+  [data-stage="risk-management"] svg path[stroke-width="8"] {
+    display: none;
+  }
+
+  /* ── what-humanos-is ──────────────────────────────────────── */
+  [data-stage="what-humanos-is"] p {
+    font-size: 27px !important;
+  }
+
+  /* ── risk management: horizontal tab selector ─────────────────
+     The step list is already tap-driven (the runtime holds the active
+     step). On phones it becomes a classic tab bar: four short labels
+     (the data-tab-short spans added in the sep-2026 source), and the
+     active tab — detectable by its indigo border-left — lays its full
+     title and description below the bar, above the demo panel.
+     display:contents lifts each step's spans into the shared flex row
+     so the bar and the content zone come from one container. */
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 0 !important;
+  }
+  /* !important: each step carries an inline display:flex; contents must
+     win or the spans never join the shared row (and the steps paint
+     their inline border-left as stray vertical lines). */
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div {
+    display: contents !important;
+  }
+  [data-stage="risk-management"] [data-tab-short] {
+    display: block !important;
+    order: 0;
+    flex: 1 1 0;
+    text-align: center;
+    padding: 10px 2px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--hm-ink-3);
+    border-bottom: 2px solid var(--hm-line);
+    cursor: pointer;
+  }
+  [data-stage="risk-management"]
+    div[style*="border-left: 2px solid var(--hm-verification)"]
+    > [data-tab-short] {
+    color: var(--hm-verification);
+    border-bottom-color: var(--hm-verification);
+  }
+  /* full title + description: hidden unless the step is active */
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:nth-of-type(2),
+  [data-stage="risk-management"] div[style*="flex: 1 1 280px"] > div > span:nth-of-type(3) {
+    display: none !important;
+  }
+  [data-stage="risk-management"]
+    div[style*="flex: 1 1 280px"]
+    > div[style*="border-left: 2px solid var(--hm-verification)"]
+    > span:nth-of-type(2) {
+    display: inline-block !important;
+    order: 1;
+    flex: 1 1 100%;
+    margin-top: 16px;
+    font-size: 20px !important;
+    padding: 0 !important;
+    background: none !important;
+    color: var(--hm-authority) !important;
+  }
+  [data-stage="risk-management"]
+    div[style*="flex: 1 1 280px"]
+    > div[style*="border-left: 2px solid var(--hm-verification)"]
+    > span:nth-of-type(3) {
+    display: block !important;
+    order: 2;
+    flex: 1 1 100%;
+    margin-top: 6px;
+    font-size: 14px !important;
+    max-width: none !important;
+  }
+  /* ── risk management: the demo panels stack ─────────────────────
+     Only the active panel renders (the others are display:none), so
+     the card sizes to content instead of cutting at 510px. Inner
+     two-column grids become one column, the column dividers rotate
+     into row dividers, and the offer rows re-lay as 2×2 tiles. */
+  [data-stage="risk-management"] div[style*="height: 510px"] {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 18px 16px !important;
+  }
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 1fr"],
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1.15fr 1fr"],
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 0.9fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  [data-stage="risk-management"] div[style*="border-left: 1px solid"] {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid var(--hm-line);
+    padding-top: 14px;
+  }
+  /* offer rows: name + price on top, detail + action below (the
+     .sc-host prefix outranks the generic px-grid collapse) */
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] {
+    grid-template-columns: 1fr auto !important;
+    row-gap: 2px;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  /* panel content trimmed for phones:
+     Know and Control lose their footer notes (both share the
+     border-top + indigo border-left signature; the step tabs have no
+     border-top, so they are safe) */
+  [data-stage="risk-management"] div[style*="border-left: 2px solid var(--hm-verification)"][style*="border-top: 1px solid"] {
+    display: none !important;
+  }
+  /* Prove: no mini chart, no share-audience list */
+  [data-stage="risk-management"] div[style*="height: 100px"] {
+    display: none !important;
+  }
+  [data-stage="risk-management"] div[style*="border-left: 1px solid"]:has(> a[style*="height: 44px"]) > div {
+    display: none !important;
+  }
+  /* Control: no Delegated authority row, no footnote sentence, and no
+     divider above its scores column */
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 0.9fr"] > div:first-child > div > div:nth-child(3) {
+    display: none !important;
+  }
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 0.9fr"] > div:first-child > span:nth-of-type(2) {
+    display: none !important;
+  }
+  [data-stage="risk-management"] div[style*="border-left: 1px solid"]:has(span[style*="font-size: 64px"]) {
+    border-top: none;
+    padding-top: 0;
+  }
+  /* Unlock: the More offer sits out */
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"]:nth-child(4) {
+    display: none !important;
+  }
+
+  /* the demo card's giant scores, scaled for a phone-width card */
+  [data-stage="risk-management"] span[style*="font-size: 62px"] {
+    font-size: 40px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 52px"] {
+    font-size: 36px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 64px"] {
+    font-size: 42px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 40px"] {
+    font-size: 30px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 30px"] {
+    font-size: 22px !important;
+  }
+
+  /* ── risk intelligence: stack the diagrams ─────────────────────
+     Two diagram rows tell left-to-right stories on desktop. On phones
+     they stack top-to-bottom in the same order, the branded node stays
+     as the junction badge between blocks, and only the connector wires
+     (decorative glue) are dropped. Fixed desktop card heights become
+     content-sized. */
+
+  /* pipeline row: events → Humanos → score → decisions */
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] {
+    flex-wrap: wrap !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div {
+    flex: 1 1 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  /* pipeline extras: the feed shows its 3 freshest events (newest rows
+     prepend at the top), and the decisions card sits out on phones */
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:first-child > div > div:nth-child(n + 4) {
+    display: none !important;
+  }
+  /* with rows 4+ hidden, the third row is the visual last */
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:first-child > div > div:nth-child(3) {
+    border-bottom: none !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 0 1 220px"] {
+    display: none !important;
+  }
+
+  /* the connector becomes one unified line: the Humanos core card and
+     the second wire (with its hand-off dot) sit out, and the first wire
+     stretches the full span — its ball travels left to right across the
+     whole line each cycle */
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) {
+    padding: 12px 0;
+    gap: 0 !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:nth-child(2),
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:nth-child(3) {
+    display: none !important;
+  }
+
+  /* ask row: questions only — no node, and the answer card lives in a
+     bottom drawer that RiAskDrawerBridge opens on an option tap */
+  [data-stage="risk-intelligence"] div[style*="flex: 1 1 320px"] {
+    flex-basis: 100% !important;
+  }
+  /* options carry no selected state on phones (the drawer is the state),
+     and a + hints that each row expands */
+  [data-stage="risk-intelligence"] div[style*="flex: 1 1 320px"] > div {
+    background: transparent !important;
+    border-left-color: transparent !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 1 1 320px"] > div > span {
+    color: #7a78ae !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 1 1 320px"] > div > div > span:nth-of-type(2) {
+    color: #c7c5e8 !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 1 1 320px"] > div::after {
+    content: "+";
+    margin-left: auto;
+    align-self: center;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    line-height: 1;
+    color: #7a78ae;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 0 0 104px"] {
+    display: none !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="height: 430px"] {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 70;
+    height: 76vh !important;
+    overflow-y: auto !important;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 -18px 50px -20px rgba(17, 17, 17, 0.5) !important;
+    /* room for the fixed X so it never covers the Live badge */
+    padding-top: 56px !important;
+    transform: translateY(103%);
+    transition: transform 300ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  html[data-ri-drawer="open"] [data-stage="risk-intelligence"] div[style*="height: 430px"] {
+    transform: translateY(0);
+  }
+  /* the page behind an open drawer holds still */
+  html[data-ri-drawer="open"],
+  html[data-ri-drawer="open"] body {
+    overflow: hidden !important;
+  }
+  .ri-drawer-close {
+    position: fixed;
+    top: calc(24vh + 12px);
+    right: 14px;
+    z-index: 71;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--hm-line-strong);
+    border-radius: 50%;
+    background: var(--hm-chalk-0);
+    color: var(--hm-ink-0);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  /* ── risk intelligence: phone type scale ──────────────────────
+     Layout already fits (generic containment); only the display type
+     is desktop-sized. Animations untouched. */
+  [data-stage="risk-intelligence"] h2[style*="font-size: 44px"] {
+    font-size: 26px !important;
+  }
+  [data-stage="risk-intelligence"] span[style*="font-size: 44px"] {
+    font-size: 30px !important;
+  }
+  [data-stage="risk-intelligence"] [style*="font-size: 34px"] {
+    font-size: 24px !important;
+  }
+  [data-stage="risk-intelligence"] [style*="font-size: 38px"] {
+    font-size: 28px !important;
+  }
+
+  /* ── quote ────────────────────────────────────────────────── */
+  [data-stage="quotes"] p {
+    font-size: 17px !important;
+  }
+  [data-stage="quotes"] p + div {
+    font-size: 14px !important;
+    gap: 12px !important;
+  }
+  [data-stage="quotes"] div[style*="width: 50px"] {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  [data-stage="quotes"] div[style*="width: 50px"] span {
+    font-size: 13px !important;
+  }
+
+  /* ── customer stories: native swipe ───────────────────────────
+     The desktop carousel moves a translateX track from arrow clicks;
+     on phones the track scrolls natively with snap points instead,
+     and the arrows disappear. */
+  [data-cs-track] {
+    --card: 100% !important; /* each story fills its column */
+    transform: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+    /* the inline padding-right shrinks the content box the cards'
+       flex-basis resolves against — with it gone, 100% is truly 100% */
+    padding-right: 0 !important;
+  }
+  [data-cs-track]::-webkit-scrollbar {
+    display: none;
+  }
+  [data-cs-track] > div,
+  [data-cs-track] [data-cs-clone] > div {
+    scroll-snap-align: center;
+  }
+}

@@ -1,0 +1,76 @@
+/* Site-wide closing CTA (components/chrome/ClosingCta.tsx), rendered above
+   the footer on every page. Design cloned from the Customers page's CTA:
+   centered on cream with a soft indigo glow, eyebrow dot, accent title.
+   It paints its own background, so it reads the same on every page. */
+.closing-cta {
+  padding: 120px 0;
+  text-align: center;
+  background: radial-gradient(
+      ellipse 60% 60% at 50% 25%,
+      rgba(75, 73, 202, 0.1),
+      transparent 70%
+    ),
+    var(--hm-clarity);
+  border-top: 1px solid var(--hm-line);
+}
+.closing-cta__wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.closing-cta__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--hm-ink-3);
+}
+.closing-cta__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--hm-verification);
+  box-shadow: 0 0 0 4px rgba(75, 73, 202, 0.16);
+}
+.closing-cta__title {
+  font-size: 48px;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  color: var(--hm-ink-0);
+  margin: 16px auto 0;
+  max-width: 720px;
+  text-wrap: balance;
+}
+.closing-cta__title .accent {
+  color: var(--hm-verification);
+}
+.closing-cta__sub {
+  margin: 18px auto 0;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--hm-ink-2);
+  max-width: 700px;
+}
+.closing-cta__ctas {
+  margin-top: 34px;
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 1080px) {
+  .closing-cta__title {
+    font-size: 36px;
+  }
+}
+@media (max-width: 720px) {
+  .closing-cta {
+    padding: 88px 0;
+  }
+}

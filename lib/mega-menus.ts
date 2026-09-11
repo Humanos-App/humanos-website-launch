@@ -73,6 +73,36 @@ export const PLATFORM_MENU: MegaMenu = {
   ],
 };
 
+/**
+ * Solutions — the three product pages of the rebrand. One flat column, so it
+ * opens the same way Developers does rather than as a wide grid.
+ */
+export const SOLUTIONS_MENU: MegaMenu = {
+  key: "solutions",
+  columns: [
+    {
+      label: "Solutions",
+      items: [
+        {
+          title: "Monitor",
+          sub: "Know your AI risk, and prove it",
+          href: "/monitor",
+        },
+        {
+          title: "Control",
+          sub: "Control what AI can do",
+          href: "/control",
+        },
+        {
+          title: "Risk Intelligence",
+          sub: "Get the risk answers you need",
+          href: "/intelligence",
+        },
+      ],
+    },
+  ],
+};
+
 export const DEVELOPERS_MENU: MegaMenu = {
   key: "developers",
   columns: [
@@ -80,29 +110,30 @@ export const DEVELOPERS_MENU: MegaMenu = {
       label: "Start",
       items: [
         {
-          title: "Get API keys",
-          sub: "Create production credentials",
-          href: "https://app.humanos.tech",
-        },
-        {
           title: "Quickstart",
           sub: "5-minute integration",
           href: "https://docs.humanos.tech/essentials/quick-start",
         },
         {
-          title: "Dashboard",
-          sub: "Manage mandates & receipts",
+          title: "Get API key",
+          sub: "Create production credentials",
           href: "https://app.humanos.tech",
         },
         {
           title: "API reference",
-          sub: "All endpoints & types",
+          sub: "Guardrails and enforcement",
           href: "https://docs.humanos.tech",
+        },
+        {
+          title: "Agent SDK",
+          tag: "Coming soon",
+          sub: "Agent risk monitoring",
+          href: "#",
         },
         {
           title: "VIA",
           tag: "Coming soon",
-          sub: "Open verification protocol",
+          sub: "Open source protocol",
           href: "#",
         },
       ],
@@ -124,29 +155,6 @@ export const DEVELOPERS_MENU: MegaMenu = {
           title: "C#",
           sub: "dotnet add Humanos",
           href: "https://www.nuget.org/packages/Humanos",
-        },
-      ],
-    },
-    {
-      label: "Orchestration",
-      items: [
-        {
-          title: "n8n",
-          tag: "Coming soon",
-          sub: "Drop verify() into low-code workflows",
-          href: "#",
-        },
-        {
-          title: "Zapier",
-          tag: "Coming soon",
-          sub: "Trigger-based agent automation",
-          href: "#",
-        },
-        {
-          title: "Skills",
-          tag: "Coming soon",
-          sub: "Reusable verify() modules for LLM agents",
-          href: "#",
         },
       ],
     },
@@ -173,56 +181,6 @@ export const DEVELOPERS_MENU: MegaMenu = {
           sub: "Event-driven integration",
           href: "https://docs.humanos.tech/essentials/webhooks-intro",
         },
-      ],
-    },
-  ],
-};
-
-export const USE_CASES_MENU: MegaMenu = {
-  key: "use-cases",
-  columns: [
-    {
-      label: "By industry",
-      items: [
-        {
-          title: "Agentic finance",
-          sub: "Capital allocation by AI",
-          href: "#",
-        },
-        { title: "Trading", sub: "Pre-trade authorization", href: "#" },
-        { title: "Treasury", sub: "Programmable approvals", href: "#" },
-        { title: "Healthcare", sub: "Consent at execution time", href: "#" },
-      ],
-    },
-    {
-      label: "By role",
-      items: [
-        { title: "Engineering", href: "#" },
-        { title: "Compliance", href: "#" },
-        { title: "Security", href: "#" },
-        { title: "Product", href: "#" },
-      ],
-    },
-    {
-      label: "By pattern",
-      items: [
-        { title: "Agent delegation", href: "#" },
-        { title: "Multi-party approval", href: "#" },
-        { title: "Standing policies", href: "#" },
-      ],
-    },
-    {
-      label: "Customers",
-      items: [
-        { title: "Numo — banking", href: "/case-studies/numo" },
-        { title: "Ralio — operations", href: "/case-studies/ralio" },
-        {
-          title: "DataWhisper — regulated AI",
-          href: "/case-studies/datawhisper",
-        },
-        { title: "Lusíadas — healthcare", href: "/case-studies/lusiadas" },
-        { title: "Paymove — agentic payments", href: "/case-studies/paymove" },
-        { title: "All case studies", href: "/case-studies" },
       ],
     },
   ],

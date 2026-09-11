@@ -1,4 +1,5 @@
 import { EXTERNAL_LINKS } from "@/lib/external-links";
+import { ClosingCta } from "./ClosingCta";
 
 type FooterLink = { label: string; href: string };
 type FooterColumn = {
@@ -17,45 +18,14 @@ const DOCS = {
   revokeCredential: `${EXTERNAL_LINKS.docs}/api-reference/latest/credentials/revoke-credential`,
 };
 
-const SDKS = {
-  ts: "https://www.npmjs.com/package/humanos",
-  py: "https://pypi.org/project/humanos/",
-  cs: "https://www.nuget.org/packages/Humanos",
-};
-
 const COLUMNS: FooterColumn[] = [
-  {
-    title: "Product",
-    links: [
-      { label: "Platform", href: "/platform" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "humanos.verify()", href: DOCS.verifyVp },
-      { label: "Request approvals", href: DOCS.createRequest },
-      { label: "Revocation", href: DOCS.revokeCredential },
-      { label: "Webhooks", href: DOCS.webhooks },
-    ],
-  },
   {
     title: "Developers",
     links: [
       { label: "Quickstart", href: DOCS.quickstart },
       { label: "API reference", href: DOCS.root },
-      { label: "TypeScript SDK", href: SDKS.ts },
-      { label: "Python SDK", href: SDKS.py },
-      { label: "C# SDK", href: SDKS.cs },
-      { label: "Get API keys", href: EXTERNAL_LINKS.app },
+      { label: "Read Docs", href: DOCS.root },
       { label: "Changelog", href: "/changelog" },
-    ],
-  },
-  {
-    title: "Customers",
-    links: [
-      { label: "All stories", href: "/case-studies" },
-      { label: "Numo", href: "/case-studies/numo" },
-      { label: "Ralio", href: "/case-studies/ralio" },
-      { label: "Paymove", href: "/case-studies/paymove" },
-      { label: "Lusíadas", href: "/case-studies/lusiadas" },
-      { label: "DataWhisper", href: "/case-studies/datawhisper" },
     ],
   },
   {
@@ -63,9 +33,7 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { label: "About", href: "/company" },
       { label: "Customers", href: "/case-studies" },
-      { label: "Trust", href: "/trust" },
       { label: "Status", href: "/status" },
-      { label: "Talk with us", href: EXTERNAL_LINKS.calendly },
       { label: "Privacy", href: "/legal/privacy" },
       { label: "Terms", href: "/legal/terms" },
     ],
@@ -73,8 +41,8 @@ const COLUMNS: FooterColumn[] = [
   {
     title: "Socials",
     links: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/humanosai/" },
-      { label: "X", href: "https://x.com/humanosai" },
+      { label: "LinkedIn", href: EXTERNAL_LINKS.linkedin },
+      { label: "X", href: EXTERNAL_LINKS.x },
     ],
   },
 ];
@@ -85,6 +53,8 @@ function isExternal(href: string) {
 
 export function Footer() {
   return (
+    <>
+    <ClosingCta />
     <footer className="footer">
       <div className="wrap">
         <div className="footer__grid">
@@ -136,7 +106,7 @@ export function Footer() {
 
         <div className="footer__bottom">
           <div className="footer__bottom-left">
-            © 2026 Humanos · All decisions verifiable
+            © 2026 Humanos Labs, Inc. · The Risk Network for AI
           </div>
           <div className="footer__bottom-right">
             <span>SOC 2 Type II</span>
@@ -148,5 +118,6 @@ export function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

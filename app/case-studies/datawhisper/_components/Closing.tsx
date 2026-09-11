@@ -37,7 +37,7 @@ export function Closing() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Talk with us <span className="arrow">→</span>
+              Talk to us <span className="arrow">→</span>
             </a>
           </div>
         </div>

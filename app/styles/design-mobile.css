@@ -1,0 +1,84 @@
+/* ---------- Mobile pass for the synced design pages ----------
+   The sep-2026 export is read-only, classless and inline-styled, so
+   phone-width fixes live here as app-level overrides scoped to the
+   design host (.sc-host). Nothing here runs above 720px, and diagram
+   or animation internals stay untouched — these rules only make boxes
+   fit the viewport. */
+
+@media (max-width: 720px) {
+  /* Flex and grid children default to min-width:auto and refuse to
+     shrink below their content size — the single biggest source of
+     sideways blowouts in the export. Let everything shrink. */
+  .sc-host * {
+    min-width: 0;
+  }
+
+  /* Media never widens its column. SVGs keep their own height —
+     diagrams are out of scope beyond containment. */
+  .sc-host img {
+    max-width: 100%;
+    height: auto;
+  }
+  .sc-host svg,
+  .sc-host canvas,
+  .sc-host video {
+    max-width: 100%;
+  }
+
+  /* The export writes desktop sizing as inline styles, which outrank any
+     plain selector — these three need !important or an attribute hook.
+     Inline nowrap keeps headline fragments on one forced line; inline
+     min-widths are desktop panel sizing that only blocks shrinking here
+     (flex-basis still expresses the preferred size). */
+  .sc-host [style*="white-space: nowrap"] {
+    white-space: normal !important;
+  }
+  .sc-host [style*="min-width"] {
+    min-width: 0 !important;
+  }
+
+  /* The design's own floating pill (fixed, centered) is wider than a
+     phone; cap anything a fixed wrapper centers. */
+  .sc-host [style*="position: fixed"] > * {
+    max-width: calc(100vw - 24px);
+  }
+
+  /* Phones don't show the floating pill at all — this hides the design
+     pages' own copy; the chrome's FloatingRiskBar carries .mobile-hide. */
+  [data-pill] {
+    display: none !important;
+  }
+
+  /* Inline fixed widths (mock-UI demo cards and the like) may not exceed
+     their column. max-width constrains width regardless of where width
+     was declared, so no !important is needed. */
+  .sc-host [style*="width:"] {
+    max-width: 100%;
+  }
+
+  /* Inline grid templates with pixel floors (minmax(360px, …), 1fr 400px
+     1fr) cannot fit a phone column — stack them. Fluid templates like
+     "auto 1fr" are left alone; min-width:0 already lets those shrink. */
+  .sc-host [style*="grid-template-columns"][style*="px"],
+  .sc-host [style*="grid-template-columns"][style*="minmax("] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Pricing plan cards run nearly full width on phones: the plans section
+     carries inline "padding: 0px 32px", so the override needs !important. */
+  .sc-host[data-sc-name="pricing"] section[style*="padding: 0px 32px"] {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* The export's spacing scale, compressed a notch for phones. Section
+     paddings and large gaps both ride these tokens, so the whole page
+     tightens together without touching any one component. */
+  .sc-host {
+    --sp-7: 24px;
+    --sp-8: 44px;
+    --sp-9: 56px;
+    --sp-10: 72px;
+    --sp-11: 88px;
+  }
+}
