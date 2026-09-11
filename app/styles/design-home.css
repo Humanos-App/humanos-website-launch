@@ -140,12 +140,67 @@
     font-size: 14px !important;
     max-width: none !important;
   }
+  /* ── risk management: the demo panels stack ─────────────────────
+     Only the active panel renders (the others are display:none), so
+     the card sizes to content instead of cutting at 510px. Inner
+     two-column grids become one column, the column dividers rotate
+     into row dividers, and the offer rows re-lay as 2×2 tiles. */
+  [data-stage="risk-management"] div[style*="height: 510px"] {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 18px 16px !important;
+  }
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 1fr"],
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1.15fr 1fr"],
+  [data-stage="risk-management"] div[style*="grid-template-columns: 1fr 0.9fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  [data-stage="risk-management"] div[style*="border-left: 1px solid"] {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid var(--hm-line);
+    padding-top: 14px;
+  }
+  /* offer rows: name + price on top, detail + action below (the
+     .sc-host prefix outranks the generic px-grid collapse) */
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] {
+    grid-template-columns: 1fr auto !important;
+    row-gap: 2px;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+  .sc-host [data-stage="risk-management"] div[style*="grid-template-columns: 92px"] > span:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
   /* the demo card's giant scores, scaled for a phone-width card */
   [data-stage="risk-management"] span[style*="font-size: 62px"] {
     font-size: 40px !important;
   }
   [data-stage="risk-management"] span[style*="font-size: 52px"] {
     font-size: 36px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 64px"] {
+    font-size: 42px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 40px"] {
+    font-size: 30px !important;
+  }
+  [data-stage="risk-management"] span[style*="font-size: 30px"] {
+    font-size: 22px !important;
   }
 
   /* ── risk intelligence: stack the diagrams ─────────────────────
