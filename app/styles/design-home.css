@@ -232,14 +232,16 @@
     display: none !important;
   }
 
-  /* the connector drops its Humanos core card; the wires stay and the
-     gap closes, so the balls travel one continuous line from raw to
-     intelligence */
+  /* the connector becomes one unified line: the Humanos core card and
+     the second wire (with its hand-off dot) sit out, and the first wire
+     stretches the full span — its ball travels left to right across the
+     whole line each cycle */
   [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) {
     padding: 12px 0;
     gap: 0 !important;
   }
-  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:nth-child(2) {
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:nth-child(2),
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:nth-child(3) {
     display: none !important;
   }
 
