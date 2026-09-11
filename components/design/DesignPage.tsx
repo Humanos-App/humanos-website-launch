@@ -3,6 +3,7 @@ import { join } from "node:path";
 import Script from "next/script";
 import { DesignBoot } from "./DesignBoot";
 import { TalkToUsBridge } from "./TalkToUsBridge";
+import { RiAskDrawerBridge } from "./RiAskDrawerBridge";
 
 /**
  * Renders one page of the sep-2026 design inside the site chrome.
@@ -65,6 +66,7 @@ export function DesignPage({ slug }: { slug: string }) {
       />
       <DesignBoot slug={slug} />
       <TalkToUsBridge />
+      <RiAskDrawerBridge />
       {/* The site chrome is sticky, so the space a design gets is the viewport
           less its height. The announcement bar has no fixed height — it is
           padding-driven and its copy can wrap — so it is measured rather than
