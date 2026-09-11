@@ -143,6 +143,48 @@
     font-size: 36px !important;
   }
 
+  /* ── risk intelligence: stack the diagrams ─────────────────────
+     Two diagram rows tell left-to-right stories on desktop. On phones
+     they stack top-to-bottom in the same order, the branded node stays
+     as the junction badge between blocks, and only the connector wires
+     (decorative glue) are dropped. Fixed desktop card heights become
+     content-sized. */
+
+  /* pipeline row: events → Humanos → score → decisions */
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] {
+    flex-wrap: wrap !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div {
+    flex: 1 1 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  /* the connector keeps its centered Humanos core, loses the wires */
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) {
+    padding: 4px 0;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:first-child,
+  [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:nth-child(2) > div:last-child {
+    display: none !important;
+  }
+
+  /* ask row: questions → Humanos node → answer card */
+  [data-stage="risk-intelligence"] div[style*="flex: 1 1 320px"] {
+    flex-basis: 100% !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 0 0 104px"] {
+    flex: 1 1 100% !important;
+    padding: 4px 0;
+  }
+  [data-stage="risk-intelligence"] div[style*="flex: 0 0 104px"] > div:first-child,
+  [data-stage="risk-intelligence"] div[style*="flex: 0 0 104px"] > div:last-child {
+    display: none !important;
+  }
+  [data-stage="risk-intelligence"] div[style*="height: 430px"] {
+    flex-basis: 100% !important;
+    height: auto !important;
+  }
+
   /* ── risk intelligence: phone type scale ──────────────────────
      Layout already fits (generic containment); only the display type
      is desktop-sized. Animations untouched. */
