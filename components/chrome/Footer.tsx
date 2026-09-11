@@ -18,21 +18,12 @@ const DOCS = {
   revokeCredential: `${EXTERNAL_LINKS.docs}/api-reference/latest/credentials/revoke-credential`,
 };
 
-const SDKS = {
-  ts: "https://www.npmjs.com/package/humanos",
-  py: "https://pypi.org/project/humanos/",
-  cs: "https://www.nuget.org/packages/Humanos",
-};
-
 const COLUMNS: FooterColumn[] = [
   {
     title: "Developers",
     links: [
       { label: "Quickstart", href: DOCS.quickstart },
       { label: "API reference", href: DOCS.root },
-      { label: "TypeScript SDK", href: SDKS.ts },
-      { label: "Python SDK", href: SDKS.py },
-      { label: "C# SDK", href: SDKS.cs },
       { label: "Read Docs", href: DOCS.root },
       { label: "Changelog", href: "/changelog" },
     ],
