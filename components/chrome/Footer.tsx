@@ -26,20 +26,6 @@ const SDKS = {
 
 const COLUMNS: FooterColumn[] = [
   {
-    title: "Product",
-    links: [
-      { label: "Monitor", href: "/monitor" },
-      { label: "Control", href: "/control" },
-      { label: "Risk Intelligence", href: "/intelligence" },
-      { label: "Prove your AI", href: "/prove" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "humanos.verify()", href: DOCS.verifyVp },
-      { label: "Request approvals", href: DOCS.createRequest },
-      { label: "Revocation", href: DOCS.revokeCredential },
-      { label: "Webhooks", href: DOCS.webhooks },
-    ],
-  },
-  {
     title: "Developers",
     links: [
       { label: "Quickstart", href: DOCS.quickstart },
@@ -52,23 +38,11 @@ const COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    title: "Customers",
-    links: [
-      { label: "All stories", href: "/case-studies" },
-      { label: "Numo", href: "/case-studies/numo" },
-      { label: "Ralio", href: "/case-studies/ralio" },
-      { label: "Paymove", href: "/case-studies/paymove" },
-      { label: "Lusíadas", href: "/case-studies/lusiadas" },
-      { label: "DataWhisper", href: "/case-studies/datawhisper" },
-    ],
-  },
-  {
     title: "Company",
     links: [
       { label: "About", href: "/company" },
       { label: "Customers", href: "/case-studies" },
       { label: "Status", href: "/status" },
-      { label: "Talk to us", href: EXTERNAL_LINKS.calendly },
       { label: "Privacy", href: "/legal/privacy" },
       { label: "Terms", href: "/legal/terms" },
     ],
@@ -141,7 +115,7 @@ export function Footer() {
 
         <div className="footer__bottom">
           <div className="footer__bottom-left">
-            © 2026 Humanos · All decisions verifiable
+            © 2026 Humanos Labs, Inc. · The Risk Network for AI
           </div>
           <div className="footer__bottom-right">
             <span>SOC 2 Type II</span>
