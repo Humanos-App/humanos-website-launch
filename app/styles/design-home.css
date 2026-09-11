@@ -295,7 +295,7 @@
      on phones the track scrolls natively with snap points instead,
      and the arrows disappear. */
   [data-stage="customer-stories"] div[style*="--card"] {
-    --card: 100% !important; /* each story fills its column */
+    --card: 86% !important; /* the current story centers, neighbours peek */
     transform: none !important;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -308,6 +308,6 @@
   }
   [data-stage="customer-stories"] div[style*="--card"] > div,
   [data-stage="customer-stories"] div[style*="--card"] [data-cs-clone] > div {
-    scroll-snap-align: start;
+    scroll-snap-align: center;
   }
 }
