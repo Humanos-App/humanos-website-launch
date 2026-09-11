@@ -13,18 +13,12 @@
   display: none;
 }
 
-/* The demo-card charts draw in ink (#111111) rather than indigo — the
-   risk line, its moving head, and the dashed now-marker. This covers
-   both instances of the TREASURY-01 card: the problem section's chart
-   and the risk-management panel's (kriChart — same builder, same
-   stroke widths). Every width. */
-[data-stage="problem"] svg path[stroke-width="2.4"],
-[data-stage="problem"] svg path[stroke-width="8"],
-[data-stage="problem"] svg line[stroke-dasharray],
-[data-stage="risk-management"] svg path[stroke-width="2.4"],
-[data-stage="risk-management"] svg path[stroke-width="8"],
-[data-stage="risk-management"] svg line[stroke-dasharray] {
-  stroke: #111111;
+/* The problem section's TREASURY-01 card sits on the section's own
+   background: the full card paints #111111 (it carried an inline
+   var(--hm-surface) background, hence the !important). The chart line
+   keeps its indigo. Every width. */
+[data-stage="problem"] div[style*="var(--hm-surface"] {
+  background: #111111 !important;
 }
 
 @media (max-width: 720px) {
