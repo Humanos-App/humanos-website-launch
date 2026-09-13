@@ -13,7 +13,7 @@
 
     <div style="width:100%; max-width:1200px; display:flex; align-items:stretch; gap:var(--sp-4); flex-wrap:nowrap;">
 
-      <div style="flex:1 1 240px; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:4px; padding:22px 24px; display:flex; flex-direction:column; height:340px;">
+      <div style="flex:1 1 240px; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:4px; padding:22px 24px; display:flex; flex-direction:column; justify-content:center;">
         <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Raw runtime events</span>
         <div style="display:flex; flex-direction:column; margin-top:10px; flex:1; overflow:hidden;">
           <sc-for list="{{ riEvents }}" as="e" hint-placeholder-count="6">
@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div style="flex:0 1 220px; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:4px; padding:22px 24px; display:flex; flex-direction:column; gap:14px; height:340px;">
+      <div style="flex:0 1 220px; min-width:0; box-sizing:border-box; border:1px solid var(--hm-line); background:#FFFFFF; border-radius:4px; padding:22px 24px; display:flex; flex-direction:column; gap:14px; justify-content:center;">
         <span style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; color:var(--hm-ink-4);">Decisions it supports</span>
         <div style="display:flex; flex-direction:column; gap:6px;">
           <sc-for list="{{ riDecisions }}" as="d" hint-placeholder-count="4">

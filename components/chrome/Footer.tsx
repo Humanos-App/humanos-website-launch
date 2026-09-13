@@ -65,8 +65,7 @@ export function Footer() {
               <span className="footer__brand-text">Humanos</span>
             </div>
             <div className="footer__tagline">
-              Human intent, programmable and portable. The authorization layer
-              for the agentic economy.
+              The Risk Network for AI
             </div>
             <a
               className="footer__api"

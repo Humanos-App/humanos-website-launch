@@ -688,8 +688,9 @@ class Component extends DCLogic {
     },
   ];
 
-  setAskStep(n) {
+  setAskStep(n, auto) {
     if ((this.state.askStep || 0) === n) return;
+    if (!auto) this._askAutoStopped = true;
     this.setState({ askStep: n, askPulse: Date.now() });
   }
 
@@ -893,8 +894,8 @@ class Component extends DCLogic {
         boxShadow: '0 10px 28px -18px rgba(75,73,202,0.7)',
       },
       riCardStyle: {
-        flex: '1.2 1 300px', minWidth: 0, boxSizing: 'border-box', height: '340px',
-        display: 'flex', flexDirection: 'column',
+        flex: '1.2 1 300px', minWidth: 0, boxSizing: 'border-box',
+        display: 'flex', flexDirection: 'column', justifyContent: 'center',
         border: '1px solid var(--hm-verification)', borderRadius: '4px',
         background: '#FFFFFF', padding: '22px 26px',
         boxShadow: '0 0 0 ' + (fresh ? 3 : 1) + 'px rgba(75,73,202,' + (fresh ? 0.1 : 0.05) + '), 0 14px 40px -24px rgba(75,73,202,0.45)',
@@ -969,9 +970,10 @@ class Component extends DCLogic {
   static KRI_TRACK = [22, 19, 26, 21, 17, 24, 18, 15, 20, 16, 13];
 
   /* One-card carousel step with an invisible wrap: while the slide runs
-     the index may sit one past the real set (-1 or 3 — the track carries
+     the index may sit one past the real set (-1 or N — the track carries
      a clone card past each tip), and once it settles it re-anchors
-     modulo 3 with the transition suppressed for a single frame. */
+     modulo STORY_COUNT with the transition suppressed for a single frame. */
+  static STORY_COUNT = 2;
   storyStep(d) {
     if (this.storyLock) return;
     this.storyLock = true;
@@ -980,7 +982,8 @@ class Component extends DCLogic {
     this.storyTimer = window.setTimeout(() => {
       this.storyLock = false;
       const v = this.state.storyIdx;
-      const n = ((v % 3) + 3) % 3;
+      const N = Component.STORY_COUNT;
+      const n = ((v % N) + N) % N;
       if (n === v) return;
       this.storySnap = true;
       this.setState({ storyIdx: n }, () => {
@@ -1230,8 +1233,9 @@ class Component extends DCLogic {
     };
   }
 
-  setKriStep(n) {
+  setKriStep(n, auto) {
     this.kriHold = Date.now();
+    if (!auto) this._kriAutoStopped = true;
     this.setState({ kriStep: n });
   }
 
@@ -1418,6 +1422,14 @@ class Component extends DCLogic {
     if (this.riVisible !== false) { C.ri += dt; if (C.ri >= Component.RI_LOOP) C.ri = 0; }
     C.dev = (C.dev || 0) + dt;
     if (C.dev >= 5.2) { C.dev = 0; this.advanceDevTab(); }
+    if (!this._kriAutoStopped && this.kriVisible === true) {
+      C.kriAuto = (C.kriAuto || 0) + dt;
+      if (C.kriAuto >= 3) { C.kriAuto = 0; this.setKriStep(((this.state.kriStep || 0) + 1) % Component.KRI_STEPS.length, true); }
+    }
+    if (!this._askAutoStopped) {
+      C.askAuto = (C.askAuto || 0) + dt;
+      if (C.askAuto >= 3) { C.askAuto = 0; this.setAskStep(((this.state.askStep || 0) + 1) % Component.ASK.length, true); }
+    }
     this.updatePillTone();
     C.head = (C.head || 0) + dt;
     if (C.head >= 8.8) C.head = 0;
@@ -2232,8 +2244,8 @@ class Component extends DCLogic {
       storyTrans: this.storySnap ? 'none' : 'transform 460ms cubic-bezier(0.2,0,0,1)',
       carouselPrev: () => this.storyStep(-1),
       carouselNext: () => this.storyStep(1),
-      storyDots: [0, 1, 2].map(i => ({
-        color: i === (((this.state.storyIdx % 3) + 3) % 3) ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
+      storyDots: Array.from({ length: Component.STORY_COUNT }, (_, i) => ({
+        color: i === (((this.state.storyIdx % Component.STORY_COUNT) + Component.STORY_COUNT) % Component.STORY_COUNT) ? 'var(--hm-verification)' : 'var(--hm-line-strong)',
         goTo: () => this.setState({ storyIdx: i }),
       })),
       setContainerRef: (el) => { this.containerEl = el; },

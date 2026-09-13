@@ -55,7 +55,7 @@ export function TalkWithUs({ children }: { children: ReactNode }) {
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
                 >
-                  <span className="dlg__choice-title">Book a demo</span>
+                  <span className="dlg__choice-title">Book a meeting</span>
                   <span className="dlg__choice-sub">
                     Schedule 30 minutes with our team via our open Calendar.
                   </span>
