@@ -440,4 +440,10 @@
     padding: 12px 16px;
     font-size: 15px;
   }
+
+  /* Hide the announcement banner when the mobile menu is open so it
+     doesn't block the close button / burger. */
+  .site-chrome:has(.nav__mobile.is-open) .announce {
+    display: none;
+  }
 }

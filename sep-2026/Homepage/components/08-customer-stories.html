@@ -4,17 +4,14 @@
         <span style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--hm-ink-3); font-weight:600;">CUSTOMER STORIES</span>
         <h2 style="font-size:32px; font-weight:600; letter-spacing:-0.015em; color:var(--hm-authority); margin-top:10px;">AI acts differently everywhere. <span style="color:var(--hm-verification);">Risk needs one network.</span></h2>
       </div>
-      <span style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--hm-verification); cursor:pointer; white-space:nowrap;">View all customer stories →</span>
+      <a href="/case-studies" style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:var(--hm-verification); cursor:pointer; white-space:nowrap; text-decoration:none;">View all customer stories →</a>
     </div>
 
     <div style="max-width:1200px; margin:var(--sp-6) auto 0; padding:0 var(--sp-7);">
-      <!-- No clipping here: the track is free to overflow this column on both
-           sides, so the previous card shows in the left gutter and the next
-           bleeds off the right. The section root clips both at the page edge. -->
       <div style="position:relative;">
-        <div ref="{{ setCarouselRef }}" data-cs-track style="--card:min(1080px, 85vw); display:flex; gap:20px; transform:translateX(calc(-1 * ({{ storyIdx }} + 3) * (var(--card) + 20px))); transition:{{ storyTrans }}; padding-right:20px;">
+        <div ref="{{ setCarouselRef }}" data-cs-track style="--card:min(1080px, 85vw); display:flex; gap:20px; transform:translateX(calc(-1 * ({{ storyIdx }} + 2) * (var(--card) + 20px))); transition:{{ storyTrans }}; padding-right:20px;">
 
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
+        <a href="/case-studies/numo" style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority); text-decoration:none; color:inherit; display:block;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[FINANCE]</span>
@@ -23,20 +20,9 @@
             <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Numo uses Humanos to verify AI agent identity, delegated authority and human authorization before executing payments and treasury operations.</p>
             <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
           </div>
-        </div>
+        </a>
 
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
-          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
-          <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
-            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[INSURANCE]</span>
-            <div style="font-size:14px; color:#F4F3EF; margin-top:6px; font-weight:600;">ArcRisk</div>
-            <h3 style="font-size:28px; font-weight:600; color:#F4F3EF; line-height:1.25; margin-top:14px;">Making AI insurable.</h3>
-            <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">ArcRisk uses Humanos Risk Intelligence to evaluate AI risk with verifiable signals from real runtime activity.</p>
-            <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
-          </div>
-        </div>
-
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
+        <a href="/case-studies/lusiadas" style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority); text-decoration:none; color:inherit; display:block;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[HEALTHCARE]</span>
@@ -45,19 +31,15 @@
             <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Lusíadas uses Humanos to capture, verify and enforce patient authorization across healthcare operations.</p>
             <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
           </div>
-        </div>
+        </a>
 
         <!-- Duplicate set for the closed loop. The viewport anchors on THIS
-             middle set (the transform above offsets by +3), so index 0 shows
-             the last story peeking on its left and index 1 on its right; the
-             extra trailing Numo copy gives the last index its right-hand
-             neighbour. On phones the track scrolls natively and
-             StoriesLoopBridge wraps scrollLeft between the identical sets so
-             the strip never hits an end. display:contents lifts the copies
-             into the same flex track; the section root clips at the page
-             edge. -->
+             middle set (the transform above offsets by +2), so index 0 shows
+             the last story peeking on its left and index 1 on its right.
+             display:contents lifts the copies into the same flex track; the
+             section root clips at the page edge. -->
         <div data-cs-clone aria-hidden="true" style="display:contents;">
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
+        <a href="/case-studies/numo" tabindex="-1" style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority); text-decoration:none; color:inherit; display:block;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[FINANCE]</span>
@@ -66,18 +48,8 @@
             <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Numo uses Humanos to verify AI agent identity, delegated authority and human authorization before executing payments and treasury operations.</p>
             <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
           </div>
-        </div>
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
-          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
-          <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
-            <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[INSURANCE]</span>
-            <div style="font-size:14px; color:#F4F3EF; margin-top:6px; font-weight:600;">ArcRisk</div>
-            <h3 style="font-size:28px; font-weight:600; color:#F4F3EF; line-height:1.25; margin-top:14px;">Making AI insurable.</h3>
-            <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">ArcRisk uses Humanos Risk Intelligence to evaluate AI risk with verifiable signals from real runtime activity.</p>
-            <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
-          </div>
-        </div>
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
+        </a>
+        <a href="/case-studies/lusiadas" tabindex="-1" style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority); text-decoration:none; color:inherit; display:block;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[HEALTHCARE]</span>
@@ -86,8 +58,8 @@
             <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Lusíadas uses Humanos to capture, verify and enforce patient authorization across healthcare operations.</p>
             <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
           </div>
-        </div>
-        <div style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority);">
+        </a>
+        <a href="/case-studies/numo" tabindex="-1" style="flex:0 0 var(--card); position:relative; height:500px; border-radius:12px; overflow:hidden; background:var(--hm-authority); text-decoration:none; color:inherit; display:block;">
           <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.85) 100%); pointer-events:none;"></div>
           <div style="position:absolute; left:0; bottom:0; right:0; padding:42px 46px; max-width:640px;">
             <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:#B8B6EE; font-weight:700;">[FINANCE]</span>
@@ -96,7 +68,7 @@
             <p style="font-size:15px; color:#C7C5E8; line-height:1.55; margin-top:12px; max-width:480px;">Numo uses Humanos to verify AI agent identity, delegated authority and human authorization before executing payments and treasury operations.</p>
             <div style="margin-top:16px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#F4F3EF; cursor:pointer;">Read case study →</div>
           </div>
-        </div>
+        </a>
         </div>
 
         </div>
