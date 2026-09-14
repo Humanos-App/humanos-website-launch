@@ -3,7 +3,7 @@ import { SITE_NAME, DEFAULT_DESCRIPTION, BRAND } from "@/lib/seo";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${SITE_NAME} — Authorization infrastructure for the agentic economy`,
+    name: `${SITE_NAME} — The Risk Network for AI`,
     short_name: SITE_NAME,
     description: DEFAULT_DESCRIPTION,
     start_url: "/",

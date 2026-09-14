@@ -16,10 +16,10 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Settling verifiably authorized agent payments on the Visa rail · Humanos × Paymove",
+      "AI risk scoring for agent payments on the Visa rail · Humanos × Paymove",
   },
   description:
-    "Paymove is the settlement layer for agentic commerce on Visa's protocol. Humanos plugs into the settlement path as the authorization stack — verifying every high-value spend against a human-signed mandate before it settles, with a portable, on-chain-anchored receipt both parties can check.",
+    "Paymove is the settlement layer for agentic commerce on Visa's protocol. Humanos provides continuous risk scoring and Risk Intelligence for every agent-initiated payment before it settles.",
   alternates: { canonical: "/case-studies/paymove" },
 };
 

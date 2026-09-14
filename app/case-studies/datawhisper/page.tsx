@@ -12,10 +12,10 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Verifying human authorization inside regulated AI workflows · DataWhisper × Humanos",
+      "Measuring AI risk inside regulated enterprise workflows · DataWhisper × Humanos",
   },
   description:
-    "DataWhisper's SmartInsights.CortexOS is integrating with Humanos so relevant legally consequential actions an AI agent takes are verified, and proved, before execution. Branded GuardianShield Consent inside CortexOS.",
+    "DataWhisper's SmartInsights.CortexOS integrates Humanos Risk Intelligence to measure, score and prove the risk of every AI agent action inside regulated enterprise workflows.",
   alternates: { canonical: "/case-studies/datawhisper" },
 };
 

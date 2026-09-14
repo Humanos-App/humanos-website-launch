@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 
 export const metadata: Metadata = {
-  // Root page keeps the layout's default title rather than templating it.
+  title: {
+    absolute: "Humanos | The Risk Network for AI",
+  },
   description:
-    "The Risk Network for AI. Continuously measure AI risk, build a verified risk reputation, reduce it with free controls, and insure what remains.",
+    "Humanos helps companies measure AI agent risk, prove safety and unlock financial products such as insurance and credit through continuous Risk Intelligence.",
   alternates: { canonical: "/" },
   other: designMetaOther,
 };

@@ -16,10 +16,10 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Verifiable agent payments beyond closed banking APIs · Humanos × Ralio",
+      "AI risk scoring for autonomous procurement and payments · Humanos × Ralio",
   },
   description:
-    "Ralio runs procurement and payment agents that source vendors, compare pricing, and execute purchases across external B2B marketplaces. Humanos verifies every transaction at the merchant boundary.",
+    "Ralio runs procurement and payment agents that source vendors, compare pricing, and execute purchases across B2B marketplaces. Humanos scores risk at every transaction boundary.",
   alternates: { canonical: "/case-studies/ralio" },
 };
 

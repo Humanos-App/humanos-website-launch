@@ -1424,11 +1424,11 @@ class Component extends DCLogic {
     if (C.dev >= 5.2) { C.dev = 0; this.advanceDevTab(); }
     if (!this._kriAutoStopped && this.kriVisible === true) {
       C.kriAuto = (C.kriAuto || 0) + dt;
-      if (C.kriAuto >= 3) { C.kriAuto = 0; this.setKriStep(((this.state.kriStep || 0) + 1) % Component.KRI_STEPS.length, true); }
+      if (C.kriAuto >= 5) { C.kriAuto = 0; this.setKriStep(((this.state.kriStep || 0) + 1) % Component.KRI_STEPS.length, true); }
     }
     if (!this._askAutoStopped) {
       C.askAuto = (C.askAuto || 0) + dt;
-      if (C.askAuto >= 3) { C.askAuto = 0; this.setAskStep(((this.state.askStep || 0) + 1) % Component.ASK.length, true); }
+      if (C.askAuto >= 5) { C.askAuto = 0; this.setAskStep(((this.state.askStep || 0) + 1) % Component.ASK.length, true); }
     }
     this.updatePillTone();
     C.head = (C.head || 0) + dt;

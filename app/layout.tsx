@@ -68,15 +68,11 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE_NAME,
     url: SITE_URL,
-    title: DEFAULT_TITLE,
-    description: DEFAULT_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
     site: TWITTER_HANDLE,
     creator: TWITTER_HANDLE,
-    title: DEFAULT_TITLE,
-    description: DEFAULT_DESCRIPTION,
   },
 };
 
@@ -86,7 +82,7 @@ const ORGANIZATION_LD = {
   name: SITE_NAME,
   url: SITE_URL,
   logo: absoluteUrl("/icon"),
-  description: DEFAULT_DESCRIPTION,
+  description: "The Risk Network for AI agents.",
   sameAs: SOCIAL_LINKS,
 };
 
