@@ -16,10 +16,10 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Verifying every agent-driven financial action before execution · Humanos × Numo",
+      "Measuring and proving AI risk in autonomous treasury operations · Humanos × Numo",
   },
   description:
-    "Numo runs autonomous strategies that reallocate capital continuously. Humanos verifies every action — identity, scope, amount, validity — before any capital moves.",
+    "Numo runs autonomous strategies that reallocate capital continuously. Humanos measures the risk of every agent action and provides continuous Risk Intelligence across the portfolio.",
   alternates: { canonical: "/case-studies/numo" },
 };
 

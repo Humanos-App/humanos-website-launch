@@ -9,10 +9,10 @@ export const SITE_URL = "https://humanos.tech";
 export const SITE_NAME = "Humanos";
 
 export const DEFAULT_TITLE =
-  "Humanos — Authorization infrastructure for the agentic economy";
+  "Humanos | The Risk Network for AI";
 
 export const DEFAULT_DESCRIPTION =
-  "Humanos turns approvals and policies into portable runtime authorization that AI agents and external systems can verify before execution — and prove afterwards.";
+  "Humanos helps companies measure AI agent risk, prove safety and unlock financial products such as insurance and credit through continuous Risk Intelligence.";
 
 /** Social profiles — used for Organization JSON-LD `sameAs` and Twitter card. */
 export const SOCIAL_LINKS = [

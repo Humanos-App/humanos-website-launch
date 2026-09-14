@@ -16,10 +16,10 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "One approval API across every clinical system · Humanos × Lusíadas",
+      "Continuous AI risk management across a clinical ecosystem · Humanos × Lusíadas",
   },
   description:
-    "Lusíadas runs human approvals through Humanos — consents, KYCs, signatures and prescriptions captured once and verified across Medify, Glintt, NewSoft, Pipedrive, internal systems and the patient mobile app. A global, independent approval OS for a multi-vendor healthcare ecosystem.",
+    "Lusíadas uses Humanos to measure and prove AI risk across Medify, Glintt, NewSoft, Pipedrive, internal systems and the patient mobile app — continuous Risk Intelligence for a multi-vendor healthcare ecosystem.",
   alternates: { canonical: "/case-studies/lusiadas" },
 };
 
