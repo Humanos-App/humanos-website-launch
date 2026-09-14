@@ -1,6 +1,6 @@
 # Humanos website
 
-Marketing site for [humanos.tech](https://humanos.tech) — authorization infrastructure for the agentic economy.
+Marketing site for [humanos.tech](https://humanos.tech) | The Risk Network for AI.
 
 ## Stack
 
@@ -18,13 +18,13 @@ npm run dev      # start the dev server on http://localhost:3000
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start the local dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
-| `npm run lint` | Run ESLint |
-| `npx tsc --noEmit` | Type-check |
+| Command            | Description                |
+| ------------------ | -------------------------- |
+| `npm run dev`      | Start the local dev server |
+| `npm run build`    | Production build           |
+| `npm run start`    | Serve the production build |
+| `npm run lint`     | Run ESLint                 |
+| `npx tsc --noEmit` | Type-check                 |
 
 ## Environment variables
 
