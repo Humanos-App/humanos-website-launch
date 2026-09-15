@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Company",
   description:
-    "Humanos is building the Risk Network for AI — infrastructure for understanding, controlling and transferring the risk behind autonomous action.",
+    "Humanos is building the Risk Network for AI — infrastructure to measure, control and transfer the risk created by autonomous systems.",
   alternates: { canonical: "/company" },
 };
 

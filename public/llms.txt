@@ -1,10 +1,12 @@
 # Humanos
 
-> Humanos is the Risk Network for AI agents. It helps companies measure AI agent risk, prove safety, and unlock financial products such as insurance and credit through continuous Risk Intelligence. Measure risk. Prove safety.
+> Humanos is the Risk Network for AI. It helps companies measure, control and transfer AI risk through continuous Risk Intelligence, unlocking insurance, credit, yield and other financial products.
 
-Humanos provides a continuous Risk Score based on how AI agents actually operate, enabling enterprises, insurers, auditors and compliance teams to understand and manage AI risk in production.
+Humanos continuously measures how AI agents actually operate, turning their activity into Risk Scores and standardized Risk Intelligence that can be used to understand, control and transfer AI risk.
 
-Last updated: 2026-09-14
+Humanos connects AI risk to financial products, enabling better-performing agents to unlock insurance, credit, yield and other forms of capital through a persistent, verifiable risk reputation.
+
+Last updated: 2026-09-15
 
 ## Developer documentation
 - [Quickstart](https://docs.humanos.tech/essentials/quick-start) — fastest path to getting started
@@ -16,11 +18,11 @@ Last updated: 2026-09-14
 - [C# / .NET SDK](https://www.nuget.org/packages/Humanos) — `dotnet add package Humanos`
 
 ## Core pages
-- [Monitor](https://humanos.tech/monitor): Know your AI risk. A continuous Risk Score from how your agents actually operate.
-- [Control](https://humanos.tech/control): Control what AI can do. Verify identity, enforce authority, and prove every decision.
-- [Risk Intelligence](https://humanos.tech/intelligence): Continuous, standardized, verifiable Risk Intelligence for insurers, auditors and compliance teams.
-- [Prove your AI](https://humanos.tech/prove): Give your AI a risk reputation — a continuously verified Risk Score you can use wherever trust matters.
-- [Pricing](https://humanos.tech/pricing): Manage AI risk for free. Buy the Risk Intelligence you need. Insure what remains.
+- [Monitor](https://humanos.tech/monitor): Know your AI risk and prove it with a continuous Risk Score based on how your AI agents actually operate.
+- [Control](https://humanos.tech/control): Control what AI can do. Set enforceable rules, require human approval when needed, and create verifiable evidence of how every agent operates.
+- [Risk Intelligence](https://humanos.tech/intelligence): Turn AI activity into continuous, standardized Risk Intelligence for companies, insurers, lenders and other risk takers.
+- [Prove your AI](https://humanos.tech/prove): Build a persistent risk reputation for your AI with a continuously verified Risk Score based on how it actually operates.
+- [Pricing](https://humanos.tech/pricing): Measure and manage AI risk for free. Access the Risk Intelligence and financial products you need as your AI scales.
 - [Customer stories](https://humanos.tech/case-studies): Real systems running Humanos in production.
 - [Company](https://humanos.tech/company): Building the Risk Network for AI.
 
@@ -30,7 +32,6 @@ Last updated: 2026-09-14
 - [Humanos × Lusíadas](https://humanos.tech/case-studies/lusiadas) [regulated healthcare]: Continuous AI risk management across a multi-vendor clinical ecosystem.
 - [Humanos × Paymove](https://humanos.tech/case-studies/paymove) [Visa rail / agent payments]: AI risk scoring for agent payments on the Visa rail.
 - [Humanos × DataWhisper](https://humanos.tech/case-studies/datawhisper) [agent governance / audit]: Measuring AI risk inside regulated enterprise workflows.
-- [Humanos × Extraflow](https://humanos.tech/case-studies/extraflow) [ERP back-office]: Continuous risk scoring for AI agents executing operations across ERP systems.
 
 ## Legal
 - [Cookie policy](https://humanos.tech/legal/cookies)

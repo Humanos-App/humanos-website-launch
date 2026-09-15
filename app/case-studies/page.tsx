@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Customers",
   description:
-    "Real systems. Real risk. Humanos in production — across workflows where identity, authorization, controls and verifiable evidence matter.",
+    "Real systems. Real risk. See how companies use Humanos to measure, control and transfer AI risk in production.",
   alternates: { canonical: "/case-studies" },
 };
 

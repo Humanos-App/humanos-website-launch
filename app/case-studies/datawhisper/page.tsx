@@ -12,7 +12,7 @@ import { CaseStudyBreadcrumb } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Measuring AI risk inside regulated enterprise workflows · DataWhisper × Humanos",
+      "Measuring AI risk inside regulated enterprise workflows · Humanos × DataWhisper",
   },
   description:
     "DataWhisper's SmartInsights.CortexOS integrates Humanos Risk Intelligence to measure, score and prove the risk of every AI agent action inside regulated enterprise workflows.",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function DataWhisperCaseStudyPage() {
   return (
     <div className="cs-page">
-      <CaseStudyBreadcrumb name="DataWhisper × Humanos" slug="datawhisper" />
+      <CaseStudyBreadcrumb name="Humanos × DataWhisper" slug="datawhisper" />
       <Hero />
       <About />
       <SelectivityCallout />
