@@ -4,7 +4,7 @@ import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 export const metadata: Metadata = {
   title: "Control",
   description:
-    "Control what AI can do. Verify identity, enforce authority, and prove every decision.",
+    "Control what AI can do. Set enforceable rules, require human approval when needed, and create verifiable evidence of how every agent operates.",
   alternates: { canonical: "/control" },
   other: designMetaOther,
 };

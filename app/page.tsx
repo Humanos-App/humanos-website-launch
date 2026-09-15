@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import { DEFAULT_DESCRIPTION } from "@/lib/seo";
 import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 
 export const metadata: Metadata = {
   title: {
     absolute: "Humanos | The Risk Network for AI",
   },
-  description:
-    "Humanos helps companies measure AI agent risk, prove safety and unlock financial products such as insurance and credit through continuous Risk Intelligence.",
+  description: DEFAULT_DESCRIPTION,
   alternates: { canonical: "/" },
   other: designMetaOther,
 };

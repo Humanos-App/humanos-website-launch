@@ -82,7 +82,7 @@ const ORGANIZATION_LD = {
   name: SITE_NAME,
   url: SITE_URL,
   logo: absoluteUrl("/icon"),
-  description: "The Risk Network for AI agents.",
+  description: "The Risk Network for AI.",
   sameAs: SOCIAL_LINKS,
 };
 

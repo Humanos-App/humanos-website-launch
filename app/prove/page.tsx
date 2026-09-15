@@ -4,7 +4,7 @@ import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 export const metadata: Metadata = {
   title: "Prove your AI",
   description:
-    "Give your AI a risk reputation — a continuously verified Risk Score you can use wherever trust matters.",
+    "Build a persistent risk reputation for your AI with a continuously verified Risk Score based on how it actually operates.",
   alternates: { canonical: "/prove" },
   other: designMetaOther,
 };

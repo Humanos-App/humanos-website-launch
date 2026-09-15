@@ -12,7 +12,7 @@ export const DEFAULT_TITLE =
   "Humanos | The Risk Network for AI";
 
 export const DEFAULT_DESCRIPTION =
-  "Humanos helps companies measure AI agent risk, prove safety and unlock financial products such as insurance and credit through continuous Risk Intelligence.";
+  "Humanos helps companies measure, control and transfer AI risk through continuous Risk Intelligence, unlocking insurance, credit, yield and other financial products.";
 
 /** Social profiles — used for Organization JSON-LD `sameAs` and Twitter card. */
 export const SOCIAL_LINKS = [
@@ -51,6 +51,8 @@ export const ROUTES: string[] = [
   "/case-studies/datawhisper",
   "/company",
   "/legal/cookies",
+  "/legal/privacy",
+  "/legal/terms",
   "/status",
   "/changelog",
 ];

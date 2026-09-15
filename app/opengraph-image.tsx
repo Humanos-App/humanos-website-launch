@@ -33,7 +33,7 @@ export default function OpengraphImage() {
             maxWidth: 980,
           }}
         >
-          Authorization infrastructure for the agentic economy
+          The Risk Network for AI
         </div>
         <div
           style={{
@@ -44,7 +44,7 @@ export default function OpengraphImage() {
             color: "#CFCDC6",
           }}
         >
-          <span>Portable Authorization &amp; Runtime Verification for AI</span>
+          <span>Measure, control and transfer AI risk.</span>
           <span style={{ color: BRAND.verification }}>
             {SITE_URL.replace("https://", "")}
           </span>
