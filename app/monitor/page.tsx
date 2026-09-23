@@ -4,7 +4,7 @@ import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 export const metadata: Metadata = {
   title: "Monitor",
   description:
-    "Know your AI risk, and prove it. A continuous Risk Score from how your agents actually operate.",
+    "Know your AI risk and prove it with a continuous Risk Score based on how your AI agents actually operate.",
   alternates: { canonical: "/monitor" },
   other: designMetaOther,
 };

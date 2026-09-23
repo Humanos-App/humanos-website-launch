@@ -4,7 +4,7 @@ import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 export const metadata: Metadata = {
   title: "Risk Intelligence",
   description:
-    "Get the risk answers you need — continuous, standardized, verifiable Risk Intelligence for insurers, auditors and compliance teams.",
+    "Turn AI activity into continuous, standardized Risk Intelligence for companies, insurers, lenders and other risk takers.",
   alternates: { canonical: "/intelligence" },
   other: designMetaOther,
 };

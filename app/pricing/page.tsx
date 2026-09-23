@@ -4,7 +4,7 @@ import { DesignPage, designMetaOther } from "@/components/design/DesignPage";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Manage AI risk for free. Buy the Risk Intelligence you need. Insure what remains.",
+    "Measure and manage AI risk for free. Access the Risk Intelligence and financial products you need as your AI scales.",
   alternates: { canonical: "/pricing" },
   other: designMetaOther,
 };

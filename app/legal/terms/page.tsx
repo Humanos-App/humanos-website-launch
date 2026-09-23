@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Terms of Service for the Humanos digital identity and verifiable credentials platform, operated by Humanos Labs Inc..",
+    "Terms of Service for the Humanos AI risk management and Risk Intelligence platform, operated by Humanos Labs Inc.",
   alternates: { canonical: "/legal/terms" },
 };
 
