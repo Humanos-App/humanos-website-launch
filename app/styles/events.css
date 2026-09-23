@@ -42,8 +42,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  width: 100%;
   min-height: 60px;
   padding: 18px 20px;
+  /* the MCP button is a <button>; the rest are links — normalize the UA bits */
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
   border: 1px solid rgba(17, 17, 17, 0.12);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.45);
@@ -63,6 +68,9 @@
 .events__btn:nth-child(2) { animation-delay: 170ms; }
 .events__btn:nth-child(3) { animation-delay: 250ms; }
 .events__btn:nth-child(4) { animation-delay: 330ms; }
+/* the disclosure wraps its button, so it can't be caught by the nth-child
+   chain above — it's the fifth item in the stack and rises after them */
+.events__disclosure > .events__btn { animation-delay: 410ms; }
 
 .events__btn:hover {
   background: rgba(255, 255, 255, 0.75);
@@ -87,6 +95,155 @@
 .events__btn:hover .events__btn-glyph {
   color: var(--fg-1);
   transform: translate(2px, 0);
+}
+
+/* ---------- MCP connector disclosure ----------
+   Same glass as the buttons, opened underneath the one that toggles it. */
+
+.events__disclosure {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.events__btn-glyph--toggle {
+  transition:
+    transform var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard);
+}
+.events__btn-glyph--toggle[data-open] {
+  transform: rotate(180deg);
+  color: var(--fg-1);
+}
+/* the shared :hover rule nudges the arrow sideways — wrong for a chevron */
+.events__btn:hover .events__btn-glyph--toggle {
+  transform: none;
+}
+.events__btn:hover .events__btn-glyph--toggle[data-open] {
+  transform: rotate(180deg);
+}
+
+.events__steps {
+  padding: 18px 20px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  animation: eventsRise 320ms var(--ease-standard) both;
+}
+
+.events__steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.events__step {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--fg-1);
+}
+
+.events__step-num {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-3);
+}
+
+/* both steps carry content under their first line, so they claim the row */
+.events__step-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.events__path strong {
+  font-weight: 600;
+}
+.events__path-sep {
+  color: var(--fg-3);
+}
+
+
+/* The whole row is the copy target — a small tap area is the last thing you
+   want on a phone at a booth. */
+.events__copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+.events__copy:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(17, 17, 17, 0.32);
+}
+.events__copy:focus-visible {
+  outline: 2px solid var(--hm-verification);
+  outline-offset: 2px;
+}
+
+.events__url {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--fg-1);
+  overflow-wrap: anywhere;
+}
+
+/* The prompt is a sentence, not an identifier — it stays in the body face,
+   and it always wraps, so the label sits under it at every width rather
+   than fighting the text for the row. */
+.events__copy--prompt {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.events__prompt {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--fg-1);
+  text-align: left;
+}
+
+.events__copy-label {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.events__copy:hover .events__copy-label {
+  color: var(--fg-1);
+}
+
+/* On a phone the URL and the label can't share a line without the URL
+   breaking mid-token, which is exactly the thing you don't want someone
+   reading off a screen — give the URL the row and drop the label under it. */
+@media (max-width: 430px) {
+  .events__copy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 /* Bottom-right corner, about a quarter of it bleeding off-screen. Fixed is
@@ -126,11 +283,13 @@
 @media (prefers-reduced-motion: reduce) {
   .events__logo,
   .events__btn,
+  .events__steps,
   .events__globe {
     animation: none;
   }
   .events__btn,
-  .events__btn-glyph {
+  .events__btn-glyph,
+  .events__copy {
     transition: none;
   }
 }

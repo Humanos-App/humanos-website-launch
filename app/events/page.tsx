@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { EXTERNAL_LINKS } from "@/lib/external-links";
 import { EventsGlobe } from "./EventsGlobe";
+import { McpConnector } from "./McpConnector";
 
 import "../styles/events.css";
 
@@ -66,6 +67,7 @@ export default function Page() {
               </Link>
             )
           )}
+          <McpConnector />
       </nav>
       <EventsGlobe />
     </main>
