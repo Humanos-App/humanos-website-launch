@@ -21,6 +21,12 @@
   background: #111111 !important;
 }
 
+/* The design's own floating SDK-prompt pill, hidden while the SDK isn't
+   live (SDK_PROMPT_PILL in lib/flags.ts sets body[data-sdk-pill]). */
+body[data-sdk-pill="off"] [data-pill] {
+  display: none !important;
+}
+
 /* The raw-events feed ends without a trailing rule, at every width. */
 [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:first-child > div > div:last-child {
   border-bottom: none !important;
