@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useState } from "react";
 import Link from "next/link";
 
 export type Filter = {
@@ -26,15 +26,9 @@ export type Story = {
   href: string;
   /** CTA copy on the bottom-left link. */
   cta: string;
-  /** Verify-panel content shown on the dark right pane. */
-  verify: {
-    chip: string;
-    code: ReactNode;
-    /** Three "subject resolved", "mandate matched", … lines. */
-    checks: string[];
-    /** Verdict line — accept JSX so the "● authorized" prefix can be highlighted. */
-    verdict: ReactNode;
-  };
+  /** Dotted illustration shown on the dark right pane — the same art as
+   *  the story's card in the homepage carousel (public/assets/stories). */
+  image: string;
 };
 
 export function StoriesGrid({
@@ -45,79 +39,6 @@ export function StoriesGrid({
   stories: Story[];
 }) {
   const [active, setActive] = useState<string>("all");
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  /* Verify-panel animation loop. Each card's dark pane cycles through
-     its checks in order, lights the verdict, marks the chip resolved,
-     then resets — but only while the panel is on screen. */
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const panels = Array.from(
-      root.querySelectorAll<HTMLElement>(".fcard__visual[data-anim]"),
-    );
-
-    const stoppers: Array<() => void> = [];
-    panels.forEach((p) => {
-      const checks = Array.from(p.querySelectorAll<HTMLElement>("[data-step]"));
-      const verdict = p.querySelector<HTMLElement>("[data-verdict]");
-      const state = p.querySelector<HTMLElement>(".fcard__chip .state");
-      let timers: number[] = [];
-      const clearT = () => {
-        timers.forEach((t) => window.clearTimeout(t));
-        timers = [];
-      };
-      const cycle = () => {
-        clearT();
-        p.classList.remove("is-resolved");
-        if (state) state.textContent = "verifying…";
-        checks.forEach((c) => c.classList.remove("is-on"));
-        verdict?.classList.remove("is-on");
-        checks.forEach((c, i) => {
-          timers.push(
-            window.setTimeout(() => c.classList.add("is-on"), 600 + i * 520),
-          );
-        });
-        const after = 600 + checks.length * 520 + 380;
-        timers.push(
-          window.setTimeout(() => {
-            verdict?.classList.add("is-on");
-            p.classList.add("is-resolved");
-            if (state) state.textContent = "resolved";
-          }, after),
-        );
-      };
-
-      let loop: number | null = null;
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              if (loop === null) {
-                cycle();
-                loop = window.setInterval(cycle, 5400);
-              }
-            } else if (loop !== null) {
-              window.clearInterval(loop);
-              loop = null;
-              clearT();
-            }
-          });
-        },
-        { threshold: 0.3 },
-      );
-      io.observe(p);
-      stoppers.push(() => {
-        io.disconnect();
-        if (loop !== null) window.clearInterval(loop);
-        clearT();
-      });
-    });
-
-    return () => {
-      stoppers.forEach((s) => s());
-    };
-  }, []);
 
   return (
     <>
@@ -134,7 +55,7 @@ export function StoriesGrid({
         ))}
       </div>
 
-      <div className="featured" id="featured" ref={rootRef}>
+      <div className="featured" id="featured">
         {stories.map((s, i) => {
           const visible = active === "all" || s.cat === active;
           const cardClass = `fcard${visible ? "" : " is-hidden"}`;
@@ -159,25 +80,15 @@ export function StoriesGrid({
                 </span>
               </div>
 
-              <div className="fcard__visual" data-anim>
-                <span className="fcard__chip">
-                  <span className="pip" />
-                  {s.verify.chip} <span className="state">verifying…</span>
-                </span>
-                <div className="code-mini">
-                  <pre>{s.verify.code}</pre>
-                </div>
-                <ul className="va__checks">
-                  {s.verify.checks.map((c, j) => (
-                    <li key={j} className="va__check" data-step>
-                      <span className="ic" />
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-                <div className="fcard__verdict va__verdict" data-verdict>
-                  {s.verify.verdict}
-                </div>
+              <div className="fcard__visual">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="fcard__art"
+                  src={s.image}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </>
           );

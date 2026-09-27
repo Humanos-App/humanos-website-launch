@@ -35,39 +35,7 @@ const STORIES: Story[] = [
     desc: "InsureNow is integrating Humanos risk intelligence into its proprietary underwriting framework. One integration supports underwriting, monitoring and renewal, with execution receipts as evidence when something goes wrong.",
     href: "/case-studies/insurenow",
     cta: "Read the story",
-    verify: {
-      chip: "verify · claims.settle",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;insured.claims-agent&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;claims.settle&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">amount</span>:{" "}
-          <span className="tk-num">18500</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">approval</span>:{" "}
-          <span className="tk-str">&quot;human&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "exposure measured · within financial limit",
-        "safeguard matched · human approval",
-        "receipt signed · claims evidence",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● receipt</span> — risk profile refreshed every
-          24h
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-shield.webp",
   },
   {
     cat: "finance",
@@ -83,38 +51,7 @@ const STORIES: Story[] = [
     desc: "Agentics Credit provides AI agents with credit to trade on Polymarket. Humanos adds identity and runtime risk intelligence, which Agentics Credit uses alongside its own credit score to set and adjust financial capacity.",
     href: "/case-studies/agentics-credit",
     cta: "Read the story",
-    verify: {
-      chip: "verify · market.trade",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;agent:polymarket-7f3&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;market.trade&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">amount</span>:{" "}
-          <span className="tk-num">12000</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">credit</span>:{" "}
-          <span className="tk-str">&quot;agentics-credit&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "identity verified · owner established (> $10K)",
-        "runtime risk measured · current profile",
-        "passport updated · history recorded",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within credit line
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-chart.webp",
   },
   {
     cat: "finance",
@@ -135,39 +72,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/numo",
     cta: "Read the story",
-    verify: {
-      chip: "verify · treasury.reallocate",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;numo-treasury&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;capital.reallocate&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">amount</span>:{" "}
-          <span className="tk-num">50000</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">rail</span>:{" "}
-          <span className="tk-str">&quot;custodian-a&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · numo-treasury",
-        "mandate matched · treasury.reallocate",
-        "constraints ok · ≤ daily limit",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within signed treasury
-          scope
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-building.webp",
   },
   {
     cat: "healthcare",
@@ -188,38 +93,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/lusiadas",
     cta: "Read the story",
-    verify: {
-      chip: "verify · consent.informed",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;medify.app&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;consent.informed&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">patient</span>:{" "}
-          <span className="tk-str">&quot;pt_4F19&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">signers</span>: [
-          <span className="tk-str">&quot;patient&quot;</span>,{" "}
-          <span className="tk-str">&quot;physician&quot;</span>]{"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · medify.app",
-        "signers matched · patient + physician",
-        "anchored · Lusíadas approval ledger",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● approved</span> — receipt attached to record
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-hospital.webp",
   },
   {
     cat: "infra",
@@ -240,39 +114,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/datawhisper",
     cta: "Read the story",
-    verify: {
-      chip: "verify · action.high_risk",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;cortex.agent&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;dispute.resolve&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">case</span>:{" "}
-          <span className="tk-str">&quot;DW-018472&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">scope</span>:{" "}
-          <span className="tk-str">&quot;dispute.resolve&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · cortex.agent",
-        "mandate matched · operations lead",
-        "audit · anchored & portable",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within signed scope, proof
-          emitted
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-building.webp",
   },
 ];
 
