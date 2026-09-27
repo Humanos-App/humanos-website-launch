@@ -52,14 +52,9 @@ const PAGES = [
   },
   { slug: "pricing", path: "/pricing", dir: "Pricing", file: "Pricing.dc.html" },
   { slug: "prove", path: "/prove", dir: "Prove Risk", file: "Prove Your AI.dc.html" },
-  { slug: "control", path: "/control", dir: "Control Risk", file: "Control.dc.html" },
-  { slug: "monitor", path: "/monitor", dir: "Control Risk", file: "Monitor v3.dc.html" },
-  {
-    slug: "intelligence",
-    path: "/intelligence",
-    dir: "Control Risk",
-    file: "Risk Intelligence.dc.html",
-  },
+  // The Control Risk exports (Monitor, Control, Risk Intelligence) are no
+  // longer published: /measure, /control and /intelligence are story-layout
+  // pages now (components/story). Their sources stay in sep-2026/ as reference.
 ];
 
 const NOINDEX = '<meta name="robots" content="noindex, nofollow">';

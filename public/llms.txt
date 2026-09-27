@@ -18,9 +18,9 @@ Last updated: 2026-09-15
 - [C# / .NET SDK](https://www.nuget.org/packages/Humanos) — `dotnet add package Humanos`
 
 ## Core pages
-- [Monitor](https://humanos.tech/monitor): Know your AI risk and prove it with a continuous Risk Score based on how your AI agents actually operate.
-- [Control](https://humanos.tech/control): Control what AI can do. Set enforceable rules, require human approval when needed, and create verifiable evidence of how every agent operates.
-- [Risk Intelligence](https://humanos.tech/intelligence): Turn AI activity into continuous, standardized Risk Intelligence for companies, insurers, lenders and other risk takers.
+- [Measure Risk](https://humanos.tech/measure): A verified identity and a live 0–100 risk profile for every AI agent, updated every time the agent acts.
+- [Control Risk](https://humanos.tech/control): Deterministic limits, policies and real-time human approval around every important agent action. Guardrails are free.
+- [Risk Intelligence](https://humanos.tech/intelligence): Verified identity, permissions and behavior turned into live risk intelligence that insurers, lenders and partners use in their own decisions.
 - [Prove your AI](https://humanos.tech/prove): Build a persistent risk reputation for your AI with a continuously verified Risk Score based on how it actually operates.
 - [Pricing](https://humanos.tech/pricing): Measure and manage AI risk for free. Access the Risk Intelligence and financial products you need as your AI scales.
 - [Customer stories](https://humanos.tech/case-studies): Real systems running Humanos in production.

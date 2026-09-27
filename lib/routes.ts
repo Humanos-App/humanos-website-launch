@@ -2,7 +2,7 @@ export const ROUTES = {
   home: "/",
   howItWorks: "/how-it-works",
   developers: "/developers",
-  monitor: "/monitor",
+  measure: "/measure",
   control: "/control",
   intelligence: "/intelligence",
   prove: "/prove",

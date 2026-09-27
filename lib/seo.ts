@@ -38,7 +38,7 @@ export const BRAND = {
  */
 export const ROUTES: string[] = [
   "/",
-  "/monitor",
+  "/measure",
   "/control",
   "/intelligence",
   "/prove",
