@@ -93,7 +93,7 @@ export default function NumoCaseStudyPage() {
           },
           {
             label: "Site",
-            value: <a href="https://usenumo.com/">usenumo.com&nbsp;↗</a>,
+            value: <a href="https://usenumo.com/" target="_blank" rel="noopener noreferrer">usenumo.com&nbsp;↗</a>,
           },
         ],
       }}
@@ -169,7 +169,7 @@ export default function NumoCaseStudyPage() {
                   },
                   {
                     label: "Site",
-                    value: <a href="https://usenumo.com/">usenumo.com&nbsp;↗</a>,
+                    value: <a href="https://usenumo.com/" target="_blank" rel="noopener noreferrer">usenumo.com&nbsp;↗</a>,
                   },
                 ]}
               />
