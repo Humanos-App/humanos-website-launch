@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         destination: "https://www.humanos.tech/:path",
         permanent: false,
       },
+      // Monitor became Measure Risk; Prove's story now lives in Risk
+      // Intelligence (proof across organizations).
+      { source: "/monitor", destination: "/measure", permanent: true },
+      { source: "/prove", destination: "/intelligence", permanent: true },
       // Retired customer stories — send old links to the stories index.
       {
         source: "/case-studies/:slug(ralio|paymove)",

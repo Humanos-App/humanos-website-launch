@@ -14,6 +14,25 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
+/** BreadcrumbList JSON-LD: Home → …items, each a {name, path} pair. */
+export function Breadcrumb({
+  items,
+}: {
+  items: Array<{ name: string; path: string }>;
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [{ name: "Home", path: "/" }, ...items].map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: absoluteUrl(it.path),
+    })),
+  };
+  return <JsonLd data={data} />;
+}
+
 /**
  * BreadcrumbList JSON-LD for a case-study page:
  * Home → Customer stories → {name}.
@@ -25,24 +44,12 @@ export function CaseStudyBreadcrumb({
   name: string;
   slug: string;
 }) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Customer stories",
-        item: absoluteUrl("/case-studies"),
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name,
-        item: absoluteUrl(`/case-studies/${slug}`),
-      },
-    ],
-  };
-  return <JsonLd data={data} />;
+  return (
+    <Breadcrumb
+      items={[
+        { name: "Customer stories", path: "/case-studies" },
+        { name, path: `/case-studies/${slug}` },
+      ]}
+    />
+  );
 }

@@ -38,10 +38,9 @@ export const BRAND = {
  */
 export const ROUTES: string[] = [
   "/",
-  "/monitor",
+  "/measure",
   "/control",
   "/intelligence",
-  "/prove",
   "/pricing",
   "/case-studies",
   "/case-studies/insurenow",

@@ -3,10 +3,9 @@ import { absoluteUrl, ROUTES } from "@/lib/seo";
 
 const HIGH_PRIORITY: Set<string> = new Set([
   "/",
-  "/monitor",
+  "/measure",
   "/control",
   "/intelligence",
-  "/prove",
   "/pricing",
 ]);
 

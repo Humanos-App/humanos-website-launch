@@ -1,4 +1,5 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
+import Link from "next/link";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 
 /**
@@ -154,6 +155,12 @@ export function CardGrid({
     title?: ReactNode;
     text?: ReactNode;
     tags?: string[];
+    /** Small status pill beside the label, e.g. "Available now". */
+    badge?: { text: string; tone?: "live" | "soon" };
+    /** A link at the foot of the card. */
+    link?: { href: string; label: string };
+    /** Colours the label as a state: ok (green) or bad (red). */
+    labelTone?: "ok" | "bad";
     highlight?: boolean;
   }>;
   /** Minimum card width before the grid wraps. */
@@ -163,7 +170,14 @@ export function CardGrid({
     <dl className="story-cards" style={{ "--cards-min": `${min}px` } as CSSProperties}>
       {items.map((it, i) => (
         <div key={i} className={cx("story-card", it.highlight && "is-hl")}>
-          <dt className="story-card__label">{it.label}</dt>
+          <dt className={cx("story-card__label", it.labelTone && `is-${it.labelTone}`)}>
+            {it.label}
+            {it.badge && (
+              <span className={cx("story-card__badge", it.badge.tone === "live" && "is-live")}>
+                {it.badge.text}
+              </span>
+            )}
+          </dt>
           {it.title && <dd className="story-card__title">{it.title}</dd>}
           {it.text && <dd className="story-card__text">{it.text}</dd>}
           {it.tags && it.tags.length > 0 && (
@@ -171,6 +185,13 @@ export function CardGrid({
               {it.tags.map((t) => (
                 <span key={t}>{t}</span>
               ))}
+            </dd>
+          )}
+          {it.link && (
+            <dd className="story-card__foot">
+              <Link href={it.link.href} className="story-card__link">
+                {it.link.label} <span aria-hidden="true">→</span>
+              </Link>
             </dd>
           )}
         </div>

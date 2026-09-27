@@ -194,6 +194,56 @@
 .mega__item:hover {
   color: var(--hm-verification);
 }
+/* Compact dropdown (Solutions): anchored under its own label. */
+.nav__item {
+  position: relative;
+  display: inline-flex;
+}
+.mega--compact {
+  left: -18px;
+  right: auto;
+  width: 340px;
+  padding: 8px;
+  border: 1px solid var(--hm-line);
+  border-radius: 6px;
+  box-shadow: var(--elev-active);
+}
+.mega--compact .mega__item {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 4px;
+}
+.mega--compact .mega__item:hover {
+  background: var(--hm-verification-wash);
+}
+.mega--compact .mega__item-icon {
+  grid-row: span 2;
+}
+.mega--compact .mega__item-sub {
+  grid-column: 2;
+}
+.mega__item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid var(--hm-line);
+  color: var(--hm-verification);
+}
+.mega__item-icon svg {
+  width: 18px;
+  height: 18px;
+}
+/* in the mobile drawer the icon sits inline before the text */
+.nav__mobile-mega .mega__item-icon {
+  display: none;
+}
+
 /* not shipped yet: readable, but not interactive */
 .mega__item.is-soon,
 .mega__item.is-soon:hover {
@@ -530,6 +580,17 @@
 }
 .site-chrome[data-theme="dark"] .mega__group-label {
   color: #76746d;
+}
+.site-chrome[data-theme="dark"] .mega--compact {
+  border-color: var(--chrome-line);
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+}
+.site-chrome[data-theme="dark"] .mega--compact .mega__item:hover {
+  background: rgba(121, 120, 233, 0.1);
+}
+.site-chrome[data-theme="dark"] .mega__item-icon {
+  border-color: var(--chrome-line);
+  color: var(--hm-execution);
 }
 .site-chrome[data-theme="dark"] .mega__item-tag {
   color: var(--hm-execution);
