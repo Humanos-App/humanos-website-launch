@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_NAME, TWITTER_HANDLE } from "@/lib/seo";
 
-/** Metadata for a customer story: absolute title (no site suffix),
+/** Metadata for a story-layout page: absolute title (no site suffix),
  *  canonical URL, and Open Graph / Twitter cards that carry the story's
  *  own title and description. Nested openGraph/twitter objects replace
  *  the root layout's rather than merging — and drop the inherited
@@ -17,7 +17,19 @@ export function storyMetadata({
   title: string;
   description: string;
 }): Metadata {
-  const url = `/case-studies/${slug}`;
+  return pageMetadata({ path: `/case-studies/${slug}`, title, description });
+}
+
+/** The same metadata for any path (the Solutions pages use it directly). */
+export function pageMetadata({
+  path: url,
+  title,
+  description,
+}: {
+  path: string;
+  title: string;
+  description: string;
+}): Metadata {
   return {
     title: { absolute: title },
     description,

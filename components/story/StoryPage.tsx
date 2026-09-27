@@ -4,9 +4,10 @@ import { StoryHero, type StoryHeroProps } from "./StoryHero";
 import { StoryToc, type TocItem } from "./StoryToc";
 
 /**
- * Shared long-form layout for every customer story
+ * Shared long-form layout for the customer stories and the Solutions pages
  * (app/styles/customer-story.css): hero, a contents rail that tracks the
- * section in view, a TL;DR card, then numbered sections.
+ * section in view, a summary card (TL;DR / In short), then numbered
+ * sections.
  *
  * Pages pass content only. Numbering is derived from the section order,
  * and each eyebrow reads "NN · nav" from the same `nav` label the contents
@@ -25,6 +26,8 @@ export type StorySection = {
 };
 
 export type StoryTldr = {
+  /** Card eyebrow and contents-rail label. Defaults to "TL;DR". */
+  label?: string;
   title: ReactNode;
   body: ReactNode;
 };
@@ -34,25 +37,30 @@ const pad = (n: number) => String(n).padStart(2, "0");
 export function StoryPage({
   slug,
   name,
+  breadcrumb,
   hero,
   tldr,
   sections,
 }: {
-  slug: string;
-  /** Breadcrumb name, e.g. "Humanos × InsureNow". */
-  name: string;
+  /** Case-study slug and breadcrumb name ("Humanos × InsureNow"); together
+   *  they emit the Customer stories breadcrumb. */
+  slug?: string;
+  name?: string;
+  /** Any other breadcrumb (e.g. a Solutions page), replacing the above. */
+  breadcrumb?: ReactNode;
   hero: StoryHeroProps;
   tldr: StoryTldr;
   sections: StorySection[];
 }) {
   const toc: TocItem[] = [
-    { id: "tldr", label: "TL;DR", n: "—" },
+    { id: "tldr", label: tldr.label ?? "TL;DR", n: "—" },
     ...sections.map((s, i) => ({ id: s.id, label: s.nav, n: pad(i + 1) })),
   ];
 
   return (
     <article className="story">
-      <CaseStudyBreadcrumb name={name} slug={slug} />
+      {breadcrumb ??
+        (slug && name ? <CaseStudyBreadcrumb name={name} slug={slug} /> : null)}
       <StoryHero {...hero} />
 
       <div className="story__body">
@@ -60,7 +68,7 @@ export function StoryPage({
 
         <div className="story__main">
           <section id="tldr" className="story-tldr">
-            <p className="story-eyebrow">TL;DR</p>
+            <p className="story-eyebrow">{tldr.label ?? "TL;DR"}</p>
             <h2 className="story-tldr__title">{tldr.title}</h2>
             {tldr.body}
           </section>

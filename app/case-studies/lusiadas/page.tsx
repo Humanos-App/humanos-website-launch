@@ -1,5 +1,5 @@
-import { StoryPage } from "../_components/story/StoryPage";
-import { storyMetadata } from "../_components/story/metadata";
+import { StoryPage } from "@/components/story/StoryPage";
+import { storyMetadata } from "@/components/story/metadata";
 import {
   Accent,
   CardGrid,
@@ -12,7 +12,7 @@ import {
   Statement,
   StepsCard,
   SummaryBox,
-} from "../_components/story/blocks";
+} from "@/components/story/blocks";
 
 export const metadata = storyMetadata({
   slug: "lusiadas",
