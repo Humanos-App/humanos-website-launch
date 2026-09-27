@@ -10,7 +10,10 @@ export const ROUTES = {
   company: "/company",
   customers: "/case-studies",
   caseStudies: {
+    insurenow: "/case-studies/insurenow",
+    agenticsCredit: "/case-studies/agentics-credit",
     numo: "/case-studies/numo",
-    ralio: "/case-studies/ralio",
+    lusiadas: "/case-studies/lusiadas",
+    datawhisper: "/case-studies/datawhisper",
   },
 } as const;

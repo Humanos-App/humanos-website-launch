@@ -27,10 +27,10 @@ Last updated: 2026-09-15
 - [Company](https://humanos.tech/company): Building the Risk Network for AI.
 
 ## Case studies
+- [Humanos × InsureNow](https://humanos.tech/case-studies/insurenow) [AI liability insurance]: Operational risk signals and execution evidence across underwriting, monitoring, renewal and claims assessment.
+- [Humanos × Agentics Credit](https://humanos.tech/case-studies/agentics-credit) [agentic credit]: Identity and runtime risk intelligence that helps set how much credit AI agents trading on Polymarket can access.
 - [Humanos × Numo](https://humanos.tech/case-studies/numo) [treasury OS]: Measuring and proving AI risk in autonomous treasury operations.
-- [Humanos × Ralio](https://humanos.tech/case-studies/ralio) [agentic commerce]: AI risk scoring for autonomous procurement and payments.
 - [Humanos × Lusíadas](https://humanos.tech/case-studies/lusiadas) [regulated healthcare]: Continuous AI risk management across a multi-vendor clinical ecosystem.
-- [Humanos × Paymove](https://humanos.tech/case-studies/paymove) [Visa rail / agent payments]: AI risk scoring for agent payments on the Visa rail.
 - [Humanos × DataWhisper](https://humanos.tech/case-studies/datawhisper) [agent governance / audit]: Measuring AI risk inside regulated enterprise workflows.
 
 ## Legal

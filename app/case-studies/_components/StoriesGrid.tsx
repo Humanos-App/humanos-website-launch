@@ -13,7 +13,7 @@ export type Story = {
   cat: string;
   /** Customer name shown in the card top. */
   name: string;
-  status: "Integrated" | "In review";
+  status: "Integrated" | "In review" | "Testing";
   /** Mono-style domain label, e.g. "Agentic finance · Treasury". */
   domain: string;
   /** Title with optional <em> highlight via JSX. */
@@ -145,7 +145,7 @@ export function StoriesGrid({
                   <span className="fcard__name">{s.name}</span>
                   <span
                     className={`fcard__status${
-                      s.status === "In review" ? " fcard__status--review" : ""
+                      s.status !== "Integrated" ? " fcard__status--review" : ""
                     }`}
                   >
                     {s.status}
