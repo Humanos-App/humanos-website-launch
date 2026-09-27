@@ -38,6 +38,7 @@ import "./styles/closing-cta.css";
 import "./styles/dialog.css";
 import "./styles/pricing.css";
 import "./styles/case-study.css";
+import "./styles/customer-story.css";
 import "./styles/company.css";
 import "./styles/customers.css";
 import "./styles/consent.css";
