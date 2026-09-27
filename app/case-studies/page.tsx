@@ -28,7 +28,7 @@ const STORIES: Story[] = [
     domain: "AI liability insurance · MGA",
     title: (
       <>
-        AI liability underwritten on how agents actually operate —{" "}
+        AI liability underwritten on how agents actually operate,{" "}
         <em>from cover to claims evidence.</em>
       </>
     ),
@@ -76,8 +76,8 @@ const STORIES: Story[] = [
     domain: "Agentic credit · Polymarket",
     title: (
       <>
-        AI agents borrow real capital to trade —{" "}
-        <em>credit set on how they actually operate.</em>
+        AI agents borrow real capital to trade.{" "}
+        <em>Credit follows how they actually operate.</em>
       </>
     ),
     desc: "Agentics Credit provides AI agents with credit to trade on Polymarket. Humanos adds identity and runtime risk intelligence, which Agentics Credit uses alongside its own credit score to set and adjust financial capacity.",
@@ -176,7 +176,7 @@ const STORIES: Story[] = [
     domain: "Healthcare · Approval OS",
     title: (
       <>
-        Consents, KYCs, and prescriptions —{" "}
+        Consents, KYCs, and prescriptions{" "}
         <em>collected once, verified everywhere.</em>
       </>
     ),
@@ -228,11 +228,11 @@ const STORIES: Story[] = [
     domain: "Multi-agent AI · Regulated industries",
     title: (
       <>
-        Agents act inside regulated workflows —{" "}
+        Agents act inside regulated workflows,{" "}
         <em>governed by Humanos at every step.</em>
       </>
     ),
-    desc: "DataWhisper orchestrates multi-agent AI for regulated industries. Humanos sits as the authorization stack — every high-risk agent action is verified before execution and produces a clean, portable audit trail.",
+    desc: "DataWhisper orchestrates multi-agent AI for regulated industries. Humanos sits as the authorization stack. Every high-risk agent action is verified before execution and produces a clean, portable audit trail.",
     stats: [
       { num: "184ms", lab: "Median verify latency" },
       { num: "100%", lab: "Actions on-mandate" },
