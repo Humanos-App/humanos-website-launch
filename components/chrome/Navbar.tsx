@@ -46,6 +46,15 @@ function MegaItemLink({
       {item.sub && <div className="mega__item-sub">{item.sub}</div>}
     </>
   );
+  /* Items that don't exist yet (tagged "Coming soon", href "#") render as
+     plain text rather than a link that jumps to the top of the page. */
+  if (!item.href || item.href === "#") {
+    return (
+      <div className="mega__item is-soon" aria-disabled="true">
+        {content}
+      </div>
+    );
+  }
   if (isExternal(item.href)) {
     return (
       <a

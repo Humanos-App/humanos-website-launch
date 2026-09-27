@@ -194,6 +194,12 @@
 .mega__item:hover {
   color: var(--hm-verification);
 }
+/* not shipped yet: readable, but not interactive */
+.mega__item.is-soon,
+.mega__item.is-soon:hover {
+  cursor: default;
+  color: var(--hm-ink-1);
+}
 .mega__item-title {
   font-weight: 500;
   display: inline-flex;
@@ -514,6 +520,10 @@
 }
 .site-chrome[data-theme="dark"] .mega__item:hover {
   color: var(--hm-chalk-0);
+}
+.site-chrome[data-theme="dark"] .mega__item.is-soon,
+.site-chrome[data-theme="dark"] .mega__item.is-soon:hover {
+  color: var(--hm-chalk-1);
 }
 .site-chrome[data-theme="dark"] .mega__item-sub {
   color: var(--hm-chalk-2);
