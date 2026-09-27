@@ -6,7 +6,6 @@ import {
   Chain,
   Chips,
   CompareTable,
-  Disclaimer,
   FactGrid,
   FlowStack,
   KeyValueList,
@@ -379,12 +378,6 @@ export default function AgenticsCreditCaseStudyPage() {
                   <Accent>greater financial capacity.</Accent>
                 </Statement>
               </SummaryBox>
-              <Disclaimer>
-                Polymarket is referenced as the venue where Agentics Credit&apos;s
-                borrowers trade. This story describes the relationship between
-                Agentics Credit and Humanos. It does not describe a partnership,
-                integration or endorsement involving Polymarket.
-              </Disclaimer>
             </>
           ),
         },
