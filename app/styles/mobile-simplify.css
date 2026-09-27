@@ -25,19 +25,6 @@
   }
 }
 
-/* When the case-study Implementation viz panel is hidden on mobile,
-   the .impl__stages cards are no longer driven by the scroll loop.
-   Strip the past/active/future dimming so every stage reads at full
-   strength as a plain static list. */
-@media (max-width: 720px) {
-  .impl__stages .istage,
-  .impl__stages .istage.is-past,
-  .impl__stages .istage.is-active,
-  .impl__stages .istage.is-future {
-    opacity: 1 !important;
-  }
-}
-
 /* =========================================================
    MobileVisualDrawer — desktop renders inline, mobile shows
    an "Expand" pill that opens a bottom-sheet drawer.
