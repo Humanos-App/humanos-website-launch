@@ -260,7 +260,7 @@ function GuardVis({ kind }: { kind: GuardVisual }) {
     case "human":
       return (
         <div className="gv-chips">
-          {["Code", "Passkey", "ID document"].map((c) => (
+          {["OTP", "Passkey", "KYC"].map((c) => (
             <span key={c} className="gv-chips__chip">{c}</span>
           ))}
         </div>

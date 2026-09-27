@@ -100,7 +100,7 @@ export default function ControlRiskPage() {
                   {
                     eyebrow: "Human",
                     title: "Know who authorized it",
-                    text: "Confirm who approved an action with an email or SMS code, a passkey or a full ID-document check.",
+                    text: "Confirm who approved an action with an OTP, passkey or full KYC check.",
                     visual: "human",
                   },
                   {
@@ -208,15 +208,15 @@ export default function ControlRiskPage() {
             <>
               <Prose>
                 <p>
-                  Limits, policies, checks, approvals and email codes cost
+                  Limits, policies, checks, approvals and email OTPs cost
                   nothing. You only pay for the two things that carry a real
                   cost to deliver.
                 </p>
               </Prose>
               <FactGrid
                 items={[
-                  { label: "Free", value: "Guardrails, policies, checks, approvals and email codes" },
-                  { label: "Paid", value: "Full ID-document and biometric checks, and SMS codes" },
+                  { label: "Free", value: "Guardrails, policies, checks, approvals and email OTPs" },
+                  { label: "Paid", value: "Full KYC checks (ID document + biometrics) and SMS OTPs" },
                 ]}
               />
             </>
