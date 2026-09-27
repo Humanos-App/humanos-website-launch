@@ -972,8 +972,10 @@ class Component extends DCLogic {
   /* One-card carousel step with an invisible wrap: while the slide runs
      the index may sit one past the real set (-1 or N — the track carries
      a clone card past each tip), and once it settles it re-anchors
-     modulo STORY_COUNT with the transition suppressed for a single frame. */
-  static STORY_COUNT = 2;
+     modulo STORY_COUNT with the transition suppressed for a single frame.
+     Keep in step with the card sets in components/08-customer-stories.html
+     (whose track transform offsets by the same count). */
+  static STORY_COUNT = 5;
   storyStep(d) {
     if (this.storyLock) return;
     this.storyLock = true;
@@ -2237,7 +2239,7 @@ class Component extends DCLogic {
       setCarouselRef: (el) => { this.carouselEl = el; },
       storyIdx: this.state.storyIdx,
       /* Seamless loop: each arrow moves exactly one card, stepping into
-         the clone zone at the tips (storyIdx may briefly be -1 or 3 —
+         the clone zone at the tips (storyIdx may briefly be -1 or 5 —
          the track carries one clone card past each tip), and after the
          slide the index re-anchors onto the real set with the
          transition off. Identical content, invisible snap. */

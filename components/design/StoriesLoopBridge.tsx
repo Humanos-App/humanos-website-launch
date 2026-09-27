@@ -6,11 +6,16 @@ import { useEffect } from "react";
  * Phone loop for the customer-stories strip.
  *
  * On phones the track scrolls natively (design-home.css: transform none,
- * overflow-x auto, snap) over two identical card sets shipped in the
- * source. This bridge starts the strip on the middle set and wraps
- * scrollLeft between the sets once a scroll settles — identical content,
- * so the jump is invisible and the strip never hits an end. Settle-based
- * wrapping matters on iOS, which ignores scrollLeft writes mid-momentum.
+ * overflow-x auto, snap) over the real card set plus a clone set shipped
+ * in the source (all stories again, then the first two). This bridge
+ * starts the strip on the clone set and wraps scrollLeft by exactly one
+ * set once a scroll settles — identical content, so the jump is invisible
+ * and the strip never hits an end. Settle-based wrapping matters on iOS,
+ * which ignores scrollLeft writes mid-momentum.
+ *
+ * The set size is counted from the markup (the real cards are the track's
+ * direct <a> children; the clones sit inside [data-cs-clone]), so adding
+ * or removing a story needs no change here.
  *
  * The arrows (whose runtime storyIdx only drives the desktop transform)
  * are repointed to one-card scrolls, animated by hand with snapping
@@ -21,7 +26,6 @@ import { useEffect } from "react";
  */
 
 const GAP = 20; /* the track's inline flex gap */
-const SET = 3; /* stories per set */
 
 export function StoriesLoopBridge() {
   useEffect(() => {
@@ -41,14 +45,20 @@ export function StoriesLoopBridge() {
       return w ? w + GAP : 0;
     };
 
-    /* jumps are exact one-set multiples over identical content */
+    /* stories per set = the real cards, i.e. the track's direct links */
+    const setSize = () =>
+      track ? track.querySelectorAll(":scope > a").length : 0;
+
+    /* jumps are exact one-set multiples over identical content: the strip
+       lives on cards 1…SET+1, so a neighbour always exists on both sides */
     const wrapNow = () => {
       if (!track || !mq.matches || animating) return;
       const st = step();
-      if (!st) return;
-      const set = st * SET;
+      const n = setSize();
+      if (!st || !n) return;
+      const set = st * n;
       if (track.scrollLeft < st * 0.6) track.scrollLeft += set;
-      else if (track.scrollLeft > st * 4.4) track.scrollLeft -= set;
+      else if (track.scrollLeft > st * (n + 1.4)) track.scrollLeft -= set;
     };
 
     /* iOS drops scrollLeft writes during momentum — correct on settle */
@@ -93,7 +103,7 @@ export function StoriesLoopBridge() {
       if (!placed && mq.matches) {
         const st = step();
         if (st) {
-          track.scrollLeft = st * SET;
+          track.scrollLeft = st * setSize();
           placed = true;
         }
       }

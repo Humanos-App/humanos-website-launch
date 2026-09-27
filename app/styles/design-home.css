@@ -381,7 +381,7 @@
   /* ── customer stories: native swipe ───────────────────────────
      The desktop carousel moves a translateX track from arrow clicks;
      on phones the track scrolls natively with snap points instead,
-     and the arrows disappear. */
+     and StoriesLoopBridge repoints the arrows to one-card scrolls. */
   [data-cs-track] {
     --card: 100% !important; /* each story fills its column */
     transform: none !important;
@@ -397,8 +397,22 @@
   [data-cs-track]::-webkit-scrollbar {
     display: none;
   }
-  [data-cs-track] > div,
-  [data-cs-track] [data-cs-clone] > div {
+  [data-cs-track] [data-cs-card] {
     scroll-snap-align: center;
+  }
+  /* the illustration spans the card's top instead of hiding behind the
+     copy, and the copy block drops the desktop gutters */
+  [data-cs-art] {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  [data-cs-copy] {
+    padding: 28px 24px !important;
+  }
+  [data-cs-copy] h3 {
+    font-size: 24px !important;
   }
 }
