@@ -3,6 +3,8 @@ export type MegaItem = {
   sub?: string;
   /** Optional small chip rendered before the title (e.g. "Coming soon"). */
   tag?: string;
+  /** Optional icon, used by compact menus (see Navbar MegaIcon). */
+  icon?: "measure" | "control" | "intelligence";
   href: string;
 };
 
@@ -23,6 +25,9 @@ export type MegaColumn = {
 export type MegaMenu = {
   key: string;
   columns: MegaColumn[];
+  /** Small dropdown anchored under its label instead of the full-width
+   *  panel — for short menus like Solutions. */
+  compact?: boolean;
 };
 
 export const PLATFORM_MENU: MegaMenu = {
@@ -74,28 +79,33 @@ export const PLATFORM_MENU: MegaMenu = {
 };
 
 /**
- * Solutions — the three product pages of the rebrand. One flat column, so it
- * opens the same way Developers does rather than as a wide grid.
+ * Solutions — the three product pages, in story order (Measure → Control →
+ * Intelligence). A compact dropdown under its label, not the full-width
+ * panel Developers uses.
  */
 export const SOLUTIONS_MENU: MegaMenu = {
   key: "solutions",
+  compact: true,
   columns: [
     {
       label: "Solutions",
       items: [
         {
-          title: "Monitor",
-          sub: "Know your AI risk, and prove it",
-          href: "/monitor",
+          title: "Measure Risk",
+          sub: "Know the risk behind every agent",
+          icon: "measure",
+          href: "/measure",
         },
         {
-          title: "Control",
-          sub: "Control what AI can do",
+          title: "Control Risk",
+          sub: "Define what every agent can do",
+          icon: "control",
           href: "/control",
         },
         {
           title: "Risk Intelligence",
-          sub: "Get the risk answers you need",
+          sub: "Turn agent risk into decisions",
+          icon: "intelligence",
           href: "/intelligence",
         },
       ],

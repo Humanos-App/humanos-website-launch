@@ -24,6 +24,38 @@ function Chevron() {
   );
 }
 
+/** Line icons for compact menu items (Solutions). */
+function MegaIcon({ name }: { name: NonNullable<MegaItem["icon"]> }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  if (name === "measure")
+    return (
+      <svg {...common}>
+        <path d="M4 17a8 8 0 1 1 16 0" />
+        <path d="M12 17l4-5" />
+        <circle cx="12" cy="17" r="1.2" />
+      </svg>
+    );
+  if (name === "control")
+    return (
+      <svg {...common}>
+        <path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6l7-3z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    );
+  return (
+    <svg {...common}>
+      <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
+    </svg>
+  );
+}
+
 function isExternal(href: string) {
   return /^https?:\/\//.test(href);
 }
@@ -37,6 +69,11 @@ function MegaItemLink({
 }) {
   const content = (
     <>
+      {item.icon && (
+        <span className="mega__item-icon" aria-hidden="true">
+          <MegaIcon name={item.icon} />
+        </span>
+      )}
       <div className="mega__item-title">
         {item.title}
         {item.tag && (
@@ -86,6 +123,18 @@ function MegaPanel({
      open over the page that was just navigated to. */
   onNavigate: () => void;
 }) {
+  if (menu.compact) {
+    return (
+      <div
+        className={`mega mega--compact${open ? " is-open" : ""}`}
+        data-mega-panel={menu.key}
+      >
+        {menu.columns.flatMap((col) => col.items ?? []).map((item) => (
+          <MegaItemLink key={item.title} item={item} onClick={onNavigate} />
+        ))}
+      </div>
+    );
+  }
   return (
     <div className={`mega${open ? " is-open" : ""}`} data-mega-panel={menu.key}>
       <div
@@ -193,7 +242,7 @@ export function Navbar() {
           <nav className="nav__links">
             {NAV_LINKS.map((link) => {
               if (link.kind === "mega") {
-                return (
+                const trigger = (
                   <span
                     key={link.label}
                     className="nav__link"
@@ -212,6 +261,20 @@ export function Navbar() {
                     <Chevron />
                   </span>
                 );
+                /* Compact menus drop down right under their own label. */
+                if (link.menu.compact) {
+                  return (
+                    <div key={link.label} className="nav__item">
+                      {trigger}
+                      <MegaPanel
+                        menu={link.menu}
+                        open={openKey === link.menu.key}
+                        onNavigate={() => setOpenKey(null)}
+                      />
+                    </div>
+                  );
+                }
+                return trigger;
               }
               if (link.external) {
                 return (
@@ -275,8 +338,8 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Desktop mega menus */}
-        {NAV_LINKS.filter((l) => l.kind === "mega").map((link) =>
+        {/* Desktop mega menus (full width; compact ones render in place) */}
+        {NAV_LINKS.filter((l) => l.kind === "mega" && !l.menu.compact).map((link) =>
           link.kind === "mega" ? (
             <MegaPanel
               key={link.menu.key}
@@ -324,7 +387,10 @@ export function Navbar() {
                     <div className="nav__mobile-mega">
                       {link.menu.columns.map((col) => (
                         <div key={col.label} className="nav__mobile-mega-col">
-                          <div className="mega__col-label">{col.label}</div>
+                          {/* a compact menu's single column repeats the group name */}
+                          {!link.menu.compact && (
+                            <div className="mega__col-label">{col.label}</div>
+                          )}
                           {col.items?.map((item) => (
                             <MegaItemLink
                               key={item.title}
