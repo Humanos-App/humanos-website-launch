@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { NAV_LINKS } from "@/lib/nav-links";
 import { ROUTES } from "@/lib/routes";
+import { isDarkRoute } from "@/lib/chrome-theme";
 import { EXTERNAL_LINKS } from "@/lib/external-links";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 import type { MegaItem, MegaMenu } from "@/lib/mega-menus";
@@ -45,6 +46,15 @@ function MegaItemLink({
       {item.sub && <div className="mega__item-sub">{item.sub}</div>}
     </>
   );
+  /* Items that don't exist yet (tagged "Coming soon", href "#") render as
+     plain text rather than a link that jumps to the top of the page. */
+  if (!item.href || item.href === "#") {
+    return (
+      <div className="mega__item is-soon" aria-disabled="true">
+        {content}
+      </div>
+    );
+  }
   if (isExternal(item.href)) {
     return (
       <a
@@ -159,6 +169,10 @@ export function Navbar() {
     setMobileMegaOpen(null);
   };
 
+  /* Dark chrome theme (styled via .site-chrome[data-theme]); only the
+     logo asset itself has to switch here. */
+  const dark = isDarkRoute(pathname);
+
   return (
     <>
       <header
@@ -169,7 +183,10 @@ export function Navbar() {
         <div className="nav__inner">
           <Link className="nav__brand" href={ROUTES.home}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/logo-mark-black.svg" alt="Humanos" />
+            <img
+              src={dark ? "/assets/logo-mark-white.svg" : "/assets/logo-mark-black.svg"}
+              alt="Humanos"
+            />
             <span className="nav__brand-text">Humanos</span>
           </Link>
 

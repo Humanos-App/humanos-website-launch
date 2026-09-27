@@ -14,13 +14,45 @@ export const metadata: Metadata = {
 
 const FILTERS: Filter[] = [
   { key: "all", label: "All" },
+  { key: "insurance", label: "Insurance" },
   { key: "finance", label: "Agentic finance" },
-  { key: "procurement", label: "Procurement" },
   { key: "healthcare", label: "Healthcare" },
   { key: "infra", label: "Infrastructure" },
 ];
 
 const STORIES: Story[] = [
+  {
+    cat: "insurance",
+    name: "InsureNow",
+    status: "Testing",
+    domain: "AI liability insurance · MGA",
+    title: (
+      <>
+        AI liability underwritten on how agents actually operate,{" "}
+        <em>from cover to claims evidence.</em>
+      </>
+    ),
+    desc: "InsureNow is integrating Humanos risk intelligence into its proprietary underwriting framework. One integration supports underwriting, monitoring and renewal, with execution receipts as evidence when something goes wrong.",
+    href: "/case-studies/insurenow",
+    cta: "Read the story",
+    image: "/assets/stories/story-card-shield.webp",
+  },
+  {
+    cat: "finance",
+    name: "Agentics Credit",
+    status: "Integrated",
+    domain: "Agentic credit · Polymarket",
+    title: (
+      <>
+        AI agents borrow real capital to trade.{" "}
+        <em>Credit follows how they actually operate.</em>
+      </>
+    ),
+    desc: "Agentics Credit provides AI agents with credit to trade on Polymarket. Humanos adds identity and runtime risk intelligence, which Agentics Credit uses alongside its own credit score to set and adjust financial capacity.",
+    href: "/case-studies/agentics-credit",
+    cta: "Read the story",
+    image: "/assets/stories/story-card-chart.webp",
+  },
   {
     cat: "finance",
     name: "Numo",
@@ -40,144 +72,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/numo",
     cta: "Read the story",
-    verify: {
-      chip: "verify · treasury.reallocate",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;numo-treasury&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;capital.reallocate&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">amount</span>:{" "}
-          <span className="tk-num">50000</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">rail</span>:{" "}
-          <span className="tk-str">&quot;custodian-a&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · numo-treasury",
-        "mandate matched · treasury.reallocate",
-        "constraints ok · ≤ daily limit",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within signed treasury
-          scope
-        </>
-      ),
-    },
-  },
-  {
-    cat: "procurement",
-    name: "Ralio",
-    status: "Integrated",
-    domain: "Procurement · Marketplaces",
-    title: (
-      <>
-        Agents transact across external marketplaces —{" "}
-        <em>made independently verifiable.</em>
-      </>
-    ),
-    desc: "Ralio's procurement agents source vendors and execute purchases across external B2B marketplaces. Humanos sits at the merchant boundary, so counterparties can verify the agent acted within scope.",
-    stats: [
-      { num: "€23.8K", lab: "Order settled & proven" },
-      { num: "100%", lab: "Cross-boundary verifiability" },
-      { num: "0", lab: "After-the-fact audits" },
-    ],
-    href: "/case-studies/ralio",
-    cta: "Read the story",
-    verify: {
-      chip: "verify · payments.purchase",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;ralio-procurement&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;payments.purchase&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">amount</span>:{" "}
-          <span className="tk-num">23840</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">vendor</span>:{" "}
-          <span className="tk-str">&quot;mkt:acme-supply&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · ralio-procurement",
-        "scope matched · payments.purchase",
-        "proof signed · verifiable by vendor",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● proof_id</span> prf_R19A2 — verifiable by
-          vendor
-        </>
-      ),
-    },
-  },
-  {
-    cat: "finance",
-    name: "Paymove",
-    status: "Integrated",
-    domain: "Agentic commerce · Visa rail",
-    title: (
-      <>
-        Consumer agent payments settle on the Visa rail —{" "}
-        <em>every spend authorized before it moves.</em>
-      </>
-    ),
-    desc: "Paymove's agents transact on behalf of consumers. Humanos sits in the settlement path; every payment is verified against a user-signed mandate before it reaches the rail.",
-    stats: [
-      { num: "100%", lab: "Spends pre-authorized" },
-      { num: "0", lab: "Out-of-mandate settlements" },
-      { num: "1", lab: "API for any consumer scope" },
-    ],
-    href: "/case-studies/paymove",
-    cta: "Read the story",
-    verify: {
-      chip: "verify · payments.consumer",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;paymove-agent&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;payments.consumer&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">amount</span>:{" "}
-          <span className="tk-num">280</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">user</span>:{" "}
-          <span className="tk-str">&quot;usr_8F22&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · paymove-agent",
-        "mandate matched · user-signed cap",
-        "rail ok · visa · within scope",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within user-signed mandate
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-building.webp",
   },
   {
     cat: "healthcare",
@@ -186,7 +81,7 @@ const STORIES: Story[] = [
     domain: "Healthcare · Approval OS",
     title: (
       <>
-        Consents, KYCs, and prescriptions —{" "}
+        Consents, KYCs, and prescriptions{" "}
         <em>collected once, verified everywhere.</em>
       </>
     ),
@@ -198,38 +93,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/lusiadas",
     cta: "Read the story",
-    verify: {
-      chip: "verify · consent.informed",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;medify.app&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;consent.informed&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">patient</span>:{" "}
-          <span className="tk-str">&quot;pt_4F19&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">signers</span>: [
-          <span className="tk-str">&quot;patient&quot;</span>,{" "}
-          <span className="tk-str">&quot;physician&quot;</span>]{"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · medify.app",
-        "signers matched · patient + physician",
-        "anchored · Lusíadas approval ledger",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● approved</span> — receipt attached to record
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-hospital.webp",
   },
   {
     cat: "infra",
@@ -238,11 +102,11 @@ const STORIES: Story[] = [
     domain: "Multi-agent AI · Regulated industries",
     title: (
       <>
-        Agents act inside regulated workflows —{" "}
+        Agents act inside regulated workflows,{" "}
         <em>governed by Humanos at every step.</em>
       </>
     ),
-    desc: "DataWhisper orchestrates multi-agent AI for regulated industries. Humanos sits as the authorization stack — every high-risk agent action is verified before execution and produces a clean, portable audit trail.",
+    desc: "DataWhisper orchestrates multi-agent AI for regulated industries. Humanos sits as the authorization stack. Every high-risk agent action is verified before execution and produces a clean, portable audit trail.",
     stats: [
       { num: "184ms", lab: "Median verify latency" },
       { num: "100%", lab: "Actions on-mandate" },
@@ -250,39 +114,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/datawhisper",
     cta: "Read the story",
-    verify: {
-      chip: "verify · action.high_risk",
-      code: (
-        <>
-          <span className="tk-kw">await</span> humanos.
-          <span className="tk-verify">verify</span>({"{\n"}
-          {"  "}
-          <span className="tk-prop">subject</span>:{" "}
-          <span className="tk-str">&quot;cortex.agent&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">action</span>:{" "}
-          <span className="tk-str">&quot;dispute.resolve&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">case</span>:{" "}
-          <span className="tk-str">&quot;DW-018472&quot;</span>,{"\n"}
-          {"  "}
-          <span className="tk-prop">scope</span>:{" "}
-          <span className="tk-str">&quot;dispute.resolve&quot;</span>
-          {"\n})"}
-        </>
-      ),
-      checks: [
-        "subject resolved · cortex.agent",
-        "mandate matched · operations lead",
-        "audit · anchored & portable",
-      ],
-      verdict: (
-        <>
-          <span className="ok">● authorized</span> — within signed scope, proof
-          emitted
-        </>
-      ),
-    },
+    image: "/assets/stories/story-card-gate.webp",
   },
 ];
 

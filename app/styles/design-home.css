@@ -21,6 +21,12 @@
   background: #111111 !important;
 }
 
+/* The design's own floating SDK-prompt pill, hidden while the SDK isn't
+   live (SDK_PROMPT_PILL in lib/flags.ts sets body[data-sdk-pill]). */
+body[data-sdk-pill="off"] [data-pill] {
+  display: none !important;
+}
+
 /* The raw-events feed ends without a trailing rule, at every width. */
 [data-stage="risk-intelligence"] div[style*="flex-wrap: nowrap"] > div:first-child > div > div:last-child {
   border-bottom: none !important;
@@ -381,7 +387,7 @@
   /* ── customer stories: native swipe ───────────────────────────
      The desktop carousel moves a translateX track from arrow clicks;
      on phones the track scrolls natively with snap points instead,
-     and the arrows disappear. */
+     and StoriesLoopBridge repoints the arrows to one-card scrolls. */
   [data-cs-track] {
     --card: 100% !important; /* each story fills its column */
     transform: none !important;
@@ -397,8 +403,27 @@
   [data-cs-track]::-webkit-scrollbar {
     display: none;
   }
-  [data-cs-track] > div,
-  [data-cs-track] [data-cs-clone] > div {
+  [data-cs-track] [data-cs-card] {
     scroll-snap-align: center;
+  }
+  /* the illustration fills the card's top band instead of hiding behind
+     the copy — contained, so a wide one (the building) spans the width and
+     a tall one (the shield) shrinks and centres above the text — and the
+     copy block drops the desktop gutters */
+  [data-cs-art] {
+    top: 12px !important;
+    right: 0 !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    height: 40% !important;
+    object-fit: contain;
+    object-position: center top !important;
+  }
+  [data-cs-copy] {
+    padding: 28px 24px !important;
+  }
+  [data-cs-copy] h3 {
+    font-size: 24px !important;
   }
 }

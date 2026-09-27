@@ -73,7 +73,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              api.humanos.tech
+              docs.humanos.tech
             </a>
           </div>
 

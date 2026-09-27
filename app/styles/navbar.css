@@ -150,7 +150,8 @@
   left: 0;
   right: 0;
   top: 100%;
-  background: var(--hm-surface-raised);
+  /* the bar's own cream, not white, so the panel reads as its extension */
+  background: var(--hm-clarity);
   border-bottom: 1px solid var(--hm-line);
   border-top: 1px solid var(--hm-line);
   opacity: 0;
@@ -192,6 +193,12 @@
 }
 .mega__item:hover {
   color: var(--hm-verification);
+}
+/* not shipped yet: readable, but not interactive */
+.mega__item.is-soon,
+.mega__item.is-soon:hover {
+  cursor: default;
+  color: var(--hm-ink-1);
 }
 .mega__item-title {
   font-weight: 500;
@@ -445,5 +452,125 @@
      doesn't block the close button / burger. */
   .site-chrome:has(.nav__mobile.is-open) .announce {
     display: none;
+  }
+}
+
+/* ---------- Dark theme ----------
+   Dark routes (lib/chrome-theme.ts — the customer stories) set
+   data-theme="dark" on .site-chrome (SiteChrome.tsx). The bar, its mega
+   panels and the mobile drawer switch to the authority surface to sit
+   flush with the page. (The announcement banner only renders on the
+   light home page, so it has no dark variant.) */
+.site-chrome[data-theme="dark"] {
+  --chrome-bg: var(--hm-authority);
+  --chrome-raised: #161615;
+  --chrome-line: var(--hm-line-dark);
+}
+
+/* bar — solid: the chrome sits above the page in flow, so a translucent
+   bar would pick up the cream body behind it at the top of the page */
+.site-chrome[data-theme="dark"] .nav {
+  background: var(--chrome-bg);
+  border-bottom-color: var(--chrome-line);
+}
+.site-chrome[data-theme="dark"] .nav__brand-text {
+  color: var(--hm-chalk-0);
+}
+.site-chrome[data-theme="dark"] .nav__link {
+  color: var(--hm-chalk-1);
+}
+.site-chrome[data-theme="dark"] .nav__link:hover,
+.site-chrome[data-theme="dark"] .nav__link[aria-expanded="true"] {
+  color: var(--hm-chalk-0);
+}
+.site-chrome[data-theme="dark"] .nav__cta--talk {
+  color: var(--hm-chalk-0);
+}
+.site-chrome[data-theme="dark"] .nav__cta--talk:hover {
+  color: var(--hm-execution);
+}
+.site-chrome[data-theme="dark"] .nav__cta--login,
+.site-chrome[data-theme="dark"] .nav__mobile-ctas .btn--primary {
+  background: var(--hm-chalk-0);
+  color: var(--hm-authority);
+}
+.site-chrome[data-theme="dark"] .nav__cta--login:hover,
+.site-chrome[data-theme="dark"] .nav__mobile-ctas .btn--primary:hover {
+  background: #fff;
+  color: var(--hm-authority);
+}
+.site-chrome[data-theme="dark"] .nav__burger {
+  color: var(--hm-chalk-0);
+}
+.site-chrome[data-theme="dark"] .nav__burger:hover {
+  background: rgba(244, 243, 239, 0.08);
+}
+
+/* mega panels (desktop) and their items (shared with the mobile drawer) */
+.site-chrome[data-theme="dark"] .mega {
+  background: var(--chrome-bg);
+  border-top-color: var(--chrome-line);
+  border-bottom-color: var(--chrome-line);
+}
+.site-chrome[data-theme="dark"] .mega__col-label {
+  color: var(--hm-chalk-2);
+}
+.site-chrome[data-theme="dark"] .mega__item {
+  color: var(--hm-chalk-1);
+}
+.site-chrome[data-theme="dark"] .mega__item:hover {
+  color: var(--hm-chalk-0);
+}
+.site-chrome[data-theme="dark"] .mega__item.is-soon,
+.site-chrome[data-theme="dark"] .mega__item.is-soon:hover {
+  color: var(--hm-chalk-1);
+}
+.site-chrome[data-theme="dark"] .mega__item-sub {
+  color: var(--hm-chalk-2);
+}
+.site-chrome[data-theme="dark"] .mega__group-label {
+  color: #76746d;
+}
+.site-chrome[data-theme="dark"] .mega__item-tag {
+  color: var(--hm-execution);
+  background: var(--hm-execution-wash);
+  border-color: rgba(121, 120, 233, 0.3);
+}
+
+@media (max-width: 880px) {
+  /* the mobile "Talk to us" is the filled primary — invert it */
+  .site-chrome[data-theme="dark"] .nav__cta--talk {
+    background: var(--hm-chalk-0);
+    color: var(--hm-authority);
+  }
+  .site-chrome[data-theme="dark"] .nav__cta--talk:hover {
+    background: #fff;
+    color: var(--hm-authority);
+  }
+
+  /* mobile drawer */
+  .site-chrome[data-theme="dark"] .nav__mobile {
+    background: var(--chrome-bg);
+  }
+  .site-chrome[data-theme="dark"] .nav__mobile-link {
+    color: var(--hm-chalk-0);
+    border-bottom-color: var(--chrome-line);
+  }
+  .site-chrome[data-theme="dark"] .nav__mobile-link:hover {
+    color: var(--hm-execution);
+  }
+  .site-chrome[data-theme="dark"] .nav__mobile-mega {
+    border-bottom-color: var(--chrome-line);
+  }
+  .site-chrome[data-theme="dark"] .nav__mobile-ctas {
+    background: var(--chrome-raised);
+    border-top-color: var(--chrome-line);
+  }
+  .site-chrome[data-theme="dark"] .nav__mobile-ctas .btn--secondary {
+    color: var(--hm-chalk-0);
+    border-color: var(--hm-line-dark);
+  }
+  .site-chrome[data-theme="dark"] .nav__mobile-ctas .btn--secondary:hover {
+    border-color: var(--hm-chalk-2);
   }
 }

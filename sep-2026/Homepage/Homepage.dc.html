@@ -422,7 +422,7 @@ class Component extends DCLogic {
       viewBox: '0 0 100 100', preserveAspectRatio: 'none',
       style: { width: '100%', height: '100%', display: 'block', overflow: 'visible' },
     }, [
-      ...[20, 40, 60, 80].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
+      ...[0, 20, 40, 60, 80, 100].map((r) => h('line', { key: 'g' + r, x1: 0, y1: yAt(r), x2: 100, y2: yAt(r), stroke: 'var(--hm-line)', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' })),
       h('line', {
         key: 'now', x1: head[0], y1: 0, x2: head[0], y2: H,
         stroke: 'var(--hm-verification)', strokeWidth: 1, strokeDasharray: '3 3', strokeOpacity: 0.55, vectorEffect: 'non-scaling-stroke',
@@ -972,8 +972,10 @@ class Component extends DCLogic {
   /* One-card carousel step with an invisible wrap: while the slide runs
      the index may sit one past the real set (-1 or N — the track carries
      a clone card past each tip), and once it settles it re-anchors
-     modulo STORY_COUNT with the transition suppressed for a single frame. */
-  static STORY_COUNT = 2;
+     modulo STORY_COUNT with the transition suppressed for a single frame.
+     Keep in step with the card sets in components/08-customer-stories.html
+     (whose track transform offsets by the same count). */
+  static STORY_COUNT = 5;
   storyStep(d) {
     if (this.storyLock) return;
     this.storyLock = true;
@@ -1308,21 +1310,22 @@ class Component extends DCLogic {
 
   /* Customers, cloned from the live site's Logos section. `src` is relative so
      the page still resolves them when opened straight from the export; the
-     one entry without a logo falls back to its name via `textOnly`. */
+     textOnly fallback renders a customer's name for any entry without a
+     logo (src: null). */
   static CUSTOMERS = [
-    { tag: 'Agentic governance', name: 'Coalex', src: 'logos/customers/coalex.png', desc: 'AI governance & oversight', href: 'https://coalex.ai' },
+    { tag: 'Agent Orchestrator', name: 'DataWhisper', src: 'logos/customers/data_whisper.webp', desc: 'Multi-Agent AI System', href: 'https://www.datawhisper.co.uk' },
+    { tag: 'Banking', name: 'numo', src: 'logos/customers/numo.png', desc: 'Agentic Treasury Management', href: 'https://usenumo.com/' },
+    { tag: 'AI Insurance', name: 'InsureNow', src: 'logos/customers/insurenow.svg', desc: 'AI liability insurance · MGA', href: 'https://insurenow.eu/' },
+    { tag: 'Agentic Credit', name: 'Agentics Credit', src: 'logos/customers/agentics-credit.svg', desc: 'Credit for AI agents', href: 'https://agentics.credit/' },
+    { tag: 'Prediction Markets', name: 'Polymarket', src: 'logos/customers/polymarket.png', desc: 'Prediction market platform', href: 'https://polymarket.com/' },
+    { tag: 'Healthtech', name: 'Bloodflow', src: 'logos/customers/bloodflow.png', desc: 'Clinical Intelligence Layer', href: 'https://www.bloodflow.eu/' },
     { tag: 'Insurance', name: 'Fidelidade', src: 'logos/customers/fidelidade.png', desc: '7M customers · 14 geos', href: 'https://www.fidelidade.pt/en' },
     { tag: 'Healthcare', name: 'Lusíadas', src: 'logos/customers/lusiadas.png.webp', desc: '60+ hospitals and clinics', href: 'https://www.lusiadas.pt/en' },
     { tag: 'Healthcare', name: 'Joaquim Chaves', src: 'logos/customers/joaquim_chaves.svg', desc: '300+ clinics', href: 'https://jcs.pt/en' },
-    { tag: 'Banking', name: 'numo', src: 'logos/customers/numo.png', desc: 'Agentic Treasury Management', href: 'https://usenumo.com/' },
-    { tag: 'Healthtech', name: 'Bloodflow', src: 'logos/customers/bloodflow.png', desc: 'Clinical Intelligence Layer', href: 'https://www.bloodflow.eu/' },
+    { tag: 'Agentic governance', name: 'Coalex', src: 'logos/customers/coalex.png', desc: 'AI governance & oversight', href: 'https://coalex.ai' },
     { tag: 'Healthtech', name: 'medify', src: 'logos/customers/medify.png', desc: '+30 hospitals', href: 'https://medify.eu/' },
-    { tag: 'Software House', name: 'Critical Software', src: null, desc: 'Defense · Finance · Insurance', href: 'http://criticalsoftware.com/en' },
+    { tag: 'Software House', name: 'Critical Software', src: 'logos/customers/critical_software.png', desc: 'Defense · Finance · Insurance', href: 'http://criticalsoftware.com/en' },
     { tag: 'EHR', name: 'Ciberbit', src: 'logos/customers/ciberbit.png', desc: '100+ hospitals and clinics', href: 'https://ciberbit.pt' },
-    { tag: 'ERP Automation', name: 'Extraflow', src: 'logos/customers/extraflow.svg', desc: 'ERP Automation', href: 'https://extraflow.ai/en' },
-    { tag: 'Agentic Payments', name: 'Ralio', src: 'logos/customers/ralio.webp', desc: 'B2B Agentic Payments', href: 'https://ralio.co' },
-    { tag: 'Agentic Payments', name: 'Paymove', src: 'logos/customers/paymove.png', desc: '500K+ users across Europe', href: 'https://www.paymove.io' },
-    { tag: 'Agent Orchestrator', name: 'DataWhisper', src: 'logos/customers/data_whisper.webp', desc: 'Multi-Agent AI System', href: 'https://www.datawhisper.co.uk' },
   ];
 
   /* Assets named by a binding rather than a literal src cannot be rewritten
@@ -2237,7 +2240,7 @@ class Component extends DCLogic {
       setCarouselRef: (el) => { this.carouselEl = el; },
       storyIdx: this.state.storyIdx,
       /* Seamless loop: each arrow moves exactly one card, stepping into
-         the clone zone at the tips (storyIdx may briefly be -1 or 3 —
+         the clone zone at the tips (storyIdx may briefly be -1 or 5 —
          the track carries one clone card past each tip), and after the
          slide the index re-anchors onto the real set with the
          transition off. Identical content, invisible snap. */

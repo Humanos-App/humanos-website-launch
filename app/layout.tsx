@@ -13,6 +13,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Navbar } from "@/components/chrome/Navbar";
 import { AnnouncementBanner } from "@/components/chrome/AnnouncementBanner";
 import { RouteChrome } from "@/components/chrome/RouteChrome";
+import { SiteChrome } from "@/components/chrome/SiteChrome";
+import { SDK_PROMPT_PILL } from "@/lib/flags";
 
 // Self-hosted, non-render-blocking. Variable fonts → all weights available;
 // OpenType features (ss01/cv11/tnum) still applied via CSS in globals.css.
@@ -37,7 +39,7 @@ import "./styles/footer.css";
 import "./styles/closing-cta.css";
 import "./styles/dialog.css";
 import "./styles/pricing.css";
-import "./styles/case-study.css";
+import "./styles/customer-story.css";
 import "./styles/company.css";
 import "./styles/customers.css";
 import "./styles/consent.css";
@@ -107,20 +109,20 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body>
+      <body data-sdk-pill={SDK_PROMPT_PILL ? undefined : "off"}>
         <JsonLd data={ORGANIZATION_LD} />
         <JsonLd data={WEBSITE_LD} />
         <ConsentProvider>
           <RouteChrome>
-            <div className="site-chrome">
+            <SiteChrome>
               <AnnouncementBanner />
               <Navbar />
-            </div>
+            </SiteChrome>
             <ChromeScrollBehavior />
           </RouteChrome>
           {children}
           <RouteChrome>
-            <FloatingRiskBar />
+            {SDK_PROMPT_PILL && <FloatingRiskBar />}
             <Footer />
           </RouteChrome>
           {/* Chromeless routes skip the banner too: GA is default-deny, so

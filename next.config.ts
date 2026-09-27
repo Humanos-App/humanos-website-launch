@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         destination: "https://www.humanos.tech/:path",
         permanent: false,
       },
+      // Retired customer stories — send old links to the stories index.
+      {
+        source: "/case-studies/:slug(ralio|paymove)",
+        destination: "/case-studies",
+        permanent: true,
+      },
     ];
   },
 };

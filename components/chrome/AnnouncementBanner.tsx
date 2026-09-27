@@ -1,9 +1,15 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 /**
- * Site-wide announcement bar that sits above the navbar. Links to the
- * Mastercard For Fintechs 2026 press release. Static markup — no
- * client JS, no dismiss state (intentionally persistent for now).
+ * Announcement bar above the navbar, shown on the home page only. Links to
+ * the Mastercard For Fintechs 2026 press release. No dismiss state
+ * (intentionally persistent for now).
  */
 export function AnnouncementBanner() {
+  const pathname = usePathname();
+  if (pathname !== "/") return null;
   return (
     <a
       className="announce"
