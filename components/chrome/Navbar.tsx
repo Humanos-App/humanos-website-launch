@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { NAV_LINKS } from "@/lib/nav-links";
 import { ROUTES } from "@/lib/routes";
+import { isDarkRoute } from "@/lib/chrome-theme";
 import { EXTERNAL_LINKS } from "@/lib/external-links";
 import { TalkWithUs } from "@/components/dialogs/TalkWithUs";
 import type { MegaItem, MegaMenu } from "@/lib/mega-menus";
@@ -159,14 +160,15 @@ export function Navbar() {
     setMobileMegaOpen(null);
   };
 
-  /* Customer stories are dark long-form pages; the bar follows suit. */
-  const dark = /^\/case-studies\/[^/]+/.test(pathname ?? "");
+  /* Dark chrome theme (styled via .site-chrome[data-theme]); only the
+     logo asset itself has to switch here. */
+  const dark = isDarkRoute(pathname);
 
   return (
     <>
       <header
         ref={headerRef}
-        className={`nav${dark ? " nav--dark" : ""}`}
+        className="nav"
         onMouseLeave={() => setOpenKey(null)}
       >
         <div className="nav__inner">

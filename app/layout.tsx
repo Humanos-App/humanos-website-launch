@@ -13,6 +13,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Navbar } from "@/components/chrome/Navbar";
 import { AnnouncementBanner } from "@/components/chrome/AnnouncementBanner";
 import { RouteChrome } from "@/components/chrome/RouteChrome";
+import { SiteChrome } from "@/components/chrome/SiteChrome";
 
 // Self-hosted, non-render-blocking. Variable fonts → all weights available;
 // OpenType features (ss01/cv11/tnum) still applied via CSS in globals.css.
@@ -112,10 +113,10 @@ export default function RootLayout({
         <JsonLd data={WEBSITE_LD} />
         <ConsentProvider>
           <RouteChrome>
-            <div className="site-chrome">
+            <SiteChrome>
               <AnnouncementBanner />
               <Navbar />
-            </div>
+            </SiteChrome>
             <ChromeScrollBehavior />
           </RouteChrome>
           {children}
