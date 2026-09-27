@@ -98,13 +98,13 @@ export const SOLUTIONS_MENU: MegaMenu = {
         },
         {
           title: "Control Risk",
-          sub: "Define what every agent can do",
+          sub: "Reduce your agents' risk",
           icon: "control",
           href: "/control",
         },
         {
           title: "Risk Intelligence",
-          sub: "Turn agent risk into decisions",
+          sub: "Build on top of agent risk",
           icon: "intelligence",
           href: "/intelligence",
         },
