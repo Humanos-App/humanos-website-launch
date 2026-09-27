@@ -447,3 +447,54 @@
     display: none;
   }
 }
+
+/* ---------- Dark variant ----------
+   Customer stories (/case-studies/<slug>) are dark long-form pages, so
+   the bar switches to the authority surface to sit flush with them.
+   Mega panels and the mobile drawer keep their light surfaces. */
+.nav--dark {
+  /* solid: the chrome sits above the page in flow, so a translucent bar
+     would pick up the cream body behind it at the top of the page */
+  background: var(--hm-authority);
+  border-bottom-color: var(--hm-line-dark);
+}
+.nav--dark .nav__brand-text {
+  color: var(--hm-chalk-0);
+}
+.nav--dark .nav__link {
+  color: var(--hm-chalk-1);
+}
+.nav--dark .nav__link:hover {
+  color: var(--hm-chalk-0);
+}
+.nav--dark .nav__cta--talk {
+  color: var(--hm-chalk-0);
+}
+.nav--dark .nav__cta--talk:hover {
+  color: var(--hm-execution);
+}
+.nav--dark .nav__cta--login {
+  background: var(--hm-chalk-0);
+  color: var(--hm-authority);
+}
+.nav--dark .nav__cta--login:hover {
+  background: #fff;
+  color: var(--hm-authority);
+}
+.nav--dark .nav__burger {
+  color: var(--hm-chalk-0);
+}
+.nav--dark .nav__burger:hover {
+  background: rgba(244, 243, 239, 0.08);
+}
+@media (max-width: 880px) {
+  /* the mobile "Talk to us" is the filled primary — invert it */
+  .nav--dark .nav__cta--talk {
+    background: var(--hm-chalk-0);
+    color: var(--hm-authority);
+  }
+  .nav--dark .nav__cta--talk:hover {
+    background: #fff;
+    color: var(--hm-authority);
+  }
+}

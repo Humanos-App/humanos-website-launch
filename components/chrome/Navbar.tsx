@@ -159,17 +159,23 @@ export function Navbar() {
     setMobileMegaOpen(null);
   };
 
+  /* Customer stories are dark long-form pages; the bar follows suit. */
+  const dark = /^\/case-studies\/[^/]+/.test(pathname ?? "");
+
   return (
     <>
       <header
         ref={headerRef}
-        className="nav"
+        className={`nav${dark ? " nav--dark" : ""}`}
         onMouseLeave={() => setOpenKey(null)}
       >
         <div className="nav__inner">
           <Link className="nav__brand" href={ROUTES.home}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/logo-mark-black.svg" alt="Humanos" />
+            <img
+              src={dark ? "/assets/logo-mark-white.svg" : "/assets/logo-mark-black.svg"}
+              alt="Humanos"
+            />
             <span className="nav__brand-text">Humanos</span>
           </Link>
 
