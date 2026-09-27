@@ -150,7 +150,8 @@
   left: 0;
   right: 0;
   top: 100%;
-  background: var(--hm-surface-raised);
+  /* the bar's own cream, not white, so the panel reads as its extension */
+  background: var(--hm-clarity);
   border-bottom: 1px solid var(--hm-line);
   border-top: 1px solid var(--hm-line);
   opacity: 0;
@@ -452,28 +453,12 @@
    Dark routes (lib/chrome-theme.ts — the customer stories) set
    data-theme="dark" on .site-chrome (SiteChrome.tsx). The bar, its mega
    panels and the mobile drawer switch to the authority surface to sit
-   flush with the page; the announcement banner inverts to white so it
-   still stands apart. */
+   flush with the page. (The announcement banner only renders on the
+   light home page, so it has no dark variant.) */
 .site-chrome[data-theme="dark"] {
   --chrome-bg: var(--hm-authority);
   --chrome-raised: #161615;
   --chrome-line: var(--hm-line-dark);
-}
-
-/* banner */
-.site-chrome[data-theme="dark"] .announce {
-  background: var(--hm-surface-raised);
-  border-bottom-color: transparent;
-}
-.site-chrome[data-theme="dark"] .announce:hover {
-  background: var(--hm-clarity);
-}
-.site-chrome[data-theme="dark"] .announce__inner,
-.site-chrome[data-theme="dark"] .announce__text {
-  color: var(--hm-ink-2);
-}
-.site-chrome[data-theme="dark"] .announce__text strong {
-  color: var(--hm-ink-0);
 }
 
 /* bar — solid: the chrome sits above the page in flow, so a translucent

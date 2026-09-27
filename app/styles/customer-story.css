@@ -13,8 +13,9 @@
   --story-line: var(--hm-line-dark);
   --story-line-strong: #3a3a37;
   --story-accent: var(--hm-execution);
-  /* sticky site chrome: announcement banner + 56px navbar */
-  --story-chrome: 96px;
+  /* sticky site chrome: the 56px navbar (+ its hairline) — the
+     announcement banner only shows on the home page */
+  --story-chrome: 57px;
 
   background: var(--hm-authority);
   color: var(--hm-chalk-0);
