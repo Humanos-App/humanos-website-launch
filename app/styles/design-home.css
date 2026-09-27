@@ -414,10 +414,11 @@ body[data-sdk-pill="off"] [data-pill] {
     top: 12px !important;
     right: 0 !important;
     bottom: auto !important;
+    transform: none !important;
     width: 100% !important;
     height: 40% !important;
     object-fit: contain;
-    object-position: center top;
+    object-position: center top !important;
   }
   [data-cs-copy] {
     padding: 28px 24px !important;
