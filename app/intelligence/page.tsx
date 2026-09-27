@@ -183,23 +183,6 @@ export default function RiskIntelligencePage() {
           ),
         },
         {
-          id: "proof",
-          nav: "Proof",
-          title: "Agents that can prove who they are.",
-          body: (
-            <Prose>
-              <p>
-                When an agent deals with another company or system, the other
-                side verifies its identity and risk information instead of
-                relying on the agent&apos;s own claims.
-              </p>
-              <p>
-                <a href="/prove">How proof works →</a>
-              </p>
-            </Prose>
-          ),
-        },
-        {
           id: "privacy",
           nav: "Privacy",
           title: "Share risk, not personal data.",
@@ -264,20 +247,6 @@ export default function RiskIntelligencePage() {
                 ]}
               />
             </>
-          ),
-        },
-        {
-          id: "exposure",
-          nav: "Exposure",
-          title: "From one agent to your entire exposure.",
-          body: (
-            <Prose>
-              <p>
-                Move from understanding one agent to understanding risk across
-                every agent, customer, counterparty and portfolio you&apos;re
-                exposed to.
-              </p>
-            </Prose>
           ),
         },
         {
