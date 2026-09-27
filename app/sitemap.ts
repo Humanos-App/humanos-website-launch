@@ -6,7 +6,6 @@ const HIGH_PRIORITY: Set<string> = new Set([
   "/measure",
   "/control",
   "/intelligence",
-  "/prove",
   "/pricing",
 ]);
 

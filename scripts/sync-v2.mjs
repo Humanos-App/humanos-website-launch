@@ -51,10 +51,9 @@ const PAGES = [
     assetDirs: ["logos/customers"],
   },
   { slug: "pricing", path: "/pricing", dir: "Pricing", file: "Pricing.dc.html" },
-  { slug: "prove", path: "/prove", dir: "Prove Risk", file: "Prove Your AI.dc.html" },
-  // The Control Risk exports (Monitor, Control, Risk Intelligence) are no
-  // longer published: /measure, /control and /intelligence are story-layout
-  // pages now (components/story). Their sources stay in sep-2026/ as reference.
+  // Monitor, Control, Risk Intelligence and Prove were retired from the
+  // exports: /measure, /control and /intelligence are story-layout pages now
+  // (components/story), and /prove redirects to /intelligence.
 ];
 
 const NOINDEX = '<meta name="robots" content="noindex, nofollow">';

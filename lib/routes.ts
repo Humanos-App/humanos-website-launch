@@ -5,7 +5,6 @@ export const ROUTES = {
   measure: "/measure",
   control: "/control",
   intelligence: "/intelligence",
-  prove: "/prove",
   pricing: "/pricing",
   company: "/company",
   customers: "/case-studies",
