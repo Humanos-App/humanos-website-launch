@@ -406,14 +406,18 @@ body[data-sdk-pill="off"] [data-pill] {
   [data-cs-track] [data-cs-card] {
     scroll-snap-align: center;
   }
-  /* the illustration spans the card's top instead of hiding behind the
-     copy, and the copy block drops the desktop gutters */
+  /* the illustration fills the card's top band instead of hiding behind
+     the copy — contained, so a wide one (the building) spans the width and
+     a tall one (the shield) shrinks and centres above the text — and the
+     copy block drops the desktop gutters */
   [data-cs-art] {
-    top: 0 !important;
+    top: 12px !important;
     right: 0 !important;
     bottom: auto !important;
     width: 100% !important;
-    height: auto !important;
+    height: 40% !important;
+    object-fit: contain;
+    object-position: center top;
   }
   [data-cs-copy] {
     padding: 28px 24px !important;
