@@ -114,7 +114,7 @@ const STORIES: Story[] = [
     ],
     href: "/case-studies/datawhisper",
     cta: "Read the story",
-    image: "/assets/stories/story-card-building.webp",
+    image: "/assets/stories/story-card-gate.webp",
   },
 ];
 
