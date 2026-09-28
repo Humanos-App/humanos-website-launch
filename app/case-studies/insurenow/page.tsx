@@ -42,7 +42,6 @@ export default function InsureNowCaseStudyPage() {
         details: [
           { label: "Customer", value: "InsureNow" },
           { label: "Industry", value: "AI liability insurance · MGA" },
-          { label: "Status", value: "Design partnership · Testing underway" },
           {
             label: "Humanos supports",
             value: "Underwriting · Monitoring · Renewal · Claims evidence",

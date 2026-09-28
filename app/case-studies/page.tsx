@@ -24,7 +24,6 @@ const STORIES: Story[] = [
   {
     cat: "insurance",
     name: "InsureNow",
-    status: "Testing",
     domain: "AI liability insurance · MGA",
     title: (
       <>
@@ -40,7 +39,6 @@ const STORIES: Story[] = [
   {
     cat: "finance",
     name: "Agentics Credit",
-    status: "Integrated",
     domain: "Agentic credit · Polymarket",
     title: (
       <>
@@ -56,7 +54,6 @@ const STORIES: Story[] = [
   {
     cat: "finance",
     name: "Numo",
-    status: "Integrated",
     domain: "Agentic finance · Treasury",
     title: (
       <>
@@ -77,7 +74,6 @@ const STORIES: Story[] = [
   {
     cat: "healthcare",
     name: "Lusíadas",
-    status: "Integrated",
     domain: "Healthcare · Approval OS",
     title: (
       <>
@@ -98,7 +94,6 @@ const STORIES: Story[] = [
   {
     cat: "infra",
     name: "DataWhisper",
-    status: "Integrated",
     domain: "Multi-agent AI · Regulated industries",
     title: (
       <>
