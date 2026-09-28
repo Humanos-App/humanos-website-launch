@@ -260,6 +260,7 @@ export default function RiskIntelligencePage() {
                 eyebrow="See it in practice"
                 title="Customer stories"
                 text="How insurers, lenders and platforms use Humanos today."
+                cta="Read the case studies"
               />
               <FinalCta title="Get the risk answers you need." />
             </>

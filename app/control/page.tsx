@@ -21,7 +21,7 @@ export const metadata = pageMetadata({
   path: "/control",
   title: "Control What AI Agents Can Do · Humanos",
   description:
-    "Deterministic limits, policies and real-time human approval around every important agent action. Humanos guardrails are free.",
+    "Deterministic limits, policies and real-time human approval around every important agent action. Free, except full KYC checks and SMS OTPs.",
 });
 
 export default function ControlRiskPage() {
@@ -41,7 +41,14 @@ export default function ControlRiskPage() {
         details: [
           { label: "Every action", value: "Allowed, blocked or escalated" },
           { label: "Humans", value: "Approve in real time" },
-          { label: "Price", value: "Guardrails are free" },
+          {
+            label: "Price",
+            value: (
+              <>
+                Free<small>Only full KYC checks and SMS OTPs are paid</small>
+              </>
+            ),
+          },
         ],
       }}
       tldr={{
@@ -203,7 +210,7 @@ export default function ControlRiskPage() {
         {
           id: "pricing",
           nav: "Pricing",
-          title: "Guardrails are free.",
+          title: "It's free.",
           body: (
             <>
               <Prose>
@@ -230,9 +237,9 @@ export default function ControlRiskPage() {
             <>
               <BridgeCard
                 href="/intelligence"
-                eyebrow="Next · Risk Intelligence"
                 title="Put your agent's verified record to work"
                 text="Every decision becomes evidence that insurers, lenders and partners can use in their own decisions."
+                cta="Go to Risk Intelligence"
               />
               <FinalCta title="Control what your agent can do." />
             </>
