@@ -42,7 +42,14 @@ export default function MeasureRiskPage() {
         details: [
           { label: "Risk score", value: "0–100, higher is riskier" },
           { label: "Updates", value: "Every time the agent acts" },
-          { label: "Price", value: "Free to start" },
+          {
+            label: "Price",
+            value: (
+              <>
+                Free<small>Only full KYC checks and SMS OTPs are paid</small>
+              </>
+            ),
+          },
         ],
       }}
       tldr={{
@@ -255,9 +262,9 @@ export default function MeasureRiskPage() {
             <>
               <BridgeCard
                 href="/control"
-                eyebrow="Next · Control Risk"
                 title="Close the gaps with free guardrails"
                 text="Turn what you've measured into limits, policies and human approval around every important action."
+                cta="Go to Control Risk"
               />
               <FinalCta title="Give your agent a risk score." />
             </>

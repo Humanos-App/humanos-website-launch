@@ -164,6 +164,13 @@
   line-height: 1.5;
   color: var(--hm-chalk-0);
 }
+.story-hero__detail dd small {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--hm-chalk-2);
+}
 .story-hero__quote {
   margin: 0;
   flex: 2 1 420px;
@@ -1255,19 +1262,37 @@
   color: var(--hm-chalk-0);
 }
 
-/* bridge to the next page */
+/* bridge to the next page: the whole card is the link, and a
+   button-shaped label on the right makes that obvious */
 .story-bridge {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 24px 28px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  padding: 28px 32px;
   border: 1px solid var(--story-line-strong);
-  border-radius: 2px;
+  border-radius: 4px;
   background: var(--story-surface);
-  transition: border-color var(--dur-base) var(--ease-standard);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-base) var(--ease-standard),
+    background var(--dur-base) var(--ease-standard);
 }
 .story-bridge:hover {
   border-color: var(--story-accent);
+  background: color-mix(in srgb, var(--story-accent) 7%, var(--story-surface));
+}
+.story-bridge:focus-visible {
+  outline: 2px solid var(--story-accent);
+  outline-offset: 3px;
+}
+.story-bridge__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
 }
 .story-bridge__eyebrow {
   font-family: var(--font-mono);
@@ -1282,18 +1307,49 @@
   letter-spacing: -0.012em;
   color: var(--hm-chalk-0);
 }
-.story-bridge__title .arrow {
-  color: var(--story-accent);
-  transition: transform var(--dur-fast) var(--ease-standard);
-  display: inline-block;
-}
-.story-bridge:hover .story-bridge__title .arrow {
-  transform: translateX(3px);
-}
 .story-bridge__text {
   font-size: 15px;
   line-height: 1.55;
   color: var(--hm-chalk-1);
+}
+.story-bridge__button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: 1px solid var(--story-accent);
+  border-radius: 4px;
+  color: var(--story-accent);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background var(--dur-base) var(--ease-standard),
+    color var(--dur-base) var(--ease-standard);
+}
+.story-bridge__button .arrow {
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+.story-bridge:hover .story-bridge__button {
+  background: var(--hm-verification);
+  border-color: var(--hm-verification);
+  color: #fff;
+}
+.story-bridge:hover .story-bridge__button .arrow {
+  transform: translateX(3px);
+}
+@media (max-width: 720px) {
+  .story-bridge {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 24px 20px;
+  }
+  .story-bridge__button {
+    width: 100%;
+  }
 }
 
 /* closing statement + CTAs */

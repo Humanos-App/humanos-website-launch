@@ -151,7 +151,6 @@ export default function NumoCaseStudyPage() {
               </Prose>
               <KeyValueList
                 items={[
-                  { label: "Status", value: "Integrated", valueTone: "strong" },
                   { label: "Domain", value: "Automated capital allocation" },
                   {
                     label: "Surface area",

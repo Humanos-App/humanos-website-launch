@@ -36,25 +36,32 @@ export function StoryCtas() {
   );
 }
 
-/** Hand-off to the next page in the Measure → Control → Intelligence story. */
+/** Hand-off to the next page in the Measure → Control → Intelligence story.
+ *  The whole card is the link; the button-shaped label makes that obvious. */
 export function BridgeCard({
   href,
-  eyebrow = "Next",
+  eyebrow = "Next step",
   title,
   text,
+  cta,
 }: {
   href: string;
   eyebrow?: string;
   title: ReactNode;
   text?: ReactNode;
+  /** Button label, e.g. "Go to Control Risk". */
+  cta: string;
 }) {
   return (
     <Link href={href} className="story-bridge">
-      <span className="story-bridge__eyebrow">{eyebrow}</span>
-      <span className="story-bridge__title">
-        {title} <span className="arrow" aria-hidden="true">→</span>
+      <span className="story-bridge__body">
+        <span className="story-bridge__eyebrow">{eyebrow}</span>
+        <span className="story-bridge__title">{title}</span>
+        {text && <span className="story-bridge__text">{text}</span>}
       </span>
-      {text && <span className="story-bridge__text">{text}</span>}
+      <span className="story-bridge__button">
+        {cta} <span className="arrow" aria-hidden="true">→</span>
+      </span>
     </Link>
   );
 }

@@ -109,7 +109,6 @@ export default function LusiadasCaseStudyPage() {
               <KeyValueList
                 items={[
                   { label: "Customer", value: "Lusíadas" },
-                  { label: "Status", value: "Integrated" },
                   { label: "Domain", value: "National private hospital network" },
                   {
                     label: "Surface area",
