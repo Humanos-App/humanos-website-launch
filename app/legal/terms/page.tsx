@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/legal/terms" },
 };
 
-const LAST_UPDATED = "2026-06-01";
+const LAST_UPDATED = "2026-10-16";
 
 export default function TermsPage() {
   return (
@@ -16,7 +16,7 @@ export default function TermsPage() {
       <div className="wrap">
         <div className="legal__inner">
           <p className="legal__eyebrow">
-            Terms of Service · v1.0 · effective {LAST_UPDATED}
+            Terms of Service · v1.1 · effective {LAST_UPDATED}
           </p>
           <h1 className="legal__title">Terms of Service</h1>
 
@@ -322,8 +322,8 @@ export default function TermsPage() {
             We use commercially reasonable efforts to keep the Service available
             and secure, including the technical and organisational measures
             described in our Information Security Policy and maintained under
-            our ISO/IEC 27001:2022 certified Information Security Management
-            System. However, the Service is provided on an &ldquo;as
+            our Information Security Management System, which follows ISO/IEC
+            27001:2022. However, the Service is provided on an &ldquo;as
             available&rdquo; basis and we do not guarantee uninterrupted or
             error-free operation. We may perform maintenance and may impose
             limits to protect the integrity and security of the Service.

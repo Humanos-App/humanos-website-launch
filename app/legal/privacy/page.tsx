@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/legal/privacy" },
 };
 
-const LAST_UPDATED = "2026-06-01";
+const LAST_UPDATED = "2026-10-16";
 
 export default function PrivacyPage() {
   return (
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       <div className="wrap">
         <div className="legal__inner">
           <p className="legal__eyebrow">
-            Privacy Statement · v1.0 · effective {LAST_UPDATED}
+            Privacy Statement · v1.1 · effective {LAST_UPDATED}
           </p>
           <h1 className="legal__title">Privacy Statement</h1>
 
@@ -44,8 +44,8 @@ export default function PrivacyPage() {
             &ldquo;GDPR&rdquo;) and Portuguese data protection law. Our
             practices are governed by our internal Data Protection Policy,
             Privacy By Design Policy, Data Classification Policy and Data
-            Retention Policy, and our information security controls are
-            certified to ISO/IEC 27001:2022.
+            Retention Policy, and our information security controls follow
+            ISO/IEC 27001:2022.
           </p>
           <p>
             By using the Service, you acknowledge the practices described in
@@ -311,8 +311,9 @@ export default function PrivacyPage() {
           </ul>
           <p>
             These measures are described in our Information Security Policy and
-            Data Lifecycle documentation and are maintained under our ISO/IEC
-            27001:2022 certified Information Security Management System.
+            Data Lifecycle documentation and are maintained under our
+            Information Security Management System, which follows ISO/IEC
+            27001:2022.
           </p>
 
           <h2 className="legal__h2">8. How long we keep personal data</h2>
