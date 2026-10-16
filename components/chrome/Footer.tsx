@@ -108,9 +108,9 @@ export function Footer() {
             © 2026 Humanos Labs, Inc. · The Risk Network for AI
           </div>
           <div className="footer__bottom-right">
-            <span>SOC 2 Type II</span>
+            <span>SOC 2 Type II in audit</span>
             <span>·</span>
-            <span>ISO 27001</span>
+            <span>ISO 27001 aligned</span>
             <span>·</span>
             <span>W3C VC 2.0</span>
           </div>
