@@ -19,9 +19,35 @@ type Entry = {
    on their own schedule. Update both places when a new version ships. */
 const ENTRIES: Entry[] = [
   {
+    version: "2026-10-16",
+    title: "Agents and actors, DID documents, risk scores, and the MCP server",
+    latest: true,
+    changes: [
+      "Agents (new, Beta): register an agent, list your agents with GET /agents, manage their keys and attestation, and suspend, resume or retire them. An agent's status is ACTIVE, SUSPENDED or REVOKED.",
+      "Actors (new, Beta): GET /actors/{did}, with the actor's signed event chain and its audit.",
+      "DID documents (new): /.well-known/did.json for the platform, plus DID documents for organizations, users and agents.",
+      "Intelligence (Beta): new risk score and risk signal endpoints; kya.expiresAt on the snapshot is now kya.validUntil.",
+      "Credential type (breaking): the credential's kind is type instead of resourceType on credential and request responses and on the credential webhook. Older pins keep resourceType.",
+      "Credential events (breaking): GET /credential/{credentialId}/events moved to GET /credential/events/{credentialId}. Older pins can keep calling the old path.",
+      "Credentials: the credential gains inactiveReason. decisions is no longer returned on any version; the signed event chain replaces it.",
+      "Webhooks (breaking): the payload carries the version in apiVersion only. Older pins keep api_version beside it.",
+      "MCP server (new): AI assistants connect to Humanos at mcp.humanos.tech.",
+    ],
+  },
+  {
+    version: "2026-09-01",
+    title: "Risk intelligence, the credential event chain, and bounded mandates",
+    changes: [
+      "Intelligence (new, Beta): snapshot, window and action endpoints for agent risk metrics.",
+      "Credentials: GET /credential/{credentialId}/events re-verifies a credential's signed event chain; the credential gains executionsRemaining and inactiveAt.",
+      "Credential status (breaking): status is now DRAFT, ACTIVE or INACTIVE; REJECTED, CANCELED, REVOKED and EXPIRED collapse into INACTIVE.",
+      "Bounded mandates: credentials[].maxExecutions on POST /request caps how many approved verifications a mandate allows.",
+      "W3C credential shape (breaking): w3cCredential carries evidence/proof instead of evidences/proofs on credential and request responses and on the credential webhook.",
+    ],
+  },
+  {
     version: "2026-07-06",
     title: "Richer catalog and audit surfaces; leaner verification shapes",
-    latest: true,
     changes: [
       "Actions: GET /actions and GET /actions/version/{id} now return the full catalog shape — action name and description, version list, per-version content, published flag and a digestSRI integrity hash, with standard pagination.",
       "Credentials: the credential entity gains name, description, tags and decisions.",
