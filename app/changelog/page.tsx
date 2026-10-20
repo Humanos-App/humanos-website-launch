@@ -14,24 +14,22 @@ type Entry = {
   changes: string[];
 };
 
-/* Mirrors docs.humanos.tech/essentials/changelog — the API is versioned by
-   date, integrations pin a version with the API-Version header and upgrade
-   on their own schedule. Update both places when a new version ships. */
+/* A short summary of docs.humanos.tech/essentials/changelog, which keeps the
+   full detail. The API is versioned by date: integrations pin a version with
+   the API-Version header and upgrade on their own schedule. Add an entry here
+   when a new version ships, with a few bullets at most. */
 const ENTRIES: Entry[] = [
   {
     version: "2026-10-16",
-    title: "Agents and actors, DID documents, risk scores, and the MCP server",
+    title: "Agents and actors, risk scores, and the MCP server",
     latest: true,
     changes: [
-      "Agents (new, Beta): register an agent, list your agents with GET /agents, manage their keys and attestation, and suspend, resume or retire them. An agent's status is ACTIVE, SUSPENDED or REVOKED.",
-      "Actors (new, Beta): GET /actors/{did}, with the actor's signed event chain and its audit.",
-      "DID documents (new): /.well-known/did.json for the platform, plus DID documents for organizations, users and agents.",
-      "Intelligence (Beta): new risk score and risk signal endpoints; kya.expiresAt on the snapshot is now kya.validUntil.",
-      "Credential type (breaking): the credential's kind is type instead of resourceType on credential and request responses and on the credential webhook. Older pins keep resourceType.",
-      "Credential events (breaking): GET /credential/{credentialId}/events moved to GET /credential/events/{credentialId}. Older pins can keep calling the old path.",
-      "Credentials: the credential gains inactiveReason. decisions is no longer returned on any version; the signed event chain replaces it.",
-      "Webhooks (breaking): the payload carries the version in apiVersion only. Older pins keep api_version beside it.",
-      "MCP server (new): AI assistants connect to Humanos at mcp.humanos.tech.",
+      "Agents and actors (new, Beta): register AI agents, manage their keys and lifecycle, and read an actor's signed event chain.",
+      "Risk scores (Beta): new risk score and risk signal endpoints for agents.",
+      "MCP server (new): AI assistants connect to Humanos at mcp.humanos.tech/mcp.",
+      "Webhooks: choose which endpoints each request notifies, and since 19 October an endpoint that keeps failing is paused, with an email to your team.",
+      "Breaking in this version: credentials use type instead of resourceType, the credential event chain moved to GET /credential/events/{credentialId}, and webhooks carry only apiVersion. Older pins are unchanged.",
+      "Breaking on every version: decisions is no longer returned (since 18 September), cancel and resend answer { ok: true }, and an inline credential's description takes at most 500 characters.",
     ],
   },
   {
@@ -100,14 +98,13 @@ export default function ChangelogPage() {
             What changed in each dated version of the Humanos platform, newest
             first. The API is versioned by date — integrations pin a version
             with the <code>API-Version</code> header and upgrade on their own
-            schedule, so a new version never changes behaviour you depend on
-            until you opt in. Full technical detail lives in the{" "}
+            schedule. Full technical detail lives in the{" "}
             <a
-              href="https://docs.humanos.tech/essentials/versioning"
+              href="https://docs.humanos.tech/essentials/changelog"
               target="_blank"
               rel="noopener noreferrer"
             >
-              API documentation
+              API changelog
             </a>
             .
           </p>
@@ -131,9 +128,9 @@ export default function ChangelogPage() {
 
           <h2 className="legal__h2">Staying informed</h2>
           <p>
-            Breaking changes are only ever introduced behind a new dated
-            version. Questions about an upgrade, or something behaving
-            differently than these notes describe? Email{" "}
+            Breaking changes come behind a new dated version, except the few
+            listed as breaking on every version. Questions about an upgrade, or
+            something behaving differently than these notes describe? Email{" "}
             <a href="mailto:support@humanos.tech">support@humanos.tech</a> and
             we will help you move across.
           </p>
