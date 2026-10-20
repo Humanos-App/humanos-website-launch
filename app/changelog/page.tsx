@@ -36,7 +36,7 @@ const ENTRIES: Entry[] = [
     version: "2026-09-01",
     title: "Risk intelligence, the credential event chain, and bounded mandates",
     changes: [
-      "Intelligence (new, Beta): snapshot, window and action endpoints for agent risk metrics.",
+      "Intelligence (new, Beta): snapshot, window and action endpoints for agent risk metrics, replacing the Activity endpoint.",
       "Credentials: GET /credential/{credentialId}/events re-verifies a credential's signed event chain; the credential gains executionsRemaining and inactiveAt.",
       "Credential status (breaking): status is now DRAFT, ACTIVE or INACTIVE; REJECTED, CANCELED, REVOKED and EXPIRED collapse into INACTIVE.",
       "Bounded mandates: credentials[].maxExecutions on POST /request caps how many approved verifications a mandate allows.",
@@ -50,7 +50,7 @@ const ENTRIES: Entry[] = [
       "Actions: GET /actions and GET /actions/version/{id} now return the full catalog shape — action name and description, version list, per-version content, published flag and a digestSRI integrity hash, with standard pagination.",
       "Credentials: the credential entity gains name, description, tags and decisions.",
       "Verifiable presentations (breaking): issue/verify shapes simplified — the presentation response no longer nests presentationEncoded/receipt, and verification takes the presentation in its new form.",
-      "Requests (breaking): the iframe object was removed from POST /request — iframe embedding is configured through the iframe integration guide instead.",
+      "Requests: iframe gains an optional cookie object for trusted browser sessions that skip the OTP.",
       "Subjects: extraContacts and identity handling refined on POST /user.",
     ],
   },
