@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/legal/privacy" },
 };
 
-const LAST_UPDATED = "2026-10-16";
+const LAST_UPDATED = "2026-10-23";
 
 export default function PrivacyPage() {
   return (
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       <div className="wrap">
         <div className="legal__inner">
           <p className="legal__eyebrow">
-            Privacy Statement · v1.1 · effective {LAST_UPDATED}
+            Privacy Statement · v1.2 · effective {LAST_UPDATED}
           </p>
           <h1 className="legal__title">Privacy Statement</h1>
 
@@ -254,6 +254,21 @@ export default function PrivacyPage() {
             <li>
               <strong>Firebase / Google Cloud</strong> (EU/US) — Google-managed
               infrastructure.
+            </li>
+            <li>
+              <strong>Grafana Labs</strong> (United States company; logs hosted
+              in the United Kingdom) — application and API request logs, which
+              can include the personal data a customer sends in an API request,
+              kept for 31 days.
+            </li>
+            <li>
+              <strong>ClickSend</strong> (Australia) — delivery of SMS messages
+              to the phone numbers our customers provide.
+            </li>
+            <li>
+              <strong>Cloudflare</strong> (United States company, global
+              network) — the edge network in front of our websites and APIs,
+              through which requests pass in transit.
             </li>
           </ul>
           <p>
