@@ -74,7 +74,8 @@ export default function MeasureRiskPage() {
             <>
               <Prose>
                 <p>
-                  Send your agent&apos;s activity to Humanos through the API.
+                  Send your agent&apos;s activity to Humanos through the API,
+                  MCP or Agent SDK.
                   Your agent keeps working exactly as before.
                 </p>
               </Prose>
@@ -85,16 +86,15 @@ export default function MeasureRiskPage() {
                     label: "API",
                     badge: { text: "Available now", tone: "live" },
                     text: "Connect any agent, in any language.",
-                    highlight: true,
                   },
                   {
                     label: "MCP",
-                    badge: { text: "Coming soon" },
+                    badge: { text: "Available now", tone: "live" },
                     text: "For assistants and agents that speak MCP.",
                   },
                   {
                     label: "Agent SDK",
-                    badge: { text: "Coming soon" },
+                    badge: { text: "Available now", tone: "live" },
                     text: "A few lines around your agent's actions.",
                   },
                 ]}
