@@ -136,15 +136,19 @@ export const DEVELOPERS_MENU: MegaMenu = {
         },
         {
           title: "MCP",
-          tag: "Coming soon",
           sub: "Model Context Protocol",
-          href: "#",
+          href: "https://docs.humanos.tech/essentials/integrate/mcp",
         },
       ],
     },
     {
       label: "SDKs",
       items: [
+        {
+          title: "Agent SDK",
+          sub: "Agent risk monitoring",
+          href: "https://docs.humanos.tech/essentials/integrate/agent-sdk",
+        },
         {
           title: "TypeScript",
           sub: "npm install humanos",
@@ -159,12 +163,6 @@ export const DEVELOPERS_MENU: MegaMenu = {
           title: "C#",
           sub: "dotnet add Humanos",
           href: "https://www.nuget.org/packages/Humanos",
-        },
-        {
-          title: "Agent SDK",
-          tag: "Coming soon",
-          sub: "Agent risk monitoring",
-          href: "#",
         },
       ],
     },
