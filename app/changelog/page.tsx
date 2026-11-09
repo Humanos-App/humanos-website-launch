@@ -14,19 +14,43 @@ type Entry = {
   changes: string[];
 };
 
-/* Mirrors docs.humanos.tech/essentials/changelog — the API is versioned by
-   date, integrations pin a version with the API-Version header and upgrade
-   on their own schedule. Update both places when a new version ships. */
+/* A short summary of docs.humanos.tech/essentials/changelog, which keeps the
+   full detail. The API is versioned by date: integrations pin a version with
+   the API-Version header and upgrade on their own schedule. Add an entry here
+   when a new version ships, with a few bullets at most. */
 const ENTRIES: Entry[] = [
+  {
+    version: "2026-10-16",
+    title: "Agents and actors, risk scores, and the MCP server",
+    latest: true,
+    changes: [
+      "Agents and actors (new, Beta): register AI agents, manage their keys and lifecycle, and read an actor's signed event chain.",
+      "Risk scores (Beta): new risk score and risk signal endpoints for agents.",
+      "MCP server (new): AI assistants connect to Humanos at mcp.humanos.tech/mcp.",
+      "Webhooks: choose which endpoints each request notifies, and since 19 October an endpoint that keeps failing is paused, with an email to your team.",
+      "Breaking in this version: credentials use type instead of resourceType, the credential event chain moved to GET /credential/events/{credentialId}, and webhooks carry only apiVersion. Older pins are unchanged.",
+      "Breaking on every version: decisions is no longer returned (since 18 September), cancel and resend answer { ok: true }, and an inline credential's description takes at most 500 characters.",
+    ],
+  },
+  {
+    version: "2026-09-01",
+    title: "Risk intelligence, the credential event chain, and bounded mandates",
+    changes: [
+      "Intelligence (new, Beta): snapshot, window and action endpoints for agent risk metrics, replacing the Activity endpoint.",
+      "Credentials: GET /credential/{credentialId}/events re-verifies a credential's signed event chain; the credential gains executionsRemaining and inactiveAt.",
+      "Credential status (breaking): status is now DRAFT, ACTIVE or INACTIVE; REJECTED, CANCELED, REVOKED and EXPIRED collapse into INACTIVE.",
+      "Bounded mandates: credentials[].maxExecutions on POST /request caps how many approved verifications a mandate allows.",
+      "W3C credential shape (breaking): w3cCredential carries evidence/proof instead of evidences/proofs on credential and request responses and on the credential webhook.",
+    ],
+  },
   {
     version: "2026-07-06",
     title: "Richer catalog and audit surfaces; leaner verification shapes",
-    latest: true,
     changes: [
       "Actions: GET /actions and GET /actions/version/{id} now return the full catalog shape — action name and description, version list, per-version content, published flag and a digestSRI integrity hash, with standard pagination.",
       "Credentials: the credential entity gains name, description, tags and decisions.",
       "Verifiable presentations (breaking): issue/verify shapes simplified — the presentation response no longer nests presentationEncoded/receipt, and verification takes the presentation in its new form.",
-      "Requests (breaking): the iframe object was removed from POST /request — iframe embedding is configured through the iframe integration guide instead.",
+      "Requests: iframe gains an optional cookie object for trusted browser sessions that skip the OTP.",
       "Subjects: extraContacts and identity handling refined on POST /user.",
     ],
   },
@@ -74,14 +98,13 @@ export default function ChangelogPage() {
             What changed in each dated version of the Humanos platform, newest
             first. The API is versioned by date — integrations pin a version
             with the <code>API-Version</code> header and upgrade on their own
-            schedule, so a new version never changes behaviour you depend on
-            until you opt in. Full technical detail lives in the{" "}
+            schedule. Full technical detail lives in the{" "}
             <a
-              href="https://docs.humanos.tech/essentials/versioning"
+              href="https://docs.humanos.tech/essentials/changelog"
               target="_blank"
               rel="noopener noreferrer"
             >
-              API documentation
+              API changelog
             </a>
             .
           </p>
@@ -105,9 +128,9 @@ export default function ChangelogPage() {
 
           <h2 className="legal__h2">Staying informed</h2>
           <p>
-            Breaking changes are only ever introduced behind a new dated
-            version. Questions about an upgrade, or something behaving
-            differently than these notes describe? Email{" "}
+            Breaking changes come behind a new dated version, except the few
+            listed as breaking on every version. Questions about an upgrade, or
+            something behaving differently than these notes describe? Email{" "}
             <a href="mailto:support@humanos.tech">support@humanos.tech</a> and
             we will help you move across.
           </p>
