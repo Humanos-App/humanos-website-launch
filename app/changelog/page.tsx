@@ -20,16 +20,17 @@ type Entry = {
    when a new version ships, with a few bullets at most. */
 const ENTRIES: Entry[] = [
   {
-    version: "2026-10-16",
-    title: "Agents and actors, risk scores, and the MCP server",
+    version: "2026-11-02",
+    title: "Agents, the audit trail, call proofs, and the MCP server",
     latest: true,
     changes: [
-      "Agents and actors (new, Beta): register AI agents, manage their keys and lifecycle, and read an actor's signed event chain.",
-      "Risk scores (Beta): new risk score and risk signal endpoints for agents.",
+      "Replaces 2026-10-16: keys and webhook endpoints pinned to it are now on 2026-11-02. An API-Version header dated 2026-10-16 is served as 2026-09-01, so send 2026-11-02.",
+      "Agents (new): list your AI agents and read each one's declared tools and the policy that applies to it. Agents register through the Agent SDK or the MCP server.",
+      "Audit trail (new): read an organization, a person or an agent by its DID, and read or re-verify any signed chain at GET /audit-trail/events/{id}. Call proofs can be redeemed at POST /call-proofs/redeem.",
       "MCP server (new): AI assistants connect to Humanos at mcp.humanos.tech/mcp.",
       "Webhooks: choose which endpoints each request notifies, and since 19 October an endpoint that keeps failing is paused, with an email to your team.",
-      "Breaking in this version: credentials use type instead of resourceType, the credential event chain moved to GET /credential/events/{credentialId}, and webhooks carry only apiVersion. Older pins are unchanged.",
-      "Breaking on every version: decisions is no longer returned (since 18 September), cancel and resend answer { ok: true }, and an inline credential's description takes at most 500 characters.",
+      "Breaking in this version: credentials use type instead of resourceType, an ended credential's status is REJECTED, CANCELED, REVOKED or EXPIRED instead of INACTIVE, verification names how a mandate ended, the credential event chain and DID resolution moved to the audit trail and did.json routes, and webhooks carry only apiVersion. Older pins are unchanged.",
+      "Breaking on every version: decisions is no longer returned (since 18 September), cancel and resend answer { ok: true }, a request's language is a BCP 47 tag (en, pt, es, fr), and an inline credential's description takes at most 500 characters.",
     ],
   },
   {
