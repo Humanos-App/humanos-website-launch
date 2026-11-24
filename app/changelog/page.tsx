@@ -35,9 +35,9 @@ const ENTRIES: Entry[] = [
   },
   {
     version: "2026-09-01",
-    title: "Risk intelligence, the credential event chain, and bounded mandates",
+    title: "The credential event chain and bounded mandates",
     changes: [
-      "Intelligence (new, Beta): snapshot, window and action endpoints for agent risk metrics, replacing the Activity endpoint.",
+      "Activity (removed, every version): GET /activity is no longer served.",
       "Credentials: GET /credential/{credentialId}/events re-verifies a credential's signed event chain; the credential gains executionsRemaining and inactiveAt.",
       "Credential status (breaking): status is now DRAFT, ACTIVE or INACTIVE; REJECTED, CANCELED, REVOKED and EXPIRED collapse into INACTIVE.",
       "Bounded mandates: credentials[].maxExecutions on POST /request caps how many approved verifications a mandate allows.",
